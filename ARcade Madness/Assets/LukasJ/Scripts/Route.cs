@@ -19,6 +19,7 @@ public class Route : MonoBehaviour
             if(i > 0)
             {
                 Vector3 prevPos = childNodeList[i - 1].position;
+                Gizmos.DrawLine(prevPos, currentPos);
             }
         }
     }
