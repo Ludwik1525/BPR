@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GameSetupController : MonoBehaviour
 {
-
     private void Start()
     {
         CreatePlayer();
