@@ -67,7 +67,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
             if(tempIndex != -1)
             {
                 roomListings.RemoveAt(tempIndex);
-                Destroy(roomsContainer.GetChild(tempIndex).gameObject);
+                //Destroy(roomsContainer.GetChild(tempIndex).gameObject);
             }
             if(room.PlayerCount > 0)
             {
