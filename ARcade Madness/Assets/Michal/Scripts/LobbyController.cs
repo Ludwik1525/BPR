@@ -67,12 +67,20 @@ public class LobbyController : MonoBehaviourPunCallbacks
             if(tempIndex != -1)
             {
                 roomListings.RemoveAt(tempIndex);
-                //Destroy(roomsContainer.GetChild(tempIndex).gameObject);
+                Destroy(roomsContainer.GetChild(tempIndex).gameObject);
             }
             if(room.PlayerCount > 0)
             {
                 roomListings.Add(room);
                 ListRoom(room);
+            }
+
+            for(int i = 0; i < roomsContainer.transform.childCount; i++)
+            {
+                if(room.Name == roomsContainer.transform.GetChild(i).GetChild(0).GetComponent<Text>().text)
+                {
+                    Destroy(roomsContainer.transform.GetChild(i).gameObject);
+                }
             }
         }
     }
