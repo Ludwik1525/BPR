@@ -70,7 +70,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
                 Destroy(roomsContainer.GetChild(tempIndex).gameObject);
             }
             if(room.PlayerCount > 0)
-            {
+            {   
                 roomListings.Add(room);
                 ListRoom(room);
             }
