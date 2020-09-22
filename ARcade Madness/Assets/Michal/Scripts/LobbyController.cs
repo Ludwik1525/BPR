@@ -16,12 +16,18 @@ public class LobbyController : MonoBehaviourPunCallbacks
 
     private string roomName;
     private int roomSize;
+    private bool isPrivate;
 
     private List<RoomInfo> roomListings;
     [SerializeField]
     private Transform roomsContainer;
     [SerializeField]
     private GameObject roomListingPrefab;
+
+    [SerializeField]
+    private InputField nameInput;
+    [SerializeField]
+    private Button connectButton;
 
     public override void OnConnectedToMaster()
     {
@@ -67,19 +73,36 @@ public class LobbyController : MonoBehaviourPunCallbacks
             if(tempIndex != -1)
             {
                 roomListings.RemoveAt(tempIndex);
-                Destroy(roomsContainer.GetChild(tempIndex).gameObject);
+                if (roomsContainer.childCount > tempIndex)
+                {
+                    Destroy(roomsContainer.GetChild(tempIndex).gameObject);
+                }
             }
             if(room.PlayerCount > 0)
             {   
                 roomListings.Add(room);
                 ListRoom(room);
             }
+            
+            int noRooms = 0;
 
             for(int i = 0; i < roomsContainer.transform.childCount; i++)
             {
                 if(room.Name == roomsContainer.transform.GetChild(i).GetChild(0).GetComponent<Text>().text)
                 {
-                    Destroy(roomsContainer.transform.GetChild(i).gameObject);
+                    noRooms++;
+                }
+            }
+
+            for (int i = 0; i < roomsContainer.transform.childCount; i++)
+            {
+                if (room.Name == roomsContainer.transform.GetChild(i).GetChild(0).GetComponent<Text>().text)
+                {
+                    noRooms--;
+                    if (noRooms > 1)
+                    {
+                        Destroy(roomsContainer.transform.GetChild(i).gameObject);
+                    }
                 }
             }
         }
@@ -110,7 +133,16 @@ public class LobbyController : MonoBehaviourPunCallbacks
         roomName = PlayerPrefs.GetString("RoomName");
         roomSize = PlayerPrefs.GetInt("RoomSize");
 
-        RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)roomSize};
+        if(PlayerPrefs.GetInt("IsPrivate") == 1)
+        {
+            isPrivate = true;
+        }
+        else
+        {
+            isPrivate = false;
+        }
+
+        RoomOptions roomOps = new RoomOptions() { IsVisible = !isPrivate, IsOpen = true, MaxPlayers = (byte)roomSize};
         PhotonNetwork.CreateRoom(roomName, roomOps);
     }
 
@@ -122,5 +154,18 @@ public class LobbyController : MonoBehaviourPunCallbacks
     public void MatchmakingCancel()
     {
         PhotonNetwork.LeaveLobby();
+    }
+
+    public void JoinRoom()
+    {
+        PhotonNetwork.JoinRoom(nameInput.text);
+        StartCoroutine(WaitForError());
+    }
+
+    private IEnumerator WaitForError()
+    {
+        FindObjectOfType<MainMenu>().TurnOffPrivateRoomError();
+        yield return new WaitForSeconds(1f);
+        FindObjectOfType<MainMenu>().TurnOnPrivateRoomError();
     }
 }

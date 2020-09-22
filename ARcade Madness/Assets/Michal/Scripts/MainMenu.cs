@@ -5,13 +5,14 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    public GameObject mainMenu, mainMenuObjs, nameBox, optionsMenu, lobby, lobbyObjs, roomCreation;
+    public GameObject mainMenu, mainMenuObjs, nameBox, optionsMenu, lobby, lobbyObjs, roomCreation, privateRoomBox;
 
-    public GameObject welcomeText, playerNameErrorShort, playerNameErrorLong, roomNameErrorShort, roomNameErrorLong, passwordErrorLong;
+    public GameObject welcomeText, playerNameErrorShort, playerNameErrorLong, roomNameErrorShort, roomNameErrorLong, privateRoomError;
 
-    public InputField playerNameField, roomNameField, passwordNameField;
+    public InputField playerNameField, roomNameField, privateRoomField;
 
-    public Button acceptNameB, playB, optionsB, quitB, changeNameB, optionsBackB, lobbyBackB, roomCreationBackB, roomCreationB, roomAcceptB, players2B, players3B, players4B;
+    public Button acceptNameB, playB, optionsB, quitB, changeNameB, optionsBackB, lobbyBackB, roomCreationBackB, roomCreationB, roomAcceptB, players2B, 
+        players3B, players4B, privateB, publicB, joinPrivateB, confirmPrivateB, cancelPrivateB;
 
     private bool isChangingName;
 
@@ -30,6 +31,10 @@ public class MainMenu : MonoBehaviour
         players2B.onClick.AddListener(Choose2Players);
         players3B.onClick.AddListener(Choose3Players);
         players4B.onClick.AddListener(Choose4Players);
+        privateB.onClick.AddListener(SetPrivate);
+        publicB.onClick.AddListener(SetPublic);
+        joinPrivateB.onClick.AddListener(OpenPrivateRoomBox);
+        cancelPrivateB.onClick.AddListener(ClosePrivateRoomBox);
 
         playerNameErrorLong.SetActive(false);
         playerNameErrorShort.SetActive(false);
@@ -74,11 +79,36 @@ public class MainMenu : MonoBehaviour
         lobbyObjs.SetActive(false);
 
         roomNameField.text = "";
-        passwordNameField.text = "";
 
         roomNameErrorLong.SetActive(false);
         roomNameErrorShort.SetActive(false);
-        passwordErrorLong.SetActive(false);
+
+        Choose2Players();
+        SetPublic();
+    }
+
+    private void OpenPrivateRoomBox()
+    {
+        privateRoomField.text = "";
+        privateRoomError.SetActive(false);
+        lobbyObjs.SetActive(false);
+        privateRoomBox.SetActive(true);
+    }
+
+    public void TurnOnPrivateRoomError()
+    {
+        privateRoomError.SetActive(true);
+    }
+
+    public void TurnOffPrivateRoomError()
+    {
+        privateRoomError.SetActive(false);
+    }
+
+    public void ClosePrivateRoomBox()
+    {
+        lobbyObjs.SetActive(true);
+        privateRoomBox.SetActive(false);
     }
 
     private void GoBackToLobby()
@@ -110,14 +140,25 @@ public class MainMenu : MonoBehaviour
     {
         if(IsNameOK(1))
         {
-            if (IsNameOK(2))
-            {
                 PlayerPrefs.SetString("RoomName", roomNameField.text);
                 FindObjectOfType<LobbyController>().CreateRoom();
                 roomCreation.SetActive(false);
                 lobbyObjs.SetActive(true);
-            }
         }
+    }
+
+    private void SetPrivate()
+    {
+        privateB.GetComponent<Image>().color = new Color32(180, 240, 70, 255);
+        publicB.GetComponent<Image>().color = new Color32(250, 50, 25, 255);
+        PlayerPrefs.SetInt("IsPrivate", 1);
+    }
+
+    private void SetPublic()
+    {
+        privateB.GetComponent<Image>().color = new Color32(250, 50, 25, 255);
+        publicB.GetComponent<Image>().color = new Color32(180, 240, 70, 255);
+        PlayerPrefs.SetInt("IsPrivate", 0);
     }
 
     private void Choose2Players()
@@ -200,20 +241,6 @@ public class MainMenu : MonoBehaviour
             else if (roomNameField.text.Length > 7)
             {
                 roomNameErrorLong.SetActive(true);
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-        else if (option == 2)
-        {
-            passwordErrorLong.SetActive(false);
-
-            if (passwordNameField.text.Length > 7)
-            {
-                passwordErrorLong.SetActive(true);
                 return false;
             }
             else

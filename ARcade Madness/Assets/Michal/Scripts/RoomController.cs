@@ -96,6 +96,7 @@ public class RoomController : MonoBehaviourPunCallbacks
     {
         lobbyPanel.SetActive(true);
         roomPanel.SetActive(false);
+        FindObjectOfType<MainMenu>().ClosePrivateRoomBox();
         PhotonNetwork.LeaveRoom();
         PhotonNetwork.LeaveLobby();
         StartCoroutine(RejoinLobby());
