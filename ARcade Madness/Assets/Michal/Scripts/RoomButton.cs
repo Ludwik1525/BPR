@@ -17,8 +17,11 @@ public class RoomButton : MonoBehaviour
 
     public void JoinRoomOnClick()
     {
-        PhotonNetwork.JoinRoom(roomName);
-        FindObjectOfType<LobbyController>().ClearRoomListings();
+        if (playerCount < roomSize)
+        {
+            PhotonNetwork.JoinRoom(roomName);
+            FindObjectOfType<LobbyController>().ClearRoomListings();
+        }
     }
 
     public void SetRoom(string nameInput, int sizeInput, int countInput)

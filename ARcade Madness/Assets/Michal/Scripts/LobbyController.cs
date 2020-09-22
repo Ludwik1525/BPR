@@ -9,10 +9,6 @@ public class LobbyController : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     private GameObject lobbyConnectButton;
-    [SerializeField]
-    private GameObject lobbyPanel;
-    [SerializeField]
-    private GameObject mainPanel;
 
     private string roomName;
     private int roomSize;
@@ -44,8 +40,6 @@ public class LobbyController : MonoBehaviourPunCallbacks
 
     public void JoinLobbyOnClick()
     {
-        mainPanel.SetActive(false);
-        lobbyPanel.SetActive(true);
         PhotonNetwork.JoinLobby();
     }
 
@@ -72,9 +66,9 @@ public class LobbyController : MonoBehaviourPunCallbacks
             }
             if(tempIndex != -1)
             {
-                roomListings.RemoveAt(tempIndex);
                 if (roomsContainer.childCount > tempIndex)
                 {
+                    roomListings.RemoveAt(tempIndex);
                     Destroy(roomsContainer.GetChild(tempIndex).gameObject);
                 }
             }
@@ -118,11 +112,23 @@ public class LobbyController : MonoBehaviourPunCallbacks
 
     void ListRoom(RoomInfo room)
     {
+        bool isDoubled = false;
         if(room.IsOpen && room.IsVisible)
         {
-            GameObject tempListing = Instantiate(roomListingPrefab, roomsContainer);
-            RoomButton tempButton = tempListing.GetComponent<RoomButton>();
-            tempButton.SetRoom(room.Name, room.MaxPlayers, room.PlayerCount);
+            for(int i = 0; i < roomsContainer.childCount; i++)
+            {
+                if (roomsContainer.GetChild(i).GetChild(0).GetComponent<Text>().text == room.Name)
+                {
+                    isDoubled = true;
+                }
+            }
+
+            if(!isDoubled)
+            {
+                GameObject tempListing = Instantiate(roomListingPrefab, roomsContainer);
+                RoomButton tempButton = tempListing.GetComponent<RoomButton>();
+                tempButton.SetRoom(room.Name, room.MaxPlayers, room.PlayerCount);
+            }
         }
     }
 
@@ -153,6 +159,7 @@ public class LobbyController : MonoBehaviourPunCallbacks
 
     public void MatchmakingCancel()
     {
+        ClearRoomListings();
         PhotonNetwork.LeaveLobby();
     }
 
