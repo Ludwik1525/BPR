@@ -17,17 +17,7 @@ public class BoardPlayerController : MonoBehaviour
         {
             steps = Random.Range(1, 7);
             Debug.Log("Dice Rolled: " + steps);
-
             StartCoroutine(Move());
-
-            //if(routePosition + steps < currentRoute.childNodeList.Count)
-            //{
-            //    StartCoroutine(Move());
-            //}
-            //else
-            //{
-            //    Debug.Log("Rolled number is too high");
-            //}
         }
     }
 
@@ -35,6 +25,7 @@ public class BoardPlayerController : MonoBehaviour
     {
         if(isMoving)
         {
+            //if the player is already moving return
             yield break;
         }
 
@@ -49,12 +40,9 @@ public class BoardPlayerController : MonoBehaviour
             {
                 yield return null;
             }
-
             yield return new WaitForSeconds(0.1f);
             steps--;
-            //routePosition++;
         }
-
         isMoving = false;
     }
 

@@ -7,6 +7,11 @@ public class Route : MonoBehaviour
     Transform[] childObjects;
     public List<Transform> childNodeList = new List<Transform>();
 
+    private void Awake()
+    {
+        FillNodes();
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
@@ -16,7 +21,7 @@ public class Route : MonoBehaviour
         for (int i = 0; i < childNodeList.Count; i++)
         {
             Vector3 currentPos = childNodeList[i].position;
-            if(i > 0)
+            if (i > 0)
             {
                 Vector3 prevPos = childNodeList[i - 1].position;
                 Gizmos.DrawLine(prevPos, currentPos);
@@ -30,9 +35,9 @@ public class Route : MonoBehaviour
 
         childObjects = GetComponentsInChildren<Transform>();
 
-        foreach(Transform child in childObjects)
+        foreach (Transform child in childObjects)
         {
-            if(child != this.transform)
+            if (child != this.transform)
             {
                 childNodeList.Add(child);
             }
