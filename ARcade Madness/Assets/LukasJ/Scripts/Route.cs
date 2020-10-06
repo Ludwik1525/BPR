@@ -32,14 +32,19 @@ public class Route : MonoBehaviour
     void FillNodes()
     {
         childNodeList.Clear();
-
+        //childObjects = 
         childObjects = GetComponentsInChildren<Transform>();
 
         foreach (Transform child in childObjects)
         {
             if (child != this.transform)
             {
-                childNodeList.Add(child);
+                if(child.transform.gameObject.tag == "Tile")
+                {
+                    print(child.transform.gameObject.name);
+                    childNodeList.Add(child);
+                }
+                    
             }
         }
     }
