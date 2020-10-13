@@ -41,7 +41,7 @@ public class Route : MonoBehaviour
             {
                 if(child.transform.gameObject.tag == "Tile")
                 {
-                    print(child.transform.gameObject.name);
+                    //print(child.transform.gameObject.name);
                     childNodeList.Add(child);
                 }
                     
