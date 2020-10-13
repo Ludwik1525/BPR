@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using ExitGames.Client.Photon;
+using System.IO;
 
 public class SpawnManager : MonoBehaviourPunCallbacks
 {
@@ -44,7 +45,9 @@ public class SpawnManager : MonoBehaviourPunCallbacks
             Quaternion receivedRotation = (Quaternion)data[1];
             //int receivedPlayerSelectionData = (int)data[3];
 
-            GameObject player = Instantiate(playerPrefab, receivedPosition + battleArenaGameobject.transform.position, receivedRotation);
+            //GameObject player = Instantiate(playerPrefab, receivedPosition + battleArenaGameobject.transform.position, receivedRotation);
+            //GameObject player = PhotonNetwork.Instantiate(Path.GetFileName(playerPrefab.name), receivedPosition + battleArenaGameobject.transform.position, receivedRotation);
+            GameObject player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs","Player1_Attacker"), receivedPosition + battleArenaGameobject.transform.position, receivedRotation);
             PhotonView _photonView = player.GetComponent<PhotonView>();
             _photonView.ViewID = (int)data[2];
         }
