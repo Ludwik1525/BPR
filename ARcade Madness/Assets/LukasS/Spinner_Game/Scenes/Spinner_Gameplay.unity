@@ -194,6 +194,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1799507371346577409, guid: 98e3e617848dbf540a3f9ddabdd48141, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1799507371346577409, guid: 98e3e617848dbf540a3f9ddabdd48141, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 1799507371346577409, guid: 98e3e617848dbf540a3f9ddabdd48141, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1799507371346577409, guid: 98e3e617848dbf540a3f9ddabdd48141, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0.7071068
       objectReference: {fileID: 0}
@@ -225,26 +237,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2607134651381181065, guid: 98e3e617848dbf540a3f9ddabdd48141, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3360384282451884562, guid: 98e3e617848dbf540a3f9ddabdd48141, type: 3}
       propertyPath: m_Name
       value: BattleArena
       objectReference: {fileID: 0}
-    - target: {fileID: 3360384282451884565, guid: 98e3e617848dbf540a3f9ddabdd48141, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: -4321184905530028032, guid: f351e27924baa6d448b50514a7e29dd2, type: 3}
-    - target: {fileID: 3935774163939856078, guid: 98e3e617848dbf540a3f9ddabdd48141, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: ed3306d9bf351b345987e158b47e9f60, type: 2}
-    - target: {fileID: 7323456439442240055, guid: 98e3e617848dbf540a3f9ddabdd48141, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: -4321184905530028032, guid: f351e27924baa6d448b50514a7e29dd2, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98e3e617848dbf540a3f9ddabdd48141, type: 3}
 --- !u!4 &929775559 stripped
