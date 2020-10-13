@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BoardPlayerController : MonoBehaviour
 {
@@ -11,8 +12,21 @@ public class BoardPlayerController : MonoBehaviour
     public int steps;
     public float speed = 2f;
 
+    //Events
+    [HideInInspector]
+    public UnityEvent onStartMoving;
+    [HideInInspector]
+    public UnityEvent onStopMoving;
+
+    private void Awake()
+    {
+        onStartMoving = new UnityEvent();
+        onStopMoving = new UnityEvent();
+    }
+
     private void Update()
     {
+        //if space is pressed and player is not moving, roll the dice
         if(Input.GetKeyDown(KeyCode.Space) && !isMoving)
         {
             steps = Random.Range(1, 7);
@@ -29,7 +43,10 @@ public class BoardPlayerController : MonoBehaviour
             yield break;
         }
 
+        //set bool value to true and invoke start moving event
         isMoving = true;
+        onStartMoving.Invoke();
+
         while(steps > 0)
         {
             routePosition++;
@@ -44,6 +61,7 @@ public class BoardPlayerController : MonoBehaviour
             steps--;
         }
         isMoving = false;
+        onStopMoving.Invoke();
     }
 
     bool MoveToNextNode(Vector3 target)
