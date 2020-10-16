@@ -24,6 +24,8 @@ public class LobbyController : MonoBehaviourPunCallbacks
     private InputField nameInput;
     [SerializeField]
     private Button connectButton;
+    [SerializeField]
+    private Button refreshButton;
 
     public override void OnConnectedToMaster()
     {
@@ -174,5 +176,12 @@ public class LobbyController : MonoBehaviourPunCallbacks
         FindObjectOfType<MainMenu>().TurnOffPrivateRoomError();
         yield return new WaitForSeconds(1f);
         FindObjectOfType<MainMenu>().TurnOnPrivateRoomError();
+    }
+
+    public void RefreshLobby()
+    {
+        ClearRoomListings();
+        PhotonNetwork.LeaveLobby();
+        PhotonNetwork.JoinLobby();
     }
 }

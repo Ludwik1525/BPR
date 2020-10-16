@@ -36,6 +36,9 @@ MonoBehaviour:
   - DestroySpaceship
   - Fire
   - RespawnSpaceship
+  - ApplyColour
+  - RPC_ApplyColour
+  - RPC_UpdateForbiddenColoursList
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
+using System.IO;
 
 public class RoomController : MonoBehaviourPunCallbacks
 {
@@ -34,13 +35,15 @@ public class RoomController : MonoBehaviourPunCallbacks
         }
     }
 
-    void ListPlayers()
+    IEnumerator ListPlayers()
     {
         foreach(Player player in PhotonNetwork.PlayerList)
         {
-            GameObject tempListing = Instantiate(playerListingPrefab, playersContainer);
+            GameObject tempListing = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerListingImg"), playersContainer.position, Quaternion.identity);
+            tempListing.transform.SetParent(playersContainer);
             Text tempText = tempListing.transform.GetChild(0).GetComponent<Text>();
             tempText.text = player.NickName;
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
@@ -56,22 +59,26 @@ public class RoomController : MonoBehaviourPunCallbacks
             startButton.SetActive(false);
         }
         ClearPlayerListings();
-        ListPlayers();
+        StartCoroutine("ListPlayers");
         roomPanel.SetActive(true);
         lobbyPanel.SetActive(false);
+
+        ExitGames.Client.Photon.Hashtable thisPColour = new ExitGames.Client.Photon.Hashtable();
+        thisPColour.Add("ColourID", null);
+        PhotonNetwork.LocalPlayer.SetCustomProperties(thisPColour);
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         ClearPlayerListings();
-        ListPlayers();
+        StartCoroutine("ListPlayers");
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         ClearPlayerListings();
-        ListPlayers();
-        if(PhotonNetwork.IsMasterClient)
+        StartCoroutine("ListPlayers");
+        if (PhotonNetwork.IsMasterClient)
         {
             startButton.SetActive(true);
         }
@@ -94,6 +101,10 @@ public class RoomController : MonoBehaviourPunCallbacks
 
     public void BackOnClick()
     {
+        ExitGames.Client.Photon.Hashtable thisPColour = new ExitGames.Client.Photon.Hashtable();
+        thisPColour.Add("ColourID", null);
+        PhotonNetwork.LocalPlayer.SetCustomProperties(thisPColour);
+
         lobbyPanel.SetActive(true);
         roomPanel.SetActive(false);
         FindObjectOfType<MainMenu>().ClosePrivateRoomBox();
