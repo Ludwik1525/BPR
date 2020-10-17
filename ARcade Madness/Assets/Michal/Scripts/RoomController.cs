@@ -188,6 +188,12 @@ public class RoomController : MonoBehaviourPunCallbacks
 
     public void ChangeRoomType()
     {
+        PV.RPC("RPC_ChangeType", RpcTarget.AllBuffered);
+    }
+
+    [PunRPC]
+    void RPC_ChangeType()
+    {
         string roomType = "";
 
         PhotonNetwork.CurrentRoom.IsVisible = !PhotonNetwork.CurrentRoom.IsVisible;

@@ -42,6 +42,7 @@ MonoBehaviour:
   - RPC_UpdateForbiddenColoursList
   - RPC_SendTimer
   - RPC_UpdateTimer
+  - RPC_ChangeType
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
