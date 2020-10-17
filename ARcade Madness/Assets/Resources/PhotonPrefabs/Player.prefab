@@ -197,6 +197,13 @@ MonoBehaviour:
   currentRoute: {fileID: 1443793430976455524, guid: 580615f43516484458869ad8f23c8852, type: 3}
   steps: 0
   speed: 5
+  dice: {fileID: 0}
+  onStartMoving:
+    m_PersistentCalls:
+      m_Calls: []
+  onStopMoving:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &3627618541956549847
 PrefabInstance:
   m_ObjectHideFlags: 0

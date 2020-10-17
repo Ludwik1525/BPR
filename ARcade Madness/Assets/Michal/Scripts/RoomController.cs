@@ -20,12 +20,26 @@ public class RoomController : MonoBehaviourPunCallbacks
     private GameObject startButton;
 
     [SerializeField]
+    private GameObject roomTypeButton;
+
+    [SerializeField]
     private Transform playersContainer;
     [SerializeField]
     private GameObject playerListingPrefab;
 
     [SerializeField]
     private Text roomNameDisplay;
+
+    private float timerValue = 5;
+
+    [SerializeField]
+    private Text timer;
+
+    [SerializeField]
+    private Text waitText;
+
+    private PhotonView PV;
+
 
     void ClearPlayerListings()
     {
@@ -45,18 +59,39 @@ public class RoomController : MonoBehaviourPunCallbacks
             tempText.text = player.NickName;
             yield return new WaitForSeconds(0.1f);
         }
+
+        if (PhotonNetwork.PlayerList.Length > 1)
+        {
+            startButton.GetComponent<Button>().interactable = true;
+        }
+        else
+        {
+            startButton.GetComponent<Button>().interactable = false;
+        }
     }
 
     public override void OnJoinedRoom()
     {
-        roomNameDisplay.text = "Room " + PhotonNetwork.CurrentRoom.Name;
+        PV = GetComponent<PhotonView>();
+        string roomType = "";
+        if(PhotonNetwork.CurrentRoom.IsVisible)
+        {
+            roomType = "public";
+        }
+        else
+        {
+            roomType = "private";
+        }
+        roomNameDisplay.text = "Room " + PhotonNetwork.CurrentRoom.Name + " (" + roomType + ")";
         if(PhotonNetwork.IsMasterClient)
         {
             startButton.SetActive(true);
+            roomTypeButton.SetActive(true);
         }
         else
         {
             startButton.SetActive(false);
+            roomTypeButton.SetActive(false);
         }
         ClearPlayerListings();
         StartCoroutine("ListPlayers");
@@ -81,16 +116,54 @@ public class RoomController : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient)
         {
             startButton.SetActive(true);
+            roomTypeButton.SetActive(true);
         }
+    }
+
+    public void BeginStartingGame()
+    {
+        if(PhotonNetwork.IsMasterClient)
+        {
+            if (PhotonNetwork.PlayerList.Length > 1)
+            {
+                PhotonNetwork.CurrentRoom.IsOpen = false;
+                StartCoroutine("CountTime");
+            }
+        }
+    }
+
+    [PunRPC]
+    void RPC_UpdateTimer()
+    {
+        waitText.gameObject.SetActive(true);
+        timer.gameObject.SetActive(true);
+        timer.text = "" + timerValue;
+        timerValue--;
+    }
+
+    IEnumerator CountTime()
+    {
+        while(timerValue >= 0)
+        {
+            PV.RPC("RPC_UpdateTimer", RpcTarget.AllBuffered);
+            yield return new WaitForSeconds(1);
+        }
+        ResetTimer();
+        StartGame();
+    }
+
+    void ResetTimer()
+    {
+        timerValue = 5;
+        waitText.gameObject.SetActive(false);
+        timer.gameObject.SetActive(false);
     }
 
     public void StartGame()
     {
-        if(PhotonNetwork.IsMasterClient)
-        {
-            PhotonNetwork.CurrentRoom.IsOpen = false;
-            PhotonNetwork.LoadLevel(multiplayerSceneIndex);
-        }
+        if (!PhotonNetwork.IsMasterClient)
+            return;
+        PhotonNetwork.LoadLevel(multiplayerSceneIndex);
     }
 
     IEnumerator RejoinLobby()
@@ -111,5 +184,22 @@ public class RoomController : MonoBehaviourPunCallbacks
         PhotonNetwork.LeaveRoom();
         PhotonNetwork.LeaveLobby();
         StartCoroutine(RejoinLobby());
+    }
+
+    public void ChangeRoomType()
+    {
+        string roomType = "";
+
+        PhotonNetwork.CurrentRoom.IsVisible = !PhotonNetwork.CurrentRoom.IsVisible;
+
+        if (PhotonNetwork.CurrentRoom.IsVisible)
+        {
+            roomType = "public";
+        }
+        else
+        {
+            roomType = "private";
+        }
+        roomNameDisplay.text = "Room " + PhotonNetwork.CurrentRoom.Name + " (" + roomType + ")";
     }
 }
