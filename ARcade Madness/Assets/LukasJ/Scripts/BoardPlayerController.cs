@@ -18,6 +18,7 @@ public class BoardPlayerController : MonoBehaviour
     public UnityEvent onStartMoving;
     [HideInInspector]
     public UnityEvent onStopMoving;
+    
 
     private void Awake()
     {
@@ -38,7 +39,6 @@ public class BoardPlayerController : MonoBehaviour
 
     IEnumerator Move()
     {
-        
         if (isMoving)
         {
             //if the player is already moving return
@@ -70,6 +70,7 @@ public class BoardPlayerController : MonoBehaviour
 
     bool MoveToNextNode(Vector3 target)
     {
+        transform.rotation = Quaternion.LookRotation(transform.position - target);
         return target != (transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime));
     }
 
