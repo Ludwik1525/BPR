@@ -127,6 +127,8 @@ public class MainMenu : MonoBehaviour
     {
         optionsMenu.SetActive(false);
         mainMenuObjs.SetActive(true);
+        FindObjectOfType<LogoBlinker>().enabled = false;
+        FindObjectOfType<LogoBlinker>().enabled = true;
     }
 
     private void OpenNameBox()

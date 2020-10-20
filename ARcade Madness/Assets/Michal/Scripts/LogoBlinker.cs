@@ -5,19 +5,25 @@ using UnityEngine.UI;
 
 public class LogoBlinker : MonoBehaviour
 {
-    private Image logo;
-    private Image logo2;
+    public Image topLogo;
+    public Image bottomLogo;
+
+    public Image topLight;
+    public Image bottomLight;
+
+    public Text welcomeText;
+
     Color32 colorOn = new Color32(255, 255, 255, 255);
 
     byte counter = 255;
     bool isDecreasing = true;
     Color32 colorMain = new Color32(255, 255, 255, 255);
+    
 
-    void Start()
+    private void OnEnable()
     {
-        logo = transform.GetChild(0).GetComponent<Image>();
-        logo2 = GetComponent<Image>();
         StartCoroutine("BlinkingRoutine");
+        StartCoroutine("TextBlinkerRoutine");
     }
 
     private void Update()
@@ -38,8 +44,10 @@ public class LogoBlinker : MonoBehaviour
                 isDecreasing = true;
             }
         }
+
         colorMain = new Color32(counter, counter, counter, 255);
-        logo.color = colorMain;
+        topLogo.color = colorMain;
+        topLight.color = new Color32(counter, counter, counter, 180);
     }
 
     IEnumerator BlinkingRoutine()
@@ -48,9 +56,11 @@ public class LogoBlinker : MonoBehaviour
         {
             byte colOff = (byte)Random.Range(0, 130);
             Color32 colorOff = new Color32(colOff, colOff, colOff, 255);
-            logo2.color = colorOff;
+            bottomLogo.color = colorOff;
+            bottomLight.gameObject.SetActive(false);
             yield return new WaitForSeconds(Random.Range(0.1f, 0.6f));
-            logo2.color = colorOn;
+            bottomLogo.color = colorOn;
+            bottomLight.gameObject.SetActive(true);
             yield return new WaitForSeconds(Random.Range(0.1f, 1f));
         }
     }
@@ -62,6 +72,15 @@ public class LogoBlinker : MonoBehaviour
             byte colOn = (byte)Random.Range(200, 255);
             colorOn = new Color32(colOn, colOn, colOn, 255);
             yield return new WaitForSeconds(Random.Range(2f, 5f));
+        }
+    }
+
+    IEnumerator TextBlinkerRoutine()
+    {
+        while(true)
+        {
+            welcomeText.color = new Color32((byte)Random.Range(110, 255), (byte)Random.Range(110, 255), (byte)Random.Range(110, 255), 255);
+            yield return new WaitForSeconds(0.5f);
         }
     }
 }
