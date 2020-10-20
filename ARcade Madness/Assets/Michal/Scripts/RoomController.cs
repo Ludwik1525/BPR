@@ -40,6 +40,8 @@ public class RoomController : MonoBehaviourPunCallbacks
 
     private PhotonView PV;
 
+    private bool isStarting = false;
+
 
     void ClearPlayerListings()
     {
@@ -51,7 +53,7 @@ public class RoomController : MonoBehaviourPunCallbacks
 
     IEnumerator ListPlayers()
     {
-        foreach(Player player in PhotonNetwork.PlayerList)
+        foreach (Player player in PhotonNetwork.PlayerList)
         {
             GameObject tempListing = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerListingImg"), playersContainer.position, Quaternion.identity);
             tempListing.transform.SetParent(playersContainer);
@@ -74,7 +76,7 @@ public class RoomController : MonoBehaviourPunCallbacks
     {
         PV = GetComponent<PhotonView>();
         string roomType = "";
-        if(PhotonNetwork.CurrentRoom.IsVisible)
+        if (PhotonNetwork.CurrentRoom.IsVisible)
         {
             roomType = "public";
         }
@@ -83,7 +85,7 @@ public class RoomController : MonoBehaviourPunCallbacks
             roomType = "private";
         }
         roomNameDisplay.text = "Room " + PhotonNetwork.CurrentRoom.Name + " (" + roomType + ")";
-        if(PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.IsMasterClient)
         {
             startButton.SetActive(true);
             roomTypeButton.SetActive(true);
@@ -122,12 +124,13 @@ public class RoomController : MonoBehaviourPunCallbacks
 
     public void BeginStartingGame()
     {
-        if(PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.IsMasterClient)
         {
             if (PhotonNetwork.PlayerList.Length > 1)
             {
                 PhotonNetwork.CurrentRoom.IsOpen = false;
                 StartCoroutine("CountTime");
+                isStarting = true;
             }
         }
     }
@@ -135,6 +138,7 @@ public class RoomController : MonoBehaviourPunCallbacks
     [PunRPC]
     void RPC_UpdateTimer()
     {
+        isStarting = true;
         waitText.gameObject.SetActive(true);
         timer.gameObject.SetActive(true);
         timer.text = "" + timerValue;
@@ -143,20 +147,30 @@ public class RoomController : MonoBehaviourPunCallbacks
 
     IEnumerator CountTime()
     {
-        while(timerValue >= 0)
+        while (timerValue >= 0)
         {
             PV.RPC("RPC_UpdateTimer", RpcTarget.AllBuffered);
             yield return new WaitForSeconds(1);
         }
-        ResetTimer();
+        PV.RPC("RPC_ResetTimer", RpcTarget.AllBuffered);
         StartGame();
     }
 
-    void ResetTimer()
+    [PunRPC]
+    void RPC_ResetTimer()
     {
+        isStarting = false;
         timerValue = 5;
         waitText.gameObject.SetActive(false);
         timer.gameObject.SetActive(false);
+    }
+
+    [PunRPC]
+    void RPC_AbortStarting()
+    {
+        StopCoroutine("CountTime");
+        PV.RPC("RPC_ResetTimer", RpcTarget.AllBuffered);
+        PhotonNetwork.CurrentRoom.IsOpen = true;
     }
 
     public void StartGame()
@@ -177,6 +191,11 @@ public class RoomController : MonoBehaviourPunCallbacks
         ExitGames.Client.Photon.Hashtable thisPColour = new ExitGames.Client.Photon.Hashtable();
         thisPColour.Add("ColourID", null);
         PhotonNetwork.LocalPlayer.SetCustomProperties(thisPColour);
+
+        if(isStarting)
+        {
+            PV.RPC("RPC_AbortStarting", RpcTarget.AllBuffered);
+        }
 
         lobbyPanel.SetActive(true);
         roomPanel.SetActive(false);

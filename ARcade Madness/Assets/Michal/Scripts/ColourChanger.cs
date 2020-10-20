@@ -84,34 +84,58 @@ public class ColourChanger : MonoBehaviour
     {
         if (PV.IsMine)
         {
-            bool isColourUsed = true;
-
             if (thisPlayer.CustomProperties["ColourID"] != null)
             {
                 colourNo = (int)thisPlayer.CustomProperties["ColourID"];
             }
             else
             {
-                colourNo = 0;
-                while (isColourUsed)
-                {
-                    isColourUsed = false;
+                bool isColourUsed = true;  // bool used to decide if the set colour is used by anybody else
+                colourNo = 0;  // initial colour index for a new player joining the room
 
-                    for (int i = playersContainer.childCount - 1; i >= 0; i--)
+                while (isColourUsed)  // loop checking if the colour is used by anybody
+                {
+                    isColourUsed = false;  // set to false at start, then try to check if it's actually false
+
+                    for (int i = playersContainer.childCount - 1; i >= 0; i--)  // for every player from the player list
                     {
-                        if (playersContainer.GetChild(i).GetChild(0).GetComponent<Text>().text != myName)
+                        if (playersContainer.GetChild(i).GetChild(0).GetComponent<Text>().text != myName)  // if given player is not me
                         {
                             if (playersContainer.GetChild(i).GetChild(1).GetComponent<Image>().color == coloursArray[colourNo])
+                            // if this player's colour had the colour I have chosen right now
                             {
-                                colourNo++;
-                                if (colourNo == 12)
+                                colourNo++;  // increment the colour index by one
+                                if (colourNo == 12)  // if the new colour index is the maximum one, zero it out
                                 {
                                     colourNo = 0;
                                 }
-                                isColourUsed = true;
+                                isColourUsed = true;  // set the bool to true to loop again with a new colour index, repeat the whole process
                             }
                         }
                     }
+                    isColourUsed = false;
+
+                    //for (int i = 0; i < colourNo + 1; i++)
+                    //{
+                    //    bool wasAlreadyIncremented = false;
+                    //    for (int j = playersContainer.childCount - 1; j >= 0; j--)
+                    //    {
+                    //        if (playersContainer.GetChild(j).GetChild(0).GetComponent<Text>().text != myName)
+                    //        {
+                    //            if (playersContainer.GetChild(j).GetChild(1).GetComponent<Image>().color == coloursArray[i])
+                    //            {
+                    //                if (!wasAlreadyIncremented)
+                    //                {
+                    //                    if (colourNo < 11)
+                    //                    {
+                    //                        colourNo++;
+                    //                    }
+                    //                    wasAlreadyIncremented = true;
+                    //                }
+                    //            }
+                    //        }
+                    //    }
+                    //}
                 }
             }
 
@@ -120,6 +144,8 @@ public class ColourChanger : MonoBehaviour
             ExitGames.Client.Photon.Hashtable thisPColour = new ExitGames.Client.Photon.Hashtable();
             thisPColour.Add("ColourID", colourNo);
             thisPlayer.SetCustomProperties(thisPColour);
+
         }
     }
 }
+
