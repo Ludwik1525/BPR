@@ -5698,6 +5698,8 @@ MonoBehaviour:
   nameInput: {fileID: 1358880693}
   connectButton: {fileID: 994301265}
   refreshButton: {fileID: 605235682}
+  joinPrivateButton: {fileID: 1576313345}
+  createRoomButton: {fileID: 2082802257}
 --- !u!1 &1201787927
 GameObject:
   m_ObjectHideFlags: 0
@@ -8032,7 +8034,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1576313346}
   m_OnClick:
     m_PersistentCalls:
@@ -10077,7 +10079,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 2082802258}
   m_OnClick:
     m_PersistentCalls:

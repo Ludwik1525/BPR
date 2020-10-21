@@ -58,6 +58,7 @@ public class RoomController : MonoBehaviourPunCallbacks
         {
             GameObject tempListing = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerListingImg"), playersContainer.position, Quaternion.identity);
             tempListing.transform.SetParent(playersContainer);
+            tempListing.name = player.NickName + "_Displayer";
             Text tempText = tempListing.transform.GetChild(0).GetComponent<Text>();
             tempText.text = player.NickName;
 
@@ -68,6 +69,17 @@ public class RoomController : MonoBehaviourPunCallbacks
             playerNumber++;
 
             yield return new WaitForSeconds(0.1f);
+        }
+
+        if (GameObject.FindGameObjectsWithTag("Displayer") != null)
+        {
+            foreach (GameObject displayer in GameObject.FindGameObjectsWithTag("Displayer"))
+            {
+                if (displayer.name == "PlayerListingImg(Clone)")
+                {
+                    Destroy(displayer);
+                }
+            }
         }
 
         if (PhotonNetwork.PlayerList.Length > 1)
