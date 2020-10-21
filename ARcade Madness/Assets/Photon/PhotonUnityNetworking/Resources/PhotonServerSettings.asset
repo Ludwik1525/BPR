@@ -37,11 +37,11 @@ MonoBehaviour:
   - DoDamage
   - Fire
   - RespawnSpaceship
+  - RPC_AbortStarting
   - RPC_ApplyColour
   - RPC_ChangeType
-  - RPC_UpdateTimer
-  - RPC_AbortStarting
   - RPC_ResetTimer
+  - RPC_UpdateTimer
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
