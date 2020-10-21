@@ -1,5 +1,6 @@
 ﻿using Photon.Pun;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -18,6 +19,8 @@ public class GameSetupController : MonoBehaviour
 
     private GameObject player;
 
+    public static List<GameObject> players = new List<GameObject>();
+
     private void Start()
     {
         spawn = FindObjectOfType<Spawn>();
@@ -32,6 +35,7 @@ public class GameSetupController : MonoBehaviour
                 Debug.Log("Index " + (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]);
         PV = player.transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<PhotonView>();
         PV.RPC("RPC_AssignColour", RpcTarget.AllBuffered);
+        players.Add(player);
     }
 
     public void DisconnectPlayer()
