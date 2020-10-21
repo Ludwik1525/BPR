@@ -53,12 +53,20 @@ public class RoomController : MonoBehaviourPunCallbacks
 
     IEnumerator ListPlayers()
     {
+        int playerNumber = 0;
         foreach (Player player in PhotonNetwork.PlayerList)
         {
             GameObject tempListing = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerListingImg"), playersContainer.position, Quaternion.identity);
             tempListing.transform.SetParent(playersContainer);
             Text tempText = tempListing.transform.GetChild(0).GetComponent<Text>();
             tempText.text = player.NickName;
+
+            ExitGames.Client.Photon.Hashtable playerNo = new ExitGames.Client.Photon.Hashtable();
+            playerNo.Add("PlayerNo", playerNumber);
+            player.SetCustomProperties(playerNo);
+
+            playerNumber++;
+
             yield return new WaitForSeconds(0.1f);
         }
 

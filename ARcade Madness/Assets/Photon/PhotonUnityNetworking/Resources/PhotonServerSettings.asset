@@ -42,6 +42,7 @@ MonoBehaviour:
   - RPC_ChangeType
   - RPC_ResetTimer
   - RPC_UpdateTimer
+  - RPC_AssignColour
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

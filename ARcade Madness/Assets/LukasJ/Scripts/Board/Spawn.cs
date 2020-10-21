@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class Spawn : MonoBehaviour
 {
-    private SpawnPosition[] spawnPositions;
+    public SpawnPosition[] spawnPositions;
 
     private void Awake()
     {
         spawnPositions = GetComponentsInChildren<SpawnPosition>();
     }
 
-    public Transform AssignSpawnPosition()
+    public Transform AssignSpawnPosition(int index)
     {
-       foreach(SpawnPosition pos in spawnPositions)
+       for(int i = 0; i < spawnPositions.Length; i++)
        {
-            if(pos.isFree)
+            if(spawnPositions[i].isFree && index == i)
             {
-                pos.isFree = false;
-                return pos.transform;
+                spawnPositions[i].isFree = false;
+                return spawnPositions[i].transform;
             }
        }
         return null;
