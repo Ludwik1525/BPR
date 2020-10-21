@@ -591,6 +591,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuSceneIndex: 0
   spawn: {fileID: 0}
+  spawnPositions:
+  - {fileID: 127721909}
+  - {fileID: 549064765}
+  - {fileID: 1126889982}
+  - {fileID: 1427000989}
 --- !u!1 &1026543714
 GameObject:
   m_ObjectHideFlags: 0

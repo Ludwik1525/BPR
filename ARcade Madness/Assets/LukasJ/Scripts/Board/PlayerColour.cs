@@ -15,9 +15,10 @@ public class PlayerColour : MonoBehaviour
         PV = GetComponent<PhotonView>();
         colours = FindObjectOfType<ColourPalette>();
 
-        if (PV.IsMine)
+        for (int i = GameSetupController.players.Count - 1; i >= 0; i--)
         {
-            GetComponent<SkinnedMeshRenderer>().material = colours.colours[(int)PhotonNetwork.LocalPlayer.CustomProperties["ColourID"]];
+            GameSetupController.players[i].transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<SkinnedMeshRenderer>().material =
+                colours.colours[(int)PhotonNetwork.PlayerList[i].CustomProperties["ColourID"]];
         }
     }
 }
