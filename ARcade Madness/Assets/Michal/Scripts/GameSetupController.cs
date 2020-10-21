@@ -30,7 +30,7 @@ public class GameSetupController : MonoBehaviour
         player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player"), Vector3.zero, Quaternion.identity);
                 //spawn.AssignSpawnPosition((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]).position, Quaternion.identity);
                 Debug.Log("Index " + (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]);
-        PV = player.GetComponentInChildren<PhotonView>();
+        PV = player.transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<PhotonView>();
         PV.RPC("RPC_AssignColour", RpcTarget.AllBuffered);
     }
 
