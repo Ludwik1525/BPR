@@ -113,7 +113,6 @@ public class ColourChanger : MonoBehaviour
                             }
                         }
                     }
-                    isColourUsed = false;
 
                     //for (int i = 0; i < colourNo + 1; i++)
                     //{
