@@ -20,7 +20,6 @@ public class GameSetupController : MonoBehaviour
 
     private void Start()
     {
-        PV = GetComponent<PhotonView>();
         spawn = FindObjectOfType<Spawn>();
         colours = FindObjectOfType<ColourPalette>();
         CreatePlayer();
@@ -28,11 +27,10 @@ public class GameSetupController : MonoBehaviour
 
     private void CreatePlayer()
     {
-        if (PV.IsMine)
-        {
             player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player"),
                 spawn.AssignSpawnPosition((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]).position, Quaternion.identity);
-        }
+        PV = player.GetComponent<PhotonView>();
+        PV.RPC("RPC_AssignColour", RpcTarget.AllBuffered);
     }
 
     [PunRPC]
