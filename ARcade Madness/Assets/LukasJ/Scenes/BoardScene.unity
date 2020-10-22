@@ -167,6 +167,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFree: 0
+--- !u!1 &187225794
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 187225795}
+  m_Layer: 0
+  m_Name: PlayersParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &187225795
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187225794}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1669.8173, y: 710.7943, z: -264.16876}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &206277135
 GameObject:
   m_ObjectHideFlags: 0
@@ -591,6 +621,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuSceneIndex: 0
   spawn: {fileID: 0}
+  playersParent: {fileID: 187225795}
   spawnPositions:
   - {fileID: 127721909}
   - {fileID: 549064765}

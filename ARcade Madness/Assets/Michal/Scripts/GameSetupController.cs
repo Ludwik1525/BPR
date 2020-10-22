@@ -39,6 +39,7 @@ public class GameSetupController : MonoBehaviour
 
         PV1 = player.GetComponent<PhotonView>();
         PV1.RPC("RPC_AddToList", RpcTarget.AllBuffered);
+        PV1.RPC("RPC_SetParent", RpcTarget.AllBuffered);
 
         PV2 = player.transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<PhotonView>();
         PV2.RPC("RPC_AssignColour", RpcTarget.AllBuffered);

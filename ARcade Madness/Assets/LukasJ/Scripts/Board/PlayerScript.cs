@@ -6,6 +6,8 @@ using Photon.Pun;
 public class PlayerScript : MonoBehaviour
 {
     private PhotonView PV;
+    
+    private Transform playersParent;
 
 
     [PunRPC]
@@ -15,4 +17,13 @@ public class PlayerScript : MonoBehaviour
         
         GameSetupController.players.Add(this.gameObject);
     }
+
+    [PunRPC]
+    void RPC_SetParent()
+    {
+        playersParent = GameObject.Find("PlayersParent").transform;
+
+        this.gameObject.transform.SetParent(playersParent);
+    }
+
 }
