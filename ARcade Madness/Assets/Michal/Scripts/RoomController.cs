@@ -104,7 +104,7 @@ public class RoomController : MonoBehaviourPunCallbacks
         {
             roomType = "private";
         }
-        roomNameDisplay.text = "Room " + PhotonNetwork.CurrentRoom.Name + " (" + roomType + ")";
+        roomNameDisplay.text = "Room    " + PhotonNetwork.CurrentRoom.Name + " (" + roomType + ")";
         if (PhotonNetwork.IsMasterClient)
         {
             startButton.SetActive(true);
@@ -245,6 +245,6 @@ public class RoomController : MonoBehaviourPunCallbacks
         {
             roomType = "private";
         }
-        roomNameDisplay.text = "Room " + PhotonNetwork.CurrentRoom.Name + " (" + roomType + ")";
+        roomNameDisplay.text = "Room    " + PhotonNetwork.CurrentRoom.Name + " (" + roomType + ")";
     }
 }

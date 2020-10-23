@@ -5,17 +5,13 @@ using UnityEngine.UI;
 
 public class LogoBlinker : MonoBehaviour
 {
-    public Image topLogo;
-    public Image bottomLogo;
+    public Image topLogo, welcomeTextLight, logoLight1, logoLight2, bottomLight;
 
-    public Image topLight;
-    public Image bottomLight;
+    public Text welcomeText, bottomLogo;
 
-    public Text welcomeText;
+    Color32 colorOn = new Color32(255, 5, 0, 255);
 
-    Color32 colorOn = new Color32(255, 255, 255, 255);
-
-    byte counter = 255;
+    int counter = 255;
     bool isDecreasing = true;
     Color32 colorMain = new Color32(255, 255, 255, 255);
     
@@ -23,7 +19,6 @@ public class LogoBlinker : MonoBehaviour
     private void OnEnable()
     {
         StartCoroutine("BlinkingRoutine");
-        StartCoroutine("TextBlinkerRoutine");
     }
 
     private void Update()
@@ -39,15 +34,20 @@ public class LogoBlinker : MonoBehaviour
         else
         {
             counter++;
-            if(counter >= 255)
+            if(counter >= 300)
             {
                 isDecreasing = true;
             }
         }
 
-        colorMain = new Color32(counter, counter, counter, 255);
-        topLogo.color = colorMain;
-        topLight.color = new Color32(counter, counter, counter, 180);
+        if (counter <= 255)
+        {
+            welcomeText.GetComponent<Outline>().effectColor = new Color32(204, 0, (byte)(counter-120), 255);
+            welcomeTextLight.color = new Color32(255, 180, (byte)(counter - 100), 120);
+            topLogo.color = new Color32((byte)counter, (byte)counter, (byte)counter, 255);
+            logoLight1.color = new Color32((byte)counter, (byte)counter, (byte)counter, 120);
+            logoLight2.color = new Color32((byte)counter, (byte)counter, (byte)counter, 120);
+        }
     }
 
     IEnumerator BlinkingRoutine()
@@ -55,7 +55,7 @@ public class LogoBlinker : MonoBehaviour
         while(true)
         {
             byte colOff = (byte)Random.Range(0, 130);
-            Color32 colorOff = new Color32(colOff, colOff, colOff, 255);
+            Color32 colorOff = new Color32(colOff, 5, 0, 255);
             bottomLogo.color = colorOff;
             bottomLight.gameObject.SetActive(false);
             yield return new WaitForSeconds(Random.Range(0.1f, 0.6f));
@@ -70,17 +70,8 @@ public class LogoBlinker : MonoBehaviour
         while(true)
         {
             byte colOn = (byte)Random.Range(200, 255);
-            colorOn = new Color32(colOn, colOn, colOn, 255);
+            colorOn = new Color32(colOn, 5, 0, 255);
             yield return new WaitForSeconds(Random.Range(2f, 5f));
-        }
-    }
-
-    IEnumerator TextBlinkerRoutine()
-    {
-        while(true)
-        {
-            welcomeText.color = new Color32((byte)Random.Range(110, 255), (byte)Random.Range(110, 255), (byte)Random.Range(110, 255), 255);
-            yield return new WaitForSeconds(0.5f);
         }
     }
 }
