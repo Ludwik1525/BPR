@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    public GameObject mainMenu, mainMenuObjs, nameBox, optionsMenu, lobby, lobbyObjs, roomCreation, privateRoomBox;
+    public GameObject mainMenu, mainMenuObjs, nameBox, optionsMenu, soundsBox, lobby, lobbyObjs, roomCreation, privateRoomBox;
 
     public GameObject welcomeText, playerNameErrorShort, playerNameErrorLong, roomNameErrorShort, roomNameErrorLong, privateRoomError;
 
     public InputField playerNameField, roomNameField, privateRoomField;
 
-    public Button acceptNameB, playB, optionsB, quitB, changeNameB, optionsBackB, lobbyBackB, roomCreationBackB, roomCreationB, roomAcceptB, players2B, 
+    public Button acceptNameB, playB, optionsB, quitB, changeNameB, changeVolumeB, acceptVolumeB, optionsBackB, lobbyBackB, roomCreationBackB, roomCreationB, roomAcceptB, players2B, 
         players3B, players4B, privateB, publicB, joinPrivateB, confirmPrivateB, cancelPrivateB;
 
     private bool isChangingName;
@@ -35,11 +35,14 @@ public class MainMenu : MonoBehaviour
         publicB.onClick.AddListener(SetPublic);
         joinPrivateB.onClick.AddListener(OpenPrivateRoomBox);
         cancelPrivateB.onClick.AddListener(ClosePrivateRoomBox);
+        changeVolumeB.onClick.AddListener(OpenSoundsBox);
+        acceptVolumeB.onClick.AddListener(CloseSoundsBox);
 
         playerNameErrorLong.SetActive(false);
         playerNameErrorShort.SetActive(false);
 
         optionsMenu.SetActive(false);
+        soundsBox.SetActive(false);
         lobby.SetActive(false);
         roomCreation.SetActive(false);
 
@@ -136,6 +139,18 @@ public class MainMenu : MonoBehaviour
         optionsMenu.SetActive(false);
         nameBox.SetActive(true);
         isChangingName = true;
+    }
+
+    private void OpenSoundsBox()
+    {
+        optionsMenu.SetActive(false);
+        soundsBox.SetActive(true);
+    }
+
+    private void CloseSoundsBox()
+    {
+        optionsMenu.SetActive(true);
+        soundsBox.SetActive(false);
     }
 
     private void CreateRoom()

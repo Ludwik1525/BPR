@@ -67,7 +67,7 @@ public class LogoBlinker : MonoBehaviour
 
     IEnumerator ChangeColour()
     {
-        while(true)
+        while(true) 
         {
             byte colOn = (byte)Random.Range(200, 255);
             colorOn = new Color32(colOn, 5, 0, 255);
