@@ -48,6 +48,7 @@ MonoBehaviour:
   - IncrementTurn
   - TurnOffTheDice
   - TurnOnTheDice
+  - ResetTurnVar
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

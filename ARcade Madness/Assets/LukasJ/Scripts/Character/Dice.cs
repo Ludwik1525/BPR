@@ -15,6 +15,7 @@ public class Dice : MonoBehaviour
     [PunRPC]
     public void TurnOffTheDice()
     {
+        print("I CALLED YO MAMA");
         gameObject.SetActive(false);
     }
 

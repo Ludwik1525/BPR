@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 1896413875}
   - component: {fileID: 1344513924658279819}
   - component: {fileID: 8635412268005515337}
+  - component: {fileID: 4130245500971397772}
   m_Layer: 0
   m_Name: Dice
   m_TagString: Untagged
@@ -137,6 +138,18 @@ MonoBehaviour:
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
+--- !u!114 &4130245500971397772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896413874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a10bca75853f7e74fa0c0e254b9af360, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &1366161294
 Animator:
   serializedVersion: 3
@@ -631,11 +644,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b346dbdae897ac43950a8ad5db48a24, type: 3}
---- !u!4 &543450652549438987 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0b346dbdae897ac43950a8ad5db48a24, type: 3}
-  m_PrefabInstance: {fileID: 1150597600}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8877229698361595578 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -346142337343115430, guid: 0b346dbdae897ac43950a8ad5db48a24, type: 3}
@@ -644,5 +652,10 @@ GameObject:
 --- !u!1 &919132148023788721 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0b346dbdae897ac43950a8ad5db48a24, type: 3}
+  m_PrefabInstance: {fileID: 1150597600}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &543450652549438987 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0b346dbdae897ac43950a8ad5db48a24, type: 3}
   m_PrefabInstance: {fileID: 1150597600}
   m_PrefabAsset: {fileID: 0}

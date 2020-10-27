@@ -51,9 +51,4 @@ public class GameController : MonoBehaviour
         }
         SetTurns();
     }
-
-    public void ResetTurnVar()
-    {
-        currentTurn = 1;
-    }
 }

@@ -10,6 +10,7 @@ public class BoardPlayerController : MonoBehaviour
     int routePosition;
     bool isMoving;
     private PhotonView PV;
+    private PhotonView dicePV;
     public int turn;
 
     public Route currentRoute;
@@ -26,9 +27,9 @@ public class BoardPlayerController : MonoBehaviour
     private void Awake()
     {
         PV = GetComponent<PhotonView>();
+        dicePV = transform.GetChild(2).GetComponent<PhotonView>();
         onStartMoving = new UnityEvent();
         onStopMoving = new UnityEvent();
-        print(PV.ViewID);
     }
 
     private void Update()
@@ -38,7 +39,7 @@ public class BoardPlayerController : MonoBehaviour
         {
             if(turn == GameController.gc.currentTurn)
             {
-                PV.RPC("TurnOnTheDice", RpcTarget.AllBuffered);
+                dicePV.RPC("TurnOnTheDice", RpcTarget.AllBuffered);
                 if (Input.GetKeyDown(KeyCode.Space) && !isMoving)
                 {
                     steps = Random.Range(1, 7);
@@ -58,7 +59,7 @@ public class BoardPlayerController : MonoBehaviour
         }
 
         //set bool value to true and invoke start moving event
-        PV.RPC("TurnOffTheDice", RpcTarget.AllBuffered);
+        dicePV.RPC("TurnOffTheDice", RpcTarget.AllBuffered);
         onStartMoving.Invoke();
         yield return new WaitForSeconds(2.2f);
         isMoving = true;
@@ -78,6 +79,7 @@ public class BoardPlayerController : MonoBehaviour
         isMoving = false;
         onStopMoving.Invoke();
         PV.RPC("IncrementTurn", RpcTarget.AllBuffered);
+        PV.RPC("ResetTurnVar", RpcTarget.AllBuffered);
     }
 
     bool MoveToNextNode(Vector3 target)
@@ -100,5 +102,12 @@ public class BoardPlayerController : MonoBehaviour
     public void IncrementTurn()
     {
         GameController.gc.currentTurn++;
+    }
+
+    [PunRPC]
+    public void ResetTurnVar()
+    {
+        if (GameController.gc.currentTurn == GameController.gc.players.Length + 1)
+            GameController.gc.currentTurn = 1;
     }
 }
