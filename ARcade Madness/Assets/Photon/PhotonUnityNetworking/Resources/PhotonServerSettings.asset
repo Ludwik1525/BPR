@@ -36,6 +36,8 @@ MonoBehaviour:
   - DestroySpaceship
   - DoDamage
   - Fire
+  - IncrementTurn
+  - ResetTurnVar
   - RespawnSpaceship
   - RPC_AbortStarting
   - RPC_AddToList
@@ -45,11 +47,7 @@ MonoBehaviour:
   - RPC_ResetTimer
   - RPC_SetParent
   - RPC_UpdateTimer
-  - IncrementTurn
-  - TurnOffTheDice
   - TurnOnTheDice
-  - ResetTurnVar
-  - LoadMinigame
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
