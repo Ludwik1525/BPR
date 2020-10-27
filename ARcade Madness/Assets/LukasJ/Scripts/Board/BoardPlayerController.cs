@@ -29,6 +29,7 @@ public class BoardPlayerController : MonoBehaviour
         PV = GetComponent<PhotonView>();
         onStartMoving = new UnityEvent();
         onStopMoving = new UnityEvent();
+        print(PV.ViewID);
     }
 
     private void Update()
