@@ -22,4 +22,9 @@ public class Currency : MonoBehaviour
             currencyAmount -= amount;
         }
     }
+
+    public int GetCurrencyAmount()
+    {
+        return currencyAmount;
+    }
 }

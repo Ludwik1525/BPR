@@ -35,6 +35,7 @@ public class GameSetupController : MonoBehaviour
     {
         player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player"), 
             spawnPositions[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]].position, Quaternion.identity);
+        //player.transform.parent = 
         //spawn.AssignSpawnPosition((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]).position, Quaternion.identity);
 
         PV1 = player.GetComponent<PhotonView>();

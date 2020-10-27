@@ -11,4 +11,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/LukasJ/Scenes/BoardScene.unity
     guid: ee83d437d80995e4c8b51fa818a40bdd
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: ecea760742381cd4288de8867b2e84f9, type: 2}

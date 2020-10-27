@@ -8,6 +8,7 @@ public class BoardPlayerController : MonoBehaviour
     public Route currentRoute;
     int routePosition;
     bool isMoving;
+    public int turn;
 
     public int steps;
     public float speed = 2f;
@@ -77,5 +78,10 @@ public class BoardPlayerController : MonoBehaviour
     IEnumerator Delay(float seconds)
     {
         yield return new WaitForSeconds(seconds);
+    }
+
+    public void SetTurn(int turn)
+    {
+        this.turn = turn;
     }
 }
