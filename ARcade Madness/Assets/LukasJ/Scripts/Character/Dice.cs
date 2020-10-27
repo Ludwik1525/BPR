@@ -13,15 +13,11 @@ public class Dice : MonoBehaviour
     }
 
     [PunRPC]
-    public void TurnOffTheDice()
-    {
-        print("I CALLED YO MAMA");
-        gameObject.SetActive(false);
-    }
-
-    [PunRPC]
     public void TurnOnTheDice()
     {
-        gameObject.SetActive(true);
+        if (gameObject.activeInHierarchy)
+            gameObject.SetActive(false);
+        else
+            gameObject.SetActive(true);
     }
 }

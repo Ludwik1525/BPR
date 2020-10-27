@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Photon.Pun;
+using UnityEngine.SceneManagement;
 
 public class BoardPlayerController : MonoBehaviour
 {
@@ -11,8 +12,9 @@ public class BoardPlayerController : MonoBehaviour
     bool isMoving;
     private PhotonView PV;
     private PhotonView dicePV;
-    public int turn;
+    private bool diceGuard = false;
 
+    public int turn;
     public Route currentRoute;
     public int steps;
     public float speed = 2f;
@@ -39,7 +41,12 @@ public class BoardPlayerController : MonoBehaviour
         {
             if(turn == GameController.gc.currentTurn)
             {
-                dicePV.RPC("TurnOnTheDice", RpcTarget.AllBuffered);
+                if(!diceGuard)
+                {
+                    dicePV.RPC("TurnOnTheDice", RpcTarget.AllBuffered);
+                    diceGuard = true;
+                }
+                    
                 if (Input.GetKeyDown(KeyCode.Space) && !isMoving)
                 {
                     steps = Random.Range(1, 7);
@@ -59,7 +66,7 @@ public class BoardPlayerController : MonoBehaviour
         }
 
         //set bool value to true and invoke start moving event
-        dicePV.RPC("TurnOffTheDice", RpcTarget.AllBuffered);
+        dicePV.RPC("TurnOnTheDice", RpcTarget.AllBuffered);
         onStartMoving.Invoke();
         yield return new WaitForSeconds(2.2f);
         isMoving = true;
@@ -79,6 +86,7 @@ public class BoardPlayerController : MonoBehaviour
         isMoving = false;
         onStopMoving.Invoke();
         PV.RPC("IncrementTurn", RpcTarget.AllBuffered);
+        diceGuard = false;
         PV.RPC("ResetTurnVar", RpcTarget.AllBuffered);
     }
 
@@ -108,6 +116,9 @@ public class BoardPlayerController : MonoBehaviour
     public void ResetTurnVar()
     {
         if (GameController.gc.currentTurn == GameController.gc.players.Length + 1)
+        {
             GameController.gc.currentTurn = 1;
+            SceneManager.LoadScene("AssetScene");
+        }
     }
 }
