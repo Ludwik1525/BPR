@@ -10,9 +10,9 @@ public class BoardPlayerController : MonoBehaviour
     int routePosition;
     bool isMoving;
     private PhotonView PV;
+    private int turn;
 
     public Route currentRoute;
-    public int turn;
     public int steps;
     public float speed = 2f;
     public GameObject dice;
@@ -37,7 +37,7 @@ public class BoardPlayerController : MonoBehaviour
         //if space is pressed and player is not moving, roll the dice
         if(PV.IsMine)
         {
-            if (Input.GetKeyDown(KeyCode.Space) && !isMoving)
+            if (Input.GetKeyDown(KeyCode.Space) && !isMoving && turn == GameController.gc.currentTurn)
             {
                 steps = Random.Range(1, 7);
                 Debug.Log("Dice Rolled: " + steps);
@@ -74,6 +74,7 @@ public class BoardPlayerController : MonoBehaviour
         }
         isMoving = false;
         onStopMoving.Invoke();
+        GameController.gc.currentTurn++;
         dice.SetActive(true);
     }
 

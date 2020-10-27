@@ -820,6 +820,7 @@ MonoBehaviour:
   - {fileID: 1126889982}
   - {fileID: 1427000989}
   players: []
+  currentTurn: 1
 --- !u!4 &1062535916
 Transform:
   m_ObjectHideFlags: 0

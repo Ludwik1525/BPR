@@ -5,7 +5,7 @@ using UnityEngine;
 public class _GameManager : MonoBehaviour
 {
     public GameObject scriptHolder;
-
+     
     private void Awake()
     {
         Debug.Log("YO");
