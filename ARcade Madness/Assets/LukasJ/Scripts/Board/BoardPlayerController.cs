@@ -53,6 +53,21 @@ public class BoardPlayerController : MonoBehaviour
                     Debug.Log("Dice Rolled: " + steps);
                     StartCoroutine(Move());
                 }
+
+                if ((Input.touchCount > 0) && (Input.GetTouch(0).phase == TouchPhase.Began))
+                {
+                    Ray raycast = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+                    RaycastHit raycastHit;
+                    if (Physics.Raycast(raycast, out raycastHit))
+                    {
+                        if (raycastHit.collider.name == "DiceModel")
+                        {
+                            steps = Random.Range(1, 7);
+                            Debug.Log("Dice Rolled: " + steps);
+                            StartCoroutine(Move());
+                        }
+                    }
+                }
             }
         }
     }
