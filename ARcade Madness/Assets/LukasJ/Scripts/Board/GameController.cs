@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class GameController : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class GameController : MonoBehaviour
     public Transform[] startPositions;
     public Transform[] players;
 
+    
     public int currentTurn = 1;
 
     private void OnEnable()

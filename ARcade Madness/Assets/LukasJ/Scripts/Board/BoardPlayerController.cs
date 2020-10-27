@@ -10,7 +10,7 @@ public class BoardPlayerController : MonoBehaviour
     int routePosition;
     bool isMoving;
     private PhotonView PV;
-    private int turn;
+    public int turn;
 
     public Route currentRoute;
     public int steps;
@@ -22,7 +22,6 @@ public class BoardPlayerController : MonoBehaviour
     public UnityEvent onStartMoving;
     [HideInInspector]
     public UnityEvent onStopMoving;
-    
 
     private void Awake()
     {
@@ -37,11 +36,15 @@ public class BoardPlayerController : MonoBehaviour
         //if space is pressed and player is not moving, roll the dice
         if(PV.IsMine)
         {
-            if (Input.GetKeyDown(KeyCode.Space) && !isMoving && turn == GameController.gc.currentTurn)
+            if(turn == GameController.gc.currentTurn)
             {
-                steps = Random.Range(1, 7);
-                Debug.Log("Dice Rolled: " + steps);
-                StartCoroutine(Move());
+                PV.RPC("TurnOnTheDice", RpcTarget.AllBuffered);
+                if (Input.GetKeyDown(KeyCode.Space) && !isMoving)
+                {
+                    steps = Random.Range(1, 7);
+                    Debug.Log("Dice Rolled: " + steps);
+                    StartCoroutine(Move());
+                }
             }
         }
     }
@@ -55,7 +58,7 @@ public class BoardPlayerController : MonoBehaviour
         }
 
         //set bool value to true and invoke start moving event
-        dice.SetActive(false);
+        PV.RPC("TurnOffTheDice", RpcTarget.AllBuffered);
         onStartMoving.Invoke();
         yield return new WaitForSeconds(2.2f);
         isMoving = true;
@@ -74,8 +77,7 @@ public class BoardPlayerController : MonoBehaviour
         }
         isMoving = false;
         onStopMoving.Invoke();
-        GameController.gc.currentTurn++;
-        dice.SetActive(true);
+        PV.RPC("IncrementTurn", RpcTarget.AllBuffered);
     }
 
     bool MoveToNextNode(Vector3 target)
@@ -92,5 +94,11 @@ public class BoardPlayerController : MonoBehaviour
     public void SetTurn(int turn)
     {
         this.turn = turn;
+    }
+
+    [PunRPC]
+    public void IncrementTurn()
+    {
+        GameController.gc.currentTurn++;
     }
 }
