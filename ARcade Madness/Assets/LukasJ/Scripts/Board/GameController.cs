@@ -6,15 +6,13 @@ public class GameController : MonoBehaviour
 {
     public GameObject playersRoot;
     public Transform[] startPositions;
-    [HideInInspector]
     public Transform[] players;
 
 
 
     private void Start()
     {
-        players = playersRoot.GetComponentsInChildren<Transform>();
-        SetTurns();
+        StartCoroutine(SetTurnsCo());
     }
 
     void SetTurns()
@@ -23,13 +21,25 @@ public class GameController : MonoBehaviour
         {
             for(int j = 0; j < startPositions.Length; j++)
             {
-                if (players[i] == startPositions[j])
+                if (players[i].position == startPositions[j].position)
                 {
                     players[i].GetComponent<BoardPlayerController>().SetTurn(j+1);
                 }
             }
                 
         }
+    }
+
+    IEnumerator SetTurnsCo()
+    {
+        yield return new WaitForSeconds(1f);
+        print(playersRoot.transform.childCount);
+        players = new Transform[playersRoot.transform.childCount];
+        for (int i = 0; i < playersRoot.transform.childCount; i++)
+        {
+            players[i] = playersRoot.transform.GetChild(i);
+        }
+        SetTurns();
     }
 
 }

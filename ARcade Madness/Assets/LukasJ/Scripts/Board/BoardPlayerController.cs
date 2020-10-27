@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Photon.Pun;
 
 public class BoardPlayerController : MonoBehaviour
 {
-    public Route currentRoute;
+    
     int routePosition;
     bool isMoving;
-    public int turn;
+    private PhotonView PV;
 
+    public Route currentRoute;
+    public int turn;
     public int steps;
     public float speed = 2f;
     public GameObject dice;
@@ -23,6 +26,7 @@ public class BoardPlayerController : MonoBehaviour
 
     private void Awake()
     {
+        PV = GetComponent<PhotonView>();
         onStartMoving = new UnityEvent();
         onStopMoving = new UnityEvent();
     }
@@ -30,11 +34,14 @@ public class BoardPlayerController : MonoBehaviour
     private void Update()
     {
         //if space is pressed and player is not moving, roll the dice
-        if(Input.GetKeyDown(KeyCode.Space) && !isMoving)
+        if(PV.IsMine)
         {
-            steps = Random.Range(1, 7);
-            Debug.Log("Dice Rolled: " + steps);
-            StartCoroutine(Move());
+            if (Input.GetKeyDown(KeyCode.Space) && !isMoving)
+            {
+                steps = Random.Range(1, 7);
+                Debug.Log("Dice Rolled: " + steps);
+                StartCoroutine(Move());
+            }
         }
     }
 

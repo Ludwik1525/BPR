@@ -262,6 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentRoute: {fileID: 3313797966453882472, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
+  turn: 0
   steps: 0
   speed: 1
   dice: {fileID: 1896413874}
