@@ -29,7 +29,6 @@ public class GameController : MonoBehaviour
                 
         }
     }
-
     IEnumerator SetTurnsCo()
     {
         yield return new WaitForSeconds(1f);
