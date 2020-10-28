@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class BoardPlayerController : MonoBehaviour
 {
     
-    int routePosition;
+    public int routePosition;
     bool isMoving;
     private PhotonView PV;
     private PhotonView dicePV;
@@ -91,7 +91,6 @@ public class BoardPlayerController : MonoBehaviour
             routePosition++;
             routePosition %= currentRoute.childNodeList.Count;
 
-            print("ROUTE POS" + " " + routePosition);
             Vector3 nextPos = currentRoute.childNodeList[routePosition].transform.GetChild(1).GetChild((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]).position;
             while(MoveToNextNode(nextPos))
             {

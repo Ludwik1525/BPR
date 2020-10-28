@@ -53,13 +53,14 @@ public class GameController : MonoBehaviour
             players[i] = playersRoot.transform.GetChild(i);
         }
         SetTurns();
+        currentPositions = new int[players.Length];
     }
 
     public void SaveCurrentPlayerPositions()
     {
         for(int i = 0; i < players.Length; i++)
         {
-            //rh.playerPositions[i] = players[i].transform;
+            currentPositions[i] = players[i].gameObject.GetComponent<BoardPlayerController>().routePosition;
         }
         doesHavePosition = true;
     }

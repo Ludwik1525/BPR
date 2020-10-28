@@ -22,10 +22,13 @@ public class GameSetupController : MonoBehaviour
     
     private GameObject player;
 
+    private Route currentRoute;
+
     public static List<GameObject> players = new List<GameObject>();
 
     private void Start()
     {
+        currentRoute = FindObjectOfType<Route>();
         spawn = FindObjectOfType<Spawn>();
         colours = FindObjectOfType<ColourPalette>();
         CreatePlayer();
@@ -33,15 +36,15 @@ public class GameSetupController : MonoBehaviour
 
     private void CreatePlayer()
     {
-        if(!GameController.gc.doesHavePosition)
+        if (!GameController.gc.doesHavePosition)
         {
             player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player"),
             spawnPositions[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]].position, Quaternion.identity);
         }
         else
         {
-            //player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player"),
-            //playerPositions[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]].position, Quaternion.identity);
+            player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player"),
+            currentRoute.childNodeList[GameController.gc.currentPositions[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]]].position, Quaternion.identity);
         }
         
         //player.transform.parent = 
