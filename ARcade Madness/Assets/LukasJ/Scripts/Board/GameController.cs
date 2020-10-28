@@ -10,8 +10,8 @@ public class GameController : MonoBehaviour
     public Transform[] startPositions;
     public Transform[] players;
     public bool doesHavePosition = false;
+    public int[] currentPositions;
 
-    private ReferenceHolder rh;
 
     
     public int currentTurn = 1;
@@ -26,7 +26,6 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        rh = FindObjectOfType<ReferenceHolder>();
         StartCoroutine(SetTurnsCo());
     }
 
@@ -54,14 +53,13 @@ public class GameController : MonoBehaviour
             players[i] = playersRoot.transform.GetChild(i);
         }
         SetTurns();
-        rh.InitializeArray(players.Length);
     }
 
     public void SaveCurrentPlayerPositions()
     {
         for(int i = 0; i < players.Length; i++)
         {
-            rh.playerPositions[i] = players[i].transform;
+            //rh.playerPositions[i] = players[i].transform;
         }
         doesHavePosition = true;
     }

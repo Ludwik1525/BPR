@@ -22,13 +22,10 @@ public class GameSetupController : MonoBehaviour
     
     private GameObject player;
 
-    private ReferenceHolder rh;
-
     public static List<GameObject> players = new List<GameObject>();
 
     private void Start()
     {
-        rh = FindObjectOfType<ReferenceHolder>();
         spawn = FindObjectOfType<Spawn>();
         colours = FindObjectOfType<ColourPalette>();
         CreatePlayer();
@@ -43,8 +40,8 @@ public class GameSetupController : MonoBehaviour
         }
         else
         {
-            player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player"),
-            rh.playerPositions[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]].position, Quaternion.identity);
+            //player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player"),
+            //playerPositions[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]].position, Quaternion.identity);
         }
         
         //player.transform.parent = 
