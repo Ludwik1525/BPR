@@ -13,6 +13,7 @@ public class BoardPlayerController : MonoBehaviour
     private PhotonView PV;
     private PhotonView dicePV;
     private bool diceGuard = false;
+    private bool isFirstRoll = true;
 
     public int routePosition;
     public int turn;
@@ -47,13 +48,14 @@ public class BoardPlayerController : MonoBehaviour
             {
                 if(!diceGuard)
                 {
-                    if (GameController.gc.currentTurn == GameController.gc.players.Length)
+                    if (GameController.gc.currentTurn == 1 && !isFirstRoll)
                     {
                         PV.RPC("TurnOnTheDiceDelayed", RpcTarget.AllBuffered);
                     }
                     else
                     {
-                        PV.RPC("TurnOnTheDice", RpcTarget.AllBuffered);
+                        dicePV.RPC("TurnOnTheDice", RpcTarget.AllBuffered);
+                        isFirstRoll = false;
                     }
                     diceGuard = true;
                 }
