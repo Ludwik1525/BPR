@@ -91,7 +91,8 @@ public class BoardPlayerController : MonoBehaviour
             routePosition++;
             routePosition %= currentRoute.childNodeList.Count;
 
-            Vector3 nextPos = currentRoute.childNodeList[routePosition].position;
+            
+            Vector3 nextPos = currentRoute.childNodeList[routePosition].transform.GetChild(1).GetChild((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]).position;
             while(MoveToNextNode(nextPos))
             {
                 yield return null;
