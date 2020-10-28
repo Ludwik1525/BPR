@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
     public static GameController gc;
     public GameObject playersRoot;
     public Transform[] startPositions;
+    public Transform[] currentPositions;
     public Transform[] players;
 
     
@@ -23,6 +24,7 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        currentPositions = new Transform[players.Length];
         StartCoroutine(SetTurnsCo());
     }
 
@@ -50,5 +52,13 @@ public class GameController : MonoBehaviour
             players[i] = playersRoot.transform.GetChild(i);
         }
         SetTurns();
+    }
+
+    public void SaveCurrentPlayerPositions()
+    {
+        for(int i = 0; i < players.Length; i++)
+        {
+            currentPositions[i] = players[i];
+        }
     }
 }
