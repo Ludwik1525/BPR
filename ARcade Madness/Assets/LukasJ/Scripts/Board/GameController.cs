@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        DontDestroyOnLoad(gc.gameObject);
         StartCoroutine(SetTurnsCo());
     }
 
