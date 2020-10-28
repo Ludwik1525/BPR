@@ -98,11 +98,13 @@ public class BoardPlayerController : MonoBehaviour
             }
             steps--;
         }
+        PV.RPC("SaveMyPos", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], routePosition);
+
         isMoving = false;
         onStopMoving.Invoke();
         PV.RPC("IncrementTurn", RpcTarget.AllBuffered);
         diceGuard = false;
-        GameController.gc.SaveCurrentPlayerPositions();
+        //GameController.gc.SaveCurrentPlayerPositions();
         PV.RPC("ResetTurnVar", RpcTarget.AllBuffered);
     }
 
@@ -136,5 +138,14 @@ public class BoardPlayerController : MonoBehaviour
             GameController.gc.currentTurn = 1;
             SceneManager.LoadScene("AssetScene");
         }
+    }
+
+    [PunRPC]
+    public void SaveMyPos(int playerIndex, int tileIndex)
+    {
+        GameController.gc.currentPositions[playerIndex] = tileIndex;
+
+        if(!GameController.gc.doesHavePosition)
+        GameController.gc.doesHavePosition = true;
     }
 }
