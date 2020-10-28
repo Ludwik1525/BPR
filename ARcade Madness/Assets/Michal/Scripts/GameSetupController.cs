@@ -45,6 +45,8 @@ public class GameSetupController : MonoBehaviour
         {
             player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player"),
             currentRoute.childNodeList[GameController.gc.currentPositions[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]]].position, Quaternion.identity);
+
+            GameController.gc.SetTurns();
         }
         
         //player.transform.parent = 

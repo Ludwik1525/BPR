@@ -30,7 +30,7 @@ public class GameController : MonoBehaviour
         StartCoroutine(SetTurnsCo());
     }
 
-    void SetTurns()
+    void SetDefaultTurns()
     {
         for (int i = 0; i < players.Length; i++)
         {
@@ -41,9 +41,9 @@ public class GameController : MonoBehaviour
                     players[i].GetComponent<BoardPlayerController>().SetTurn(j + 1);
                 }
             }
-
         }
     }
+
     IEnumerator SetTurnsCo()
     {
         yield return new WaitForSeconds(1f);
@@ -53,16 +53,16 @@ public class GameController : MonoBehaviour
         {
             players[i] = playersRoot.transform.GetChild(i);
         }
-        SetTurns();
+        SetDefaultTurns();
         currentPositions = new int[players.Length];
     }
 
-    public void SaveCurrentPlayerPositions()
+
+    public void SetTurns()
     {
-        for(int i = 0; i < players.Length; i++)
+        for (int i = 0; i < players.Length; i++)
         {
-            currentPositions[i] = players[i].gameObject.GetComponent<BoardPlayerController>().routePosition;
+            players[i].GetComponent<BoardPlayerController>().SetTurn((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"] + 1);
         }
-        doesHavePosition = true;
     }
 }
