@@ -103,6 +103,7 @@ public class BoardPlayerController : MonoBehaviour
         onStopMoving.Invoke();
         PV.RPC("IncrementTurn", RpcTarget.AllBuffered);
         diceGuard = false;
+        GameController.gc.SaveCurrentPlayerPositions();
         PV.RPC("ResetTurnVar", RpcTarget.AllBuffered);
     }
 

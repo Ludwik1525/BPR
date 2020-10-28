@@ -33,8 +33,17 @@ public class GameSetupController : MonoBehaviour
 
     private void CreatePlayer()
     {
-        player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player"), 
+        if(!GameController.gc.doesHavePosition)
+        {
+            player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player"),
             spawnPositions[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]].position, Quaternion.identity);
+        }
+        else
+        {
+            player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player"),
+            GameController.gc.currentPositions[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]].position, Quaternion.identity);
+        }
+        
         //player.transform.parent = 
         //spawn.AssignSpawnPosition((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]).position, Quaternion.identity);
 

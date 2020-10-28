@@ -534,10 +534,10 @@ MonoBehaviour:
   menuSceneIndex: 0
   spawn: {fileID: 0}
   spawnPositions:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 3313797965330712675}
+  - {fileID: 3313797965330712674}
+  - {fileID: 3313797965330712673}
+  - {fileID: 3313797965330712672}
 --- !u!1 &1026543714
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     public Transform[] startPositions;
     public Transform[] currentPositions;
     public Transform[] players;
+    public bool doesHavePosition = false;
 
     
     public int currentTurn = 1;
@@ -20,6 +21,7 @@ public class GameController : MonoBehaviour
         {
             gc = this;
         }
+        DontDestroyOnLoad(gc);
     }
 
     private void Start()
@@ -60,5 +62,6 @@ public class GameController : MonoBehaviour
         {
             currentPositions[i] = players[i];
         }
+        doesHavePosition = true;
     }
 }
