@@ -95,7 +95,7 @@ public class BoardPlayerController : MonoBehaviour
             routePosition++;
             routePosition %= currentRoute.childNodeList.Count;
 
-            Vector3 nextPos = currentRoute.childNodeList[routePosition].transform.GetChild(1).GetChild((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]).position;
+            Vector3 nextPos = currentRoute.childNodeList[totalPos + routePosition].transform.GetChild(1).GetChild((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]).position;
             while(MoveToNextNode(nextPos))
             {
                 yield return null;
@@ -141,8 +141,9 @@ public class BoardPlayerController : MonoBehaviour
         if (GameController.gc.currentTurn == GameController.gc.players.Length + 1)
         {
             GameController.gc.currentTurn = 1;
-            SceneManager.LoadScene("AssetScene");
+            StartCoroutine(LoadSceneDelay());
         }
+        
     }
 
     [PunRPC]
@@ -152,5 +153,11 @@ public class BoardPlayerController : MonoBehaviour
 
         if(!GameController.gc.doesHavePosition)
         GameController.gc.doesHavePosition = true;
+    }
+
+    IEnumerator LoadSceneDelay()
+    {
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene("AssetScene");
     }
 }

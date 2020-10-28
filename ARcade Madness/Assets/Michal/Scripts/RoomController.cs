@@ -151,6 +151,7 @@ public class RoomController : MonoBehaviourPunCallbacks
                 PhotonNetwork.CurrentRoom.IsOpen = false;
                 StartCoroutine("CountTime");
                 isStarting = true;
+                startButton.GetComponent<Button>().interactable = false;
             }
         }
     }

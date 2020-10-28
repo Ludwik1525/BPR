@@ -38,6 +38,7 @@ public class GameSetupController : MonoBehaviour
     {
         if (!GameController.gc.doesHavePosition)
         {
+            PlayerPrefs.SetInt("totalPos", 0);
             player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player"),
             spawnPositions[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]].position, Quaternion.identity);
         }
@@ -47,6 +48,8 @@ public class GameSetupController : MonoBehaviour
             currentRoute.childNodeList[GameController.gc.currentPositions[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]]].position, Quaternion.identity);
 
             GameController.gc.SetTurns();
+            player.transform.rotation = Quaternion.LookRotation(player.transform.position - currentRoute.childNodeList[GameController.gc.currentPositions[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]] + 1].position);
+            //player.transform.LookAt(currentRoute.childNodeList[GameController.gc.currentPositions[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]]+1]);
         }
         
         //player.transform.parent = 
