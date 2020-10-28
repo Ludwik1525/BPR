@@ -21,13 +21,7 @@ public class Dice : MonoBehaviour
             gameObject.SetActive(true);
     }
 
-    [PunRPC]
-    public void TurnOnTheDiceDelayed()
-    {
-        StartCoroutine(SwitchTheDice());
-    }
-
-    IEnumerator SwitchTheDice()
+    public IEnumerator SwitchTheDice()
     {
         yield return new WaitForSeconds(1.1f);
         if (gameObject.activeInHierarchy)

@@ -47,13 +47,13 @@ public class BoardPlayerController : MonoBehaviour
             {
                 if(!diceGuard)
                 {
-                    if (GameController.gc.currentTurn == GameController.gc.players.Length + 1)
+                    if (GameController.gc.currentTurn == GameController.gc.players.Length)
                     {
-                        dicePV.RPC("TurnOnTheDiceDelayed", RpcTarget.AllBuffered);
+                        PV.RPC("TurnOnTheDiceDelayed", RpcTarget.AllBuffered);
                     }
                     else
                     {
-                        dicePV.RPC("TurnOnTheDice", RpcTarget.AllBuffered);
+                        PV.RPC("TurnOnTheDice", RpcTarget.AllBuffered);
                     }
                     diceGuard = true;
                 }
@@ -168,5 +168,11 @@ public class BoardPlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("AssetScene");
+    }
+
+    [PunRPC]
+    public void TurnOnTheDiceDelayed()
+    {
+        StartCoroutine(dice.GetComponent<Dice>().SwitchTheDice());
     }
 }
