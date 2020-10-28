@@ -7,13 +7,14 @@ using UnityEngine.SceneManagement;
 
 public class BoardPlayerController : MonoBehaviour
 {
-    
-    public int routePosition;
+
+    private int totalPos = 0;
     bool isMoving;
     private PhotonView PV;
     private PhotonView dicePV;
     private bool diceGuard = false;
 
+    public int routePosition;
     public int turn;
     public Route currentRoute;
     public int steps;
@@ -98,13 +99,13 @@ public class BoardPlayerController : MonoBehaviour
             }
             steps--;
         }
+        totalPos += routePosition;
         PV.RPC("SaveMyPos", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], routePosition);
 
         isMoving = false;
         onStopMoving.Invoke();
         PV.RPC("IncrementTurn", RpcTarget.AllBuffered);
         diceGuard = false;
-        //GameController.gc.SaveCurrentPlayerPositions();
         PV.RPC("ResetTurnVar", RpcTarget.AllBuffered);
     }
 
