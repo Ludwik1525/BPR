@@ -60,6 +60,19 @@ public class GameController : MonoBehaviour
 
     public void SetTurns()
     {
+        StartCoroutine(SetTurnsAgain());
+    }
+
+    IEnumerator SetTurnsAgain()
+    {
+        yield return new WaitForSeconds(1f);
+        playersRoot = GameObject.Find("PlayersParent");
+        players = new Transform[playersRoot.transform.childCount];
+
+        for (int i = 0; i < playersRoot.transform.childCount; i++)
+        {
+            players[i] = playersRoot.transform.GetChild(i);
+        }
         for (int i = 0; i < players.Length; i++)
         {
             players[i].GetComponent<BoardPlayerController>().SetTurn((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"] + 1);
