@@ -85,7 +85,16 @@ public class BoardPlayerController : MonoBehaviour
         }
 
         //set bool value to true and invoke start moving event
-        dicePV.RPC("TurnOnTheDice", RpcTarget.AllBuffered);
+
+        if (GameController.gc.currentTurn == GameController.gc.players.Length + 1)
+        {
+            dicePV.RPC("TurnOnTheDiceDelayed", RpcTarget.AllBuffered);
+        }
+        else
+        {
+            dicePV.RPC("TurnOnTheDice", RpcTarget.AllBuffered);
+        }
+
         onStartMoving.Invoke();
         yield return new WaitForSeconds(2.2f);
         isMoving = true;
