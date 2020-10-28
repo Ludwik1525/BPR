@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class BoardPlayerController : MonoBehaviour
 {
 
-    private int totalPos = 0;
+    public int totalPos = 0;
     bool isMoving;
     private PhotonView PV;
     private PhotonView dicePV;
@@ -29,6 +29,9 @@ public class BoardPlayerController : MonoBehaviour
 
     private void Awake()
     {
+        if(PlayerPrefs.HasKey("totalPos"))
+            totalPos = PlayerPrefs.GetInt("totalPos");
+
         PV = GetComponent<PhotonView>();
         dicePV = transform.GetChild(2).GetComponent<PhotonView>();
         onStartMoving = new UnityEvent();
@@ -100,7 +103,8 @@ public class BoardPlayerController : MonoBehaviour
             steps--;
         }
         totalPos += routePosition;
-        PV.RPC("SaveMyPos", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], routePosition);
+        PlayerPrefs.SetInt("totalPos", totalPos);
+        PV.RPC("SaveMyPos", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], totalPos);
 
         isMoving = false;
         onStopMoving.Invoke();
