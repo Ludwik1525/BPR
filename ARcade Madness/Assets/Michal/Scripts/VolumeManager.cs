@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class VolumeManager : MonoBehaviour
 {
-    public AudioSource musicSource, soundsSource;
+    public AudioSource musicSource, neonSoundsSource, countdownSoundsSource;
 
     public Slider musicSlider, soundsSlider;
 
@@ -24,7 +24,8 @@ public class VolumeManager : MonoBehaviour
         musicSource.volume = PlayerPrefs.GetFloat("MusicVol");
         musicSlider.value = PlayerPrefs.GetFloat("MusicVol");
 
-        soundsSource.volume = PlayerPrefs.GetFloat("SoundsVol");
+        countdownSoundsSource.volume = PlayerPrefs.GetFloat("SoundsVol");
+        neonSoundsSource.volume = PlayerPrefs.GetFloat("SoundsVol");
         soundsSlider.value = PlayerPrefs.GetFloat("SoundsVol");
 
         musicSlider.onValueChanged.AddListener(ChangeMusicVolume);
@@ -40,7 +41,8 @@ public class VolumeManager : MonoBehaviour
 
     void ChangeSoundsVolume(float value)
     {
-        soundsSource.volume = value;
+        countdownSoundsSource.volume = value;
+        neonSoundsSource.volume = value;
         float soundsValue = value;
         PlayerPrefs.SetFloat("SoundsVol", soundsValue);
     }

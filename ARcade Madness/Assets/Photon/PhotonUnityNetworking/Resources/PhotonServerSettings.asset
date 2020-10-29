@@ -49,6 +49,7 @@ MonoBehaviour:
   - RPC_UpdateTimer
   - TurnOnTheDice
   - SaveMyPos
+  - TurnOnTheDiceDelayed
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
