@@ -35,7 +35,6 @@ public class ChestAnimationController : MonoBehaviour
         
         if (other.gameObject.transform.parent.GetComponent<Currency>() != null)
         {
-            print("HEYO");
             currency = other.gameObject.transform.parent.GetComponent<Currency>();
         }
 
