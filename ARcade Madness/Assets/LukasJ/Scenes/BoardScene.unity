@@ -1047,7 +1047,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPosition: {fileID: 3313797965330712676}
-  chestPrefab: {fileID: 1148667450455775477, guid: 5ad4b99193b52894481a5f197b312f69, type: 3}
 --- !u!1 &1389254734
 GameObject:
   m_ObjectHideFlags: 0
