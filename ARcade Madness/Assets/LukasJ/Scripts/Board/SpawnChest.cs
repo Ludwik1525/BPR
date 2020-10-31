@@ -36,6 +36,13 @@ public class SpawnChest : MonoBehaviour
     [PunRPC]
     public void SetChestsParent()
     {
-        chest.transform.parent = gameObject.transform;
+        if (chest != null)
+        {
+            chest.transform.parent = gameObject.transform;
+        }
+        else
+        {
+            GameObject.Find("Chest(Clone)").transform.parent = gameObject.transform;
+        }
     }
 }
