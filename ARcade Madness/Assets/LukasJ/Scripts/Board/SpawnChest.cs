@@ -19,12 +19,18 @@ public class SpawnChest : MonoBehaviour
             SpawnChests();
         }
 
-        PV.RPC("SetChestsParent", RpcTarget.AllBuffered);
+        StartCoroutine("WaitAndSetParent");
     }
 
     public void SpawnChests()
     {
         chest = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Chest"), spawnPosition.transform.position, spawnPosition.transform.rotation);
+    }
+
+    private IEnumerator WaitAndSetParent()
+    {
+        yield return new WaitForSeconds(1f);
+        PV.RPC("SetChestsParent", RpcTarget.AllBuffered);
     }
 
     [PunRPC]
