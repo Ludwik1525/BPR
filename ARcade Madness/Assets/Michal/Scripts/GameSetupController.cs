@@ -74,6 +74,8 @@ public class GameSetupController : MonoBehaviour
 
     IEnumerator DisconnectAndLoad()
     {
+        PlayerPrefs.SetInt("totalPos", 0);
+        GameController.gc.doesHavePosition = false;
         yield return new WaitForSeconds(1f);
         PhotonNetwork.Disconnect();
         while (PhotonNetwork.IsConnected)
