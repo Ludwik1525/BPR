@@ -128,8 +128,6 @@ public class BoardPlayerController : MonoBehaviour
             totalPos = var;
         }
         PlayerPrefs.SetInt("totalPos", totalPos);
-        print("Total pos: " + totalPos + ", Tile count: " + currentRoute.childNodeList.Count + ", route pos: " + routePosition); 
-
         PV.RPC("SaveMyPos", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], totalPos);
 
         isMoving = false;
