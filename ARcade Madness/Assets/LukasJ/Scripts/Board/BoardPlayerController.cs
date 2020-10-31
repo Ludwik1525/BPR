@@ -101,13 +101,21 @@ public class BoardPlayerController : MonoBehaviour
         onStartMoving.Invoke();
         yield return new WaitForSeconds(2.2f);
         isMoving = true;
-        
+
+        int var = 0;
         while (steps > 0)
         {
             routePosition++;
             routePosition %= currentRoute.childNodeList.Count;
 
-            Vector3 nextPos = currentRoute.childNodeList[totalPos + routePosition].transform.GetChild(1).GetChild((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]).position;
+            var = totalPos + routePosition;
+
+            if (totalPos + routePosition >= currentRoute.childNodeList.Count)
+            {
+                var = totalPos + routePosition - currentRoute.childNodeList.Count;
+            }
+
+            Vector3 nextPos = currentRoute.childNodeList[var].transform.GetChild(1).GetChild((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]).position;
             while(MoveToNextNode(nextPos))
             {
                 yield return null;
@@ -115,11 +123,13 @@ public class BoardPlayerController : MonoBehaviour
             steps--;
         }
         totalPos += routePosition;
-        if(totalPos > currentRoute.childNodeList.Count)
+        if(totalPos >= currentRoute.childNodeList.Count)
         {
-            totalPos = routePosition;
+            totalPos = var;
         }
         PlayerPrefs.SetInt("totalPos", totalPos);
+        print("Total pos: " + totalPos + ", Tile count: " + currentRoute.childNodeList.Count + ", route pos: " + routePosition); 
+
         PV.RPC("SaveMyPos", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], totalPos);
 
         isMoving = false;

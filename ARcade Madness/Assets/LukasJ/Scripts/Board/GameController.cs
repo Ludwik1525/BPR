@@ -47,7 +47,6 @@ public class GameController : MonoBehaviour
     IEnumerator SetTurnsCo()
     {
         yield return new WaitForSeconds(3f);
-        print(playersRoot.transform.childCount);
         players = new Transform[playersRoot.transform.childCount];
         for (int i = 0; i < playersRoot.transform.childCount; i++)
         {
