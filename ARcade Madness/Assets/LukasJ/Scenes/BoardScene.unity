@@ -1047,7 +1047,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b079536b81d6546a99b0fab0275f37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPosition: {fileID: 3313797965330712676}
 --- !u!114 &1300573097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2253,14 +2252,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1414285052394138122, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1414285052820328897, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3313797966453882471, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.14
@@ -2309,138 +2300,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Route2
       objectReference: {fileID: 0}
-    - target: {fileID: 5565143864517574272, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143864517574272, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_Name
-      value: RoadTileAngled
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143864687091890, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143864737314401, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143864737314401, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_Name
-      value: RoadTileAngled
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143864745935222, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143864975605271, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143864975605271, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_Name
-      value: RoadTileAngled (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143865071430586, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143865071430586, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_Name
-      value: RoadTileAngled
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143865213456433, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143865213456433, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_Name
-      value: RoadTileAngled
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143865216375155, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143865246666253, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143865247315595, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143865273361964, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143865273361964, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_Name
-      value: RoadTileAngled
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143865585704107, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143865646255527, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143865660177158, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143865660177158, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_Name
-      value: RoadTileAngled
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143865890773750, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143865926026177, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143865930695650, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143866085830181, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143866159306751, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143866258726751, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143866325366535, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143866475396032, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143866475396032, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_Name
-      value: RoadTileAngled
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143866505191442, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143866582738187, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_Name
-      value: RoadTileAngled
-      objectReference: {fileID: 0}
-    - target: {fileID: 5565143866632945799, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
 --- !u!4 &3313797965330712672 stripped
@@ -2461,11 +2320,6 @@ Transform:
 --- !u!4 &3313797965330712675 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3001311630894933114, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
-  m_PrefabInstance: {fileID: 3313797965330712671}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &3313797965330712676 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9036336667446281318, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
   m_PrefabInstance: {fileID: 3313797965330712671}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4595180457477878147
