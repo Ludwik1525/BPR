@@ -14,17 +14,8 @@ public class SpawnChest : MonoBehaviour
 
     private void Start()
     {
-        PV = GetComponent<PhotonView>();
-
-        if (PhotonNetwork.IsMasterClient)
-        {
-            PV.RPC("ChooseRandomNumber", RpcTarget.AllBuffered);
-            SpawnChests();
-        }
-
-        StartCoroutine("WaitAndSetParent");
-
-        childObjects = GetComponentsInChildren<Transform>();
+        childObjects = FindObjectOfType<Route>().GetComponentsInChildren<Transform>();
+        tilesToSpawnChestsOn = new List<Transform>();
 
         foreach (Transform child in childObjects)
         {
@@ -37,12 +28,24 @@ public class SpawnChest : MonoBehaviour
 
             }
         }
+
+        PV = GetComponent<PhotonView>();
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PV.RPC("ChooseRandomNumber", RpcTarget.AllBuffered);
+            SpawnChests();
+        }
+
+        StartCoroutine("WaitAndSetParent");
+
+        
     }
 
     public void SpawnChests()
     {
 
-        chest = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Chest"), tilesToSpawnChestsOn[rand].transform.position, tilesToSpawnChestsOn[rand].transform.rotation);
+        chest = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Chest"), tilesToSpawnChestsOn[rand].GetChild(2).transform.position, tilesToSpawnChestsOn[rand].GetChild(2).transform.rotation);
     }
 
     [PunRPC]
@@ -64,6 +67,7 @@ public class SpawnChest : MonoBehaviour
             chest = GameObject.Find("Chest(Clone)");
 
         transform.parent = gameObject.transform;
-        tilesToSpawnChestsOn[rand].transform.parent.GetComponent<TileChestCheck>().iHaveAChest = true;
+        if (tilesToSpawnChestsOn[rand].transform.parent.GetComponent<TileChestCheck>() != null)
+            tilesToSpawnChestsOn[rand].transform.parent.GetComponent<TileChestCheck>().iHaveAChest = true;
     }
 }
