@@ -115,6 +115,10 @@ public class BoardPlayerController : MonoBehaviour
             steps--;
         }
         totalPos += routePosition;
+        if(totalPos > currentRoute.childNodeList.Count)
+        {
+            totalPos = routePosition;
+        }
         PlayerPrefs.SetInt("totalPos", totalPos);
         PV.RPC("SaveMyPos", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], totalPos);
 
