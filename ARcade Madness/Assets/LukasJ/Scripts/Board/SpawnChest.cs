@@ -68,7 +68,7 @@ public class SpawnChest : MonoBehaviour
         if (chest == null)
             chest = GameObject.Find("Chest(Clone)");
 
-        transform.parent = gameObject.transform;
+        transform.parent = tilesToSpawnChestsOn[rand].transform;
         tilesToSpawnChestsOn[rand].GetComponent<TileChestCheck>().iHaveAChest = true;
     }
 
