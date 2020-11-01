@@ -115,6 +115,17 @@ public class BoardPlayerController : MonoBehaviour
                 var = totalPos + routePosition - currentRoute.childNodeList.Count;
             }
 
+            //NO IDEA WHY THIS IS NOT WORKING
+            print("DO I HAVE CHEST :" + currentRoute.childNodeList[var].GetComponent<TileChestCheck>().iHaveAChest);
+            if(currentRoute.childNodeList[var].GetComponent<TileChestCheck>().iHaveAChest)
+            {
+                steps = 0;
+            }
+            
+            //DOGSHIT WAY TO DO IT AS ALWAYS
+            
+
+
             Vector3 nextPos = currentRoute.childNodeList[var].transform.GetChild(1).GetChild((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]).position;
             while(MoveToNextNode(nextPos))
             {

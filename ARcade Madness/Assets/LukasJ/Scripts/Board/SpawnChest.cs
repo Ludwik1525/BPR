@@ -30,34 +30,36 @@ public class SpawnChest : MonoBehaviour
         }
 
         PV = GetComponent<PhotonView>();
-
-        if (PhotonNetwork.IsMasterClient)
-        {
-            PV.RPC("ChooseRandomNumber", RpcTarget.AllBuffered);
-            SpawnChests();
-        }
-
-        StartCoroutine("WaitAndSetParent");
-
-        
+        SpawningChestSequence();
     }
 
     public void SpawnChests()
     {
-
         chest = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Chest"), tilesToSpawnChestsOn[rand].GetChild(2).transform.position, tilesToSpawnChestsOn[rand].GetChild(2).transform.rotation);
     }
 
     [PunRPC]
     private void ChooseRandomNumber()
     {
-        rand = Random.Range(0, tilesToSpawnChestsOn.Count);
+        rand = Random.Range(1, tilesToSpawnChestsOn.Count);
+        rand = 2;
+        PlayerPrefs.SetInt("random", rand);
     }
 
     private IEnumerator WaitAndSetParent()
     {
         yield return new WaitForSeconds(1f);
         PV.RPC("SetChestsParent", RpcTarget.AllBuffered);
+    }
+
+    public void ResetChestPosition()
+    {
+        PlayerPrefs.SetInt("random", 0);
+    }
+
+    private void OnApplicationQuit()
+    {
+        ResetChestPosition();
     }
 
     [PunRPC]
@@ -67,7 +69,30 @@ public class SpawnChest : MonoBehaviour
             chest = GameObject.Find("Chest(Clone)");
 
         transform.parent = gameObject.transform;
-        if (tilesToSpawnChestsOn[rand].transform.parent.GetComponent<TileChestCheck>() != null)
-            tilesToSpawnChestsOn[rand].transform.parent.GetComponent<TileChestCheck>().iHaveAChest = true;
+        tilesToSpawnChestsOn[rand].GetComponent<TileChestCheck>().iHaveAChest = true;
+    }
+
+    public void DestroyChest()
+    {
+        tilesToSpawnChestsOn[rand].GetComponent<TileChestCheck>().iHaveAChest = false;
+        PlayerPrefs.SetInt("random", 0);
+        Destroy(chest);
+        SpawningChestSequence();
+
+    }
+
+    private void SpawningChestSequence()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            rand = PlayerPrefs.GetInt("random");
+            if (rand == 0)
+            {
+                PV.RPC("ChooseRandomNumber", RpcTarget.AllBuffered);
+            }
+            SpawnChests();
+        }
+
+        StartCoroutine("WaitAndSetParent");
     }
 }

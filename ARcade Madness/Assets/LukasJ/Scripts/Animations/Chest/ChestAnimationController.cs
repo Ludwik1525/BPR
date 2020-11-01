@@ -43,6 +43,11 @@ public class ChestAnimationController : MonoBehaviour
             StartBoolAnimationByName("OpenChest");
         }
     }
+
+    public void DestroyTheChest()
+    {
+        transform.parent.transform.parent.GetComponent<SpawnChest>().DestroyChest();
+    }
     //private void OnCollisionEnter(Collision collision)
     //{
     //    print("HEYO");
