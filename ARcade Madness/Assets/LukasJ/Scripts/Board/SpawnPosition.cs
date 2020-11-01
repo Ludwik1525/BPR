@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class SpawnPosition : MonoBehaviour
 {
-    public bool isFree = false;
+    [HideInInspector]
+    public bool isFree = true;
 }

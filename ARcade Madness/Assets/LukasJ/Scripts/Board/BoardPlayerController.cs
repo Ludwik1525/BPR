@@ -102,6 +102,11 @@ public class BoardPlayerController : MonoBehaviour
         yield return new WaitForSeconds(2.2f);
         isMoving = true;
 
+        for(int i = 0; i < currentRoute.childNodeList.Count; i++)
+        {
+            print("Tile " + i + " is " + currentRoute.childNodeList[i].GetComponent<TileChestCheck>().iHaveAChest);
+        }
+
         int var = 0;
         while (steps > 0)
         {
@@ -116,14 +121,8 @@ public class BoardPlayerController : MonoBehaviour
             }
 
             //NO IDEA WHY THIS IS NOT WORKING
-
-            if(currentRoute.childNodeList[var].GetComponent<TileChestCheck>() != null)
-            {
-                print("IM NOT NULL");
-            }
-
-            print("DO I HAVE CHEST :" + currentRoute.childNodeList[var].GetComponent<TileChestCheck>().Check());
-            if(currentRoute.childNodeList[var].GetComponent<TileChestCheck>().Check())
+            print("DO I HAVE CHEST :" + currentRoute.childNodeList[var].GetComponent<TileChestCheck>().iHaveAChest);
+            if(!currentRoute.childNodeList[var].GetComponent<TileChestCheck>().iHaveAChest)
             {
                 steps = 0;
             }

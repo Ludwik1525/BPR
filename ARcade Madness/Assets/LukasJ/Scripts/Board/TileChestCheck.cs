@@ -4,20 +4,6 @@ using UnityEngine;
 
 public class TileChestCheck : MonoBehaviour
 {
-    private bool iHaveAChest;
-
-    public void SetToTrue()
-    {
-        iHaveAChest = true;
-    }
-
-    public void SetToFalse()
-    {
-        iHaveAChest = false;
-    }
-
-    public bool Check()
-    {
-        return iHaveAChest;
-    }
+    [HideInInspector]
+    public bool iHaveAChest = true;
 }
