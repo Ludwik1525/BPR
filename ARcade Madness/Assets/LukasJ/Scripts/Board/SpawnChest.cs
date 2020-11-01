@@ -11,9 +11,11 @@ public class SpawnChest : MonoBehaviour
     private Transform[] childObjects;
     private List<Transform> tilesToSpawnChestsOn;
     int rand;
+    int numberToIncrease;
 
     private void Start()
     {
+        numberToIncrease = 0;
         childObjects = FindObjectOfType<Route>().GetComponentsInChildren<Transform>();
         tilesToSpawnChestsOn = new List<Transform>();
 
@@ -23,7 +25,7 @@ public class SpawnChest : MonoBehaviour
             {
                 if (child.transform.gameObject.tag == "Tile" && child.transform.gameObject.name.Contains("Simple"))
                 {
-                    tilesToSpawnChestsOn.Add(child);
+                        tilesToSpawnChestsOn.Add(child);
                 }
 
             }
@@ -69,12 +71,10 @@ public class SpawnChest : MonoBehaviour
             chest = GameObject.Find("Chest(Clone)");
 
         transform.parent = gameObject.transform;
-        tilesToSpawnChestsOn[rand].GetComponent<TileChestCheck>().iHaveAChest = true;
     }
 
     public void DestroyChest()
     {
-        tilesToSpawnChestsOn[rand].GetComponent<TileChestCheck>().iHaveAChest = false;
         PlayerPrefs.SetInt("random", 0);
         Destroy(chest);
         SpawningChestSequence();
@@ -94,5 +94,52 @@ public class SpawnChest : MonoBehaviour
         }
 
         StartCoroutine("WaitAndSetParent");
+    }
+
+    public int GetRealTileNo()
+    {
+        numberToIncrease = 0;
+        int max = rand;
+        int check = 0;
+
+        GameObject[] allTiles = new GameObject[FindObjectOfType<Route>().transform.childCount - 1];
+
+        for (int i = 0; i < FindObjectOfType<Route>().transform.childCount - 1; i++)
+        {
+            if (i < 9)
+            {
+                allTiles[i] = FindObjectOfType<Route>().transform.GetChild(i).gameObject;
+            }
+            else
+            {
+                allTiles[i] = FindObjectOfType<Route>().transform.GetChild(i + 1).gameObject;
+            }
+        }
+
+        while (check <= max)
+        {
+            if (allTiles[check].transform.gameObject.tag == "Tile")
+            {
+                if (!allTiles[check].transform.gameObject.name.Contains("Simple"))
+                {
+                    numberToIncrease++;
+                    max++;
+                }
+            }
+            check++;
+        }
+
+        //for (int i = 0; i < rand + numberToIncrease; i++)
+        //{
+        //    if (allTiles[i].transform.gameObject.tag == "Tile")
+        //        {
+        //            if (!allTiles[i].transform.gameObject.name.Contains("Simple"))
+        //            {
+        //                numberToIncrease++;
+        //            }
+        //        }
+        //}
+
+        return rand + numberToIncrease;
     }
 }

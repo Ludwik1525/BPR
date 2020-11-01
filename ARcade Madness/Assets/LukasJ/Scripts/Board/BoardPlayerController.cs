@@ -88,6 +88,7 @@ public class BoardPlayerController : MonoBehaviour
 
     IEnumerator Move()
     {
+
         if (isMoving)
         {
             //if the player is already moving return
@@ -103,6 +104,9 @@ public class BoardPlayerController : MonoBehaviour
         isMoving = true;
 
         int var = 0;
+
+        print("THE CHEST IS AT TILE " + FindObjectOfType<SpawnChest>().GetRealTileNo());
+
         while (steps > 0)
         {
             routePosition++;
@@ -114,17 +118,11 @@ public class BoardPlayerController : MonoBehaviour
             {
                 var = totalPos + routePosition - currentRoute.childNodeList.Count;
             }
-
-            //NO IDEA WHY THIS IS NOT WORKING
-            print("DO I HAVE CHEST :" + currentRoute.childNodeList[var].GetComponent<TileChestCheck>().iHaveAChest);
-            if(currentRoute.childNodeList[var].GetComponent<TileChestCheck>().iHaveAChest)
+            if(var == FindObjectOfType<SpawnChest>().GetRealTileNo())
             {
                 steps = 0;
             }
-            
-            //DOGSHIT WAY TO DO IT AS ALWAYS
-            
-
+           
 
             Vector3 nextPos = currentRoute.childNodeList[var].transform.GetChild(1).GetChild((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]).position;
             while(MoveToNextNode(nextPos))
