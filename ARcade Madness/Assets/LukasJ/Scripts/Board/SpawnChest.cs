@@ -69,7 +69,7 @@ public class SpawnChest : MonoBehaviour
             chest = GameObject.Find("Chest(Clone)");
 
         transform.parent = gameObject.transform;
-        tilesToSpawnChestsOn[rand].GetComponent<TileChestCheck>().PV.RPC("SetToTrue", RpcTarget.AllBuffered);
+        tilesToSpawnChestsOn[rand].GetComponent<TileChestCheck>().SetToTrue();
     }
 
     //public void DestroyChest()
