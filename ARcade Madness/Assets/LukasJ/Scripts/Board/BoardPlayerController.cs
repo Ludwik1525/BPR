@@ -117,11 +117,6 @@ public class BoardPlayerController : MonoBehaviour
 
             //NO IDEA WHY THIS IS NOT WORKING
 
-            if(currentRoute.childNodeList[var].GetComponent<TileChestCheck>() != null)
-            {
-                print("IM NOT NULL");
-            }
-
             print("DO I HAVE CHEST :" + currentRoute.childNodeList[var].GetComponent<TileChestCheck>().Check());
             if(currentRoute.childNodeList[var].GetComponent<TileChestCheck>().Check())
             {

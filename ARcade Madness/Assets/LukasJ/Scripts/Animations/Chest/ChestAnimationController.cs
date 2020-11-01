@@ -44,10 +44,10 @@ public class ChestAnimationController : MonoBehaviour
         }
     }
 
-    public void DestroyTheChest()
-    {
-        transform.parent.transform.parent.GetComponent<SpawnChest>().DestroyChest();
-    }
+    //public void DestroyTheChest()
+    //{
+    //    transform.parent.transform.parent.GetComponent<SpawnChest>().DestroyChest();
+    //}
     //private void OnCollisionEnter(Collision collision)
     //{
     //    print("HEYO");
