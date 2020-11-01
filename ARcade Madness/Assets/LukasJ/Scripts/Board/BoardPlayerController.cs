@@ -116,8 +116,8 @@ public class BoardPlayerController : MonoBehaviour
             }
 
             //NO IDEA WHY THIS IS NOT WORKING
-            print("DO I HAVE CHEST :" + currentRoute.childNodeList[var].transform.GetChild(3) != null);
-            if(currentRoute.childNodeList[var].transform.GetChild(3) != null)
+            print("DO I HAVE CHEST :" + currentRoute.childNodeList[var].GetComponent<TileChestCheck>().iHaveAChest);
+            if(currentRoute.childNodeList[var].GetComponent<TileChestCheck>().iHaveAChest)
             {
                 steps = 0;
             }
