@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Tile
   - Displayer
+  - Beystadium
+  - PacmanPoint
+  - PacmanPatrolPoints
   layers:
   - Default
   - TransparentFX
