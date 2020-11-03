@@ -52,7 +52,7 @@ public class GameManager_PC : MonoBehaviour
 
             door.gameObject.SetActive(false);
         }
-        
+         
     }
 
     public void StartGame()

@@ -31,6 +31,7 @@ MonoBehaviour:
   RunInBackground: 1
   StartInOfflineMode: 0
   RpcList:
+  - ChooseRandomNumber
   - ClickRpc
   - DestroyRpc
   - DestroySpaceship
@@ -47,13 +48,10 @@ MonoBehaviour:
   - RPC_ResetTimer
   - RPC_SetParent
   - RPC_UpdateTimer
-  - TurnOnTheDice
   - SaveMyPos
-  - TurnOnTheDiceDelayed
-  - SpawnChests
   - SetChestsParent
-  - ChooseRandomNumber
-  - SetTileBool
+  - TurnOnTheDice
+  - TurnOnTheDiceDelayed
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
