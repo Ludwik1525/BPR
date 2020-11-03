@@ -64,7 +64,7 @@ public class SpawnManager : MonoBehaviourPunCallbacks
 
         Vector3 instantiatePosition = spawnPositions[randomSpawnPoint].position;
 
-        GameObject player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player1_Attacker"), instantiatePosition + battleArenaGameobject.transform.position, Quaternion.identity);
+        GameObject player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player1_Attacker"), instantiatePosition , Quaternion.identity);
         PhotonView _photonView = player.GetComponent<PhotonView>();
 
         //GameObject playerGameobject2 = Instantiate(playerPrefab, instantiatePosition, Quaternion.identity);

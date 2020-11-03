@@ -15,7 +15,7 @@ public class SpinningGameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        uI_InformPanelGameobject.SetActive(true);
+        //uI_InformPanelGameobject.SetActive(true);
     }
 
     // Update is called once per frame
