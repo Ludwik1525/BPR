@@ -15,14 +15,14 @@ public class SpawnManager : MonoBehaviourPunCallbacks
 
     public GameObject battleArenaGameobject;
 
-    public enum RaiseEventCodes
-    {
-        PlayerSpawnEventCode = 0
-    }
+    //public enum RaiseEventCodes
+    //{
+    //    PlayerSpawnEventCode = 0
+    //}
     // Start is called before the first frame update
     void Start()
     {
-        PhotonNetwork.NetworkingClient.EventReceived += OnEvent;
+        //PhotonNetwork.NetworkingClient.EventReceived += OnEvent;
     }
 
     // Update is called once per frame
@@ -31,27 +31,27 @@ public class SpawnManager : MonoBehaviourPunCallbacks
         
     }
 
-    private void OnDestroy()
-    {
-        PhotonNetwork.NetworkingClient.EventReceived -= OnEvent;
-    }
+    //private void OnDestroy()
+    //{
+    //    PhotonNetwork.NetworkingClient.EventReceived -= OnEvent;
+    //}
 
-    void OnEvent(EventData photonEvent)
-    {
-        if (photonEvent.Code == (byte)RaiseEventCodes.PlayerSpawnEventCode)
-        {
-            object[] data = (object[])photonEvent.CustomData;
-            Vector3 receivedPosition = (Vector3)data[0];
-            Quaternion receivedRotation = (Quaternion)data[1];
-            //int receivedPlayerSelectionData = (int)data[3];
+    //void OnEvent(EventData photonEvent)
+    //{
+    //    if (photonEvent.Code == (byte)RaiseEventCodes.PlayerSpawnEventCode)
+    //    {
+    //        object[] data = (object[])photonEvent.CustomData;
+    //        Vector3 receivedPosition = (Vector3)data[0];
+    //        Quaternion receivedRotation = (Quaternion)data[1];
+    //        //int receivedPlayerSelectionData = (int)data[3];
 
-            //GameObject player = Instantiate(playerPrefab, receivedPosition + battleArenaGameobject.transform.position, receivedRotation);
-            //GameObject player = PhotonNetwork.Instantiate(Path.GetFileName(playerPrefab.name), receivedPosition + battleArenaGameobject.transform.position, receivedRotation);
-            GameObject player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs","Player1_Attacker"), receivedPosition + battleArenaGameobject.transform.position, receivedRotation);
-            PhotonView _photonView = player.GetComponent<PhotonView>();
-            _photonView.ViewID = (int)data[2];
-        }
-    }
+    //        //GameObject player = Instantiate(playerPrefab, receivedPosition + battleArenaGameobject.transform.position, receivedRotation);
+    //        //GameObject player = PhotonNetwork.Instantiate(Path.GetFileName(playerPrefab.name), receivedPosition + battleArenaGameobject.transform.position, receivedRotation);
+    //        GameObject player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs","Player1_Attacker"), receivedPosition + battleArenaGameobject.transform.position, receivedRotation);
+    //        PhotonView _photonView = player.GetComponent<PhotonView>();
+    //        _photonView.ViewID = (int)data[2];
+    //    }
+    //}
 
     public void JoinRoom()
     {
@@ -64,34 +64,40 @@ public class SpawnManager : MonoBehaviourPunCallbacks
 
         Vector3 instantiatePosition = spawnPositions[randomSpawnPoint].position;
 
-        GameObject playerGameobject = Instantiate(playerPrefab, instantiatePosition, Quaternion.identity);
+        GameObject player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player1_Attacker"), instantiatePosition + battleArenaGameobject.transform.position, Quaternion.identity);
+        PhotonView _photonView = player.GetComponent<PhotonView>();
 
-        PhotonView _photonView = playerGameobject.GetComponent<PhotonView>();
+        //GameObject playerGameobject2 = Instantiate(playerPrefab, instantiatePosition, Quaternion.identity);
 
-        if (PhotonNetwork.AllocateViewID(_photonView))
-        {
-            object[] data = new object[]
-            {
-                    playerGameobject.transform.position - battleArenaGameobject.transform.position, playerGameobject.transform.rotation, _photonView.ViewID
-            };
+        ////GameObject playerGameobject = PhotonNetwork.Instantiate(Path.Combine();
 
-            RaiseEventOptions raiseEventOptions = new RaiseEventOptions
-            {
-                Receivers = ReceiverGroup.Others,
-                CachingOption = EventCaching.AddToRoomCache
-            };
 
-            SendOptions sendOptions = new SendOptions
-            {
-                Reliability = true
-            };
+        //PhotonView _photonView = playerGameobject.GetComponent<PhotonView>();
 
-            PhotonNetwork.RaiseEvent((byte)RaiseEventCodes.PlayerSpawnEventCode, data, raiseEventOptions, sendOptions);
-        }
-        else
-        {
-            Debug.Log("Failed to allocate a viewID");
-            Destroy(playerGameobject);
-        }
+        //if (PhotonNetwork.AllocateViewID(_photonView))
+        //{
+        //    object[] data = new object[]
+        //    {
+        //            playerGameobject.transform.position - battleArenaGameobject.transform.position, playerGameobject.transform.rotation, _photonView.ViewID
+        //    };
+
+        //    RaiseEventOptions raiseEventOptions = new RaiseEventOptions
+        //    {
+        //        Receivers = ReceiverGroup.Others,
+        //        CachingOption = EventCaching.AddToRoomCache
+        //    };
+
+        //    SendOptions sendOptions = new SendOptions
+        //    {
+        //        Reliability = true
+        //    };
+
+        //    PhotonNetwork.RaiseEvent((byte)RaiseEventCodes.PlayerSpawnEventCode, data, raiseEventOptions, sendOptions);
+        //}
+        //else
+        //{
+        //    Debug.Log("Failed to allocate a viewID");
+        //    Destroy(playerGameobject);
+        //}
     }
 }

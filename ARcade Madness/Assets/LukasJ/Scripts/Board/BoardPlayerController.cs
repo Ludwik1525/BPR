@@ -191,7 +191,7 @@ public class BoardPlayerController : MonoBehaviour
     IEnumerator LoadSceneDelay()
     {
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene("AssetScene");
+        SceneManager.LoadScene("Spinner_Gameplay");
     }
 
     [PunRPC]
