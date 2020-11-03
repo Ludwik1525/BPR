@@ -320,9 +320,9 @@ GameObject:
   - component: {fileID: 3396989747327439426}
   - component: {fileID: 1686611084}
   - component: {fileID: -8749391038762223553}
-  - component: {fileID: -8508600367487764310}
   - component: {fileID: 1878651732429116845}
   - component: {fileID: 1663680026571956798}
+  - component: {fileID: 2661774661711058133}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -402,25 +402,10 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: -8508600367487764310}
+  - {fileID: 2661774661711058133}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &-8508600367487764310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3396989747327439425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
 --- !u!114 &1878651732429116845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -446,6 +431,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currencyAmount: 10
+--- !u!114 &2661774661711058133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3396989747327439425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eabeed050ac70242a4bcb9bd2cce99d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  synchronizeVelocity: 1
+  synchronizeAngularVelocity: 1
+  isTeleportEnabled: 1
+  teleportIfDistanceGreaterThan: 1
 --- !u!65 &5917508830178314512
 BoxCollider:
   m_ObjectHideFlags: 0
