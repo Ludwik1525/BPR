@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class BoardSeneSync: MonoBehaviour, IPunObservable
+public class BoardSceneSync: MonoBehaviour, IPunObservable
 {
     Rigidbody rb;
     PhotonView photonView;
@@ -19,8 +19,6 @@ public class BoardSeneSync: MonoBehaviour, IPunObservable
     private float distance;
     private float angle;
 
-    private GameObject battleArenaGameobject;
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -28,8 +26,6 @@ public class BoardSeneSync: MonoBehaviour, IPunObservable
 
         networkedPosition = new Vector3();
         networkedRotation = new Quaternion();
-
-        battleArenaGameobject = GameObject.Find("BattleArena");
     }
 
     private void FixedUpdate()
@@ -48,7 +44,7 @@ public class BoardSeneSync: MonoBehaviour, IPunObservable
         {
             //Then, photonView is mine and I am the one who controls the player
             //should send postion, velocity etc. data to the other players 
-            stream.SendNext(rb.position - battleArenaGameobject.transform.position);
+            stream.SendNext(rb.position);
             stream.SendNext(rb.rotation);
 
             if (synchronizeVelocity)
@@ -64,7 +60,7 @@ public class BoardSeneSync: MonoBehaviour, IPunObservable
         else
         {
             //Called on my player gameobject that exists in remote player's game
-            networkedPosition = (Vector3)stream.ReceiveNext() + battleArenaGameobject.transform.position;
+            networkedPosition = (Vector3)stream.ReceiveNext();
             networkedRotation = (Quaternion)stream.ReceiveNext();
 
             if (isTeleportEnabled)
