@@ -23,6 +23,9 @@ public class GameSetupController : MonoBehaviour
     private GameObject player;
 
     private Route currentRoute;
+    private int readyCount;
+    private bool startGame = false;
+    public GameObject infoPanel;
 
     public static List<GameObject> players = new List<GameObject>();
 
@@ -31,7 +34,33 @@ public class GameSetupController : MonoBehaviour
         currentRoute = FindObjectOfType<Route>();
         spawn = FindObjectOfType<Spawn>();
         colours = FindObjectOfType<ColourPalette>();
-        CreatePlayer();
+    }
+
+    private void Update()
+    {
+        if(!startGame)
+        {
+            foreach (GameObject player in players)
+            {
+                if (player.GetComponent<PlayerScript>().readyForGame)
+                {
+                    readyCount++;
+                }
+                else
+                {
+                    readyCount = 0;
+                }
+            }
+            if (readyCount == players.Count)
+            {
+                print("ready");
+                startGame = true;
+                infoPanel.SetActive(false);
+                CreatePlayer();
+            }
+        }
+       
+
     }
 
     private void CreatePlayer()
