@@ -29,9 +29,10 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
     {
         placeButton.SetActive(true);
         scaleSlider.SetActive(true);
+        
 
         adjustButton.SetActive(false);
-        searchForGameButton.SetActive(false);
+        searchForGameButton.SetActive(true);
 
         informUIPanel_Text.text = "Move phone to detect planes and place the Board!";
     }

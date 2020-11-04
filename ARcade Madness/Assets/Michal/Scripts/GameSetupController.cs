@@ -34,31 +34,40 @@ public class GameSetupController : MonoBehaviour
         currentRoute = FindObjectOfType<Route>();
         spawn = FindObjectOfType<Spawn>();
         colours = FindObjectOfType<ColourPalette>();
+        CreatePlayer();
     }
 
     private void Update()
     {
-        if(!startGame)
+        if(PhotonNetwork.IsMasterClient)
         {
-            foreach (GameObject player in players)
+            if (!startGame && players.Count > 0)
             {
-                if (player.GetComponent<PlayerScript>().readyForGame)
+                foreach (GameObject player in players)
                 {
-                    readyCount++;
+                    if (player.GetComponent<PlayerScript>().readyForGame)
+                    {
+                        print(PhotonNetwork.NickName + " " + player.GetComponent<PlayerScript>().readyForGame);
+                        readyCount++;
+                    }
+                    else
+                    {
+                        readyCount = 0;
+                    }
                 }
-                else
+                if (readyCount == players.Count)
                 {
-                    readyCount = 0;
+                    print("ready");
+                    startGame = true;
                 }
-            }
-            if (readyCount == players.Count)
-            {
-                print("ready");
-                startGame = true;
-                infoPanel.SetActive(false);
-                CreatePlayer();
             }
         }
+
+        if(startGame && infoPanel.activeInHierarchy)
+        {
+            infoPanel.SetActive(false);
+        }
+        
        
 
     }
