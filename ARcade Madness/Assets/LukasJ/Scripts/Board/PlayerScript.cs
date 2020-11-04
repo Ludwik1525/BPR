@@ -10,6 +10,10 @@ public class PlayerScript : MonoBehaviour
     private Transform playersParent;
 
 
+    //ready for game after placing ar board
+    public bool readyForGame;
+
+
     [PunRPC]
     void RPC_AddToList()
     {
