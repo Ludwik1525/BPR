@@ -92,6 +92,9 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
                 placeButton.SetActive(false);
                 adjustButton.SetActive(false);
                 searchForGameButton.SetActive(false);
+                informUIPanel_Text.text = "Waiting for other players..";
+
+
             }
             print(player.name + " " + player.GetComponent<PlayerScript>().readyForGame);
             
