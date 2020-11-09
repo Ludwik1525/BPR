@@ -100,6 +100,7 @@ public class BoardPlayerController : MonoBehaviour
         dicePV.RPC("TurnOnTheDice", RpcTarget.AllBuffered);
 
         onStartMoving.Invoke();
+        //Jump animation
         yield return new WaitForSeconds(2.2f);
         isMoving = true;
 
