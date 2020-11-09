@@ -18,9 +18,12 @@ public class GameSetupController : MonoBehaviour
 
     private ColourPalette colours;
 
-    private PhotonView PV1, PV2;
+    private PhotonView PV1, PV2, PV3;
     
     private GameObject player;
+
+    private GameObject scoresParent;
+    private GameObject score;
 
     private Route currentRoute;
     private int readyCount;
@@ -88,11 +91,7 @@ public class GameSetupController : MonoBehaviour
 
             GameController.gc.SetTurns();
             player.transform.rotation = Quaternion.LookRotation(player.transform.position - currentRoute.childNodeList[GameController.gc.currentPositions[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]] + 1].position);
-            //player.transform.LookAt(currentRoute.childNodeList[GameController.gc.currentPositions[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]]+1]);
         }
-        
-        //player.transform.parent = 
-        //spawn.AssignSpawnPosition((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]).position, Quaternion.identity);
 
         PV1 = player.GetComponent<PhotonView>();
         PV1.RPC("RPC_AddToList", RpcTarget.AllBuffered);
@@ -103,6 +102,17 @@ public class GameSetupController : MonoBehaviour
         {
             PV2.RPC("RPC_AssignColour", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["ColourID"]);
         }
+
+        SetScores();
+    }
+
+    private void SetScores()
+    {
+        GameObject score = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "ScorePrefab"),
+            new Vector3(0, -20 * (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], 0), Quaternion.identity);
+
+        PV3 = score.GetComponent<PhotonView>();
+        PV3.RPC("SetScoresParent", RpcTarget.AllBuffered);
     }
 
     public void DisconnectPlayer()
