@@ -6,15 +6,17 @@ public class ChestAnimationController : MonoBehaviour
 {
     private Animator anim;
     private Currency currency;
+    public bool taken = false;
     void Start()
     {
-        anim = GetComponentInChildren<Animator>();
+        anim = GetComponent<Animator>();
+        taken = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKeyDown(KeyCode.O))
         {
             StartBoolAnimationByName("OpenChest");
         }
@@ -32,7 +34,7 @@ public class ChestAnimationController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
+
         if (other.gameObject.transform.parent.GetComponent<Currency>() != null)
         {
             currency = other.gameObject.transform.parent.GetComponent<Currency>();
@@ -42,11 +44,11 @@ public class ChestAnimationController : MonoBehaviour
         {
             StartBoolAnimationByName("OpenChest");
         }
+        taken = true;
     }
-
     public void DestroyTheChest()
     {
-        transform.parent.transform.parent.GetComponent<SpawnChest>().DestroyChest();
+        FindObjectOfType<SpawnChest>().DestroyChest();
     }
     //private void OnCollisionEnter(Collision collision)
     //{

@@ -122,7 +122,6 @@ public class BoardPlayerController : MonoBehaviour
             {
                 steps = 0;
             }
-           
 
             Vector3 nextPos = currentRoute.childNodeList[var].transform.GetChild(1).GetChild((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]).position;
             while(MoveToNextNode(nextPos))
@@ -190,8 +189,17 @@ public class BoardPlayerController : MonoBehaviour
 
     IEnumerator LoadSceneDelay()
     {
-        yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene("Spinner_Gameplay");
+        if(FindObjectOfType<ChestAnimationController>().taken)
+        {
+            yield return new WaitForSeconds(3f);
+            SceneManager.LoadScene("AssetScene");
+        }
+        else
+        {
+            yield return new WaitForSeconds(1f);
+            SceneManager.LoadScene("AssetScene");
+        }
+        
     }
 
     [PunRPC]
