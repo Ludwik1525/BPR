@@ -44,8 +44,7 @@ public class SpawnChest : MonoBehaviour
     [PunRPC]
     private void ChooseRandomNumber()
     {
-        //rand = UnityEngine.Random.Range(1, tilesToSpawnChestsOn.Count);
-        rand = UnityEngine.Random.Range(0, 2);
+        rand = UnityEngine.Random.Range(1, tilesToSpawnChestsOn.Count);
 
         foreach (int tileNumber in GameController.gc.currentPositions)
         {
