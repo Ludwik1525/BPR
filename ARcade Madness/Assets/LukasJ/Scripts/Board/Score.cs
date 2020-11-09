@@ -14,25 +14,30 @@ public class Score : MonoBehaviour
     void Start()
     {
         PV = GetComponent<PhotonView>();
-        scoresParent = GameObject.Find("Scores");
+        InstantiateMyScore();
     }
     
     void InstantiateMyScore()
     {
-        score = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "ScorePrefab"),
-            new Vector3(0, -20*(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], 0), Quaternion.identity);
-
-        PV.RPC("SetParent", RpcTarget.AllBuffered);
+        if (PV.IsMine)
+        {
+            GameObject score = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "ScorePrefab"),
+                new Vector3(0, -20 * (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], 0), Quaternion.identity);
+            
+            StartCoroutine("WaitAndSetParent");
+        }
     }
 
     [PunRPC]
-    void SetParent()
+    void SetScoresParent()
     {
-        score.transform.SetParent(GameObject.Find("Canvas").transform);
+        scoresParent = GameObject.Find("Scores");
+        score.transform.SetParent(scoresParent.transform);
     }
 
-    void Update()
+    private IEnumerator WaitAndSetParent()
     {
-        
+        yield return new WaitForSeconds(1f);
+        PV.RPC("SetScoresParent", RpcTarget.AllBuffered);
     }
 }
