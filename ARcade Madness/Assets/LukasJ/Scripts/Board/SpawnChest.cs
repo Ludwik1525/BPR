@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using System.IO;
+using System;
 
 public class SpawnChest : MonoBehaviour
 {
@@ -43,8 +44,15 @@ public class SpawnChest : MonoBehaviour
     [PunRPC]
     private void ChooseRandomNumber()
     {
-        rand = Random.Range(1, tilesToSpawnChestsOn.Count);
-        rand = 2;
+        //rand = UnityEngine.Random.Range(1, tilesToSpawnChestsOn.Count);
+        rand = UnityEngine.Random.Range(0, 2);
+
+        foreach (int tileNumber in GameController.gc.currentPositions)
+        {
+            if (rand == tileNumber)
+                ChooseRandomNumber();
+        }
+
         PlayerPrefs.SetInt("random", rand);
     }
 

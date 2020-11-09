@@ -21,6 +21,7 @@ public class BoardPlayerController : MonoBehaviour
     public int steps;
     public float speed = 2f;
     public GameObject dice;
+    public int roll;
 
     //Events
     [HideInInspector]
@@ -65,6 +66,7 @@ public class BoardPlayerController : MonoBehaviour
                 {
                     steps = Random.Range(1, 7);
                     Debug.Log("Dice Rolled: " + steps);
+                    //steps = roll;
                     StartCoroutine(Move());
                 }
 
