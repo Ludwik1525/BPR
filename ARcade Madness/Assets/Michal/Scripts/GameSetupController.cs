@@ -112,7 +112,7 @@ public class GameSetupController : MonoBehaviour
             new Vector3(0, -20 * (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], 0), Quaternion.identity);
 
         PV3 = score.GetComponent<PhotonView>();
-        PV3.RPC("SetScoresParent", RpcTarget.AllBuffered);
+        PV3.RPC("RPC_SetParent", RpcTarget.AllBuffered);
     }
 
     public void DisconnectPlayer()
