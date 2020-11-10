@@ -8,7 +8,7 @@ public class Score : MonoBehaviour
 {
     private ScoreInfo si;
     private PhotonView myPV;
-    private int score = 0;
+    private int score;
 
     private void Start()
     {
@@ -16,11 +16,15 @@ public class Score : MonoBehaviour
         myPV = GetComponent<PhotonView>();
         if(myPV.IsMine)
         {
-            if (!PlayerPrefs.HasKey("score"))
+            if(PhotonNetwork.LocalPlayer.CustomProperties["score"] != null)
+                si.GetComponent<PhotonView>().RPC("SetScore", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"],
+                    (int)PhotonNetwork.LocalPlayer.CustomProperties["score"]);
+            else
             {
-                PlayerPrefs.SetInt("score", score);
+                ExitGames.Client.Photon.Hashtable thisScore = new ExitGames.Client.Photon.Hashtable();
+                thisScore.Add("score", 0);
+                PhotonNetwork.LocalPlayer.SetCustomProperties(thisScore);
             }
-            setScore(0);
         }
         
     }
@@ -28,7 +32,10 @@ public class Score : MonoBehaviour
     public void setScore(int score)
     {
         this.score += score;
-        PlayerPrefs.SetInt("score", this.score);
+
+        ExitGames.Client.Photon.Hashtable thisScore = new ExitGames.Client.Photon.Hashtable();
+        thisScore.Add("score", score);
+        PhotonNetwork.LocalPlayer.SetCustomProperties(thisScore);
 
         if(myPV.IsMine)
             si.GetComponent<PhotonView>().RPC("SetScore", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], this.score);
