@@ -23,7 +23,7 @@ public class Dice : MonoBehaviour
 
     public IEnumerator SwitchTheDice()
     {
-        yield return new WaitForSeconds(1.1f);
+        yield return new WaitForSeconds(3.1f);
         if (gameObject.activeInHierarchy)
             gameObject.SetActive(false);
         else

@@ -52,6 +52,9 @@ MonoBehaviour:
   - SetChestsParent
   - TurnOnTheDice
   - TurnOnTheDiceDelayed
+  - SetParent
+  - SetScoresParent
+  - ActivateChildren
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

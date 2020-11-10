@@ -21,6 +21,7 @@ public class BoardPlayerController : MonoBehaviour
     public int steps;
     public float speed = 2f;
     public GameObject dice;
+    public int roll;
 
     //Events
     [HideInInspector]
@@ -63,8 +64,9 @@ public class BoardPlayerController : MonoBehaviour
                     
                 if (Input.GetKeyDown(KeyCode.Space) && !isMoving)
                 {
-                    steps = Random.Range(1, 7);
+                    steps = Random.Range(9, 10);
                     Debug.Log("Dice Rolled: " + steps);
+                    //steps = roll;
                     StartCoroutine(Move());
                 }
 
@@ -100,6 +102,7 @@ public class BoardPlayerController : MonoBehaviour
         dicePV.RPC("TurnOnTheDice", RpcTarget.AllBuffered);
 
         onStartMoving.Invoke();
+        //Jump animation
         yield return new WaitForSeconds(2.2f);
         isMoving = true;
 
@@ -122,7 +125,6 @@ public class BoardPlayerController : MonoBehaviour
             {
                 steps = 0;
             }
-           
 
             Vector3 nextPos = currentRoute.childNodeList[var].transform.GetChild(1).GetChild((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]).position;
             while(MoveToNextNode(nextPos))
@@ -190,8 +192,17 @@ public class BoardPlayerController : MonoBehaviour
 
     IEnumerator LoadSceneDelay()
     {
-        yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene("Spinner_Gameplay");
+        if(FindObjectOfType<ChestAnimationController>().taken)
+        {
+            yield return new WaitForSeconds(3f);
+            SceneManager.LoadScene("AssetScene");
+        }
+        else
+        {
+            yield return new WaitForSeconds(1f);
+            SceneManager.LoadScene("AssetScene");
+        }
+        
     }
 
     [PunRPC]

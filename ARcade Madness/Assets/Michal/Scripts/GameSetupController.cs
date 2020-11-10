@@ -18,9 +18,11 @@ public class GameSetupController : MonoBehaviour
 
     private ColourPalette colours;
 
-    private PhotonView PV1, PV2;
+    private PhotonView PV1, PV2, PV3;
     
     private GameObject player;
+    
+    private GameObject score;
 
     private Route currentRoute;
     private int readyCount;
@@ -43,6 +45,7 @@ public class GameSetupController : MonoBehaviour
     {
         //if(PhotonNetwork.IsMasterClient)
         //{
+<<<<<<< HEAD
         //    if (!startGame && players.Count == newPlayers.Count)
         //    {
                 
@@ -71,6 +74,36 @@ public class GameSetupController : MonoBehaviour
         //    print("ready");
         //    startGame = true;
         //}
+=======
+        //    if (!startGame && players.Count > 0)
+        //    {
+        //        foreach (GameObject player in players)
+        //        {
+        //            if (player.GetComponent<PlayerScript>().readyForGame)
+        //            {
+        //                print(PhotonNetwork.NickName + " " + player.GetComponent<PlayerScript>().readyForGame);
+        //                readyCount++;
+        //            }
+        //            else
+        //            {
+        //                readyCount = 0;
+        //            }
+        //        }
+        //        if (readyCount == players.Count)
+        //        {
+        //            print("ready");
+        //            startGame = true;
+        //        }
+        //    }
+        //}
+
+        if(startGame && infoPanel.activeInHierarchy)
+        {
+            infoPanel.SetActive(false);
+        }
+        
+       
+>>>>>>> 0e1d1bbc88032c37da904ad1cb484d0ac14c08ca
 
     }
 
@@ -90,11 +123,7 @@ public class GameSetupController : MonoBehaviour
 
             GameController.gc.SetTurns();
             player.transform.rotation = Quaternion.LookRotation(player.transform.position - currentRoute.childNodeList[GameController.gc.currentPositions[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]] + 1].position);
-            //player.transform.LookAt(currentRoute.childNodeList[GameController.gc.currentPositions[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]]+1]);
         }
-        
-        //player.transform.parent = 
-        //spawn.AssignSpawnPosition((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]).position, Quaternion.identity);
 
         PV1 = player.GetComponent<PhotonView>();
         PV1.RPC("RPC_AddToList", RpcTarget.AllBuffered);

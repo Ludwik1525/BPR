@@ -3182,7 +3182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bd96d3703bb6e94fb6c2701e5955d0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multiplayerSceneIndex: 4
+  multiplayerSceneIndex: 1
   lobbyPanel: {fileID: 1871107068}
   roomPanel: {fileID: 1855997215}
   startButton: {fileID: 240127400}
