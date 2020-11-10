@@ -8,24 +8,30 @@ public class Score : MonoBehaviour
 {
     private ScoreInfo si;
     private PhotonView myPV;
+    private int score = 0;
 
     private void Start()
     {
-        if (!PlayerPrefs.HasKey("score"))
-        {
-            PlayerPrefs.SetInt("score", 0);
-        }
-        setScore(0);
         si = FindObjectOfType<ScoreInfo>();
         myPV = GetComponent<PhotonView>();
+        if(myPV.IsMine)
+        {
+            if (!PlayerPrefs.HasKey("score"))
+            {
+                PlayerPrefs.SetInt("score", score);
+            }
+            setScore(0);
+        }
+        
     }
 
     public void setScore(int score)
     {
-        PlayerPrefs.SetInt("score", getScore() + score);
+        this.score += score;
+        PlayerPrefs.SetInt("score", this.score);
 
         if(myPV.IsMine)
-            si.GetComponent<PhotonView>().RPC("SetScore", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], getScore());
+            si.GetComponent<PhotonView>().RPC("SetScore", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], this.score);
     }
     public int getScore()
     {
@@ -34,7 +40,7 @@ public class Score : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        //PlayerPrefs.SetInt("score", 0);
+        PlayerPrefs.SetInt("score", 0);
     }
 
 }
