@@ -44,16 +44,13 @@ public class SpawnChest : MonoBehaviour
     private void ChooseRandomNumber(int number)
     {
         rand = number;
-
-        print("Random number: " + rand);
-
-        PlayerPrefs.SetInt("random", rand);
     }
 
     private IEnumerator WaitAndSetParent()
     {
         yield return new WaitForSeconds(1f);
         PV.RPC("SetChestsParent", RpcTarget.AllBuffered);
+        PlayerPrefs.SetInt("random", rand);
     }
 
     public void ResetChestPosition()
@@ -85,9 +82,9 @@ public class SpawnChest : MonoBehaviour
 
     private void SpawningChestSequence()
     {
+        rand = PlayerPrefs.GetInt("random");
         if (PhotonNetwork.IsMasterClient)
         {
-            rand = PlayerPrefs.GetInt("random");
             if (rand == 0)
             {
                 bool isTileTaken = true;
