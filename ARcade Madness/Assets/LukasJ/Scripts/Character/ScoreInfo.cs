@@ -31,6 +31,6 @@ public class ScoreInfo : MonoBehaviour
     [PunRPC]
     void SetScore(int index, int score)
     {
-        this.gameObject.transform.GetChild(index).GetChild(0).GetChild(1).GetComponent<Text>().text = "" + score;
+        this.gameObject.transform.GetChild(index).GetChild(0).GetChild(2).GetComponent<Text>().text = "" + score;
     }
 }

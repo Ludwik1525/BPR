@@ -55,6 +55,8 @@ MonoBehaviour:
   - SetParent
   - SetScoresParent
   - ActivateChildren
+  - SetScore
+  - RPC_AddToNewList
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
