@@ -167,7 +167,14 @@ public class BoardPlayerController : MonoBehaviour
     [PunRPC]
     public void IncrementTurn()
     {
-        GameController.gc.currentTurn++;
+        if (FindObjectOfType<ChestAnimationController>().taken)
+        {
+            StartCoroutine(DelayIfPlayerPicksUpChest(3));
+        }
+        else
+        {
+            GameController.gc.currentTurn++;
+        }
     }
 
     [PunRPC]
@@ -209,5 +216,11 @@ public class BoardPlayerController : MonoBehaviour
     public void TurnOnTheDiceDelayed()
     {
         StartCoroutine(dice.GetComponent<Dice>().SwitchTheDice());
+    }
+
+    IEnumerator DelayIfPlayerPicksUpChest(int seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        GameController.gc.currentTurn++;
     }
 }
