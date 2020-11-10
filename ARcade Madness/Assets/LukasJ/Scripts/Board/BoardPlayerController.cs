@@ -143,8 +143,9 @@ public class BoardPlayerController : MonoBehaviour
 
         isMoving = false;
         onStopMoving.Invoke();
-        PV.RPC("IncrementTurn", RpcTarget.AllBuffered);
         diceGuard = false;
+
+        PV.RPC("IncrementTurn", RpcTarget.AllBuffered);
         PV.RPC("ResetTurnVar", RpcTarget.AllBuffered);
     }
 
@@ -185,7 +186,6 @@ public class BoardPlayerController : MonoBehaviour
             GameController.gc.currentTurn = 1;
             StartCoroutine(LoadSceneDelay());
         }
-        
     }
 
     [PunRPC]
@@ -209,7 +209,6 @@ public class BoardPlayerController : MonoBehaviour
             yield return new WaitForSeconds(1f);
             SceneManager.LoadScene("AssetScene");
         }
-        
     }
 
     [PunRPC]

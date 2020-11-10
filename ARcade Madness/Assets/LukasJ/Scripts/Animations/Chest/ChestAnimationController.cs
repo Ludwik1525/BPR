@@ -34,28 +34,29 @@ public class ChestAnimationController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        taken = true;
 
         if (other.gameObject.transform.parent.GetComponent<Currency>() != null)
         {
             currency = other.gameObject.transform.parent.GetComponent<Currency>();
-        }
 
-        if (currency.GetCurrencyAmount() > 9)
-        {
-            StartBoolAnimationByName("OpenChest");
+            if (currency.GetCurrencyAmount() > 9)
+            {
+                StartBoolAnimationByName("OpenChest");
+            }
         }
-        taken = true;
 
         if (other.gameObject.transform.parent.GetComponent<Score>() != null)
         {
             other.gameObject.transform.parent.GetComponent<Score>().setScore();
         }
-            
     }
+
     public void DestroyTheChest()
     {
         FindObjectOfType<SpawnChest>().DestroyChest();
     }
+
     //private void OnCollisionEnter(Collision collision)
     //{
     //    print("HEYO");
