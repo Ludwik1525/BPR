@@ -101,19 +101,6 @@ public class GameSetupController : MonoBehaviour
         {
             PV2.RPC("RPC_AssignColour", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["ColourID"]);
         }
-
-        SetScores();
-    }
-
-    private void SetScores()
-    {
-        GameObject score = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "ScorePrefab"), Vector3.zero, Quaternion.identity);
-
-        PV3 = score.GetComponent<PhotonView>();
-        if (PV3.IsMine)
-        {
-            PV3.RPC("RPC_SetParent", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["ColourID"]);
-        }
     }
 
     public void DisconnectPlayer()
