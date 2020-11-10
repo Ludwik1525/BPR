@@ -110,7 +110,10 @@ public class GameSetupController : MonoBehaviour
         GameObject score = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "ScorePrefab"), Vector3.zero, Quaternion.identity);
 
         PV3 = score.GetComponent<PhotonView>();
-        PV3.RPC("RPC_SetParent", RpcTarget.AllBuffered);
+        if (PV3.IsMine)
+        {
+            PV3.RPC("RPC_SetParent", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["ColourID"]);
+        }
     }
 
     public void DisconnectPlayer()

@@ -10,11 +10,11 @@ public class ScoreInfo : MonoBehaviour
     private Transform scoresParent;
 
     [PunRPC]
-    void RPC_SetParent()
+    void RPC_SetParent(int index)
     {
         scoresParent = GameObject.Find("Scores").transform;
 
-        this.gameObject.transform.SetParent(scoresParent.transform.GetChild((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]));
+        this.gameObject.transform.SetParent(scoresParent.transform.GetChild(index));
 
         this.gameObject.transform.localPosition = Vector3.zero; //new Vector3(0, -20 * (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], 0);
     }
