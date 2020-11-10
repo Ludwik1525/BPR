@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using System.IO;
-using System;
 
 public class SpawnChest : MonoBehaviour
 {
@@ -44,11 +43,13 @@ public class SpawnChest : MonoBehaviour
     [PunRPC]
     private void ChooseRandomNumber()
     {
-        rand = UnityEngine.Random.Range(1, tilesToSpawnChestsOn.Count);
+        rand = Random.Range(1, tilesToSpawnChestsOn.Count);
+
+        print("Random number: " + rand);
 
         foreach (int tileNumber in GameController.gc.currentPositions)
         {
-            if (rand == tileNumber)
+            if (GetRealTileNo() == tileNumber)
                 ChooseRandomNumber();
         }
 
@@ -135,17 +136,6 @@ public class SpawnChest : MonoBehaviour
             }
             check++;
         }
-
-        //for (int i = 0; i < rand + numberToIncrease; i++)
-        //{
-        //    if (allTiles[i].transform.gameObject.tag == "Tile")
-        //        {
-        //            if (!allTiles[i].transform.gameObject.name.Contains("Simple"))
-        //            {
-        //                numberToIncrease++;
-        //            }
-        //        }
-        //}
 
         return rand + numberToIncrease;
     }

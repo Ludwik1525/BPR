@@ -108,6 +108,8 @@ public class BoardPlayerController : MonoBehaviour
 
         int var = 0;
 
+        print("Chest at: " + FindObjectOfType<SpawnChest>().GetRealTileNo());
+
         while (steps > 0)
         {
             routePosition++;
