@@ -61,11 +61,9 @@ public class GameManager_PC : MonoBehaviour
 
     private void SpawnGhosts()
     {
-        Debug.Log(ghosts.Length);
         foreach(var ghost in ghosts)
         {
-            int random = Random.Range(0, patrolPoints.Length);
-            Debug.Log("r " + random);
+            int random = Random.Range(0, patrolPoints.Length -1);
 
             Instantiate(ghost, patrolPoints[random].transform.position, Quaternion.identity);
         }

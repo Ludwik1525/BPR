@@ -95,6 +95,9 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
                 searchForGameButton.SetActive(false);
                 informUIPanel_Text.text = "Waiting for other players..";
 
+                PhotonView PV1 = player.GetComponent<PhotonView>();
+                PV1.RPC("RPC_AddToNewList", RpcTarget.AllBuffered);
+
 
             }
             print(player.name + " " + player.GetComponent<PlayerScript>().readyForGame);
