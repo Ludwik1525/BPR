@@ -48,7 +48,7 @@ public class ChestAnimationController : MonoBehaviour
 
         if (other.gameObject.transform.parent.GetComponent<Score>() != null)
         {
-            other.gameObject.transform.parent.GetComponent<Score>().setScore(1);
+            other.gameObject.transform.parent.GetComponent<Score>().setScore();
         }
             
     }
