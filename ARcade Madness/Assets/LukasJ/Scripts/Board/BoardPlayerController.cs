@@ -64,7 +64,7 @@ public class BoardPlayerController : MonoBehaviour
                     
                 if (Input.GetKeyDown(KeyCode.Space) && !isMoving)
                 {
-                    steps = Random.Range(1, 7);
+                    steps = Random.Range(9, 10);
                     Debug.Log("Dice Rolled: " + steps);
                     //steps = roll;
                     StartCoroutine(Move());

@@ -46,7 +46,11 @@ public class ChestAnimationController : MonoBehaviour
         }
         taken = true;
 
-        other.GetComponent<Score>().setScore();
+        if (other.gameObject.transform.parent.GetComponent<Score>() != null)
+        {
+            other.gameObject.transform.parent.GetComponent<Score>().setScore(1);
+        }
+            
     }
     public void DestroyTheChest()
     {

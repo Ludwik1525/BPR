@@ -11,14 +11,18 @@ public class Score : MonoBehaviour
 
     private void Start()
     {
-        PlayerPrefs.SetInt("score", 0);
+        if (!PlayerPrefs.HasKey("score"))
+        {
+            PlayerPrefs.SetInt("score", 0);
+        }
+        setScore(0);
         si = FindObjectOfType<ScoreInfo>();
         myPV = GetComponent<PhotonView>();
     }
 
-    public void setScore()
+    public void setScore(int score)
     {
-        PlayerPrefs.SetInt("score", getScore() + 1);
+        PlayerPrefs.SetInt("score", getScore() + score);
 
         if(myPV.IsMine)
             si.GetComponent<PhotonView>().RPC("SetScore", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], getScore());
@@ -30,7 +34,7 @@ public class Score : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        PlayerPrefs.SetInt("score", 0);
+        //PlayerPrefs.SetInt("score", 0);
     }
 
 }
