@@ -21,8 +21,7 @@ public class GameSetupController : MonoBehaviour
     private PhotonView PV1, PV2, PV3;
     
     private GameObject player;
-
-    private GameObject scoresParent;
+    
     private GameObject score;
 
     private Route currentRoute;
@@ -108,8 +107,7 @@ public class GameSetupController : MonoBehaviour
 
     private void SetScores()
     {
-        GameObject score = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "ScorePrefab"),
-            new Vector3(0, -20 * (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], 0), Quaternion.identity);
+        GameObject score = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "ScorePrefab"), Vector3.zero, Quaternion.identity);
 
         PV3 = score.GetComponent<PhotonView>();
         PV3.RPC("RPC_SetParent", RpcTarget.AllBuffered);

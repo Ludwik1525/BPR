@@ -14,8 +14,8 @@ public class ScoreInfo : MonoBehaviour
     {
         scoresParent = GameObject.Find("Scores").transform;
 
-        this.gameObject.transform.SetParent(scoresParent);
+        this.gameObject.transform.SetParent(scoresParent.transform.GetChild((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]));
 
-        this.gameObject.transform.position = new Vector3(0, -20 * (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], 0);
+        this.gameObject.transform.localPosition = Vector3.zero; //new Vector3(0, -20 * (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], 0);
     }
 }
