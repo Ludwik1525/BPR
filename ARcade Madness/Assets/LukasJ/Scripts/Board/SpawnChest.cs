@@ -41,17 +41,11 @@ public class SpawnChest : MonoBehaviour
     }
 
     [PunRPC]
-    private void ChooseRandomNumber()
+    private void ChooseRandomNumber(int number)
     {
-        rand = Random.Range(1, tilesToSpawnChestsOn.Count);
+        rand = number;
 
         print("Random number: " + rand);
-
-        foreach (int tileNumber in GameController.gc.currentPositions)
-        {
-            if (GetRealTileNo() == tileNumber)
-                ChooseRandomNumber();
-        }
 
         PlayerPrefs.SetInt("random", rand);
     }
@@ -96,7 +90,21 @@ public class SpawnChest : MonoBehaviour
             rand = PlayerPrefs.GetInt("random");
             if (rand == 0)
             {
-                PV.RPC("ChooseRandomNumber", RpcTarget.AllBuffered);
+                bool isTileTaken = true;
+
+                while(isTileTaken)
+                {
+                    isTileTaken = false;
+                    rand = Random.Range(1, tilesToSpawnChestsOn.Count);
+
+                    foreach (int tileNumber in GameController.gc.currentPositions)
+                    {
+                        if (GetRealTileNo() == tileNumber)
+                            isTileTaken = true;
+                    }
+                }
+                
+                PV.RPC("ChooseRandomNumber", RpcTarget.AllBuffered, rand);
             }
             SpawnChests();
         }
