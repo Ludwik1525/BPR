@@ -24,7 +24,6 @@ public class PlayerScript_PC : MonoBehaviour
         if(other.gameObject.CompareTag("PacmanPoint"))
         {
             score++;
-            Debug.Log(score);
             Destroy(other.gameObject);
         }
     }

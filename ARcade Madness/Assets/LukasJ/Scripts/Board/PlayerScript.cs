@@ -22,6 +22,15 @@ public class PlayerScript : MonoBehaviour
         GameSetupController.players.Add(this.gameObject);
     }
 
+
+    [PunRPC]
+    void RPC_AddToNewList()
+    {
+        PV = GetComponent<PhotonView>();
+
+        GameSetupController.newPlayers.Add(this.gameObject);
+    }
+
     [PunRPC]
     void RPC_SetParent()
     {
