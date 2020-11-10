@@ -91,7 +91,7 @@ public class ColourChanger : MonoBehaviour
             else
             {
                 bool isColourUsed = true;  // bool used to decide if the set colour is used by anybody else
-                colourNo = 0;  // initial colour index for a new player joining the room
+                colourNo = Random.Range(0, 12);  // initial random colour index for a new player joining the room
 
                 while (isColourUsed)  // loop checking if the colour is used by anybody
                 {
@@ -113,28 +113,6 @@ public class ColourChanger : MonoBehaviour
                             }
                         }
                     }
-
-                    //for (int i = 0; i < colourNo + 1; i++)
-                    //{
-                    //    bool wasAlreadyIncremented = false;
-                    //    for (int j = playersContainer.childCount - 1; j >= 0; j--)
-                    //    {
-                    //        if (playersContainer.GetChild(j).GetChild(0).GetComponent<Text>().text != myName)
-                    //        {
-                    //            if (playersContainer.GetChild(j).GetChild(1).GetComponent<Image>().color == coloursArray[i])
-                    //            {
-                    //                if (!wasAlreadyIncremented)
-                    //                {
-                    //                    if (colourNo < 11)
-                    //                    {
-                    //                        colourNo++;
-                    //                    }
-                    //                    wasAlreadyIncremented = true;
-                    //                }
-                    //            }
-                    //        }
-                    //    }
-                    //}
                 }
             }
 
