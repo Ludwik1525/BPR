@@ -242,11 +242,21 @@ public class BoardPlayerController : MonoBehaviour
     }
 
     [PunRPC]
-    private void StartTheTime()
+    private void StartTheTimeAccept()
     {
         Time.timeScale = 1;
+        FindObjectOfType<ChestAnimationController>().doesWantChest = true;
     }
-    
+
+    [PunRPC]
+    private void StartTheTimeDecline()
+    {
+        Time.timeScale = 1;
+        steps = 0;
+        PV.RPC("SetChestVariable", RpcTarget.AllBuffered);
+        FindObjectOfType<ChestAnimationController>().doesWantChest = false;
+    }
+
     private void StopTimeAndOpenBox()
     {
         decisionBox.SetActive(true);
@@ -255,20 +265,14 @@ public class BoardPlayerController : MonoBehaviour
 
     private void AcceptChest()
     {
-        Time.timeScale = 1;
-        PV.RPC("StartTheTime", RpcTarget.AllBuffered);
+        PV.RPC("StartTheTimeAccept", RpcTarget.AllBuffered);
         doesWantToOpenTheChest = true;
         decisionBox.SetActive(false);
-        FindObjectOfType<ChestAnimationController>().doesWantChest = true;
-        steps = 0;
-        PV.RPC("SetChestVariable", RpcTarget.AllBuffered);
     }
 
     private void DeclineChest()
     {
-        Time.timeScale = 1;
-        PV.RPC("StartTheTime", RpcTarget.AllBuffered);
-        FindObjectOfType<ChestAnimationController>().doesWantChest = false;
+        PV.RPC("StartTheTimeDecline", RpcTarget.AllBuffered);
         doesWantToOpenTheChest = false;
         decisionBox.SetActive(false);
     }

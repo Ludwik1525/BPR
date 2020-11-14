@@ -42,15 +42,18 @@ public class ChestAnimationController : MonoBehaviour
 
             if (currency.GetCurrencyAmount() > 9)
             {
-                if(doesWantChest)
+                if (doesWantChest)
+                {
                     StartBoolAnimationByName("OpenChest");
+
+                    if (other.gameObject.transform.parent.GetComponent<Score>() != null)
+                    {
+                        other.gameObject.transform.parent.GetComponent<Score>().setScore();
+                    }
+                }
             }
         }
 
-        if (other.gameObject.transform.parent.GetComponent<Score>() != null)
-        {
-            other.gameObject.transform.parent.GetComponent<Score>().setScore();
-        }
     }
 
     public void DestroyTheChest()
