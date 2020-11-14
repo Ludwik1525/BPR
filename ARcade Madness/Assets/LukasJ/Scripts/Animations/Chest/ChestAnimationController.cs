@@ -45,14 +45,15 @@ public class ChestAnimationController : MonoBehaviour
                 {
                     taken = true;
                     StartBoolAnimationByName("OpenChest");
+
+                    if (other.gameObject.transform.parent.GetComponent<Score>() != null)
+                    {
+                        other.gameObject.transform.parent.GetComponent<Score>().setScore();
+                    }
                 }
             }
         }
 
-        if (other.gameObject.transform.parent.GetComponent<Score>() != null)
-        {
-            other.gameObject.transform.parent.GetComponent<Score>().setScore();
-        }
     }
 
     public void DestroyTheChest()
