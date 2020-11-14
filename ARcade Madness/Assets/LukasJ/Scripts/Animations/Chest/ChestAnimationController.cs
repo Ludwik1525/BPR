@@ -34,8 +34,6 @@ public class ChestAnimationController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        taken = true;
-
         if (other.gameObject.transform.parent.GetComponent<Currency>() != null)
         {
             currency = other.gameObject.transform.parent.GetComponent<Currency>();
@@ -44,6 +42,8 @@ public class ChestAnimationController : MonoBehaviour
             {
                 if (doesWantChest)
                 {
+                    taken = true;
+
                     StartBoolAnimationByName("OpenChest");
 
                     if (other.gameObject.transform.parent.GetComponent<Score>() != null)

@@ -88,7 +88,7 @@ public class SpawnChest : MonoBehaviour
         rand = PlayerPrefs.GetInt("random");
         if (PhotonNetwork.IsMasterClient)
         {
-            if (true)
+            if (rand == 0)
             {
                 bool isTileTaken = true;
 
