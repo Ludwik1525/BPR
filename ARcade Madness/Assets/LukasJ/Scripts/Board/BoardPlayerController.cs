@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
@@ -14,6 +15,10 @@ public class BoardPlayerController : MonoBehaviour
     private PhotonView dicePV;
     private bool diceGuard = false;
     private bool wasDiceRolled = false;
+    private bool doesWantToOpenTheChest = false;
+
+    private GameObject decisionBox;
+    private Button yesB, noB;
 
     public int routePosition;
     public int turn;
@@ -38,6 +43,11 @@ public class BoardPlayerController : MonoBehaviour
         dicePV = transform.GetChild(2).GetComponent<PhotonView>();
         onStartMoving = new UnityEvent();
         onStopMoving = new UnityEvent();
+        decisionBox = GameObject.Find("DecisionBox");
+        yesB = decisionBox.transform.GetChild(1).GetComponent<Button>();
+        noB = decisionBox.transform.GetChild(2).GetComponent<Button>();
+        yesB.onClick.AddListener(AcceptChest);
+        noB.onClick.AddListener(DeclineChest);
     }
 
     private void Update()
@@ -124,8 +134,7 @@ public class BoardPlayerController : MonoBehaviour
             }
             if(var == FindObjectOfType<SpawnChest>().GetRealTileNo())
             {
-                steps = 0;
-                PV.RPC("SetChestVariable", RpcTarget.AllBuffered);
+                StopTimeAndOpenBox();
             }
 
             Vector3 nextPos = currentRoute.childNodeList[var].transform.GetChild(1).GetChild((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]).position;
@@ -225,5 +234,39 @@ public class BoardPlayerController : MonoBehaviour
     private void SetChestVariable()
     {
         PlayerPrefs.SetInt("random", 0);
+    }
+
+    [PunRPC]
+    private void StopTheTime()
+    {
+        Time.timeScale = 0;
+    }
+
+    [PunRPC]
+    private void StartTheTime()
+    {
+        Time.timeScale = 1;
+    }
+    
+    private void StopTimeAndOpenBox()
+    {
+        decisionBox.SetActive(true);
+        PV.RPC("StopTheTime", RpcTarget.AllBuffered);
+    }
+
+    private void AcceptChest()
+    {
+        PV.RPC("StartTheTime", RpcTarget.AllBuffered);
+        doesWantToOpenTheChest = true;
+        decisionBox.SetActive(false);
+        steps = 0;
+        PV.RPC("SetChestVariable", RpcTarget.AllBuffered);
+    }
+
+    private void DeclineChest()
+    {
+        PV.RPC("StartTheTime", RpcTarget.AllBuffered);
+        doesWantToOpenTheChest = false;
+        decisionBox.SetActive(false);
     }
 }
