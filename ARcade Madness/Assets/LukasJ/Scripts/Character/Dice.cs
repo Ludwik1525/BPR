@@ -13,7 +13,7 @@ public class Dice : MonoBehaviour
     }
 
     [PunRPC]
-    public void TurnOnTheDice()
+    public void SwitchTheDice()
     {
         if (gameObject.activeInHierarchy)
             gameObject.SetActive(false);

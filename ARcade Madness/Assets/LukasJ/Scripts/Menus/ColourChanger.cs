@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class ColourChanger : MonoBehaviour
 {
     private int colourNo = 0;
+    public int randomNo = 0;
     private string myName;
 
     private PhotonView PV;
@@ -91,7 +92,10 @@ public class ColourChanger : MonoBehaviour
             else
             {
                 bool isColourUsed = true;  // bool used to decide if the set colour is used by anybody else
-                colourNo = Random.Range(0, 12);  // initial random colour index for a new player joining the room
+
+                PV.RPC("GenerateColourNo", RpcTarget.AllBuffered);
+
+                colourNo = randomNo;  // initial random colour index for a new player joining the room
 
                 while (isColourUsed)  // loop checking if the colour is used by anybody
                 {
@@ -123,6 +127,12 @@ public class ColourChanger : MonoBehaviour
             thisPlayer.SetCustomProperties(thisPColour);
 
         }
+    }
+
+    [PunRPC]
+    void GenerateColourNo()
+    {
+        randomNo = Random.Range(0, 12);
     }
 }
 

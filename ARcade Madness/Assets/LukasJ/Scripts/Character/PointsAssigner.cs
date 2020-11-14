@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public class ScoreInfo : MonoBehaviour
+public class PointsAssigner : MonoBehaviour
 {
     private PhotonView PV;
 

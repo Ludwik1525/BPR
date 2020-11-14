@@ -6,13 +6,13 @@ using System.IO;
 
 public class Score : MonoBehaviour
 {
-    private ScoreInfo si;
+    private PointsAssigner si;
     private PhotonView myPV;
     private int score;
 
     private void Start()
     {
-        si = FindObjectOfType<ScoreInfo>();
+        si = FindObjectOfType<PointsAssigner>();
         myPV = GetComponent<PhotonView>();
 
         if(PlayerPrefs.HasKey("Score"))
@@ -28,7 +28,6 @@ public class Score : MonoBehaviour
         {
             si.GetComponent<PhotonView>().RPC("SetScore", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"],
                        PlayerPrefs.GetInt("Score"));
-            print("My score " + PlayerPrefs.GetInt("Score"));
         }
     }
 

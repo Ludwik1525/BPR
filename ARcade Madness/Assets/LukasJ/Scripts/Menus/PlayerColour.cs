@@ -15,7 +15,6 @@ public class PlayerColour : MonoBehaviour
         PV = GetComponent<PhotonView>();
         colours = FindObjectOfType<ColourPalette>();
         
-        //if(PV.IsMine)
         GetComponent<SkinnedMeshRenderer>().material = colours.colours[colourNo];
     }
 }

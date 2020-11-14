@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba1cc8bfaae7b4a45bb9767a6618d273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  randomNo: 0
   coloursArray:
   - serializedVersion: 2
     rgba: 4294967295
