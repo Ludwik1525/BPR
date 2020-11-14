@@ -124,6 +124,7 @@ public class BoardPlayerController : MonoBehaviour
             if(var == FindObjectOfType<SpawnChest>().GetRealTileNo())
             {
                 steps = 0;
+                PV.RPC("SetChestVariable", RpcTarget.AllBuffered);
             }
 
             Vector3 nextPos = currentRoute.childNodeList[var].transform.GetChild(1).GetChild((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]).position;
@@ -221,5 +222,11 @@ public class BoardPlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(seconds);
         GameController.gc.currentTurn++;
+    }
+
+    [PunRPC]
+    private void SetChestVariable()
+    {
+        PlayerPrefs.SetInt("random", 0);
     }
 }

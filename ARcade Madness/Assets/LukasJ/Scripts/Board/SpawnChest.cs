@@ -43,7 +43,10 @@ public class SpawnChest : MonoBehaviour
     [PunRPC]
     private void ChooseRandomNumber(int number)
     {
+        
         rand = number;
+        print("AFTER WE SET RAND THROUGH RPC " + rand);
+        PlayerPrefs.SetInt("random", rand);
     }
 
     private IEnumerator WaitAndSetParent()
@@ -51,8 +54,8 @@ public class SpawnChest : MonoBehaviour
         yield return new WaitForSeconds(1f);
         PV.RPC("SetChestsParent", RpcTarget.AllBuffered);
         yield return new WaitForSeconds(1f);
-        print("Number saved: " + rand);
-        PlayerPrefs.SetInt("random", rand);
+        print("Number saved: " + PlayerPrefs.GetInt("random"));
+        
     }
 
     public void ResetChestPosition()
@@ -71,15 +74,14 @@ public class SpawnChest : MonoBehaviour
         if (chest == null)
             chest = GameObject.Find("Chest(Clone)");
 
-        transform.parent = gameObject.transform;
+        chest.transform.parent = gameObject.transform;
     }
 
     public void DestroyChest()
     {
-        PlayerPrefs.SetInt("random", 0);
+        //PlayerPrefs.SetInt("random", 0);
         Destroy(chest);
         SpawningChestSequence();
-
     }
 
     private void SpawningChestSequence()
@@ -87,14 +89,14 @@ public class SpawnChest : MonoBehaviour
         rand = PlayerPrefs.GetInt("random");
         if (PhotonNetwork.IsMasterClient)
         {
-            if (rand == 0)
+            if (true)
             {
                 bool isTileTaken = true;
 
                 while(isTileTaken)
                 {
                     isTileTaken = false;
-                    rand = Random.Range(1, tilesToSpawnChestsOn.Count);
+                    rand = Random.Range(1, 5);
 
                     foreach (int tileNumber in GameController.gc.currentPositions)
                     {
@@ -107,13 +109,14 @@ public class SpawnChest : MonoBehaviour
             }
             SpawnChests();
         }
-
+        
         StartCoroutine("WaitAndSetParent");
     }
 
     public int GetRealTileNo()
     {
         numberToIncrease = 0;
+        print("RANDOM NUMBER IN GET REAL TILE METHOD : " + rand);
         int max = rand;
         int check = 0;
 

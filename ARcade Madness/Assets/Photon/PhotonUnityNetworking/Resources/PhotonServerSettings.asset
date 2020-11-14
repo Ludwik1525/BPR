@@ -57,6 +57,7 @@ MonoBehaviour:
   - ActivateChildren
   - SetScore
   - RPC_AddToNewList
+  - SetChestVariable
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
