@@ -7,7 +7,6 @@ public class ChestAnimationController : MonoBehaviour
     private Animator anim;
     private Currency currency;
     public bool taken = false, doesWantChest = false;
-
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -35,17 +34,16 @@ public class ChestAnimationController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        taken = true;
+
         if (other.gameObject.transform.parent.GetComponent<Currency>() != null)
         {
             currency = other.gameObject.transform.parent.GetComponent<Currency>();
 
             if (currency.GetCurrencyAmount() > 9)
             {
-                if (doesWantChest)
-                {
-                    taken = true;
+                if(doesWantChest)
                     StartBoolAnimationByName("OpenChest");
-                }
             }
         }
 
