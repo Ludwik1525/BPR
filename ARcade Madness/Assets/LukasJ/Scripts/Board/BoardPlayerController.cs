@@ -49,6 +49,13 @@ public class BoardPlayerController : MonoBehaviour
         noB = decisionBox.transform.GetChild(2).GetComponent<Button>();
         yesB.onClick.AddListener(AcceptChest);
         noB.onClick.AddListener(DeclineChest);
+
+        GameController.gc.roundCount++;
+        if (GameController.gc.roundCount > 0)
+        {
+            GetComponent<Currency>().setCurrency();
+        }
+
     }
 
     private void Update()

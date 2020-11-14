@@ -43,57 +43,7 @@ public class GameSetupController : MonoBehaviour
 
     private void Update()
     {
-        //if(PhotonNetwork.IsMasterClient)
-        //{
-        //    if (!startGame && players.Count == newPlayers.Count)
-        //    {
-                
-        //    }
-        //}
-
-        //if(startGame && infoPanel.activeInHierarchy)
-        //{
-        //    infoPanel.SetActive(false);
-        //}
-
-        //foreach (GameObject player in players)
-        //{
-        //    if (player.GetComponent<PlayerScript>().readyForGame)
-        //    {
-        //        print(PhotonNetwork.NickName + " " + player.GetComponent<PlayerScript>().readyForGame);
-        //        readyCount++;
-        //    }
-        //    else
-        //    {
-        //        readyCount = 0;
-        //    }
-        //}
-        //if (readyCount == players.Count)
-        //{
-        //    print("ready");
-        //    startGame = true;
-        //}
-        //    if (!startGame && players.Count > 0)
-        //    {
-        //        foreach (GameObject player in players)
-        //        {
-        //            if (player.GetComponent<PlayerScript>().readyForGame)
-        //            {
-        //                print(PhotonNetwork.NickName + " " + player.GetComponent<PlayerScript>().readyForGame);
-        //                readyCount++;
-        //            }
-        //            else
-        //            {
-        //                readyCount = 0;
-        //            }
-        //        }
-        //        if (readyCount == players.Count)
-        //        {
-        //            print("ready");
-        //            startGame = true;
-        //        }
-        //    }
-        //}
+       
 
         if(startGame && infoPanel.activeInHierarchy)
         {

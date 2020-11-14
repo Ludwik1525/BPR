@@ -1,30 +1,53 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using Photon.Pun;
 
 public class Currency : MonoBehaviour
 {
-    public int currencyAmount = 10;
+    private ScoreInfo si;
+    private PhotonView myPV;
+    private int currency;
 
-    public void AddCurrency(int amount)
+    private void Start()
     {
-        currencyAmount += amount;
-    }
+        si = FindObjectOfType<ScoreInfo>();
+        myPV = GetComponent<PhotonView>();
 
-    public void SubtractCurrency(int amount)
-    {
-        if(amount > currencyAmount)
+        if (PlayerPrefs.HasKey("Currency"))
         {
-            currencyAmount = 0;
+            currency = PlayerPrefs.GetInt("Currency");
         }
         else
         {
-            currencyAmount -= amount;
+            currency = 0;
+        }
+
+        if (myPV.IsMine)
+        {
+            si.GetComponent<PhotonView>().RPC("SetCurrency", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"],
+                       PlayerPrefs.GetInt("Currency"));
         }
     }
 
-    public int GetCurrencyAmount()
+
+    public void setCurrency()
     {
-        return currencyAmount;
+        if (myPV.IsMine)
+        {
+            this.currency++;
+
+            PlayerPrefs.SetInt("Currency", currency);
+
+            si.GetComponent<PhotonView>().RPC("SetCurrency", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], PlayerPrefs.GetInt("Currency"));
+        }
     }
+
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.SetInt("Currency", 0);
+    }
+
+
 }

@@ -38,7 +38,7 @@ public class ChestAnimationController : MonoBehaviour
         {
             currency = other.gameObject.transform.parent.GetComponent<Currency>();
 
-            if (currency.GetCurrencyAmount() > 9)
+            if (PlayerPrefs.GetInt("Currency") > 1)
             {
                 if (doesWantChest)
                 {

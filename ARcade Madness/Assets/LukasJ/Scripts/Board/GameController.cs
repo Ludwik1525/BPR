@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour
 
     
     public int currentTurn = 1;
+    public int roundCount = 0;
 
     private void OnEnable()
     {

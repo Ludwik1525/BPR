@@ -33,4 +33,10 @@ public class ScoreInfo : MonoBehaviour
     {
         this.gameObject.transform.GetChild(index).GetChild(0).GetChild(2).GetComponent<Text>().text = "" + score;
     }
+
+    [PunRPC]
+    void SetCurrency(int index, int currency)
+    {
+        this.gameObject.transform.GetChild(index).GetChild(0).GetChild(1).GetComponent<Text>().text = "" + currency;
+    }
 }

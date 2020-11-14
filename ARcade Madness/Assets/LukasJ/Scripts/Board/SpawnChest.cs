@@ -95,7 +95,7 @@ public class SpawnChest : MonoBehaviour
                 while(isTileTaken)
                 {
                     isTileTaken = false;
-                    rand = Random.Range(1, 5);
+                    rand = Random.Range(1, tilesToSpawnChestsOn.Count);
 
                     foreach (int tileNumber in GameController.gc.currentPositions)
                     {
