@@ -6,7 +6,7 @@ public class ChestAnimationController : MonoBehaviour
 {
     private Animator anim;
     private Currency currency;
-    public bool taken = false;
+    public bool taken = false, doesWantChest = false;
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -42,7 +42,8 @@ public class ChestAnimationController : MonoBehaviour
 
             if (currency.GetCurrencyAmount() > 9)
             {
-                StartBoolAnimationByName("OpenChest");
+                if(doesWantChest)
+                    StartBoolAnimationByName("OpenChest");
             }
         }
 

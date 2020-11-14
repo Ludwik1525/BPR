@@ -43,7 +43,8 @@ public class BoardPlayerController : MonoBehaviour
         dicePV = transform.GetChild(2).GetComponent<PhotonView>();
         onStartMoving = new UnityEvent();
         onStopMoving = new UnityEvent();
-        decisionBox = GameObject.Find("DecisionBox");
+
+        decisionBox = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
         yesB = decisionBox.transform.GetChild(1).GetComponent<Button>();
         noB = decisionBox.transform.GetChild(2).GetComponent<Button>();
         yesB.onClick.AddListener(AcceptChest);
@@ -118,8 +119,6 @@ public class BoardPlayerController : MonoBehaviour
         isMoving = true;
 
         int var = 0;
-
-        print("Chest at: " + FindObjectOfType<SpawnChest>().GetRealTileNo());
 
         while (steps > 0)
         {
@@ -239,7 +238,7 @@ public class BoardPlayerController : MonoBehaviour
     [PunRPC]
     private void StopTheTime()
     {
-        Time.timeScale = 0;
+        Time.timeScale = 0.01f;
     }
 
     [PunRPC]
@@ -256,16 +255,20 @@ public class BoardPlayerController : MonoBehaviour
 
     private void AcceptChest()
     {
+        Time.timeScale = 1;
         PV.RPC("StartTheTime", RpcTarget.AllBuffered);
         doesWantToOpenTheChest = true;
         decisionBox.SetActive(false);
+        FindObjectOfType<ChestAnimationController>().doesWantChest = true;
         steps = 0;
         PV.RPC("SetChestVariable", RpcTarget.AllBuffered);
     }
 
     private void DeclineChest()
     {
+        Time.timeScale = 1;
         PV.RPC("StartTheTime", RpcTarget.AllBuffered);
+        FindObjectOfType<ChestAnimationController>().doesWantChest = false;
         doesWantToOpenTheChest = false;
         decisionBox.SetActive(false);
     }

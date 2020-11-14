@@ -58,6 +58,8 @@ MonoBehaviour:
   - SetScore
   - RPC_AddToNewList
   - SetChestVariable
+  - StartTheTime
+  - StopTheTime
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
