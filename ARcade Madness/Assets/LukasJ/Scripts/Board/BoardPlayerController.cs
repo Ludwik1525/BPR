@@ -42,16 +42,14 @@ public class BoardPlayerController : MonoBehaviour
 
     private void Update()
     {
-        //if space is pressed and player is not moving, roll the dice
         if(PV.IsMine)
         {
             if(turn == GameController.gc.currentTurn)
             {
-                if(!diceGuard)
+                if (!diceGuard)
                 {
-                    if (GameController.gc.currentTurn == 1 && wasDiceRolled)
+                    if (wasDiceRolled)
                     {
-                        PV.RPC("TurnOnTheDiceDelayed", RpcTarget.AllBuffered);
                         wasDiceRolled = false;
                     }
                     else
@@ -61,7 +59,10 @@ public class BoardPlayerController : MonoBehaviour
                     }
                     diceGuard = true;
                 }
-                    
+
+
+
+
                 if (Input.GetKeyDown(KeyCode.Space) && !isMoving)
                 {
                     steps = Random.Range(9, 10);
@@ -147,7 +148,7 @@ public class BoardPlayerController : MonoBehaviour
         diceGuard = false;
 
         PV.RPC("IncrementTurn", RpcTarget.AllBuffered);
-        PV.RPC("ResetTurnVar", RpcTarget.AllBuffered);
+        
     }
 
     bool MoveToNextNode(Vector3 target)
@@ -176,6 +177,7 @@ public class BoardPlayerController : MonoBehaviour
         else
         {
             GameController.gc.currentTurn++;
+            PV.RPC("ResetTurnVar", RpcTarget.AllBuffered);
         }
     }
 
@@ -212,16 +214,11 @@ public class BoardPlayerController : MonoBehaviour
         }
     }
 
-    [PunRPC]
-    public void TurnOnTheDiceDelayed()
-    {
-        StartCoroutine(dice.GetComponent<Dice>().SwitchTheDice());
-    }
-
     IEnumerator DelayIfPlayerPicksUpChest(int seconds)
     {
         yield return new WaitForSeconds(seconds);
         GameController.gc.currentTurn++;
+        PV.RPC("ResetTurnVar", RpcTarget.AllBuffered);
     }
 
     [PunRPC]

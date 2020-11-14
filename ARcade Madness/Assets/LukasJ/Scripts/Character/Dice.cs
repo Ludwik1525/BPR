@@ -20,13 +20,4 @@ public class Dice : MonoBehaviour
         else
             gameObject.SetActive(true);
     }
-
-    public IEnumerator SwitchTheDice()
-    {
-        yield return new WaitForSeconds(3.1f);
-        if (gameObject.activeInHierarchy)
-            gameObject.SetActive(false);
-        else
-            gameObject.SetActive(true);
-    }
 }

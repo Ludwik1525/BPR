@@ -45,7 +45,6 @@ public class SpawnChest : MonoBehaviour
     {
         
         rand = number;
-        print("AFTER WE SET RAND THROUGH RPC " + rand);
         PlayerPrefs.SetInt("random", rand);
     }
 
@@ -116,7 +115,6 @@ public class SpawnChest : MonoBehaviour
     public int GetRealTileNo()
     {
         numberToIncrease = 0;
-        print("RANDOM NUMBER IN GET REAL TILE METHOD : " + rand);
         int max = rand;
         int check = 0;
 
