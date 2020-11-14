@@ -252,6 +252,7 @@ public class BoardPlayerController : MonoBehaviour
         Time.timeScale = 1;
         PV.RPC("SetChestVariable", RpcTarget.AllBuffered);
         FindObjectOfType<ChestAnimationController>().doesWantChest = true;
+        GetComponent<Currency>().decreaseCurrency();
     }
 
     [PunRPC]
