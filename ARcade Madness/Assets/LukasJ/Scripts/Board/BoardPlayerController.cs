@@ -160,8 +160,8 @@ public class BoardPlayerController : MonoBehaviour
         onStopMoving.Invoke();
         diceGuard = false;
 
-        PV.RPC("IncrementTurn", RpcTarget.AllBuffered);
-        
+
+        StartCoroutine(DelayForIncrementingTurns());
     }
 
     bool MoveToNextNode(Vector3 target)
@@ -252,7 +252,7 @@ public class BoardPlayerController : MonoBehaviour
         Time.timeScale = 1;
         PV.RPC("SetChestVariable", RpcTarget.AllBuffered);
         FindObjectOfType<ChestAnimationController>().doesWantChest = true;
-        GetComponent<Currency>().decreaseCurrency();
+        
     }
 
     [PunRPC]
@@ -274,6 +274,7 @@ public class BoardPlayerController : MonoBehaviour
         doesWantToOpenTheChest = true;
         decisionBox.SetActive(false);
         steps = 0;
+        GetComponent<Currency>().decreaseCurrency();
     }
 
     private void DeclineChest()
@@ -291,5 +292,11 @@ public class BoardPlayerController : MonoBehaviour
         {
             GetComponent<Currency>().setCurrency();
         }
+    }
+
+    IEnumerator DelayForIncrementingTurns()
+    {
+        yield return new WaitForSeconds(0.3f);
+        PV.RPC("IncrementTurn", RpcTarget.AllBuffered);
     }
 }
