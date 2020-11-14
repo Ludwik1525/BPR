@@ -49,13 +49,11 @@ public class BoardPlayerController : MonoBehaviour
         noB = decisionBox.transform.GetChild(2).GetComponent<Button>();
         yesB.onClick.AddListener(AcceptChest);
         noB.onClick.AddListener(DeclineChest);
+    }
 
-        GameController.gc.roundCount++;
-        if (GameController.gc.roundCount > 0)
-        {
-            GetComponent<Currency>().setCurrency();
-        }
-
+    private void Start()
+    {
+        StartCoroutine(DelayForCurrency());
     }
 
     private void Update()
@@ -282,5 +280,15 @@ public class BoardPlayerController : MonoBehaviour
         PV.RPC("StartTheTimeDecline", RpcTarget.AllBuffered);
         doesWantToOpenTheChest = false;
         decisionBox.SetActive(false);
+    }
+
+    IEnumerator DelayForCurrency()
+    {
+        yield return new WaitForSeconds(1f);
+        GameController.gc.roundCount++;
+        if (GameController.gc.roundCount > 0)
+        {
+            GetComponent<Currency>().setCurrency();
+        }
     }
 }

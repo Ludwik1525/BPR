@@ -132,6 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taken: 0
+  doesWantChest: 0
 --- !u!1 &8550340730974553668
 GameObject:
   m_ObjectHideFlags: 0

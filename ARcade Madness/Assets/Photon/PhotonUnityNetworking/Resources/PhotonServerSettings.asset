@@ -60,6 +60,9 @@ MonoBehaviour:
   - SetChestVariable
   - StartTheTime
   - StopTheTime
+  - StartTheTimeAccept
+  - StartTheTimeDecline
+  - SetCurrency
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
