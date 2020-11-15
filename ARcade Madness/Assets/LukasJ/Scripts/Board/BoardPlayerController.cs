@@ -134,7 +134,7 @@ public class BoardPlayerController : MonoBehaviour
 
     private void StopTimeAndOpenBox()
     {
-        if (PlayerPrefs.GetInt("Currency") > 1)
+        if (PlayerPrefs.GetInt("Currency") >= 1)
         {
             decisionBox.SetActive(true);
             PV.RPC("StopTheTime", RpcTarget.AllBuffered);
