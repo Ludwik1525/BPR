@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/LukasJ/Scenes/MainMenu.unity
+    path: Assets/Michal/Scenes/MainMenu.unity
     guid: 03fb2553cb5bf5840aa1bb0aadcfc9dd
   - enabled: 1
     path: Assets/LukasJ/Scenes/BoardScene.unity

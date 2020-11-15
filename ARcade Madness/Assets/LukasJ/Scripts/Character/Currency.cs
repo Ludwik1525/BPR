@@ -6,13 +6,13 @@ using Photon.Pun;
 
 public class Currency : MonoBehaviour
 {
-    private PointsAssigner si;
+    private ScoreInfo si;
     private PhotonView myPV;
     private int currency;
 
     private void Start()
     {
-        si = FindObjectOfType<PointsAssigner>();
+        si = FindObjectOfType<ScoreInfo>();
         myPV = GetComponent<PhotonView>();
 
         if (PlayerPrefs.HasKey("Currency"))
@@ -60,4 +60,6 @@ public class Currency : MonoBehaviour
     {
         PlayerPrefs.SetInt("Currency", 0);
     }
+
+
 }

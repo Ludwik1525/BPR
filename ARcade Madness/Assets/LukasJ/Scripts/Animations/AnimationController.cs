@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class AnimationController : MonoBehaviour
 {
-    private GameManager playerController;
+    private BoardPlayerController playerController;
     private Animator anim;
 
     private void Start()
     {
         anim = GetComponentInChildren<Animator>();
-        playerController = transform.parent.GetComponent<GameManager>();
+        playerController = transform.parent.GetComponent<BoardPlayerController>();
         playerController.onStartMoving.AddListener(delegate { StartBoolAnimationByName("isRunning"); });
         playerController.onStopMoving.AddListener(delegate { StopBoolAnimationByName("isRunning"); });
     }

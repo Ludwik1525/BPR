@@ -53,6 +53,8 @@ public class SpawnChest : MonoBehaviour
         yield return new WaitForSeconds(1f);
         PV.RPC("SetChestsParent", RpcTarget.AllBuffered);
         yield return new WaitForSeconds(1f);
+        print("Number saved: " + PlayerPrefs.GetInt("random"));
+        
     }
 
     public void ResetChestPosition()

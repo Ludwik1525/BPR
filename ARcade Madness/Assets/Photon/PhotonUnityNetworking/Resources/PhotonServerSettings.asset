@@ -63,8 +63,6 @@ MonoBehaviour:
   - StartTheTimeAccept
   - StartTheTimeDecline
   - SetCurrency
-  - GenerateColourNo
-  - SwitchTheDice
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
