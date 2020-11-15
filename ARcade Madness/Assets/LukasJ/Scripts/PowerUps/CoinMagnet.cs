@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class CoinMagnet : MonoBehaviour
 {
@@ -28,6 +29,6 @@ public class CoinMagnet : MonoBehaviour
     public void StealTheCoins()
     {
         currency.setCurrencyWithVar(GameController.gc.players.Length - 1);
-        currency.decreaseCurrencyCoinMagnet();
+        currency.decreaseCurrencyCoinMagnet(PhotonNetwork.LocalPlayer.NickName);
     }
 }
