@@ -45,9 +45,33 @@ public class Currency : MonoBehaviour
         }
     }
 
+    public void setCurrencyWithVar(int currencyVar)
+    {
+        if (myPV.IsMine)
+        {
+            this.currency =+ currencyVar;
+
+            PlayerPrefs.SetInt("Currency", currency);
+
+            si.GetComponent<PhotonView>().RPC("SetCurrency", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], currency);
+        }
+    }
+
     public void decreaseCurrency()
     {
         if (myPV.IsMine)
+        {
+            this.currency--;
+
+            PlayerPrefs.SetInt("Currency", currency);
+
+            si.GetComponent<PhotonView>().RPC("SetCurrency", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], currency);
+        }
+    }
+
+    public void decreaseCurrencyCoinMagnet()
+    {
+        if (!myPV.IsMine)
         {
             this.currency--;
 
