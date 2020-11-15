@@ -6,21 +6,19 @@ using UnityEngine.Events;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class BoardPlayerController : MonoBehaviour
 {
-    public int totalPos = 0;
 
+    public int totalPos = 0;
+    bool isMoving;
     private PhotonView PV;
     private PhotonView dicePV;
-
-    bool isMoving;
-    private bool wasKeyPressed = false;
     private bool diceGuard = false;
     private bool wasDiceRolled = false;
     private bool doesWantToOpenTheChest = false;
 
     private GameObject decisionBox;
-    private Button yesB, noB, rollB;
+    private Button yesB, noB;
 
     public int routePosition;
     public int turn;
@@ -38,7 +36,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (PlayerPrefs.HasKey("totalPos"))
+        if(PlayerPrefs.HasKey("totalPos"))
             totalPos = PlayerPrefs.GetInt("totalPos");
 
         PV = GetComponent<PhotonView>();
@@ -49,12 +47,8 @@ public class GameManager : MonoBehaviour
         decisionBox = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
         yesB = decisionBox.transform.GetChild(1).GetComponent<Button>();
         noB = decisionBox.transform.GetChild(2).GetComponent<Button>();
-        rollB = GameObject.Find("ButtonRoll").GetComponent<Button>();
-        rollB.interactable = false;
-
         yesB.onClick.AddListener(AcceptChest);
         noB.onClick.AddListener(DeclineChest);
-        rollB.onClick.AddListener(Roll);
     }
 
     private void Start()
@@ -62,34 +56,12 @@ public class GameManager : MonoBehaviour
         StartCoroutine(DelayForCurrency());
     }
 
-    private void Roll()
-    {
-        if (PV.IsMine)
-        {
-            if (turn == GameController.gc.currentTurn)
-            {
-                if (!wasKeyPressed && !isMoving)
-                {
-                    wasKeyPressed = true;
-                    steps = Random.Range(9, 10);
-                    Debug.Log("Dice Rolled: " + steps);
-                    StartCoroutine(Move());
-                }
-            }
-        }
-    }
-
     private void Update()
     {
-        if (PV.IsMine)
+        if(PV.IsMine)
         {
-            if (turn == GameController.gc.currentTurn)
+            if(turn == GameController.gc.currentTurn)
             {
-                if (dice.activeInHierarchy)
-                {
-                    rollB.interactable = true;
-                }
-
                 if (!diceGuard)
                 {
                     if (wasDiceRolled)
@@ -98,21 +70,21 @@ public class GameManager : MonoBehaviour
                     }
                     else
                     {
-                        dicePV.RPC("SwitchTheDice", RpcTarget.AllBuffered);
+                        dicePV.RPC("TurnOnTheDice", RpcTarget.AllBuffered);
                         wasDiceRolled = true;
                     }
                     diceGuard = true;
                 }
 
+
+
+
                 if (Input.GetKeyDown(KeyCode.Space) && !isMoving)
                 {
-                    if (!wasKeyPressed)
-                    {
-                        wasKeyPressed = true;
-                        steps = Random.Range(9, 10);
-                        Debug.Log("Dice Rolled: " + steps);
-                        StartCoroutine(Move());
-                    }
+                    steps = Random.Range(9, 10);
+                    Debug.Log("Dice Rolled: " + steps);
+                    //steps = roll;
+                    StartCoroutine(Move());
                 }
 
                 if ((Input.touchCount > 0) && (Input.GetTouch(0).phase == TouchPhase.Began))
@@ -133,40 +105,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void StopTimeAndOpenBox()
-    {
-        decisionBox.SetActive(true);
-        PV.RPC("StopTheTime", RpcTarget.AllBuffered);
-    }
-
-    private void AcceptChest()
-    {
-        PV.RPC("StartTheTimeAccept", RpcTarget.AllBuffered);
-        doesWantToOpenTheChest = true;
-        decisionBox.SetActive(false);
-        steps = 0;
-    }
-
-    private void DeclineChest()
-    {
-        PV.RPC("StartTheTimeDecline", RpcTarget.AllBuffered);
-        doesWantToOpenTheChest = false;
-        decisionBox.SetActive(false);
-    }
-
-    bool MoveToNextNode(Vector3 target)
-    {
-        transform.rotation = Quaternion.LookRotation(transform.position - target);
-        return target != (transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime));
-    }
-
-    public void SetTurn(int turn)
-    {
-        this.turn = turn;
-    }
-
     IEnumerator Move()
     {
+
         if (isMoving)
         {
             //if the player is already moving return
@@ -175,8 +116,7 @@ public class GameManager : MonoBehaviour
 
         //set bool value to true and invoke start moving event
 
-        dicePV.RPC("SwitchTheDice", RpcTarget.AllBuffered);
-        rollB.interactable = false;
+        dicePV.RPC("TurnOnTheDice", RpcTarget.AllBuffered);
 
         onStartMoving.Invoke();
         //Jump animation
@@ -196,32 +136,38 @@ public class GameManager : MonoBehaviour
             {
                 var = totalPos + routePosition - currentRoute.childNodeList.Count;
             }
-            if (var == FindObjectOfType<SpawnChest>().GetRealTileNo())
+            if(var == FindObjectOfType<SpawnChest>().GetRealTileNo())
             {
                 StopTimeAndOpenBox();
             }
 
             Vector3 nextPos = currentRoute.childNodeList[var].transform.GetChild(1).GetChild((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]).position;
-            while (MoveToNextNode(nextPos))
+            while(MoveToNextNode(nextPos))
             {
                 yield return null;
             }
             steps--;
         }
         totalPos += routePosition;
-        if (totalPos >= currentRoute.childNodeList.Count)
+        if(totalPos >= currentRoute.childNodeList.Count)
         {
             totalPos = var;
         }
         PlayerPrefs.SetInt("totalPos", totalPos);
         PV.RPC("SaveMyPos", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], totalPos);
 
-        onStopMoving.Invoke();
         isMoving = false;
+        onStopMoving.Invoke();
         diceGuard = false;
-        wasKeyPressed = false;
 
         PV.RPC("IncrementTurn", RpcTarget.AllBuffered);
+        
+    }
+
+    bool MoveToNextNode(Vector3 target)
+    {
+        transform.rotation = Quaternion.LookRotation(transform.position - target);
+        return target != (transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime));
     }
 
     IEnumerator Delay(float seconds)
@@ -229,9 +175,47 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(seconds);
     }
 
-    IEnumerator LoadSceneDelay()
+    public void SetTurn(int turn)
+    {
+        this.turn = turn;
+    }
+
+    [PunRPC]
+    public void IncrementTurn()
     {
         if (FindObjectOfType<ChestAnimationController>().taken)
+        {
+            StartCoroutine(DelayIfPlayerPicksUpChest(3));
+        }
+        else
+        {
+            GameController.gc.currentTurn++;
+            PV.RPC("ResetTurnVar", RpcTarget.AllBuffered);
+        }
+    }
+
+    [PunRPC]
+    public void ResetTurnVar()
+    {
+        if (GameController.gc.currentTurn == GameController.gc.players.Length + 1)
+        {
+            GameController.gc.currentTurn = 1;
+            StartCoroutine(LoadSceneDelay());
+        }
+    }
+
+    [PunRPC]
+    public void SaveMyPos(int playerIndex, int tileIndex)
+    {
+        GameController.gc.currentPositions[playerIndex] = tileIndex;
+
+        if(!GameController.gc.doesHavePosition)
+        GameController.gc.doesHavePosition = true;
+    }
+
+    IEnumerator LoadSceneDelay()
+    {
+        if(FindObjectOfType<ChestAnimationController>().taken)
         {
             yield return new WaitForSeconds(3f);
             SceneManager.LoadScene("AssetScene");
@@ -248,16 +232,6 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         GameController.gc.currentTurn++;
         PV.RPC("ResetTurnVar", RpcTarget.AllBuffered);
-    }
-
-    IEnumerator DelayForCurrency()
-    {
-        yield return new WaitForSeconds(1f);
-        if (GameController.gc.roundCount > 0)
-        {
-            GetComponent<Currency>().setCurrency();
-        }
-        GameController.gc.roundCount++;
     }
 
     [PunRPC]
@@ -288,37 +262,34 @@ public class GameManager : MonoBehaviour
         FindObjectOfType<ChestAnimationController>().doesWantChest = false;
     }
 
-    [PunRPC]
-    public void ResetTurnVar()
+    private void StopTimeAndOpenBox()
     {
-        if (GameController.gc.currentTurn == GameController.gc.players.Length + 1)
-        {
-            GameController.gc.currentTurn = 1;
-            StartCoroutine(LoadSceneDelay());
-        }
+        decisionBox.SetActive(true);
+        PV.RPC("StopTheTime", RpcTarget.AllBuffered);
     }
 
-    [PunRPC]
-    public void SaveMyPos(int playerIndex, int tileIndex)
+    private void AcceptChest()
     {
-        GameController.gc.currentPositions[playerIndex] = tileIndex;
-
-        if (!GameController.gc.doesHavePosition)
-            GameController.gc.doesHavePosition = true;
+        PV.RPC("StartTheTimeAccept", RpcTarget.AllBuffered);
+        doesWantToOpenTheChest = true;
+        decisionBox.SetActive(false);
+        steps = 0;
     }
 
-    [PunRPC]
-    public void IncrementTurn()
+    private void DeclineChest()
     {
-        if (FindObjectOfType<ChestAnimationController>().taken)
-        {
-            StartCoroutine(DelayIfPlayerPicksUpChest(3));
-        }
-        else
-        {
-            GameController.gc.currentTurn++;
-            PV.RPC("ResetTurnVar", RpcTarget.AllBuffered);
-        }
+        PV.RPC("StartTheTimeDecline", RpcTarget.AllBuffered);
+        doesWantToOpenTheChest = false;
+        decisionBox.SetActive(false);
     }
 
+    IEnumerator DelayForCurrency()
+    {
+        yield return new WaitForSeconds(1f);
+        GameController.gc.roundCount++;
+        if (GameController.gc.roundCount > 0)
+        {
+            GetComponent<Currency>().setCurrency();
+        }
+    }
 }
