@@ -28,7 +28,7 @@ public class CoinMagnet : MonoBehaviour
 
     public void StealTheCoins()
     {
-        currency.setCurrencyWithVar(GameController.gc.players.Length - 1);
+        currency.setCurrencyWithVar(currency.CheckHowManyHaveMoney(PhotonNetwork.LocalPlayer.NickName));
         currency.decreaseCurrencyCoinMagnet(PhotonNetwork.LocalPlayer.NickName);
     }
 }

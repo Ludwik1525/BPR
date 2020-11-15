@@ -97,6 +97,24 @@ public class Currency : MonoBehaviour
         }
     }
 
+    public int CheckHowManyHaveMoney(string myName)
+    {
+        int amount = 0;
+        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+        {
+            int tempCurrency = 0;
+            if (PhotonNetwork.PlayerList[i].NickName != myName)
+            {
+                tempCurrency = (int)PhotonNetwork.PlayerList[i].CustomProperties["Currency"];
+                if (tempCurrency > 0)
+                {
+                    amount++;
+                }
+            }
+        }
+        return amount;
+    }
+
     public void decreaseCurrencyCoinMagnet(string myName)
     {
         for(int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
@@ -105,14 +123,17 @@ public class Currency : MonoBehaviour
             if(PhotonNetwork.PlayerList[i].NickName != myName)
             {
                 tempCurrency = (int)PhotonNetwork.PlayerList[i].CustomProperties["Currency"];
-                tempCurrency--;
+                if (tempCurrency > 0)
+                {
+                    tempCurrency--;
 
-                ExitGames.Client.Photon.Hashtable thisCurrency = new ExitGames.Client.Photon.Hashtable();
-                thisCurrency.Add("Currency", tempCurrency);
-                PhotonNetwork.PlayerList[i].SetCustomProperties(thisCurrency);
+                    ExitGames.Client.Photon.Hashtable thisCurrency = new ExitGames.Client.Photon.Hashtable();
+                    thisCurrency.Add("Currency", tempCurrency);
+                    PhotonNetwork.PlayerList[i].SetCustomProperties(thisCurrency);
 
-                si.GetComponent<PhotonView>().RPC("SetCurrency", RpcTarget.AllBuffered, 
-                    (int)PhotonNetwork.PlayerList[i].CustomProperties["PlayerNo"], tempCurrency);
+                    si.GetComponent<PhotonView>().RPC("SetCurrency", RpcTarget.AllBuffered,
+                        (int)PhotonNetwork.PlayerList[i].CustomProperties["PlayerNo"], tempCurrency);
+                }
             }
         }
 
