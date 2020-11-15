@@ -13,16 +13,16 @@ public class CoinMagnet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(isAvailable)
+        currency = GetComponent<Currency>();
+        coinB = GameObject.Find("ButtonCoinMagnet").GetComponent<Button>();
+        coinB.onClick.AddListener(StealTheCoins);
+
+        if (isAvailable)
         {
             coinB.interactable = true;
         }
         else
             coinB.interactable = false;
-
-        currency = GetComponent<Currency>();
-        coinB = GameObject.Find("ButtonCoinMagnet").GetComponent<Button>();
-        coinB.onClick.AddListener(StealTheCoins);
     }
 
     public void StealTheCoins()

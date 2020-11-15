@@ -71,14 +71,25 @@ public class Currency : MonoBehaviour
 
     public void decreaseCurrencyCoinMagnet()
     {
-        if (!myPV.IsMine)
+
+        foreach(Transform player in GameController.gc.players)
         {
-            this.currency--;
-
-            PlayerPrefs.SetInt("Currency", currency);
-
-            si.GetComponent<PhotonView>().RPC("SetCurrency", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], currency);
+            if(player != gameObject.transform)
+            {
+                player.GetComponent<Currency>().decreaseCurrency();
+                si.GetComponent<PhotonView>().RPC("SetCurrency", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], currency);
+            }
         }
+
+        //if (!myPV.IsMine)
+        //{
+        //    if(currency >= 0)
+        //    {
+        //        this.currency--;
+        //        PlayerPrefs.SetInt("Currency", currency);
+        //        si.GetComponent<PhotonView>().RPC("SetCurrency", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], currency);
+        //    }
+        //}
     }
 
     private void OnApplicationQuit()
