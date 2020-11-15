@@ -52,6 +52,7 @@ public class Currency : MonoBehaviour
     {
         if (myPV.IsMine)
         {
+            this.currency = (int)PhotonNetwork.LocalPlayer.CustomProperties["Currency"];
             this.currency++;
 
             //PlayerPrefs.SetInt("Currency", currency);
@@ -68,6 +69,7 @@ public class Currency : MonoBehaviour
     {
         if (myPV.IsMine)
         {
+            this.currency = (int)PhotonNetwork.LocalPlayer.CustomProperties["Currency"];
             this.currency += currencyVar;
 
             //PlayerPrefs.SetInt("Currency", currency);
@@ -83,6 +85,7 @@ public class Currency : MonoBehaviour
     {
         if (myPV.IsMine)
         {
+            this.currency = (int)PhotonNetwork.LocalPlayer.CustomProperties["Currency"];
             this.currency--;
 
             //PlayerPrefs.SetInt("Currency", currency);
