@@ -24,10 +24,11 @@ public class Currency : MonoBehaviour
             currency = 0;
         }
 
+
         if (myPV.IsMine)
         {
             si.GetComponent<PhotonView>().RPC("SetCurrency", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"],
-                       PlayerPrefs.GetInt("Currency"));
+                       currency);
         }
     }
 
@@ -40,7 +41,7 @@ public class Currency : MonoBehaviour
 
             PlayerPrefs.SetInt("Currency", currency);
 
-            si.GetComponent<PhotonView>().RPC("SetCurrency", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], PlayerPrefs.GetInt("Currency"));
+            si.GetComponent<PhotonView>().RPC("SetCurrency", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], currency);
         }
     }
 
@@ -52,7 +53,7 @@ public class Currency : MonoBehaviour
 
             PlayerPrefs.SetInt("Currency", currency);
 
-            si.GetComponent<PhotonView>().RPC("SetCurrency", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], PlayerPrefs.GetInt("Currency"));
+            si.GetComponent<PhotonView>().RPC("SetCurrency", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], currency);
         }
     }
 

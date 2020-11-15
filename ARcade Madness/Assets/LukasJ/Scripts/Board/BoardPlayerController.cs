@@ -17,7 +17,6 @@ public class BoardPlayerController : MonoBehaviour
     private bool wasKeyPressed = false;
     private bool diceGuard = false;
     private bool wasDiceRolled = false;
-    private bool doesWantToOpenTheChest = false;
 
     private GameObject decisionBox;
     private Button yesB, noB, rollB;
@@ -135,22 +134,24 @@ public class BoardPlayerController : MonoBehaviour
 
     private void StopTimeAndOpenBox()
     {
-        decisionBox.SetActive(true);
-        PV.RPC("StopTheTime", RpcTarget.AllBuffered);
+        if (PlayerPrefs.GetInt("Currency") > 1)
+        {
+            decisionBox.SetActive(true);
+            PV.RPC("StopTheTime", RpcTarget.AllBuffered);
+        }
     }
 
     private void AcceptChest()
     {
         PV.RPC("StartTheTimeAccept", RpcTarget.AllBuffered);
-        doesWantToOpenTheChest = true;
         decisionBox.SetActive(false);
         steps = 0;
+        GetComponent<Currency>().decreaseCurrency();
     }
 
     private void DeclineChest()
     {
         PV.RPC("StartTheTimeDecline", RpcTarget.AllBuffered);
-        doesWantToOpenTheChest = false;
         decisionBox.SetActive(false);
     }
 
@@ -278,7 +279,7 @@ public class BoardPlayerController : MonoBehaviour
         Time.timeScale = 1;
         PV.RPC("SetChestVariable", RpcTarget.AllBuffered);
         FindObjectOfType<ChestAnimationController>().doesWantChest = true;
-        GetComponent<Currency>().decreaseCurrency();
+        FindObjectOfType<ChestAnimationController>().taken = true;
     }
 
     [PunRPC]
