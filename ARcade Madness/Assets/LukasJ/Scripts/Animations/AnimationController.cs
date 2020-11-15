@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class AnimationController : MonoBehaviour
 {
-    private BoardPlayerController playerController;
+    private GameManager gm;
     private Animator anim;
 
     private void Start()
     {
         anim = GetComponentInChildren<Animator>();
-        playerController = transform.parent.GetComponent<BoardPlayerController>();
-        playerController.onStartMoving.AddListener(delegate { StartBoolAnimationByName("isRunning"); });
-        playerController.onStopMoving.AddListener(delegate { StopBoolAnimationByName("isRunning"); });
+        gm = transform.parent.GetComponent<GameManager>();
+        gm.onStartMoving.AddListener(delegate { StartBoolAnimationByName("isRunning"); });
+        gm.onStopMoving.AddListener(delegate { StopBoolAnimationByName("isRunning"); });
     }
 
     void StartBoolAnimationByName(string animationName)
