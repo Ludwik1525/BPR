@@ -55,7 +55,7 @@ public class ChestAnimationController : MonoBehaviour
     public void DestroyTheChest()
     {
 
-        FindObjectOfType<SpawnChest>().PV.RPC("DestroyChest", RpcTarget.AllBuffered, false); 
+        FindObjectOfType<SpawnChest>().DestroyChest(false); 
     }
 
     //private void OnCollisionEnter(Collision collision)

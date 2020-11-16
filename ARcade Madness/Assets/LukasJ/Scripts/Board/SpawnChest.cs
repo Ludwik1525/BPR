@@ -12,7 +12,7 @@ public class SpawnChest : MonoBehaviour
     private List<Transform> tilesToSpawnChestsOn;
     int rand;
     int numberToIncrease;
-    bool isRand;
+    bool isNOTRand;
 
     private void Start()
     {
@@ -33,7 +33,7 @@ public class SpawnChest : MonoBehaviour
         }
 
         PV = GetComponent<PhotonView>();
-        PV.RPC("SpawningChestSequence", RpcTarget.AllBuffered, false, 0);
+        SpawningChestSequence();
     }
 
     public void SpawnChests()
@@ -77,29 +77,19 @@ public class SpawnChest : MonoBehaviour
 
         chest.transform.parent = gameObject.transform;
     }
-
-    [PunRPC]
+    
     public void DestroyChest(bool isRand)
     {
             Destroy(chest.gameObject);
             if (!isRand)
             {
-                PV.RPC("SpawningChestSequence", RpcTarget.AllBuffered, false, 0);
+                SpawningChestSequence();
             }
     }
-
-    [PunRPC]
-    public void SpawningChestSequence(bool isRand, int tileToSpawnOn)
+    
+    public void SpawningChestSequence()
     {
-        if (!isRand)
-        {
-            rand = PlayerPrefs.GetInt("random");
-            
-        }
-        else
-        {
-            rand = tileToSpawnOn;
-        }
+        rand = PlayerPrefs.GetInt("random");
 
         if (PhotonNetwork.IsMasterClient)
         {
@@ -125,6 +115,33 @@ public class SpawnChest : MonoBehaviour
         }
         StartCoroutine("WaitAndSetParent");
     }
+
+    public void SpawningChestSequenceDetermined(int tileToSpawnOn)
+    {
+        rand = tileToSpawnOn;
+
+        if (rand == 0)
+        {
+            bool isTileTaken = true;
+
+            while (isTileTaken)
+            {
+                isTileTaken = false;
+                rand = Random.Range(1, tilesToSpawnChestsOn.Count);
+
+                foreach (int tileNumber in GameController.gc.currentPositions)
+                {
+                    if (GetRealTileNo() == tileNumber)
+                        isTileTaken = true;
+                }
+            }
+
+            PV.RPC("ChooseRandomNumber", RpcTarget.AllBuffered, rand);
+        }
+        SpawnChests();
+    StartCoroutine("WaitAndSetParent");
+}
+
 
     public int GetRealTileNo()
     {

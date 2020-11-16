@@ -28,8 +28,8 @@ public class RespawnChestNextToPlayer : MonoBehaviour
             BPC.hasUsedPowerUp = true;
         }
         
-        FindObjectOfType<SpawnChest>().PV.RPC("DestroyChest", RpcTarget.AllBuffered, true);
-        spawnChest.PV.RPC("SpawningChestSequence", RpcTarget.AllBuffered, true, PlayerPrefs.GetInt("totalPos") + 1);
+        FindObjectOfType<SpawnChest>().DestroyChest(true);
+        spawnChest.SpawningChestSequenceDetermined(PlayerPrefs.GetInt("totalPos") + 1);
     }
 
     public void TurnOffChestRespawn()
