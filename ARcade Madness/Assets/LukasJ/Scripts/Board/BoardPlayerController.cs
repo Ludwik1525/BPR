@@ -252,7 +252,7 @@ public class BoardPlayerController : MonoBehaviour
         //diceGuard = false;
         //wasKeyPressed = false;
 
-        //PV.RPC("IncrementTurn", RpcTarget.AllBuffered, PlayerPrefs.GetInt("Score"));
+        PV.RPC("IncrementTurn", RpcTarget.AllBuffered, PlayerPrefs.GetInt("Score"), false);
     }
 
     IEnumerator Move()
@@ -311,7 +311,7 @@ public class BoardPlayerController : MonoBehaviour
         diceGuard = false;
         wasKeyPressed = false;
         print("VAR : " + var + " ROUTE POS: " + routePosition + " TOTAL POS: " + totalPos);
-        PV.RPC("IncrementTurn", RpcTarget.AllBuffered , PlayerPrefs.GetInt("Score"));
+        PV.RPC("IncrementTurn", RpcTarget.AllBuffered , PlayerPrefs.GetInt("Score"), true);
     }
 
     IEnumerator Delay(float seconds)
@@ -335,11 +335,16 @@ public class BoardPlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator DelayIfPlayerPicksUpChest(int seconds, int callersScore)
+    IEnumerator DelayIfPlayerPicksUpChest(int seconds, int callersScore, bool shouldIncrement)
     {
         yield return new WaitForSeconds(seconds);
-        GameController.gc.currentTurn++;
-        PV.RPC("ResetTurnVar", RpcTarget.AllBuffered);
+
+        if(shouldIncrement)
+        {
+            GameController.gc.currentTurn++;
+            PV.RPC("ResetTurnVar", RpcTarget.AllBuffered);
+        }
+
         if (callersScore >= 1)
         {
             FindObjectOfType<GameManager>().TurnOnWinScreen();
@@ -405,16 +410,19 @@ public class BoardPlayerController : MonoBehaviour
     }
 
     [PunRPC]
-    public void IncrementTurn(int callersScore)
+    public void IncrementTurn(int callersScore, bool shouldIncrement)
     {
         if (FindObjectOfType<ChestAnimationController>().taken)
         {
-            StartCoroutine(DelayIfPlayerPicksUpChest(3, callersScore));
+            StartCoroutine(DelayIfPlayerPicksUpChest(3, callersScore, shouldIncrement));
         }
         else
         {
-            GameController.gc.currentTurn++;
-            PV.RPC("ResetTurnVar", RpcTarget.AllBuffered);
+            if(shouldIncrement)
+            {
+                GameController.gc.currentTurn++;
+                PV.RPC("ResetTurnVar", RpcTarget.AllBuffered);
+            }
         }
     }
 
