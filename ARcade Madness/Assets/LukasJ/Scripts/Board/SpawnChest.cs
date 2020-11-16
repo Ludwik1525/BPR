@@ -81,7 +81,7 @@ public class SpawnChest : MonoBehaviour
     public void DestroyChest(bool isRand)
     {
             Destroy(GameObject.FindGameObjectWithTag("Chest"));
-        GameController.gc.isChestSpawne = false;
+
         if (!isRand)
             {
                 SpawningChestSequence();
