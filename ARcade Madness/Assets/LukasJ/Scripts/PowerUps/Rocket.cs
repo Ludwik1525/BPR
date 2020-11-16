@@ -21,7 +21,8 @@ public class Rocket : MonoBehaviour
 
     public void UseRocket()
     {
-        StartCoroutine(BPC.MoveWithRocket(10));
+        if(BPC.PV.IsMine)
+            StartCoroutine(BPC.MoveWithRocket(10));
     }
 
     public void TurnOffRocket()

@@ -10,7 +10,7 @@ public class BoardPlayerController : MonoBehaviour
 {
     public int totalPos = 0;
 
-    private PhotonView PV;
+    public PhotonView PV;
     private PhotonView dicePV;
 
     bool isMoving;
@@ -201,7 +201,7 @@ public class BoardPlayerController : MonoBehaviour
         steps = tilesToMove;
         //set bool value to true and invoke start moving event
 
-        //dicePV.RPC("SwitchTheDice", RpcTarget.AllBuffered);
+        dicePV.RPC("SwitchTheDice", RpcTarget.AllBuffered);
         rollB.interactable = false;
 
         //onStartMoving.Invoke();
