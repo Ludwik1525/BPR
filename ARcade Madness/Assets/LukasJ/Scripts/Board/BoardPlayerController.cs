@@ -205,6 +205,7 @@ public class BoardPlayerController : MonoBehaviour
 
         dicePV.RPC("SwitchTheDice", RpcTarget.AllBuffered);
         rollB.interactable = false;
+        rocket.TurnOffRocket();
 
         int var = 0;
 

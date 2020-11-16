@@ -24,6 +24,7 @@ public class CoinMagnet : MonoBehaviour
 
     public void StealTheCoins()
     {
+        TurnOffCoinMagnet();
         currency.setCurrencyWithVar(currency.CheckHowManyHaveMoney(PhotonNetwork.LocalPlayer.NickName));
         currency.decreaseCurrencyCoinMagnet(PhotonNetwork.LocalPlayer.NickName);
         BPC.hasUsedPowerUp = true;
