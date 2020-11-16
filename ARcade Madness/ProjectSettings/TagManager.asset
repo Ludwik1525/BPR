@@ -9,6 +9,7 @@ TagManager:
   - Beystadium
   - PacmanPoint
   - PacmanPatrolPoints
+  - Chest
   layers:
   - Default
   - TransparentFX

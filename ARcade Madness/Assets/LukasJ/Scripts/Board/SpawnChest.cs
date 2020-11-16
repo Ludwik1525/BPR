@@ -77,10 +77,11 @@ public class SpawnChest : MonoBehaviour
 
         chest.transform.parent = gameObject.transform;
     }
-    
+
+    [PunRPC]
     public void DestroyChest(bool isRand)
     {
-            Destroy(chest.gameObject);
+            Destroy(GameObject.FindGameObjectWithTag("Chest"));
             if (!isRand)
             {
                 SpawningChestSequence();
