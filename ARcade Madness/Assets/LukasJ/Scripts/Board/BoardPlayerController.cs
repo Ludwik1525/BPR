@@ -27,6 +27,7 @@ public class BoardPlayerController : MonoBehaviour
     public int steps;
     public float speed = 2f;
     public GameObject dice;
+    private GameObject diceRollInfo;
     public int roll;
 
     //Events
@@ -45,6 +46,8 @@ public class BoardPlayerController : MonoBehaviour
 
         PV = GetComponent<PhotonView>();
         dicePV = transform.GetChild(2).GetComponent<PhotonView>();
+        diceRollInfo = GameObject.Find("DiceRollInfo");
+        diceRollInfo.SetActive(false);
 
         //Events
         onStartMoving = new UnityEvent();
@@ -83,6 +86,7 @@ public class BoardPlayerController : MonoBehaviour
                 {
                     wasKeyPressed = true;
                     steps = Random.Range(1, 7);
+                    StartCoroutine(ShowTheRoll(steps));
                     Debug.Log("Dice Rolled: " + steps);
                     StartCoroutine(Move());
                 }
@@ -115,16 +119,17 @@ public class BoardPlayerController : MonoBehaviour
                     diceGuard = true;
                 }
 
-                if (Input.GetKeyDown(KeyCode.Space) && !isMoving)
-                {
-                    if (!wasKeyPressed)
-                    {
-                        wasKeyPressed = true;
-                        steps = Random.Range(9, 10);
-                        Debug.Log("Dice Rolled: " + steps);
-                        StartCoroutine(Move());
-                    }
-                }
+                //if (Input.GetKeyDown(KeyCode.Space) && !isMoving)
+                //{
+                //    if (!wasKeyPressed)
+                //    {
+                //        wasKeyPressed = true;
+                //        steps = Random.Range(1, 7);
+                //        StartCoroutine(ShowTheRoll(steps));
+                //        Debug.Log("Dice Rolled: " + steps);
+                //        StartCoroutine(Move());
+                //    }
+                //}
 
                 if ((Input.touchCount > 0) && (Input.GetTouch(0).phase == TouchPhase.Began))
                 {
@@ -135,6 +140,7 @@ public class BoardPlayerController : MonoBehaviour
                         if (raycastHit.collider.name == "DiceModel")
                         {
                             steps = Random.Range(1, 7);
+                            StartCoroutine(ShowTheRoll(steps));
                             Debug.Log("Dice Rolled: " + steps);
                             StartCoroutine(Move());
                         }
@@ -182,6 +188,14 @@ public class BoardPlayerController : MonoBehaviour
     public void SetTurn(int turn)
     {
         this.turn = turn;
+    }
+
+    IEnumerator ShowTheRoll(int roll)
+    {
+        diceRollInfo.GetComponent<Text>().text = "You    rolled    " + roll;
+        diceRollInfo.SetActive(true);
+        yield return new WaitForSeconds(3);
+        diceRollInfo.SetActive(false);
     }
 
     IEnumerator Move()
