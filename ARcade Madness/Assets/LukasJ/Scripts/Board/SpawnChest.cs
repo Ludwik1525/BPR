@@ -44,7 +44,6 @@ public class SpawnChest : MonoBehaviour
     [PunRPC]
     private void ChooseRandomNumber(int number)
     {
-        
         rand = number;
         PlayerPrefs.SetInt("random", rand);
     }
@@ -119,8 +118,8 @@ public class SpawnChest : MonoBehaviour
 
     public void SpawningChestSequenceDetermined(int tileToSpawnOn)
     {
-        rand = tileToSpawnOn - 1;
-        rand = GetRealTileNo(false);
+        rand = tileToSpawnOn;
+        rand = GetRealTileNo(false) - 1;
         bool isTileTaken = true;
 
         while (isTileTaken)
@@ -134,6 +133,8 @@ public class SpawnChest : MonoBehaviour
                     isTileTaken = true;
             }
         }
+
+        PV.RPC("ChooseRandomNumber", RpcTarget.AllBuffered, rand);
 
         SpawnChests();
         StartCoroutine("WaitAndSetParent");
@@ -177,17 +178,15 @@ public class SpawnChest : MonoBehaviour
         }
         else
         {
-            while (check <= max)
+            for(int i = 0; i < max; i++)
             {
-                if (allTiles[check].transform.gameObject.tag == "Tile")
+                if (allTiles[i].transform.gameObject.tag == "Tile")
                 {
-                    if (!allTiles[check].transform.gameObject.name.Contains("Simple"))
+                    if (!allTiles[i].transform.gameObject.name.Contains("Simple"))
                     {
                         numberToIncrease--;
-                        max--;
                     }
                 }
-                check++;
             }
         }
 
