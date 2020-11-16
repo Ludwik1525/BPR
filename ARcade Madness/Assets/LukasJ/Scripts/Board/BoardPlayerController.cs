@@ -39,6 +39,7 @@ public class BoardPlayerController : MonoBehaviour
 
     //Power ups
     private CoinMagnet coinMagnet;
+    private Rocket rocket;
 
     private void Awake()
     {
@@ -62,12 +63,15 @@ public class BoardPlayerController : MonoBehaviour
 
         //Powerups
         coinMagnet = GetComponent<CoinMagnet>();
+        rocket = GetComponent<Rocket>();
 
         //Add listeners
         yesB.onClick.AddListener(AcceptChest);
         noB.onClick.AddListener(DeclineChest);
         rollB.onClick.AddListener(Roll);
         onStopMoving.AddListener(coinMagnet.TurnOffCoinMagnet);
+        onStopMoving.AddListener(rocket.TurnOffRocket);
+
     }
 
     private void Start()
@@ -141,6 +145,7 @@ public class BoardPlayerController : MonoBehaviour
     {
         rollB.interactable = true;
         coinMagnet.TurnOnCoinMagnet();
+        rocket.TurnOnRocket();
     }
 
     private void StopTimeAndOpenBox()
@@ -183,6 +188,66 @@ public class BoardPlayerController : MonoBehaviour
         diceRollInfo.SetActive(true);
         yield return new WaitForSeconds(3);
         diceRollInfo.SetActive(false);
+    }
+
+    public IEnumerator MoveWithRocket(int tilesToMove)
+    {
+        if (isMoving)
+        {
+            //if the player is already moving return
+            yield break;
+        }
+
+        steps = tilesToMove;
+        //set bool value to true and invoke start moving event
+
+        //dicePV.RPC("SwitchTheDice", RpcTarget.AllBuffered);
+        rollB.interactable = false;
+
+        //onStartMoving.Invoke();
+        //Jump animation
+        //yield return new WaitForSeconds(2.2f);
+        //isMoving = true;
+
+        int var = 0;
+
+        while (steps > 0)
+        {
+            routePosition++;
+            routePosition %= currentRoute.childNodeList.Count;
+
+            var = totalPos + routePosition;
+
+            if (totalPos + routePosition >= currentRoute.childNodeList.Count)
+            {
+                var = totalPos + routePosition - currentRoute.childNodeList.Count;
+            }
+            if (var == FindObjectOfType<SpawnChest>().GetRealTileNo())
+            {
+                StopTimeAndOpenBox();
+            }
+
+            Vector3 nextPos = currentRoute.childNodeList[var].transform.GetChild(1).GetChild((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]).position;
+            while (MoveToNextNode(nextPos))
+            {
+                yield return null;
+            }
+            steps--;
+        }
+        totalPos += routePosition;
+        if (totalPos >= currentRoute.childNodeList.Count)
+        {
+            totalPos = var;
+        }
+        PlayerPrefs.SetInt("totalPos", totalPos);
+        PV.RPC("SaveMyPos", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], totalPos);
+
+        //onStopMoving.Invoke();
+        isMoving = false;
+        //diceGuard = false;
+        //wasKeyPressed = false;
+
+        //PV.RPC("IncrementTurn", RpcTarget.AllBuffered, PlayerPrefs.GetInt("Score"));
     }
 
     IEnumerator Move()
