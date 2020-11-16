@@ -30,7 +30,7 @@ public class Currency : MonoBehaviour
         }
         else
         {
-            currency = 2;
+            currency = 0;
             ExitGames.Client.Photon.Hashtable thisCurrency = new ExitGames.Client.Photon.Hashtable();
             thisCurrency.Add("Currency", currency);
             PhotonNetwork.LocalPlayer.SetCustomProperties(thisCurrency);

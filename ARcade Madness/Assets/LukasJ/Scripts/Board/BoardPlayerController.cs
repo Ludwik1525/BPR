@@ -240,7 +240,7 @@ public class BoardPlayerController : MonoBehaviour
         diceGuard = false;
         wasKeyPressed = false;
 
-        PV.RPC("IncrementTurn", RpcTarget.AllBuffered);
+        PV.RPC("IncrementTurn", RpcTarget.AllBuffered , PlayerPrefs.GetInt("Score"));
     }
 
     IEnumerator Delay(float seconds)
@@ -262,11 +262,15 @@ public class BoardPlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator DelayIfPlayerPicksUpChest(int seconds)
+    IEnumerator DelayIfPlayerPicksUpChest(int seconds, int callersScore)
     {
         yield return new WaitForSeconds(seconds);
         GameController.gc.currentTurn++;
         PV.RPC("ResetTurnVar", RpcTarget.AllBuffered);
+        if (callersScore >= 1)
+        {
+            FindObjectOfType<GameManager>().TurnOnWinScreen();
+        }
     }
 
     IEnumerator DelayOnStart()
@@ -298,11 +302,6 @@ public class BoardPlayerController : MonoBehaviour
         PV.RPC("SetChestVariable", RpcTarget.AllBuffered);
         FindObjectOfType<ChestAnimationController>().doesWantChest = true;
         FindObjectOfType<ChestAnimationController>().taken = true;
-
-        if (PlayerPrefs.GetInt("Score") >= 1)
-        {
-            FindObjectOfType<GameManager>().TurnOnWinScreen();
-        }
     }
 
     [PunRPC]
@@ -332,11 +331,11 @@ public class BoardPlayerController : MonoBehaviour
     }
 
     [PunRPC]
-    public void IncrementTurn()
+    public void IncrementTurn(int callersScore)
     {
         if (FindObjectOfType<ChestAnimationController>().taken)
         {
-            StartCoroutine(DelayIfPlayerPicksUpChest(3));
+            StartCoroutine(DelayIfPlayerPicksUpChest(3, callersScore));
         }
         else
         {

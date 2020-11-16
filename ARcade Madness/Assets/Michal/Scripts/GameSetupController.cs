@@ -86,6 +86,7 @@ public class GameSetupController : MonoBehaviour
         }
 
         StartCoroutine("DisconnectAndLoad");
+        PlayerPrefs.SetInt("Score", 0);
     }
 
     IEnumerator DisconnectAndLoad()
