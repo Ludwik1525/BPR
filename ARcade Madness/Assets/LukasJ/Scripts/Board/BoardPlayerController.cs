@@ -236,7 +236,7 @@ public class BoardPlayerController : MonoBehaviour
             {
                 var = totalPos + routePosition - currentRoute.childNodeList.Count;
             }
-            if (var == FindObjectOfType<SpawnChest>().GetRealTileNo())
+            if (var == FindObjectOfType<SpawnChest>().GetRealTileNo(true))
             {
                 StopTimeAndOpenBox();
             }
@@ -298,7 +298,7 @@ public class BoardPlayerController : MonoBehaviour
             {
                 var = totalPos + routePosition - currentRoute.childNodeList.Count;
             }
-            if (var == FindObjectOfType<SpawnChest>().GetRealTileNo())
+            if (var == FindObjectOfType<SpawnChest>().GetRealTileNo(true))
             {
                 StopTimeAndOpenBox();
             }

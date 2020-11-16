@@ -105,7 +105,7 @@ public class SpawnChest : MonoBehaviour
 
                     foreach (int tileNumber in GameController.gc.currentPositions)
                     {
-                        if (GetRealTileNo() == tileNumber)
+                        if (GetRealTileNo(true) == tileNumber)
                             isTileTaken = true;
                     }
                 }
@@ -130,7 +130,7 @@ public class SpawnChest : MonoBehaviour
 
                 foreach (int tileNumber in GameController.gc.currentPositions)
                 {
-                    if (GetRealTileNo() == tileNumber)
+                    if (GetRealTileNo(false) == tileNumber)
                         isTileTaken = true;
                 }
             }
@@ -140,7 +140,7 @@ public class SpawnChest : MonoBehaviour
     }
 
 
-    public int GetRealTileNo()
+    public int GetRealTileNo(bool convertingToChest)
     {
         numberToIncrease = 0;
         int max = rand;
@@ -160,17 +160,35 @@ public class SpawnChest : MonoBehaviour
             }
         }
 
-        while (check <= max)
+        if(convertingToChest)
         {
-            if (allTiles[check].transform.gameObject.tag == "Tile")
+            while (check <= max)
             {
-                if (!allTiles[check].transform.gameObject.name.Contains("Simple"))
+                if (allTiles[check].transform.gameObject.tag == "Tile")
                 {
-                    numberToIncrease++;
-                    max++;
+                    if (!allTiles[check].transform.gameObject.name.Contains("Simple"))
+                    {
+                        numberToIncrease++;
+                        max++;
+                    }
                 }
+                check++;
             }
-            check++;
+        }
+        else
+        {
+            while (check <= max)
+            {
+                if (allTiles[check].transform.gameObject.tag == "Tile")
+                {
+                    if (!allTiles[check].transform.gameObject.name.Contains("Simple"))
+                    {
+                        numberToIncrease--;
+                        max--;
+                    }
+                }
+                check++;
+            }
         }
 
         return rand + numberToIncrease;
