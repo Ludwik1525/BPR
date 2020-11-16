@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     public Transform[] startPositions;
     public Transform[] players;
     public bool doesHavePosition = false;
+    public bool isChestSpawne = false;
     public int[] currentPositions;
 
 

@@ -81,7 +81,8 @@ public class SpawnChest : MonoBehaviour
     public void DestroyChest(bool isRand)
     {
             Destroy(GameObject.FindGameObjectWithTag("Chest"));
-            if (!isRand)
+        GameController.gc.isChestSpawne = false;
+        if (!isRand)
             {
                 SpawningChestSequence();
             }
@@ -116,10 +117,11 @@ public class SpawnChest : MonoBehaviour
         StartCoroutine("WaitAndSetParent");
     }
 
-    public void SpawningChestSequenceDetermined(int tileToSpawnOn, int playerNo)
+    public void SpawningChestSequenceDetermined(int tileToSpawnOn)
     {
-        if ((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"] == playerNo)
+        if (GameController.gc.isChestSpawne)
         {
+            GameController.gc.isChestSpawne = true;
             rand = tileToSpawnOn - 1;
 
             bool isTileTaken = true;

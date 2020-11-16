@@ -30,7 +30,7 @@ public class RespawnChestNextToPlayer : MonoBehaviour
 
         FindObjectOfType<SpawnChest>().PV.RPC("DestroyChest", RpcTarget.AllBuffered, true);
 
-        spawnChest.SpawningChestSequenceDetermined(PlayerPrefs.GetInt("totalPos") + 1, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]);
+        spawnChest.SpawningChestSequenceDetermined(PlayerPrefs.GetInt("totalPos") + 1);
     }
 
     public void TurnOffChestRespawn()
