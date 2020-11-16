@@ -59,7 +59,6 @@ public class BoardPlayerController : MonoBehaviour
 
         //Powerups
         coinMagnet = GetComponent<CoinMagnet>();
-        coinMagnet.TurnOffCoinMagnet();
 
         //Add listeners
         yesB.onClick.AddListener(AcceptChest);
@@ -71,7 +70,8 @@ public class BoardPlayerController : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(DelayForCurrency());
+        StartCoroutine(DelayOnStart());
+        
     }
 
     private void Roll()
@@ -148,7 +148,6 @@ public class BoardPlayerController : MonoBehaviour
     private void OnStartTurn()
     {
         rollB.interactable = true;
-        coinMagnet.TurnOnCoinMagnet();
     }
 
     private void StopTimeAndOpenBox()
@@ -270,9 +269,10 @@ public class BoardPlayerController : MonoBehaviour
         PV.RPC("ResetTurnVar", RpcTarget.AllBuffered);
     }
 
-    IEnumerator DelayForCurrency()
+    IEnumerator DelayOnStart()
     {
         yield return new WaitForSeconds(1f);
+        coinMagnet.TurnOffCoinMagnet();
         if (GameController.gc.roundCount > 0)
         {
             GetComponent<Currency>().setCurrency();
