@@ -17,13 +17,6 @@ public class CoinMagnet : MonoBehaviour
         currency = GetComponent<Currency>();
         coinB = GameObject.Find("ButtonCoinMagnet").GetComponent<Button>();
         coinB.onClick.AddListener(StealTheCoins);
-
-        if (isAvailable)
-        {
-            coinB.interactable = true;
-        }
-        else
-            coinB.interactable = false;
     }
 
     public void StealTheCoins()

@@ -36,7 +36,7 @@ public class BoardPlayerController : MonoBehaviour
     public UnityEvent onStopMoving;
 
     //Power ups
-    private CoinMagnet CM;
+    private CoinMagnet coinMagnet;
 
     private void Awake()
     {
@@ -50,9 +50,6 @@ public class BoardPlayerController : MonoBehaviour
         onStartMoving = new UnityEvent();
         onStopMoving = new UnityEvent();
 
-        onStopMoving.AddListener(CM.TurnOffCoinMagnet);
-
-
         //UI's
         decisionBox = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
         yesB = decisionBox.transform.GetChild(1).GetComponent<Button>();
@@ -60,13 +57,15 @@ public class BoardPlayerController : MonoBehaviour
         rollB = GameObject.Find("ButtonRoll").GetComponent<Button>();
         rollB.interactable = false;
 
+        //Powerups
+        coinMagnet = GetComponent<CoinMagnet>();
+        coinMagnet.TurnOffCoinMagnet();
+
         //Add listeners
         yesB.onClick.AddListener(AcceptChest);
         noB.onClick.AddListener(DeclineChest);
         rollB.onClick.AddListener(Roll);
-
-        //Powerups
-        CM = GetComponent<CoinMagnet>();
+        onStopMoving.AddListener(coinMagnet.TurnOffCoinMagnet);
 
     }
 
@@ -149,7 +148,7 @@ public class BoardPlayerController : MonoBehaviour
     private void OnStartTurn()
     {
         rollB.interactable = true;
-        CM.TurnOnCoinMagnet();
+        coinMagnet.TurnOnCoinMagnet();
     }
 
     private void StopTimeAndOpenBox()
