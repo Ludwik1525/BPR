@@ -35,6 +35,9 @@ public class BoardPlayerController : MonoBehaviour
     [HideInInspector]
     public UnityEvent onStopMoving;
 
+    //Power ups
+    private CoinMagnet CM;
+
     private void Awake()
     {
         if (PlayerPrefs.HasKey("totalPos"))
@@ -42,18 +45,29 @@ public class BoardPlayerController : MonoBehaviour
 
         PV = GetComponent<PhotonView>();
         dicePV = transform.GetChild(2).GetComponent<PhotonView>();
+
+        //Events
         onStartMoving = new UnityEvent();
         onStopMoving = new UnityEvent();
 
+        onStopMoving.AddListener(CM.TurnOffCoinMagnet);
+
+
+        //UI's
         decisionBox = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
         yesB = decisionBox.transform.GetChild(1).GetComponent<Button>();
         noB = decisionBox.transform.GetChild(2).GetComponent<Button>();
         rollB = GameObject.Find("ButtonRoll").GetComponent<Button>();
         rollB.interactable = false;
 
+        //Add listeners
         yesB.onClick.AddListener(AcceptChest);
         noB.onClick.AddListener(DeclineChest);
         rollB.onClick.AddListener(Roll);
+
+        //Powerups
+        CM = GetComponent<CoinMagnet>();
+
     }
 
     private void Start()
@@ -86,7 +100,7 @@ public class BoardPlayerController : MonoBehaviour
             {
                 if (dice.activeInHierarchy)
                 {
-                    rollB.interactable = true;
+                    OnStartTurn();
                 }
 
                 if (!diceGuard)
@@ -130,6 +144,12 @@ public class BoardPlayerController : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void OnStartTurn()
+    {
+        rollB.interactable = true;
+        CM.TurnOnCoinMagnet();
     }
 
     private void StopTimeAndOpenBox()

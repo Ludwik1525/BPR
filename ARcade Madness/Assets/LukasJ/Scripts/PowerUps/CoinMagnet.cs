@@ -31,4 +31,23 @@ public class CoinMagnet : MonoBehaviour
         currency.setCurrencyWithVar(currency.CheckHowManyHaveMoney(PhotonNetwork.LocalPlayer.NickName));
         currency.decreaseCurrencyCoinMagnet(PhotonNetwork.LocalPlayer.NickName);
     }
+
+    public void TurnOffCoinMagnet()
+    {
+        if (isAvailable)
+        {
+            isAvailable = false;
+            coinB.interactable = false;
+        } 
+    }
+
+    public void TurnOnCoinMagnet()
+    {
+        if (!isAvailable)
+        {
+            isAvailable = true;
+            coinB.interactable = true;
+        }
+    }
+
 }
