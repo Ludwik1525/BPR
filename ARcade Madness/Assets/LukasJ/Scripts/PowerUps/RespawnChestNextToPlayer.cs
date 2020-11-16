@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class RespawnChestNextToPlayer : MonoBehaviour
 {
@@ -26,9 +27,9 @@ public class RespawnChestNextToPlayer : MonoBehaviour
         {
             BPC.hasUsedPowerUp = true;
         }
-
-        spawnChest.DestroyChest(true);
-        spawnChest.SpawningChestSequence(true, PlayerPrefs.GetInt("totalPos") + 1);
+        
+        FindObjectOfType<SpawnChest>().PV.RPC("DestroyChest", RpcTarget.AllBuffered, true);
+        spawnChest.PV.RPC("SpawningChestSequence", RpcTarget.AllBuffered, true, PlayerPrefs.GetInt("totalPos") + 1);
     }
 
     public void TurnOffChestRespawn()

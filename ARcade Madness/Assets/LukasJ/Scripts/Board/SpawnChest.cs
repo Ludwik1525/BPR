@@ -7,7 +7,7 @@ using System.IO;
 public class SpawnChest : MonoBehaviour
 {
     private GameObject chest;
-    private PhotonView PV;
+    public PhotonView PV;
     private Transform[] childObjects;
     private List<Transform> tilesToSpawnChestsOn;
     int rand;
@@ -33,7 +33,7 @@ public class SpawnChest : MonoBehaviour
         }
 
         PV = GetComponent<PhotonView>();
-        SpawningChestSequence(false, 0);
+        PV.RPC("SpawningChestSequence", RpcTarget.AllBuffered, false, 0);
     }
 
     public void SpawnChests()
@@ -77,73 +77,56 @@ public class SpawnChest : MonoBehaviour
         chest.transform.parent = gameObject.transform;
     }
 
+    [PunRPC]
     public void DestroyChest(bool isRand)
     {
-        PhotonNetwork.Destroy(chest);
-        if (!isRand)
+        if (PhotonNetwork.IsMasterClient)
         {
-            //PlayerPrefs.SetInt("random", 0);
-            SpawningChestSequence(false, 0);
-        }
-        
-    }
-
-    public void SpawningChestSequence(bool isRand, int tileToSpawnOn)
-    {
+            PhotonNetwork.Destroy(chest);
             if (!isRand)
             {
-                rand = PlayerPrefs.GetInt("random");
-                if(PhotonNetwork.IsMasterClient)
-                {
-                    if (rand == 0)
-                    {
-                        bool isTileTaken = true;
-
-                        while (isTileTaken)
-                        {
-                            isTileTaken = false;
-                            rand = Random.Range(1, tilesToSpawnChestsOn.Count);
-
-                            foreach (int tileNumber in GameController.gc.currentPositions)
-                            {
-                                if (GetRealTileNo() == tileNumber)
-                                    isTileTaken = true;
-                            }
-                        }
-
-                        PV.RPC("ChooseRandomNumber", RpcTarget.AllBuffered, rand);
-                    }
-                    SpawnChests();
-
-                StartCoroutine("WaitAndSetParent");
-                }
+                //PlayerPrefs.SetInt("random", 0);
+                PV.RPC("SpawningChestSequence", RpcTarget.AllBuffered, false, 0);
             }
-            else
+        }
+    }
+
+    [PunRPC]
+    public void SpawningChestSequence(bool isRand, int tileToSpawnOn)
+    {
+        if (!isRand)
+        {
+            rand = PlayerPrefs.GetInt("random");
+            
+        }
+        else
+        {
+            rand = tileToSpawnOn;
+        }
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            if (rand == 0)
             {
-                rand = tileToSpawnOn;
-                if (rand == 0)
+                bool isTileTaken = true;
+
+                while (isTileTaken)
                 {
-                    bool isTileTaken = true;
+                    isTileTaken = false;
+                    rand = Random.Range(1, tilesToSpawnChestsOn.Count);
 
-                    while (isTileTaken)
+                    foreach (int tileNumber in GameController.gc.currentPositions)
                     {
-                        isTileTaken = false;
-                        rand = Random.Range(1, tilesToSpawnChestsOn.Count);
-
-                        foreach (int tileNumber in GameController.gc.currentPositions)
-                        {
-                            if (GetRealTileNo() == tileNumber)
-                                isTileTaken = true;
-                        }
+                        if (GetRealTileNo() == tileNumber)
+                            isTileTaken = true;
                     }
-
-                    PV.RPC("ChooseRandomNumber", RpcTarget.AllBuffered, rand);
                 }
-                SpawnChests();
 
-                StartCoroutine("WaitAndSetParent");
-            }      
-       
+                PV.RPC("ChooseRandomNumber", RpcTarget.AllBuffered, rand);
+            }
+            SpawnChests();
+        }
+        StartCoroutine("WaitAndSetParent");
     }
 
     public int GetRealTileNo()
