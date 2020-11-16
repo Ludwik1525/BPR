@@ -38,8 +38,7 @@ public class SpawnChest : MonoBehaviour
 
     public void SpawnChests()
     {
-        if(PhotonNetwork.IsMasterClient)
-            chest = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Chest"), tilesToSpawnChestsOn[rand].GetChild(2).transform.position, tilesToSpawnChestsOn[rand].GetChild(2).transform.rotation);
+        chest = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Chest"), tilesToSpawnChestsOn[rand].GetChild(2).transform.position, tilesToSpawnChestsOn[rand].GetChild(2).transform.rotation);
     }
 
     [PunRPC]
@@ -75,7 +74,7 @@ public class SpawnChest : MonoBehaviour
         if (chest == null)
             chest = GameObject.Find("Chest(Clone)");
 
-        chest.transform.parent = gameObject.transform;
+        chest.transform.parent = this.gameObject.transform;
     }
 
     [PunRPC]
@@ -119,29 +118,25 @@ public class SpawnChest : MonoBehaviour
 
     public void SpawningChestSequenceDetermined(int tileToSpawnOn)
     {
-        rand = tileToSpawnOn;
+        rand = tileToSpawnOn - 1;
+        
+        bool isTileTaken = true;
 
-        if (rand == 0)
+        while (isTileTaken)
         {
-            bool isTileTaken = true;
+            isTileTaken = false;
+            rand = rand+1;
 
-            while (isTileTaken)
+            foreach (int tileNumber in GameController.gc.currentPositions)
             {
-                isTileTaken = false;
-                rand = Random.Range(1, tilesToSpawnChestsOn.Count);
-
-                foreach (int tileNumber in GameController.gc.currentPositions)
-                {
-                    if (GetRealTileNo() == tileNumber)
-                        isTileTaken = true;
-                }
+                if (GetRealTileNo() == tileNumber)
+                    isTileTaken = true;
             }
-
-            PV.RPC("ChooseRandomNumber", RpcTarget.AllBuffered, rand);
         }
+
         SpawnChests();
-    StartCoroutine("WaitAndSetParent");
-}
+        StartCoroutine("WaitAndSetParent");
+    }
 
 
     public int GetRealTileNo()
