@@ -47,7 +47,6 @@ public class BoardPlayerController : MonoBehaviour
         PV = GetComponent<PhotonView>();
         dicePV = transform.GetChild(2).GetComponent<PhotonView>();
         diceRollInfo = GameObject.Find("DiceRollInfo");
-        diceRollInfo.SetActive(false);
 
         //Events
         onStartMoving = new UnityEvent();
