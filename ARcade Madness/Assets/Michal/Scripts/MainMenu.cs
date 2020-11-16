@@ -6,14 +6,15 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    public GameObject mainMenu, mainMenuObjs, nameBox, optionsMenu, soundsBox, lobby, lobbyObjs, roomCreation, privateRoomBox;
+    public GameObject mainMenu, mainMenuObjs, nameBox, optionsMenu, soundsBox, lobby, 
+        lobbyObjs, roomCreation, privateRoomBox, instructionsMenu, instructionsGeneral, instructionsMinigames, instructionsPowerups;
 
     public GameObject welcomeText, playerNameErrorShort, playerNameErrorLong, playerNameErrorNumbers, roomNameErrorShort, roomNameErrorLong, privateRoomError;
 
     public InputField playerNameField, roomNameField, privateRoomField;
 
     public Button acceptNameB, playB, optionsB, quitB, changeNameB, changeVolumeB, acceptVolumeB, optionsBackB, lobbyBackB, roomCreationBackB, roomCreationB, roomAcceptB, players2B, 
-        players3B, players4B, privateB, publicB, joinPrivateB, confirmPrivateB, cancelPrivateB;
+        players3B, players4B, privateB, publicB, joinPrivateB, confirmPrivateB, cancelPrivateB, openInstrB, instrBack1B, instrBack2B, instrBack3B, instrBack4B, instrGeneralB, instrMinigamesB, instrPowerupsB;
 
     private bool isChangingName;
 
@@ -38,6 +39,14 @@ public class MainMenu : MonoBehaviour
         cancelPrivateB.onClick.AddListener(ClosePrivateRoomBox);
         changeVolumeB.onClick.AddListener(OpenSoundsBox);
         acceptVolumeB.onClick.AddListener(CloseSoundsBox);
+        openInstrB.onClick.AddListener(OpenInstructionsMenu);
+        instrBack1B.onClick.AddListener(OpenOptions);
+        instrBack2B.onClick.AddListener(BackToInstructionsMenu);
+        instrBack3B.onClick.AddListener(BackToInstructionsMenu);
+        instrBack4B.onClick.AddListener(BackToInstructionsMenu);
+        instrGeneralB.onClick.AddListener(OpenGeneralInstrMenu);
+        instrMinigamesB.onClick.AddListener(OpenMinigamesInstrMenu);
+        instrPowerupsB.onClick.AddListener(OpenPowerupsInstrMenu);
 
         playerNameErrorLong.SetActive(false);
         playerNameErrorShort.SetActive(false);
@@ -126,6 +135,7 @@ public class MainMenu : MonoBehaviour
     {
         optionsMenu.SetActive(true);
         mainMenuObjs.SetActive(false);
+        instructionsMenu.SetActive(false);
     }
 
     private void GoBackToMenu()
@@ -164,6 +174,38 @@ public class MainMenu : MonoBehaviour
                 roomCreation.SetActive(false);
                 lobbyObjs.SetActive(true);
         }
+    }
+
+    private void OpenInstructionsMenu()
+    {
+        instructionsMenu.SetActive(true);
+        optionsMenu.SetActive(false);
+    }
+
+    private void OpenGeneralInstrMenu()
+    {
+        instructionsMenu.SetActive(false);
+        instructionsGeneral.SetActive(true);
+    }
+
+    private void OpenMinigamesInstrMenu()
+    {
+        instructionsMenu.SetActive(false);
+        instructionsMinigames.SetActive(true);
+    }
+    
+    private void OpenPowerupsInstrMenu()
+    {
+        instructionsMenu.SetActive(false);
+        instructionsPowerups.SetActive(true);
+    }
+
+    private void BackToInstructionsMenu()
+    {
+        instructionsMenu.SetActive(true);
+        instructionsGeneral.SetActive(false);
+        instructionsMinigames.SetActive(false);
+        instructionsPowerups.SetActive(false);
     }
 
     private void SetPrivate()
