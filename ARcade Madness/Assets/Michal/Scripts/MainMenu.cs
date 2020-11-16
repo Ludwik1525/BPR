@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +8,7 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject mainMenu, mainMenuObjs, nameBox, optionsMenu, soundsBox, lobby, lobbyObjs, roomCreation, privateRoomBox;
 
-    public GameObject welcomeText, playerNameErrorShort, playerNameErrorLong, roomNameErrorShort, roomNameErrorLong, privateRoomError;
+    public GameObject welcomeText, playerNameErrorShort, playerNameErrorLong, playerNameErrorNumbers, roomNameErrorShort, roomNameErrorLong, privateRoomError;
 
     public InputField playerNameField, roomNameField, privateRoomField;
 
@@ -40,6 +41,7 @@ public class MainMenu : MonoBehaviour
 
         playerNameErrorLong.SetActive(false);
         playerNameErrorShort.SetActive(false);
+        playerNameErrorNumbers.SetActive(false);
 
         optionsMenu.SetActive(false);
         soundsBox.SetActive(false);
@@ -229,6 +231,7 @@ public class MainMenu : MonoBehaviour
         {
             playerNameErrorLong.SetActive(false);
             playerNameErrorShort.SetActive(false);
+            playerNameErrorNumbers.SetActive(false);
 
             if (playerNameField.text.Length < 3)
             {
@@ -238,6 +241,11 @@ public class MainMenu : MonoBehaviour
             else if (playerNameField.text.Length > 7)
             {
                 playerNameErrorLong.SetActive(true);
+                return false;
+            }
+            else if(playerNameField.text.Any(char.IsDigit))
+            {
+                playerNameErrorNumbers.SetActive(true);
                 return false;
             }
             else

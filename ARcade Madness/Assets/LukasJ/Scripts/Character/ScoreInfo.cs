@@ -41,12 +41,13 @@ public class ScoreInfo : MonoBehaviour
     {
         for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
         {
-            finalNames[i] = this.gameObject.transform.GetChild(i).GetChild(0).GetChild(0).GetComponent<Text>().text +
-                int.Parse(this.gameObject.transform.GetChild(i).GetChild(2).GetChild(0).GetComponent<Text>().text);
-            finalScores[i] = int.Parse(this.gameObject.transform.GetChild(i).GetChild(2).GetChild(0).GetComponent<Text>().text);
+            finalNames.Add(this.gameObject.transform.GetChild(i).GetChild(0).GetChild(0).GetComponent<Text>().text + "  " +
+                this.gameObject.transform.GetChild(i).GetChild(0).GetChild(2).GetComponent<Text>().text);
+            finalScores.Add(int.Parse(this.gameObject.transform.GetChild(i).GetChild(0).GetChild(2).GetComponent<Text>().text));
         }
 
         finalScores.Sort();
+        finalScores.Reverse();
 
         for(int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
         {
