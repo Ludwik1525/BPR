@@ -17,6 +17,7 @@ public class BoardPlayerController : MonoBehaviour
     private bool wasKeyPressed = false;
     private bool diceGuard = false;
     private bool wasDiceRolled = false;
+    private bool isGameFinished = false;
 
     private GameObject decisionBox;
     private Button yesB, noB, rollB;
@@ -253,12 +254,14 @@ public class BoardPlayerController : MonoBehaviour
         if (FindObjectOfType<ChestAnimationController>().taken)
         {
             yield return new WaitForSeconds(3f);
-            SceneManager.LoadScene("AssetScene");
+            if(!isGameFinished)
+                SceneManager.LoadScene("AssetScene");
         }
         else
         {
             yield return new WaitForSeconds(1f);
-            SceneManager.LoadScene("AssetScene");
+            if (!isGameFinished)
+                SceneManager.LoadScene("AssetScene");
         }
     }
 
@@ -270,6 +273,7 @@ public class BoardPlayerController : MonoBehaviour
         if (callersScore >= 1)
         {
             FindObjectOfType<GameManager>().TurnOnWinScreen();
+            isGameFinished = true;
         }
     }
 
