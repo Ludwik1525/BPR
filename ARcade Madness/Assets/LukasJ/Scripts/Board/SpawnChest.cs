@@ -79,6 +79,8 @@ public class SpawnChest : MonoBehaviour
 
     public void DestroyChest(bool isRand)
     {
+        //PhotonNetwork.Destroy()
+        GameController.gc.numberOfChests--;
         Destroy(chest);
         if (!isRand)
         {
@@ -90,20 +92,20 @@ public class SpawnChest : MonoBehaviour
 
     public void SpawningChestSequence(bool isRand, int tileToSpawnOn)
     {
-        if(!isRand)
+        if(GameController.gc.numberOfChests < 1)
         {
-            rand = PlayerPrefs.GetInt("random");
-        }
-        else
-            rand = tileToSpawnOn;
+            if (!isRand)
+            {
+                rand = PlayerPrefs.GetInt("random");
+            }
+            else
+                rand = tileToSpawnOn;
 
-        if (PhotonNetwork.IsMasterClient)
-        {
             if (rand == 0)
             {
                 bool isTileTaken = true;
 
-                while(isTileTaken)
+                while (isTileTaken)
                 {
                     isTileTaken = false;
                     rand = Random.Range(1, tilesToSpawnChestsOn.Count);
@@ -114,13 +116,15 @@ public class SpawnChest : MonoBehaviour
                             isTileTaken = true;
                     }
                 }
-                
+
                 PV.RPC("ChooseRandomNumber", RpcTarget.AllBuffered, rand);
             }
             SpawnChests();
+
+            StartCoroutine("WaitAndSetParent");
+            GameController.gc.numberOfChests++;
         }
-        
-        StartCoroutine("WaitAndSetParent");
+       
     }
 
     public int GetRealTileNo()

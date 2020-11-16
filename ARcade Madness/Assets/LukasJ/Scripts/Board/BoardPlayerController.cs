@@ -276,6 +276,9 @@ public class BoardPlayerController : MonoBehaviour
 
         dicePV.RPC("SwitchTheDice", RpcTarget.AllBuffered);
         rollB.interactable = false;
+        rocket.TurnOffRocket();
+        coinMagnet.TurnOffCoinMagnet();
+        respawnChest.TurnOffChestRespawn();
 
         onStartMoving.Invoke();
         //Jump animation
