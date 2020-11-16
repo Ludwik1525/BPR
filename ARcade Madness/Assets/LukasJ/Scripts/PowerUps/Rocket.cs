@@ -9,10 +9,13 @@ public class Rocket : MonoBehaviour
     public bool isAvailable = true;
     private Button rocketB;
     private BoardPlayerController BPC;
+    private int numberOfTilesToMove = 5;
+    private PhotonView PV;
 
     // Start is called before the first frame update
     void Start()
     {
+        PV = GetComponent<PhotonView>();
         BPC = GetComponent<BoardPlayerController>();
         rocketB = GameObject.Find("ButtonRocket").GetComponent<Button>();
         rocketB.onClick.AddListener(UseRocket);
@@ -24,7 +27,9 @@ public class Rocket : MonoBehaviour
         if (BPC.PV.IsMine)
         {
             BPC.hasUsedPowerUp = true;
-            StartCoroutine(BPC.MoveWithRocket(3));
+            int randomNo = Random.Range(5, 8);
+            PV.RPC("UnifyTheRandomNumber", RpcTarget.AllBuffered, randomNo);
+            StartCoroutine(BPC.MoveWithRocket(numberOfTilesToMove));
         }
     }
 
@@ -44,5 +49,11 @@ public class Rocket : MonoBehaviour
             isAvailable = true;
             rocketB.interactable = true;
         }
+    }
+
+    [PunRPC]
+    void UnifyTheRandomNumber(int number)
+    {
+        numberOfTilesToMove = number;
     }
 }

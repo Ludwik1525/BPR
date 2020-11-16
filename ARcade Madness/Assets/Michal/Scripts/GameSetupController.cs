@@ -56,6 +56,16 @@ public class GameSetupController : MonoBehaviour
             PlayerPrefs.SetInt("totalPos", 0);
             player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player"),
             spawnPositions[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]].position, Quaternion.identity);
+
+            ExitGames.Client.Photon.Hashtable thisCurrency = new ExitGames.Client.Photon.Hashtable();
+            thisCurrency.Add("Currency", 0);
+            PhotonNetwork.LocalPlayer.SetCustomProperties(thisCurrency);
+            FindObjectOfType<ScoreInfo>().GetComponent<PhotonView>().RPC("SetCurrency", RpcTarget.AllBuffered,
+                (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], 0);
+
+            PlayerPrefs.SetInt("Score", 0);
+            FindObjectOfType<ScoreInfo>().GetComponent<PhotonView>().RPC("SetScore", RpcTarget.AllBuffered, 
+                (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], 0);
         }
         else
         {

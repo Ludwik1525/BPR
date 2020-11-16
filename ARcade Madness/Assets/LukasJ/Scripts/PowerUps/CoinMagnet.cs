@@ -29,8 +29,12 @@ public class CoinMagnet : MonoBehaviour
             TurnOffCoinMagnet();
             BPC.hasUsedPowerUp = true;
         }
-        currency.setCurrencyWithVar(currency.CheckHowManyHaveMoney(PhotonNetwork.LocalPlayer.NickName));
-        currency.decreaseCurrencyCoinMagnet(PhotonNetwork.LocalPlayer.NickName);
+
+        for(int i = 0; i < 2; i++)
+        {
+            currency.setCurrencyWithVar(currency.CheckHowManyHaveMoney(PhotonNetwork.LocalPlayer.NickName));
+            currency.decreaseCurrencyCoinMagnet(PhotonNetwork.LocalPlayer.NickName);
+        }
     }
 
     public void TurnOffCoinMagnet()
