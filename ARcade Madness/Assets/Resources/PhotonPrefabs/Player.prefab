@@ -327,6 +327,7 @@ GameObject:
   - component: {fileID: -9151022928099566985}
   - component: {fileID: -2057222434137066733}
   - component: {fileID: -5243003360218519551}
+  - component: {fileID: -1146793703820666203}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -364,6 +365,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalPos: 0
+  PV: {fileID: 0}
+  hasUsedPowerUp: 0
   routePosition: 0
   turn: 0
   currentRoute: {fileID: 3313797966453882472, guid: 996799b6a1b65b5469d01d9171c59265, type: 3}
@@ -503,6 +506,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b6870bd1eccbe849a2f23c5f74d6f5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAvailable: 1
+--- !u!114 &-1146793703820666203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3396989747327439425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0de78339398151044813d9907d7b9c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isAvailable: 1
@@ -728,6 +744,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b346dbdae897ac43950a8ad5db48a24, type: 3}
+--- !u!1 &919132148023788721 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0b346dbdae897ac43950a8ad5db48a24, type: 3}
+  m_PrefabInstance: {fileID: 1150597600}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &543450652549438987 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0b346dbdae897ac43950a8ad5db48a24, type: 3}
@@ -736,10 +757,5 @@ Transform:
 --- !u!1 &8877229698361595578 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -346142337343115430, guid: 0b346dbdae897ac43950a8ad5db48a24, type: 3}
-  m_PrefabInstance: {fileID: 1150597600}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &919132148023788721 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0b346dbdae897ac43950a8ad5db48a24, type: 3}
   m_PrefabInstance: {fileID: 1150597600}
   m_PrefabAsset: {fileID: 0}

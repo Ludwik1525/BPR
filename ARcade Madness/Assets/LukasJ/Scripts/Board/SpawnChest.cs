@@ -12,6 +12,7 @@ public class SpawnChest : MonoBehaviour
     private List<Transform> tilesToSpawnChestsOn;
     int rand;
     int numberToIncrease;
+    bool isRand;
 
     private void Start()
     {
@@ -32,7 +33,7 @@ public class SpawnChest : MonoBehaviour
         }
 
         PV = GetComponent<PhotonView>();
-        SpawningChestSequence();
+        SpawningChestSequence(false, 0);
     }
 
     public void SpawnChests()
@@ -80,12 +81,18 @@ public class SpawnChest : MonoBehaviour
     {
         //PlayerPrefs.SetInt("random", 0);
         Destroy(chest);
-        SpawningChestSequence();
+        SpawningChestSequence(false, 0);
     }
 
-    private void SpawningChestSequence()
+    public void SpawningChestSequence(bool isRand, int tileToSpawnOn)
     {
-        rand = PlayerPrefs.GetInt("random");
+        if(isRand)
+        {
+            rand = PlayerPrefs.GetInt("random");
+        }
+        else
+            rand = tileToSpawnOn;
+
         if (PhotonNetwork.IsMasterClient)
         {
             if (rand == 0)

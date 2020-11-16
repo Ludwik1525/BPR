@@ -41,6 +41,7 @@ public class BoardPlayerController : MonoBehaviour
     //Power ups
     private CoinMagnet coinMagnet;
     private Rocket rocket;
+    private RespawnChestNextToPlayer respawnChest;
 
     private void Awake()
     {
@@ -66,6 +67,7 @@ public class BoardPlayerController : MonoBehaviour
         //Powerups
         coinMagnet = GetComponent<CoinMagnet>();
         rocket = GetComponent<Rocket>();
+        respawnChest = GetComponent<RespawnChestNextToPlayer>();
 
         //Add listeners
         yesB.onClick.AddListener(AcceptChest);
@@ -73,6 +75,8 @@ public class BoardPlayerController : MonoBehaviour
         rollB.onClick.AddListener(Roll);
         onStopMoving.AddListener(coinMagnet.TurnOffCoinMagnet);
         onStopMoving.AddListener(rocket.TurnOffRocket);
+        onStopMoving.AddListener(respawnChest.TurnOffChestRespawn);
+
 
     }
 
@@ -150,11 +154,13 @@ public class BoardPlayerController : MonoBehaviour
         {
             coinMagnet.TurnOnCoinMagnet();
             rocket.TurnOnRocket();
+            respawnChest.TurnOnChestRespawn();
         }
         else
         {
             coinMagnet.TurnOffCoinMagnet();
             rocket.TurnOffRocket();
+            respawnChest.TurnOffChestRespawn();
         }
     }
 
@@ -214,6 +220,8 @@ public class BoardPlayerController : MonoBehaviour
         dicePV.RPC("SwitchTheDice", RpcTarget.AllBuffered);
         rollB.interactable = false;
         rocket.TurnOffRocket();
+        coinMagnet.TurnOffCoinMagnet();
+        respawnChest.TurnOffChestRespawn();
 
         int var = 0;
 
