@@ -66,6 +66,7 @@ MonoBehaviour:
   - SwitchTheDice
   - GenerateColourIndex
   - EnableEndScreen
+  - SetFinalScores
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
