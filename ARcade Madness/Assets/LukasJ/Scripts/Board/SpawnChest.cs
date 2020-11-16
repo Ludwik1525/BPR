@@ -38,7 +38,8 @@ public class SpawnChest : MonoBehaviour
 
     public void SpawnChests()
     {
-        chest = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Chest"), tilesToSpawnChestsOn[rand].GetChild(2).transform.position, tilesToSpawnChestsOn[rand].GetChild(2).transform.rotation);
+        if(PhotonNetwork.IsMasterClient)
+            chest = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Chest"), tilesToSpawnChestsOn[rand].GetChild(2).transform.position, tilesToSpawnChestsOn[rand].GetChild(2).transform.rotation);
     }
 
     [PunRPC]
@@ -80,15 +81,11 @@ public class SpawnChest : MonoBehaviour
     [PunRPC]
     public void DestroyChest(bool isRand)
     {
-        if (PhotonNetwork.IsMasterClient)
-        {
-            PhotonNetwork.Destroy(chest);
+            Destroy(chest.gameObject);
             if (!isRand)
             {
-                //PlayerPrefs.SetInt("random", 0);
                 PV.RPC("SpawningChestSequence", RpcTarget.AllBuffered, false, 0);
             }
-        }
     }
 
     [PunRPC]
