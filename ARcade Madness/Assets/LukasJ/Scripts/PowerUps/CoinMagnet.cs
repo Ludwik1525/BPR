@@ -19,15 +19,19 @@ public class CoinMagnet : MonoBehaviour
         currency = GetComponent<Currency>();
         coinB = GameObject.Find("ButtonCoinMagnet").GetComponent<Button>();
         coinB.onClick.AddListener(StealTheCoins);
-        TurnOffCoinMagnet();
+        isAvailable = false;
+        TurnOnCoinMagnet();
     }
 
     public void StealTheCoins()
     {
-        TurnOffCoinMagnet();
+        if (BPC.PV.IsMine)
+        {
+            TurnOffCoinMagnet();
+            BPC.hasUsedPowerUp = true;
+        }
         currency.setCurrencyWithVar(currency.CheckHowManyHaveMoney(PhotonNetwork.LocalPlayer.NickName));
         currency.decreaseCurrencyCoinMagnet(PhotonNetwork.LocalPlayer.NickName);
-        BPC.hasUsedPowerUp = true;
     }
 
     public void TurnOffCoinMagnet()

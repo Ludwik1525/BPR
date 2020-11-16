@@ -16,14 +16,17 @@ public class Rocket : MonoBehaviour
         BPC = GetComponent<BoardPlayerController>();
         rocketB = GameObject.Find("ButtonRocket").GetComponent<Button>();
         rocketB.onClick.AddListener(UseRocket);
-        TurnOffRocket();
-        BPC.hasUsedPowerUp = true;
+        isAvailable = false;
+        TurnOnRocket();
     }
 
     public void UseRocket()
     {
-        if(BPC.PV.IsMine)
+        if (BPC.PV.IsMine)
+        {
+            BPC.hasUsedPowerUp = true;
             StartCoroutine(BPC.MoveWithRocket(3));
+        }
     }
 
     public void TurnOffRocket()

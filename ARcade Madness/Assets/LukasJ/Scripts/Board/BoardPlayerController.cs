@@ -61,6 +61,7 @@ public class BoardPlayerController : MonoBehaviour
         noB = decisionBox.transform.GetChild(2).GetComponent<Button>();
         rollB = GameObject.Find("ButtonRoll").GetComponent<Button>();
         rollB.interactable = false;
+        hasUsedPowerUp = false;
 
         //Powerups
         coinMagnet = GetComponent<CoinMagnet>();
@@ -145,9 +146,11 @@ public class BoardPlayerController : MonoBehaviour
     private void OnStartTurn()
     {
         rollB.interactable = true;
-        hasUsedPowerUp = false;
-        coinMagnet.TurnOnCoinMagnet();
-        rocket.TurnOnRocket();
+        if (!hasUsedPowerUp)
+        {
+            coinMagnet.TurnOnCoinMagnet();
+            rocket.TurnOnRocket();
+        }
     }
 
     private void StopTimeAndOpenBox()
