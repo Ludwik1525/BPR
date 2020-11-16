@@ -7,12 +7,21 @@ using Photon.Pun;
 public class ScoreInfo : MonoBehaviour
 {
     private PhotonView PV;
+    private GameObject winScores;
+    private List<string> finalNames;
+    private List<int> finalScores;
+    private string[] namesToDisplay;
 
     private void Start()
     {
         PV = GetComponent<PhotonView>();
+        winScores = GameObject.Find("Canvas").transform.GetChild(2).GetChild(2).gameObject;
 
-        if(PhotonNetwork.IsMasterClient)
+        finalNames = new List<string>();
+        finalScores = new List<int>();
+        namesToDisplay = new string[PhotonNetwork.PlayerList.Length];
+
+        if (PhotonNetwork.IsMasterClient)
         {
             PV.RPC("ActivateChildren", RpcTarget.AllBuffered);
         }
@@ -25,6 +34,46 @@ public class ScoreInfo : MonoBehaviour
         {
             this.gameObject.transform.GetChild(i).gameObject.SetActive(true);
             this.gameObject.transform.GetChild(i).GetChild(0).GetChild(0).GetComponent<Text>().text = PhotonNetwork.PlayerList[i].NickName;
+        }
+    }
+
+    public void SortPlayersOrder()
+    {
+        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+        {
+            finalNames[i] = this.gameObject.transform.GetChild(i).GetChild(0).GetChild(0).GetComponent<Text>().text +
+                int.Parse(this.gameObject.transform.GetChild(i).GetChild(2).GetChild(0).GetComponent<Text>().text);
+            finalScores[i] = int.Parse(this.gameObject.transform.GetChild(i).GetChild(2).GetChild(0).GetComponent<Text>().text);
+        }
+
+        finalScores.Sort();
+
+        for(int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+        {
+            string checker = finalScores[i].ToString();
+            for(int j = 0; j < finalNames.Count; j++)
+            {
+                if(finalNames[j].Contains(checker))
+                {
+                    namesToDisplay[i] = finalNames[j];
+                }
+            }
+        }
+
+        PV.RPC("SetFinalScores", RpcTarget.AllBuffered);
+    }
+
+    [PunRPC]
+    void SetFinalScores()
+    {
+        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+        {
+            if (i < 3)
+            {
+                winScores.transform.GetChild(i).gameObject.SetActive(true);
+
+                winScores.transform.GetChild(i).GetComponent<Text>().text = (i + 1) + ".  " + namesToDisplay[i];
+            }
         }
     }
 

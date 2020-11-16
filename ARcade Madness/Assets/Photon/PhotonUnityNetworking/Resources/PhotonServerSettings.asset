@@ -65,6 +65,7 @@ MonoBehaviour:
   - SetCurrency
   - SwitchTheDice
   - GenerateColourIndex
+  - EnableEndScreen
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
