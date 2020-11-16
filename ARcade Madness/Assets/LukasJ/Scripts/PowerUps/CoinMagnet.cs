@@ -17,6 +17,7 @@ public class CoinMagnet : MonoBehaviour
         currency = GetComponent<Currency>();
         coinB = GameObject.Find("ButtonCoinMagnet").GetComponent<Button>();
         coinB.onClick.AddListener(StealTheCoins);
+        TurnOffCoinMagnet();
     }
 
     public void StealTheCoins()

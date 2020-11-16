@@ -71,7 +71,6 @@ public class BoardPlayerController : MonoBehaviour
     private void Start()
     {
         StartCoroutine(DelayOnStart());
-        
     }
 
     private void Roll()
@@ -83,7 +82,7 @@ public class BoardPlayerController : MonoBehaviour
                 if (!wasKeyPressed && !isMoving)
                 {
                     wasKeyPressed = true;
-                    steps = Random.Range(9, 10);
+                    steps = Random.Range(1, 7);
                     Debug.Log("Dice Rolled: " + steps);
                     StartCoroutine(Move());
                 }
@@ -148,11 +147,12 @@ public class BoardPlayerController : MonoBehaviour
     private void OnStartTurn()
     {
         rollB.interactable = true;
+        coinMagnet.TurnOnCoinMagnet();
     }
 
     private void StopTimeAndOpenBox()
     {
-        if (PlayerPrefs.GetInt("Currency") >= 1)
+        if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Currency"] >= 1)
         {
             decisionBox.SetActive(true);
             PV.RPC("StopTheTime", RpcTarget.AllBuffered);
@@ -272,7 +272,6 @@ public class BoardPlayerController : MonoBehaviour
     IEnumerator DelayOnStart()
     {
         yield return new WaitForSeconds(1f);
-        coinMagnet.TurnOffCoinMagnet();
         if (GameController.gc.roundCount > 0)
         {
             GetComponent<Currency>().setCurrency();
