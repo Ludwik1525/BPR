@@ -1741,7 +1741,7 @@ GameObject:
   - component: {fileID: 887040122}
   - component: {fileID: 887040121}
   m_Layer: 5
-  m_Name: ButtonRespawnChest
+  m_Name: ButtonChestRespawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

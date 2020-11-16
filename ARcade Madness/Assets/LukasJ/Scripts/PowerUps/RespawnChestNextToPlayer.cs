@@ -25,7 +25,7 @@ public class RespawnChestNextToPlayer : MonoBehaviour
         if (BPC.PV.IsMine)
         {
             BPC.hasUsedPowerUp = true;
-            spawnChest.DestroyChest();
+            spawnChest.DestroyChest(true);
             spawnChest.SpawningChestSequence(true, PlayerPrefs.GetInt("totalPos") + 1);
         }
     }

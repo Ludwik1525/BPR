@@ -53,7 +53,7 @@ public class ChestAnimationController : MonoBehaviour
 
     public void DestroyTheChest()
     {
-        FindObjectOfType<SpawnChest>().DestroyChest();
+        FindObjectOfType<SpawnChest>().DestroyChest(false);
     }
 
     //private void OnCollisionEnter(Collision collision)

@@ -77,16 +77,20 @@ public class SpawnChest : MonoBehaviour
         chest.transform.parent = gameObject.transform;
     }
 
-    public void DestroyChest()
+    public void DestroyChest(bool isRand)
     {
-        //PlayerPrefs.SetInt("random", 0);
         Destroy(chest);
-        SpawningChestSequence(false, 0);
+        if (!isRand)
+        {
+            //PlayerPrefs.SetInt("random", 0);
+            SpawningChestSequence(false, 0);
+        }
+        
     }
 
     public void SpawningChestSequence(bool isRand, int tileToSpawnOn)
     {
-        if(isRand)
+        if(!isRand)
         {
             rand = PlayerPrefs.GetInt("random");
         }
