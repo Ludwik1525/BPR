@@ -118,24 +118,34 @@ public class SpawnChest : MonoBehaviour
 
     public void SpawningChestSequenceDetermined(int tileToSpawnOn)
     {
-        rand = tileToSpawnOn - 1;
-        
-        bool isTileTaken = true;
+        StartCoroutine(SpawnDeterminedChest(tileToSpawnOn));
+    }
 
-        while (isTileTaken)
+    IEnumerator SpawnDeterminedChest(int tileToSpawnOn)
+    {
+        yield return new WaitForSeconds(Random.Range(0.01f, 0.1f));
+        if(GameController.gc.noOfChests < 1)
         {
-            isTileTaken = false;
-            rand = rand+1;
+            GameController.gc.noOfChests++;
+            rand = tileToSpawnOn - 1;
 
-            foreach (int tileNumber in GameController.gc.currentPositions)
+            bool isTileTaken = true;
+
+            while (isTileTaken)
             {
-                if (GetRealTileNo() == tileNumber)
-                    isTileTaken = true;
-            }
-        }
+                isTileTaken = false;
+                rand = rand + 1;
 
-        SpawnChests();
-        StartCoroutine("WaitAndSetParent");
+                foreach (int tileNumber in GameController.gc.currentPositions)
+                {
+                    if (GetRealTileNo() == tileNumber)
+                        isTileTaken = true;
+                }
+            }
+
+            SpawnChests();
+            StartCoroutine("WaitAndSetParent");
+        }
     }
 
 

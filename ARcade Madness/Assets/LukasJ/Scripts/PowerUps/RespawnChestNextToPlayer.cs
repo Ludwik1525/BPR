@@ -29,6 +29,8 @@ public class RespawnChestNextToPlayer : MonoBehaviour
         }
 
         FindObjectOfType<SpawnChest>().PV.RPC("DestroyChest", RpcTarget.AllBuffered, true);
+        GameController.gc.noOfChests--;
+
         spawnChest.SpawningChestSequenceDetermined(PlayerPrefs.GetInt("totalPos") + 1);
     }
 
