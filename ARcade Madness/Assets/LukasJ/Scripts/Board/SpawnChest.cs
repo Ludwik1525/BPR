@@ -119,9 +119,6 @@ public class SpawnChest : MonoBehaviour
 
     public void SpawningChestSequenceDetermined(int tileToSpawnOn)
     {
-        if (GameController.gc.isChestSpawne)
-        {
-            GameController.gc.isChestSpawne = true;
             rand = tileToSpawnOn - 1;
 
             bool isTileTaken = true;
@@ -140,7 +137,6 @@ public class SpawnChest : MonoBehaviour
 
             SpawnChests();
             StartCoroutine("WaitAndSetParent");
-        }
     }
 
 
