@@ -11,7 +11,6 @@ public class GameController : MonoBehaviour
     public Transform[] players;
     public bool doesHavePosition = false;
     public int[] currentPositions;
-    public int noOfChests = 0;
 
 
     

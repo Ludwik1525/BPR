@@ -38,7 +38,7 @@ public class SpawnChest : MonoBehaviour
 
     public void SpawnChests()
     {
-        chest = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Chest"), tilesToSpawnChestsOn[rand].GetChild(2).transform.position, tilesToSpawnChestsOn[rand].GetChild(2).transform.rotation);
+            chest = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Chest"), tilesToSpawnChestsOn[rand].GetChild(2).transform.position, tilesToSpawnChestsOn[rand].GetChild(2).transform.rotation);
     }
 
     [PunRPC]
@@ -116,17 +116,10 @@ public class SpawnChest : MonoBehaviour
         StartCoroutine("WaitAndSetParent");
     }
 
-    public void SpawningChestSequenceDetermined(int tileToSpawnOn)
+    public void SpawningChestSequenceDetermined(int tileToSpawnOn, int playerNo)
     {
-        StartCoroutine(SpawnDeterminedChest(tileToSpawnOn));
-    }
-
-    IEnumerator SpawnDeterminedChest(int tileToSpawnOn)
-    {
-        yield return new WaitForSeconds(Random.Range(0.01f, 0.1f));
-        if(GameController.gc.noOfChests < 1)
+        if ((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"] == playerNo)
         {
-            GameController.gc.noOfChests++;
             rand = tileToSpawnOn - 1;
 
             bool isTileTaken = true;
