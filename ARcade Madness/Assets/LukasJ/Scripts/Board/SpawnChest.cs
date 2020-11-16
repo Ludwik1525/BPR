@@ -101,6 +101,10 @@ public class SpawnChest : MonoBehaviour
                 {
                     isTileTaken = false;
                     rand = Random.Range(1, tilesToSpawnChestsOn.Count);
+                    if (rand > FindObjectOfType<Route>().transform.childCount - 1)
+                    {
+                        rand = 0;
+                    }
 
                     foreach (int tileNumber in GameController.gc.currentPositions)
                     {
@@ -126,6 +130,10 @@ public class SpawnChest : MonoBehaviour
         {
             isTileTaken = false;
             rand = rand + 1;
+            if(rand > FindObjectOfType<Route>().transform.childCount - 1)
+            {
+                rand = 0;
+            }
 
             foreach (int tileNumber in GameController.gc.currentPositions)
             {
@@ -178,6 +186,11 @@ public class SpawnChest : MonoBehaviour
         }
         else
         {
+            if(rand == allTiles.Length - 1)
+            {
+                return 0;
+            }
+
             for(int i = 0; i < max; i++)
             {
                 if (allTiles[i].transform.gameObject.tag == "Tile")
