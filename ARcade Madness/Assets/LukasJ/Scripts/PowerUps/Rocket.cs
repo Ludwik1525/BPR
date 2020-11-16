@@ -22,7 +22,7 @@ public class Rocket : MonoBehaviour
     public void UseRocket()
     {
         if(BPC.PV.IsMine)
-            StartCoroutine(BPC.MoveWithRocket(10));
+            StartCoroutine(BPC.MoveWithRocket(3));
     }
 
     public void TurnOffRocket()

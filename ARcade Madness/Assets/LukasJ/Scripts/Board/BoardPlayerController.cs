@@ -239,11 +239,16 @@ public class BoardPlayerController : MonoBehaviour
         {
             totalPos = var;
         }
-        PlayerPrefs.SetInt("totalPos", totalPos);
-        PV.RPC("SaveMyPos", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], totalPos);
+        totalPos = PlayerPrefs.GetInt("totalPos");
+        //PlayerPrefs.SetInt("totalPos", totalPos);
+        //PV.RPC("SaveMyPos", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], totalPos);
+
+
+        print("VAR : " + var + " ROUTE POS: " + routePosition + " TOTAL POS: " + totalPos);
 
         //onStopMoving.Invoke();
         isMoving = false;
+        dicePV.RPC("SwitchTheDice", RpcTarget.AllBuffered);
         //diceGuard = false;
         //wasKeyPressed = false;
 
@@ -269,7 +274,7 @@ public class BoardPlayerController : MonoBehaviour
         isMoving = true;
 
         int var = 0;
-
+        print("VAR : " + var + " ROUTE POS: " + routePosition + " TOTAL POS: " + totalPos);
         while (steps > 0)
         {
             routePosition++;
@@ -305,7 +310,7 @@ public class BoardPlayerController : MonoBehaviour
         isMoving = false;
         diceGuard = false;
         wasKeyPressed = false;
-
+        print("VAR : " + var + " ROUTE POS: " + routePosition + " TOTAL POS: " + totalPos);
         PV.RPC("IncrementTurn", RpcTarget.AllBuffered , PlayerPrefs.GetInt("Score"));
     }
 
