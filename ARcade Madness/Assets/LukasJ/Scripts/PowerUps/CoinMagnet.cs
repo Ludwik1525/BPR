@@ -10,10 +10,12 @@ public class CoinMagnet : MonoBehaviour
     public bool isAvailable = true;
     private Button coinB;
     private Currency currency;
+    private BoardPlayerController BPC;
 
     // Start is called before the first frame update
     void Start()
     {
+        BPC = GetComponent<BoardPlayerController>();
         currency = GetComponent<Currency>();
         coinB = GameObject.Find("ButtonCoinMagnet").GetComponent<Button>();
         coinB.onClick.AddListener(StealTheCoins);
@@ -24,6 +26,7 @@ public class CoinMagnet : MonoBehaviour
     {
         currency.setCurrencyWithVar(currency.CheckHowManyHaveMoney(PhotonNetwork.LocalPlayer.NickName));
         currency.decreaseCurrencyCoinMagnet(PhotonNetwork.LocalPlayer.NickName);
+        BPC.hasUsedPowerUp = true;
     }
 
     public void TurnOffCoinMagnet()

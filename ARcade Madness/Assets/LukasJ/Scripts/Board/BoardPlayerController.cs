@@ -18,6 +18,7 @@ public class BoardPlayerController : MonoBehaviour
     private bool diceGuard = false;
     private bool wasDiceRolled = false;
     private bool isGameFinished = false;
+    public bool hasUsedPowerUp = false;
 
     private GameObject decisionBox;
     private Button yesB, noB, rollB;
@@ -144,6 +145,7 @@ public class BoardPlayerController : MonoBehaviour
     private void OnStartTurn()
     {
         rollB.interactable = true;
+        hasUsedPowerUp = false;
         coinMagnet.TurnOnCoinMagnet();
         rocket.TurnOnRocket();
     }
@@ -204,11 +206,6 @@ public class BoardPlayerController : MonoBehaviour
         dicePV.RPC("SwitchTheDice", RpcTarget.AllBuffered);
         rollB.interactable = false;
 
-        //onStartMoving.Invoke();
-        //Jump animation
-        //yield return new WaitForSeconds(2.2f);
-        //isMoving = true;
-
         int var = 0;
 
         while (steps > 0)
@@ -240,17 +237,12 @@ public class BoardPlayerController : MonoBehaviour
             totalPos = var;
         }
         totalPos = PlayerPrefs.GetInt("totalPos");
-        //PlayerPrefs.SetInt("totalPos", totalPos);
-        //PV.RPC("SaveMyPos", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], totalPos);
 
 
         print("VAR : " + var + " ROUTE POS: " + routePosition + " TOTAL POS: " + totalPos);
-
-        //onStopMoving.Invoke();
+        
         isMoving = false;
         dicePV.RPC("SwitchTheDice", RpcTarget.AllBuffered);
-        //diceGuard = false;
-        //wasKeyPressed = false;
 
         PV.RPC("IncrementTurn", RpcTarget.AllBuffered, PlayerPrefs.GetInt("Score"), false);
     }
