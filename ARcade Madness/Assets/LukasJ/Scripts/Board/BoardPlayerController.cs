@@ -151,6 +151,11 @@ public class BoardPlayerController : MonoBehaviour
             coinMagnet.TurnOnCoinMagnet();
             rocket.TurnOnRocket();
         }
+        else
+        {
+            coinMagnet.TurnOffCoinMagnet();
+            rocket.TurnOffRocket();
+        }
     }
 
     private void StopTimeAndOpenBox()
