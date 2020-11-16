@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject pauseScreen, optWindow, escWindow;
+    public GameObject pauseScreen, optWindow, escWindow, mainScreen, winScreen;
 
     public Button optButton, escButton, escCancelButton, resumeButton;
     
@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
         pauseScreen.SetActive(false);
         optWindow.SetActive(false);
         escWindow.SetActive(false);
+        winScreen.SetActive(false);
 
         optButton.onClick.AddListener(OpenPauseScreen);
         escButton.onClick.AddListener(OpenEscWindow);
@@ -25,12 +26,14 @@ public class GameManager : MonoBehaviour
     void OpenPauseScreen()
     {
         pauseScreen.SetActive(true);
+        mainScreen.SetActive(false);
         OpenOptWindow();
     }
 
     void ClosePauseScreen()
     {
         pauseScreen.SetActive(false);
+        mainScreen.SetActive(true);
     }
 
     void OpenOptWindow()
@@ -53,5 +56,11 @@ public class GameManager : MonoBehaviour
     {
         escWindow.SetActive(false);
         OpenOptWindow();
+    }
+
+    public void TurnOnWinScreen()
+    {
+        winScreen.SetActive(true);
+        mainScreen.SetActive(false);
     }
 }

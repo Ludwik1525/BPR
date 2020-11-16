@@ -53,7 +53,7 @@ public class BoardPlayerController : MonoBehaviour
         onStopMoving = new UnityEvent();
 
         //UI's
-        decisionBox = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
+        decisionBox = GameObject.Find("Canvas").transform.GetChild(0).GetChild(0).gameObject;
         yesB = decisionBox.transform.GetChild(1).GetComponent<Button>();
         noB = decisionBox.transform.GetChild(2).GetComponent<Button>();
         rollB = GameObject.Find("ButtonRoll").GetComponent<Button>();
@@ -67,7 +67,6 @@ public class BoardPlayerController : MonoBehaviour
         noB.onClick.AddListener(DeclineChest);
         rollB.onClick.AddListener(Roll);
         onStopMoving.AddListener(coinMagnet.TurnOffCoinMagnet);
-
     }
 
     private void Start()
@@ -117,18 +116,6 @@ public class BoardPlayerController : MonoBehaviour
                     }
                     diceGuard = true;
                 }
-
-                //if (Input.GetKeyDown(KeyCode.Space) && !isMoving)
-                //{
-                //    if (!wasKeyPressed)
-                //    {
-                //        wasKeyPressed = true;
-                //        steps = Random.Range(1, 7);
-                //        StartCoroutine(ShowTheRoll(steps));
-                //        Debug.Log("Dice Rolled: " + steps);
-                //        StartCoroutine(Move());
-                //    }
-                //}
 
                 if ((Input.touchCount > 0) && (Input.GetTouch(0).phase == TouchPhase.Began))
                 {
@@ -311,6 +298,11 @@ public class BoardPlayerController : MonoBehaviour
         PV.RPC("SetChestVariable", RpcTarget.AllBuffered);
         FindObjectOfType<ChestAnimationController>().doesWantChest = true;
         FindObjectOfType<ChestAnimationController>().taken = true;
+
+        if (PlayerPrefs.GetInt("Score") >= 1)
+        {
+            FindObjectOfType<GameManager>().TurnOnWinScreen();
+        }
     }
 
     [PunRPC]

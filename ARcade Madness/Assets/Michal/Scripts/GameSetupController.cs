@@ -43,15 +43,10 @@ public class GameSetupController : MonoBehaviour
 
     private void Update()
     {
-       
-
         if(startGame && infoPanel.activeInHierarchy)
         {
             infoPanel.SetActive(false);
         }
-        
-       
-
     }
 
     private void CreatePlayer()
@@ -85,7 +80,18 @@ public class GameSetupController : MonoBehaviour
 
     public void DisconnectPlayer()
     {
+        if(PhotonNetwork.PlayerList.Length - 1 < 2)
+        {
+            PV1.RPC("EnableEndScreen", RpcTarget.AllBuffered);
+        }
+
         StartCoroutine("DisconnectAndLoad");
+    }
+
+    [PunRPC]
+    void EnableEndScreen()
+    {
+        FindObjectOfType<GameManager>().TurnOnWinScreen();
     }
 
     IEnumerator DisconnectAndLoad()
