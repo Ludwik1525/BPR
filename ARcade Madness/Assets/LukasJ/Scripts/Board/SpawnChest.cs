@@ -79,9 +79,7 @@ public class SpawnChest : MonoBehaviour
 
     public void DestroyChest(bool isRand)
     {
-        //PhotonNetwork.Destroy()
-        GameController.gc.numberOfChests--;
-        Destroy(chest);
+        PhotonNetwork.Destroy(chest);
         if (!isRand)
         {
             //PlayerPrefs.SetInt("random", 0);
@@ -92,38 +90,59 @@ public class SpawnChest : MonoBehaviour
 
     public void SpawningChestSequence(bool isRand, int tileToSpawnOn)
     {
-        if(GameController.gc.numberOfChests < 1)
-        {
             if (!isRand)
             {
                 rand = PlayerPrefs.GetInt("random");
+                if(PhotonNetwork.IsMasterClient)
+                {
+                    if (rand == 0)
+                    {
+                        bool isTileTaken = true;
+
+                        while (isTileTaken)
+                        {
+                            isTileTaken = false;
+                            rand = Random.Range(1, tilesToSpawnChestsOn.Count);
+
+                            foreach (int tileNumber in GameController.gc.currentPositions)
+                            {
+                                if (GetRealTileNo() == tileNumber)
+                                    isTileTaken = true;
+                            }
+                        }
+
+                        PV.RPC("ChooseRandomNumber", RpcTarget.AllBuffered, rand);
+                    }
+                    SpawnChests();
+
+                StartCoroutine("WaitAndSetParent");
+                }
             }
             else
-                rand = tileToSpawnOn;
-
-            if (rand == 0)
             {
-                bool isTileTaken = true;
-
-                while (isTileTaken)
+                rand = tileToSpawnOn;
+                if (rand == 0)
                 {
-                    isTileTaken = false;
-                    rand = Random.Range(1, tilesToSpawnChestsOn.Count);
+                    bool isTileTaken = true;
 
-                    foreach (int tileNumber in GameController.gc.currentPositions)
+                    while (isTileTaken)
                     {
-                        if (GetRealTileNo() == tileNumber)
-                            isTileTaken = true;
+                        isTileTaken = false;
+                        rand = Random.Range(1, tilesToSpawnChestsOn.Count);
+
+                        foreach (int tileNumber in GameController.gc.currentPositions)
+                        {
+                            if (GetRealTileNo() == tileNumber)
+                                isTileTaken = true;
+                        }
                     }
+
+                    PV.RPC("ChooseRandomNumber", RpcTarget.AllBuffered, rand);
                 }
+                SpawnChests();
 
-                PV.RPC("ChooseRandomNumber", RpcTarget.AllBuffered, rand);
-            }
-            SpawnChests();
-
-            StartCoroutine("WaitAndSetParent");
-            GameController.gc.numberOfChests++;
-        }
+                StartCoroutine("WaitAndSetParent");
+            }      
        
     }
 
