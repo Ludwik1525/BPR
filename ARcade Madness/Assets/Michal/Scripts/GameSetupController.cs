@@ -88,12 +88,6 @@ public class GameSetupController : MonoBehaviour
         StartCoroutine("DisconnectAndLoad");
     }
 
-    [PunRPC]
-    void EnableEndScreen()
-    {
-        FindObjectOfType<GameManager>().TurnOnWinScreen();
-    }
-
     IEnumerator DisconnectAndLoad()
     {
         PlayerPrefs.SetInt("totalPos", 0);

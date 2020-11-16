@@ -39,4 +39,10 @@ public class PlayerScript : MonoBehaviour
         this.gameObject.transform.SetParent(playersParent);
     }
 
+    [PunRPC]
+    void EnableEndScreen()
+    {
+        FindObjectOfType<GameManager>().TurnOnWinScreen();
+    }
+
 }
