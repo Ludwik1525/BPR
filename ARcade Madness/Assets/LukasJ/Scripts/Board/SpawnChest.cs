@@ -119,24 +119,24 @@ public class SpawnChest : MonoBehaviour
 
     public void SpawningChestSequenceDetermined(int tileToSpawnOn)
     {
-            rand = tileToSpawnOn - 1;
+        rand = tileToSpawnOn - 1;
+        rand = GetRealTileNo(false);
+        bool isTileTaken = true;
 
-            bool isTileTaken = true;
+        while (isTileTaken)
+        {
+            isTileTaken = false;
+            rand = rand + 1;
 
-            while (isTileTaken)
+            foreach (int tileNumber in GameController.gc.currentPositions)
             {
-                isTileTaken = false;
-                rand = rand + 1;
-
-                foreach (int tileNumber in GameController.gc.currentPositions)
-                {
-                    if (GetRealTileNo(false) == tileNumber)
-                        isTileTaken = true;
-                }
+                if (GetRealTileNo(true) == tileNumber)
+                    isTileTaken = true;
             }
+        }
 
-            SpawnChests();
-            StartCoroutine("WaitAndSetParent");
+        SpawnChests();
+        StartCoroutine("WaitAndSetParent");
     }
 
 
