@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Photon.Pun;
 using UnityEngine.UI;
+using System.IO;
 
 public class SpinningGameManager : MonoBehaviour
 {
@@ -29,7 +30,11 @@ public class SpinningGameManager : MonoBehaviour
     {
         foreach(var player in PhotonNetwork.PlayerList)
         {
-            button = Instantiate(playerLoading_btn, menu.transform);
+            //button = PhotonNetwork.Instantiate(playerLoading_btn, menu.transform);
+            button = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerLoading"), menu.transform.position, Quaternion.identity);
+            //button = Instantiate(playerLoading_btn, menu.transform);
+            button.transform.SetParent(menu.transform);
+            button.GetComponent<Loader>().ready = true;
             button.transform.position += offset;
             button.transform.GetChild(0).gameObject.GetComponent<Text>().text = player.NickName;
             offset += new Vector3(0, -150, 0);
@@ -37,15 +42,18 @@ public class SpinningGameManager : MonoBehaviour
             buttons.Add(button);
         }
 
-        foreach (GameObject go in GameObject.FindObjectsOfType(typeof(GameObject)))
-        {
-            if (go.name == "Player_Spinner(Clone)")
-            {
-                if(go.GetComponent<PhotonView>().IsMine)
-                    pv = go.GetComponent<PhotonView>();
-            }
+        //foreach (GameObject go in GameObject.FindObjectsOfType(typeof(GameObject)))
+        //{
+        //    if (go.name == "Player_Spinner(Clone)")
+        //    {
+        //        if(go.GetComponent<PhotonView>().IsMine)
+        //        {
+        //            pv = go.GetComponent<PhotonView>();
+
+        //        }
+        //    }
                 
-        }
+        //}
     }
 
     // Update is called once per frame
@@ -60,12 +68,16 @@ public class SpinningGameManager : MonoBehaviour
         {
             if(butt.transform.GetChild(0).gameObject.GetComponent<Text>().text == PhotonNetwork.NickName)
             {
-                print(PhotonNetwork.NickName);
 
-                pv.RPC("ReadyIndication", RpcTarget.AllBuffered, butt);
+                if(pv.IsMine)
+                {
+                    print("mine");
+                    pv.RPC("ReadyIndication", RpcTarget.AllBuffered, butt);
 
-                //butt.transform.GetChild(1).gameObject.SetActive(false);
-                //butt.transform.GetChild(2).gameObject.SetActive(true);
+                }
+
+                butt.transform.GetChild(1).gameObject.SetActive(false);
+                butt.transform.GetChild(2).gameObject.SetActive(true);
                 ready_btn.interactable = false;
             }
         }

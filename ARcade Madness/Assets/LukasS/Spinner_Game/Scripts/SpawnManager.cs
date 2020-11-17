@@ -20,17 +20,17 @@ public class SpawnManager : MonoBehaviourPunCallbacks
     //    PlayerSpawnEventCode = 0
     //}
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         //PhotonNetwork.NetworkingClient.EventReceived += OnEvent;
 
-        int randomSpawnPoint = Random.Range(0, spawnPositions.Length - 1);
+        //int randomSpawnPoint = Random.Range(0, spawnPositions.Length - 1);
 
-        Vector3 instantiatePosition = spawnPositions[randomSpawnPoint].position;
+        //Vector3 instantiatePosition = spawnPositions[randomSpawnPoint].position;
 
-        GameObject player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player_Spinner"), instantiatePosition, Quaternion.identity);
-        //player.GetComponent<Rigidbody>().
-        PhotonView _photonView = player.GetComponent<PhotonView>();
+        //GameObject player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player_Spinner"), instantiatePosition, Quaternion.identity);
+        ////player.GetComponent<Rigidbody>().
+        //PhotonView _photonView = player.GetComponent<PhotonView>();
     }
 
     // Update is called once per frame
@@ -61,19 +61,19 @@ public class SpawnManager : MonoBehaviourPunCallbacks
     //    }
     //}
 
-    //public void JoinRoom()
-    //{
-    //    SpawnPlayer();
-    //}
+    public void JoinRoom()
+    {
+        SpawnPlayer();
+    }
 
-    //private void SpawnPlayer()
-    //{
-    //    int randomSpawnPoint = Random.Range(0, spawnPositions.Length - 1);
+    private void SpawnPlayer()
+    {
+        int randomSpawnPoint = Random.Range(0, spawnPositions.Length - 1);
 
-    //    Vector3 instantiatePosition = spawnPositions[randomSpawnPoint].position;
+        Vector3 instantiatePosition = spawnPositions[randomSpawnPoint].position;
 
-    //    GameObject player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player1_Attacker"), instantiatePosition , Quaternion.identity);
-    //    PhotonView _photonView = player.GetComponent<PhotonView>();
+        GameObject player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player_Spinner"), instantiatePosition, Quaternion.identity);
+        PhotonView _photonView = player.GetComponent<PhotonView>();
 
         //GameObject playerGameobject2 = Instantiate(playerPrefab, instantiatePosition, Quaternion.identity);
 
@@ -107,5 +107,5 @@ public class SpawnManager : MonoBehaviourPunCallbacks
         //    Debug.Log("Failed to allocate a viewID");
         //    Destroy(playerGameobject);
         //}
-    //}
-}
+        }
+    }

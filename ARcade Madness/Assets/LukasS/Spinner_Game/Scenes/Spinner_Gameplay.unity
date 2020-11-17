@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 268830696}
   - component: {fileID: 268830695}
   m_Layer: 5
-  m_Name: TextErrorShort
+  m_Name: Instruction_txt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -254,6 +254,7 @@ MonoBehaviour:
   playerLoading_btn: {fileID: 560073583046803556, guid: 9e36659a956d006449baa04755ee7573, type: 3}
   ready_btn: {fileID: 741569997}
   menu: {fileID: 1506862080}
+  players: []
 --- !u!1 &438968534
 GameObject:
   m_ObjectHideFlags: 0
