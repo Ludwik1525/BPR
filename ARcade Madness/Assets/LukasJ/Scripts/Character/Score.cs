@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Photon.Pun;
 using System.IO;
 
@@ -15,7 +16,7 @@ public class Score : MonoBehaviour
         si = FindObjectOfType<ScoreInfo>();
         myPV = GetComponent<PhotonView>();
 
-        if(PlayerPrefs.HasKey("Score"))
+        if (PlayerPrefs.HasKey("Score"))
         {
             score = PlayerPrefs.GetInt("Score");
         }

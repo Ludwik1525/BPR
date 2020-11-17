@@ -10,8 +10,29 @@ public class Currency : MonoBehaviour
     private PhotonView myPV;
     private int currency;
 
+    Button[] buttons;
+    Button buttonQuit;
+    Button buttonQuit2;
+
+
     private void Start()
     {
+        //Very bad code that might work
+        buttons = GameObject.Find("Canvas").GetComponentsInChildren<Button>(true);
+        foreach(Button b in buttons)
+        {
+            if(b.gameObject.name.Contains("Quit"))
+            {
+                buttonQuit = b;
+            }
+            if (b.gameObject.name.Contains("Confirm"))
+            {
+                buttonQuit2 = b;
+            }
+        }
+        buttonQuit.onClick.AddListener(onQuit);
+        buttonQuit2.onClick.AddListener(onQuit);
+
         si = FindObjectOfType<ScoreInfo>();
         myPV = GetComponent<PhotonView>();
 
@@ -141,6 +162,11 @@ public class Currency : MonoBehaviour
     }
 
     private void OnApplicationQuit()
+    {
+        onQuit();
+    }
+
+    void onQuit()
     {
         currency = 0;
         ExitGames.Client.Photon.Hashtable thisCurrency = new ExitGames.Client.Photon.Hashtable();
