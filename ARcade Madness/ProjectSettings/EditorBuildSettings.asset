@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Michal/Scenes/MainMenu.unity
     guid: 03fb2553cb5bf5840aa1bb0aadcfc9dd
-  - enabled: 0
+  - enabled: 1
     path: Assets/LukasJ/Scenes/BoardScene.unity
     guid: ee83d437d80995e4c8b51fa818a40bdd
-  - enabled: 0
+  - enabled: 1
     path: Assets/LukasJ/Scenes/AssetScene.unity
     guid: ccfbf8f03be0d524b8321881eefa6d59
   - enabled: 0
@@ -20,8 +20,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/LukasJ/Scenes/BoardSceneWithAr.unity
     guid: cf623cec438f9fe4093d3c672dcd4877
-  - enabled: 1
-    path: Assets/LukasS/Spinner_Game/Scenes/Spinner_Gameplay.unity
+  - enabled: 0
+    path: Assets/LukasS/Spinner_Game/Scenes/Spinner_Gameplay 1.unity
     guid: 552cc7c900d03524092d44a54632b555
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 07b6381d889f04f44aab930a18e2a7e7, type: 2}
