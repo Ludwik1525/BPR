@@ -38,7 +38,9 @@ public class SpawnChest : MonoBehaviour
 
     public void SpawnChests()
     {
-            chest = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Chest"), tilesToSpawnChestsOn[rand].GetChild(2).transform.position, tilesToSpawnChestsOn[rand].GetChild(2).transform.rotation);
+        chest = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Chest"), 
+             tilesToSpawnChestsOn[rand].GetChild(2).transform.position, tilesToSpawnChestsOn[rand].GetChild(2).transform.rotation);
+        FindObjectOfType<GameManager>().PV.RPC("PlayChestSpawnSound", RpcTarget.AllBuffered);
     }
 
     [PunRPC]

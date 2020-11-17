@@ -75,6 +75,10 @@ MonoBehaviour:
   - EnableRocket
   - RPC_SetName
   - RPC_SetPlayerLoader
+  - PlayChestSpawnSound
+  - PlayCoinStealSound
+  - PlayTrophySound
+  - SwitchRocketSounds
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

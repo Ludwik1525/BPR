@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
     private GameObject diceRollInfo;
     public int roll;
 
+    private AudioManager audioManager;
+
     //Events
     [HideInInspector]
     public UnityEvent onStartMoving;
@@ -49,6 +51,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        audioManager = FindObjectOfType<AudioManager>();
         if (PlayerPrefs.HasKey("totalPos"))
             totalPos = PlayerPrefs.GetInt("totalPos");
 
@@ -103,6 +106,7 @@ public class GameManager : MonoBehaviour
                     steps = Random.Range(1, 7);
                     StartCoroutine(ShowTheRoll(steps));
                     StartCoroutine(Move());
+                    audioManager.PlayDiceRollSound();
                 }
             }
         }
@@ -145,6 +149,7 @@ public class GameManager : MonoBehaviour
                             StartCoroutine(ShowTheRoll(steps));
                             Debug.Log("Dice Rolled: " + steps);
                             StartCoroutine(Move());
+                            audioManager.PlayDiceRollSound();
                         }
                     }
                 }
@@ -231,6 +236,7 @@ public class GameManager : MonoBehaviour
         int var = 0;
 
         onStartMovingWithRocket.Invoke();
+        PV.RPC("SwitchRocketSounds", RpcTarget.AllBuffered, true);
 
         while (steps > 0)
         {
@@ -265,6 +271,7 @@ public class GameManager : MonoBehaviour
         isMoving = false;
 
         onStopMovingWithRocket.Invoke();
+        PV.RPC("SwitchRocketSounds", RpcTarget.AllBuffered, false);
 
         dicePV.RPC("SwitchTheDice", RpcTarget.AllBuffered);
 
@@ -337,7 +344,6 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(seconds);
     }
 
-
     IEnumerator LoadSceneDelay()
     {
         if (FindObjectOfType<ChestAnimationController>().taken)
@@ -400,6 +406,7 @@ public class GameManager : MonoBehaviour
         PV.RPC("SetChestVariable", RpcTarget.AllBuffered);
         FindObjectOfType<ChestAnimationController>().doesWantChest = true;
         FindObjectOfType<ChestAnimationController>().taken = true;
+        PV.RPC("PlayTrophySound", RpcTarget.AllBuffered);
     }
 
     [PunRPC]
@@ -442,6 +449,37 @@ public class GameManager : MonoBehaviour
                 GameController.gc.currentTurn++;
                 PV.RPC("ResetTurnVar", RpcTarget.AllBuffered);
             }
+        }
+    }
+
+    [PunRPC]
+    public void PlayCoinStealSound()
+    {
+        audioManager.PlayCoinStealSound();
+    }
+
+    [PunRPC]
+    private void PlayTrophySound()
+    {
+        audioManager.PlayTrophySound();
+    }
+
+    [PunRPC]
+    public void PlayChestSpawnSound()
+    {
+        audioManager.PlayChestSpawnSound();
+    }
+
+    [PunRPC]
+    private void SwitchRocketSounds(bool condition)
+    {
+        if(condition)
+        {
+            audioManager.TurnOnRocketSounds();
+        }
+        else
+        {
+            audioManager.TurnOffRocketSounds();
         }
     }
 
