@@ -1015,10 +1015,7 @@ GameObject:
   - component: {fileID: 5269389219472566509}
   - component: {fileID: 5269389219472566499}
   - component: {fileID: 2328038353982409406}
-  - component: {fileID: 7161538928708883256}
-  - component: {fileID: 7637690272980262862}
   - component: {fileID: 6995718887053405833}
-  - component: {fileID: 6845003172328702646}
   - component: {fileID: 5181779001582584477}
   m_Layer: 0
   m_Name: Player_Spinner
@@ -1397,27 +1394,6 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
---- !u!114 &6845003172328702646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5269389219472566511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c120abdd5d3ec548905385714505a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spinnerScript: {fileID: 7161538928708883256}
-  uI_3D_Gameobject: {fileID: 5269389219166370273}
-  deathPanelUIPrefab: {fileID: 3593783272886976281, guid: dfb360a2c30a2d54bad456151ac8906b, type: 3}
-  spinSpeedBar_Image: {fileID: 5269389218958141032}
-  spinSpeedRatio_Text: {fileID: 5855994178444033063}
-  isDead: 0
-  common_Demage_Coefficient: 0.04
-  doDamage_Coefficient: 10
-  getDamaged_Coefficient: 1.2
 --- !u!4 &6846396698723392055
 Transform:
   m_ObjectHideFlags: 0
@@ -1578,21 +1554,6 @@ MonoBehaviour:
   viewIdField: 3
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &7161538928708883256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5269389219472566511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10149df88c3126b49b42a71b320b8646, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spinSpeed: 3600
-  doSpin: 1
-  playerGraphics: {fileID: 5269389220739547815}
 --- !u!114 &7170700436256712310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1624,19 +1585,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0.08}
   m_SizeDelta: {x: 0.55, y: 0.065}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7637690272980262862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5269389219472566511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6aec4e5d6369e69418a8cbf7ec4417e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerNameText: {fileID: 5269389219909794517}
 --- !u!33 &8081640997074419210
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1785,8 +1733,11 @@ MonoBehaviour:
     SynchronizeType: 2
     Name: isRunning
   - Type: 4
-    SynchronizeType: 2
-    Name: isRidingRocket
+    SynchronizeType: 0
+    Name: isThrowingSpell
+  - Type: 4
+    SynchronizeType: 0
+    Name: isBlocking
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
