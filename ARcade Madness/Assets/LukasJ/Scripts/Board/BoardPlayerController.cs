@@ -166,7 +166,7 @@ public class BoardPlayerController : MonoBehaviour
 
     private void StopTimeAndOpenBox()
     {
-        if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Currency"] >= 1)
+        if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Currency"] >= 7)
         {
             decisionBox.SetActive(true);
             PV.RPC("StopTheTime", RpcTarget.AllBuffered);
