@@ -29,7 +29,6 @@ public class Score : MonoBehaviour
         {
             si.GetComponent<PhotonView>().RPC("SetScore", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"],
                        PlayerPrefs.GetInt("Score"));
-            print("My score " + PlayerPrefs.GetInt("Score"));
         }
     }
 
