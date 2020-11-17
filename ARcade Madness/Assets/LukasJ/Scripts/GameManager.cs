@@ -64,5 +64,7 @@ public class GameManager : MonoBehaviour
         FindObjectOfType<ScoreInfo>().SortPlayersOrder();
         winScreen.SetActive(true);
         mainScreen.SetActive(false);
+        escWindow.SetActive(false);
+        optWindow.SetActive(false);
     }
 }

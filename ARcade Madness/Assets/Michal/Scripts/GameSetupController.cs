@@ -53,6 +53,7 @@ public class GameSetupController : MonoBehaviour
     {
         if (!GameController.gc.doesHavePosition)
         {
+            GameController.gc.roundCount = 0;
             PlayerPrefs.SetInt("totalPos", 0);
             player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player"),
             spawnPositions[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]].position, Quaternion.identity);

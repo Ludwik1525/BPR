@@ -172,6 +172,8 @@ public class Currency : MonoBehaviour
         ExitGames.Client.Photon.Hashtable thisCurrency = new ExitGames.Client.Photon.Hashtable();
         thisCurrency.Add("Currency", currency);
         PhotonNetwork.LocalPlayer.SetCustomProperties(thisCurrency);
+
+        si.GetComponent<PhotonView>().RPC("SetCurrency", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], currency);
     }
 
 
