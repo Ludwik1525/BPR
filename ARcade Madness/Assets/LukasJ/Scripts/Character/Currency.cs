@@ -119,17 +119,23 @@ public class Currency : MonoBehaviour
             if(PhotonNetwork.PlayerList[i].NickName != myName)
             {
                 tempCurrency = (int)PhotonNetwork.PlayerList[i].CustomProperties["Currency"];
-                if (tempCurrency > 0)
+                if (tempCurrency > 1)
+                {
+                    tempCurrency -= 2;
+
+                   
+                }
+                else if(tempCurrency > 0)
                 {
                     tempCurrency--;
-
-                    ExitGames.Client.Photon.Hashtable thisCurrency = new ExitGames.Client.Photon.Hashtable();
-                    thisCurrency.Add("Currency", tempCurrency);
-                    PhotonNetwork.PlayerList[i].SetCustomProperties(thisCurrency);
-
-                    si.GetComponent<PhotonView>().RPC("SetCurrency", RpcTarget.AllBuffered,
-                        (int)PhotonNetwork.PlayerList[i].CustomProperties["PlayerNo"], tempCurrency);
                 }
+
+                ExitGames.Client.Photon.Hashtable thisCurrency = new ExitGames.Client.Photon.Hashtable();
+                thisCurrency.Add("Currency", tempCurrency);
+                PhotonNetwork.PlayerList[i].SetCustomProperties(thisCurrency);
+
+                si.GetComponent<PhotonView>().RPC("SetCurrency", RpcTarget.AllBuffered,
+                    (int)PhotonNetwork.PlayerList[i].CustomProperties["PlayerNo"], tempCurrency);
             }
         }
     }
