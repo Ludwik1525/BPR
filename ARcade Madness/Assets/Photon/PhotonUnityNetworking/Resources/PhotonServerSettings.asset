@@ -71,6 +71,9 @@ MonoBehaviour:
   - DestroyChest
   - SpawningChestSequence
   - UnifyTheRandomNumber
+  - RPC_AddPlayerLoaderToList
+  - RPC_SetName
+  - RPC_SetPlayerLoader
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

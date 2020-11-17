@@ -66,7 +66,7 @@ public class SpawnManager : MonoBehaviourPunCallbacks
         SpawnPlayer();
     }
 
-    private void SpawnPlayer()
+    public void SpawnPlayer()
     {
         int randomSpawnPoint = Random.Range(0, spawnPositions.Length - 1);
 

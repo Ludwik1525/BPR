@@ -9,91 +9,78 @@ using System.IO;
 public class SpinningGameManager : MonoBehaviour
 {
     [Header("UI")]
-    public GameObject playerLoading_btn;
+    [SerializeField]
+    private Button ready_btn;
+    [SerializeField]
+    private GameObject menu;
+    [SerializeField]
+    private Transform[] spawnPositions;
+    [SerializeField]
+    private GameObject battleArenaGameobject;
+    [SerializeField]
+    private GameObject instruction;
 
-    private GameObject button;
-
-    private List<GameObject> buttons = new List<GameObject>();
-
-    public Button ready_btn;
+    public static List<GameObject> playerLoaders = new List<GameObject>();
 
     private PhotonView pv;
-
-    public GameObject menu;
-
-    public List<GameObject> players = new List<GameObject>();
-
-    private Vector3 offset = Vector3.zero;
+    private int count = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        //pv = GetComponent<PhotonView>();
+        GameObject playerLoader = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerLoadingImg"), menu.transform.position, Quaternion.identity);
+        pv = playerLoader.GetComponent<PhotonView>();
+        pv.RPC("RPC_SetPlayerLoader", RpcTarget.AllBuffered);
 
-        button = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerLoading"), menu.transform.position, Quaternion.identity);
-        button.transform.GetChild(0).gameObject.GetComponent<Text>().text = PhotonNetwork.LocalPlayer.NickName;
-
-        pv = button.GetComponent<PhotonView>();
-        pv.RPC("RPC_SetParent", RpcTarget.AllBuffered);
-
-        //button = PhotonNetwork.Instantiate(playerLoading_btn, menu.transform);
-        //button = Instantiate(playerLoading_btn, menu.transform);
-        //button.GetComponent<Loader>().ready = true;
-        //button.transform.position += offset;
-        //offset += new Vector3(0, -150, 0);
-
-        //buttons.Add(button);
-
-
-        //foreach (GameObject go in GameObject.FindObjectsOfType(typeof(GameObject)))
-        //{
-        //    if (go.name == "Player_Spinner(Clone)")
-        //    {
-        //        if(go.GetComponent<PhotonView>().IsMine)
-        //        {
-        //            pv = go.GetComponent<PhotonView>();
-
-        //        }
-        //    }
-
-        //}
+        if(pv.IsMine)
+        {
+            pv.RPC("RPC_SetName", RpcTarget.AllBuffered);
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
+        while(count < playerLoaders.Count)
+        {
+            foreach (var a in playerLoaders)
+            {
+                if (a.GetComponent<Loader>().ready == true)
+                {
+                    count++;
+                }
+                else
+                {
+                    count = 0;
+                    return;
+                }
+                print(count);
+            }
+
+            if (count == playerLoaders.Count)
+            {
+                print("ready");
+                instruction.SetActive(false);
+                SpawnPlayer();
+            }
+        }
+        
 
     }
 
-    //public void Ready()
-    //{
-    //    foreach(var butt in buttons)
-    //    {
-    //        if(butt.transform.GetChild(0).gameObject.GetComponent<Text>().text == PhotonNetwork.NickName)
-    //        {
+    public void Ready()
+    {
+        print("c  " + PhotonNetwork.CountOfPlayers);
+        pv.RPC("ReadyIndication", RpcTarget.AllBuffered);
+        ready_btn.interactable = false;
+    }
 
-    //            //if(pv.IsMine)
-    //            //{
-    //            //    print("mine");
-    //            //    pv.RPC("ReadyIndication", RpcTarget.AllBuffered, butt);
+    public void SpawnPlayer()
+    {
+        int randomSpawnPoint = Random.Range(0, spawnPositions.Length - 1);
 
-    //            //}
+        Vector3 instantiatePosition = spawnPositions[randomSpawnPoint].position;
 
-    //            butt.transform.GetChild(1).gameObject.SetActive(false);
-    //            butt.transform.GetChild(2).gameObject.SetActive(true);
-    //            ready_btn.interactable = false;
-    //        }
-    //    }
-    //}
-
-    //[PunRPC]
-    //public void ReadyIndication(GameObject a)
-    //{
-    //    print("aaa");
-    //    a.transform.GetChild(1).gameObject.SetActive(false);
-    //    a.transform.GetChild(2).gameObject.SetActive(true);
-    //}
-
-
+        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player_Spinner"), instantiatePosition, Quaternion.identity);
+    }
 
 }
