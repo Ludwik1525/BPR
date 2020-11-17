@@ -10,28 +10,28 @@ public class Currency : MonoBehaviour
     private PhotonView myPV;
     private int currency;
 
-    Button[] buttons;
-    Button buttonQuit;
-    Button buttonQuit2;
+    //Button[] buttons;
+    //Button buttonQuit;
+    //Button buttonQuit2;
 
 
     private void Start()
     {
         //Very bad code that might work
-        buttons = GameObject.Find("Canvas").GetComponentsInChildren<Button>(true);
-        foreach(Button b in buttons)
-        {
-            if(b.gameObject.name.Contains("Quit"))
-            {
-                buttonQuit = b;
-            }
-            if (b.gameObject.name.Contains("Confirm"))
-            {
-                buttonQuit2 = b;
-            }
-        }
-        buttonQuit.onClick.AddListener(onQuit);
-        buttonQuit2.onClick.AddListener(onQuit);
+        //buttons = GameObject.Find("Canvas").GetComponentsInChildren<Button>(true);
+        //foreach(Button b in buttons)
+        //{
+        //    if(b.gameObject.name.Contains("Quit"))
+        //    {
+        //        buttonQuit = b;
+        //    }
+        //    if (b.gameObject.name.Contains("Confirm"))
+        //    {
+        //        buttonQuit2 = b;
+        //    }
+        //}
+        //buttonQuit.onClick.AddListener(onQuit);
+        //buttonQuit2.onClick.AddListener(onQuit);
 
         si = FindObjectOfType<ScoreInfo>();
         myPV = GetComponent<PhotonView>();
@@ -95,12 +95,12 @@ public class Currency : MonoBehaviour
         }
     }
 
-    public void decreaseCurrency()
+    public void decreaseCurrency(int chestCost)
     {
         if (myPV.IsMine)
         {
             this.currency = (int)PhotonNetwork.LocalPlayer.CustomProperties["Currency"];
-            this.currency--;
+            this.currency -= chestCost;
             
             ExitGames.Client.Photon.Hashtable thisCurrency = new ExitGames.Client.Photon.Hashtable();
             thisCurrency.Add("Currency", currency);

@@ -178,7 +178,7 @@ public class BoardPlayerController : MonoBehaviour
         PV.RPC("StartTheTimeAccept", RpcTarget.AllBuffered);
         decisionBox.SetActive(false);
         steps = 0;
-        GetComponent<Currency>().decreaseCurrency();
+        GetComponent<Currency>().decreaseCurrency(7);
     }
 
     private void DeclineChest()

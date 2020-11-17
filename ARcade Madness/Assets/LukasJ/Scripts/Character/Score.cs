@@ -37,7 +37,7 @@ public class Score : MonoBehaviour
     {
         if (myPV.IsMine)
         {
-            this.score ++;
+            this.score++;
 
             PlayerPrefs.SetInt("Score", score);
 
