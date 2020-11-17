@@ -98,7 +98,11 @@ public class Currency : MonoBehaviour
             if (PhotonNetwork.PlayerList[i].NickName != myName)
             {
                 tempCurrency = (int)PhotonNetwork.PlayerList[i].CustomProperties["Currency"];
-                if (tempCurrency > 0)
+                if (tempCurrency > 1)
+                {
+                    amount += 2;
+                }
+                else if(tempCurrency > 0)
                 {
                     amount++;
                 }

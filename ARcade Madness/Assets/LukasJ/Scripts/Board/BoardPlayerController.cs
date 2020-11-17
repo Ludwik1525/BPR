@@ -331,6 +331,7 @@ public class BoardPlayerController : MonoBehaviour
         yield return new WaitForSeconds(seconds);
     }
 
+
     IEnumerator LoadSceneDelay()
     {
         if (FindObjectOfType<ChestAnimationController>().taken)
@@ -357,7 +358,7 @@ public class BoardPlayerController : MonoBehaviour
             PV.RPC("ResetTurnVar", RpcTarget.AllBuffered);
         }
 
-        if (callersScore >= 1)
+        if (callersScore >= 3)
         {
             FindObjectOfType<GameManager>().TurnOnWinScreen();
             isGameFinished = true;
