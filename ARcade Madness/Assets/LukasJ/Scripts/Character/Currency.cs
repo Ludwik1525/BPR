@@ -10,8 +10,29 @@ public class Currency : MonoBehaviour
     private PhotonView myPV;
     private int currency;
 
+    //Button[] buttons;
+    //Button buttonQuit;
+    //Button buttonQuit2;
+
+
     private void Start()
     {
+        //Very bad code that might work
+        //buttons = GameObject.Find("Canvas").GetComponentsInChildren<Button>(true);
+        //foreach(Button b in buttons)
+        //{
+        //    if(b.gameObject.name.Contains("Quit"))
+        //    {
+        //        buttonQuit = b;
+        //    }
+        //    if (b.gameObject.name.Contains("Confirm"))
+        //    {
+        //        buttonQuit2 = b;
+        //    }
+        //}
+        //buttonQuit.onClick.AddListener(onQuit);
+        //buttonQuit2.onClick.AddListener(onQuit);
+
         si = FindObjectOfType<ScoreInfo>();
         myPV = GetComponent<PhotonView>();
 
@@ -74,12 +95,12 @@ public class Currency : MonoBehaviour
         }
     }
 
-    public void decreaseCurrency()
+    public void decreaseCurrency(int chestCost)
     {
         if (myPV.IsMine)
         {
             this.currency = (int)PhotonNetwork.LocalPlayer.CustomProperties["Currency"];
-            this.currency--;
+            this.currency -= chestCost;
             
             ExitGames.Client.Photon.Hashtable thisCurrency = new ExitGames.Client.Photon.Hashtable();
             thisCurrency.Add("Currency", currency);
@@ -119,27 +140,40 @@ public class Currency : MonoBehaviour
             if(PhotonNetwork.PlayerList[i].NickName != myName)
             {
                 tempCurrency = (int)PhotonNetwork.PlayerList[i].CustomProperties["Currency"];
-                if (tempCurrency > 0)
+                if (tempCurrency > 1)
+                {
+                    tempCurrency -= 2;
+
+                   
+                }
+                else if(tempCurrency > 0)
                 {
                     tempCurrency--;
-
-                    ExitGames.Client.Photon.Hashtable thisCurrency = new ExitGames.Client.Photon.Hashtable();
-                    thisCurrency.Add("Currency", tempCurrency);
-                    PhotonNetwork.PlayerList[i].SetCustomProperties(thisCurrency);
-
-                    si.GetComponent<PhotonView>().RPC("SetCurrency", RpcTarget.AllBuffered,
-                        (int)PhotonNetwork.PlayerList[i].CustomProperties["PlayerNo"], tempCurrency);
                 }
+
+                ExitGames.Client.Photon.Hashtable thisCurrency = new ExitGames.Client.Photon.Hashtable();
+                thisCurrency.Add("Currency", tempCurrency);
+                PhotonNetwork.PlayerList[i].SetCustomProperties(thisCurrency);
+
+                si.GetComponent<PhotonView>().RPC("SetCurrency", RpcTarget.AllBuffered,
+                    (int)PhotonNetwork.PlayerList[i].CustomProperties["PlayerNo"], tempCurrency);
             }
         }
     }
 
     private void OnApplicationQuit()
     {
+        onQuit();
+    }
+
+    void onQuit()
+    {
         currency = 0;
         ExitGames.Client.Photon.Hashtable thisCurrency = new ExitGames.Client.Photon.Hashtable();
         thisCurrency.Add("Currency", currency);
         PhotonNetwork.LocalPlayer.SetCustomProperties(thisCurrency);
+
+        si.GetComponent<PhotonView>().RPC("SetCurrency", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], currency);
     }
 
 

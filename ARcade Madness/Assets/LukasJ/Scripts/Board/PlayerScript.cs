@@ -6,9 +6,13 @@ using Photon.Pun;
 public class PlayerScript : MonoBehaviour
 {
     private PhotonView PV;
-    
+    private GameObject rocket;
     private Transform playersParent;
 
+    private void Start()
+    {
+        rocket = gameObject.transform.GetChild(1).GetChild(1).gameObject;
+    }
 
     //ready for game after placing ar board
     public bool readyForGame;
@@ -45,4 +49,15 @@ public class PlayerScript : MonoBehaviour
         FindObjectOfType<GameManager>().TurnOnWinScreen();
     }
 
+    [PunRPC]
+    private void EnableRocket()
+    {
+        rocket.SetActive(true);
+    }
+
+    [PunRPC]
+    private void DisableRocket()
+    {
+        rocket.SetActive(false);
+    }
 }

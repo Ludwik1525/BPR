@@ -36,7 +36,11 @@ public class BoardPlayerController : MonoBehaviour
     [HideInInspector]
     public UnityEvent onStartMoving;
     [HideInInspector]
-    public UnityEvent onStopMoving;
+    public UnityEvent onStopMoving;  
+    [HideInInspector]
+    public UnityEvent onStartMovingWithRocket;
+    [HideInInspector]
+    public UnityEvent onStopMovingWithRocket;
 
     //Power ups
     private CoinMagnet coinMagnet;
@@ -55,6 +59,8 @@ public class BoardPlayerController : MonoBehaviour
         //Events
         onStartMoving = new UnityEvent();
         onStopMoving = new UnityEvent();
+        onStartMovingWithRocket = new UnityEvent();
+        onStopMovingWithRocket = new UnityEvent();
 
         //UI's
         decisionBox = GameObject.Find("Canvas").transform.GetChild(0).GetChild(0).gameObject;
@@ -96,7 +102,6 @@ public class BoardPlayerController : MonoBehaviour
                     wasKeyPressed = true;
                     steps = Random.Range(1, 7);
                     StartCoroutine(ShowTheRoll(steps));
-                    Debug.Log("Dice Rolled: " + steps);
                     StartCoroutine(Move());
                 }
             }
@@ -166,7 +171,7 @@ public class BoardPlayerController : MonoBehaviour
 
     private void StopTimeAndOpenBox()
     {
-        if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Currency"] >= 1)
+        if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Currency"] >= 7)
         {
             decisionBox.SetActive(true);
             PV.RPC("StopTheTime", RpcTarget.AllBuffered);
@@ -178,7 +183,7 @@ public class BoardPlayerController : MonoBehaviour
         PV.RPC("StartTheTimeAccept", RpcTarget.AllBuffered);
         decisionBox.SetActive(false);
         steps = 0;
-        GetComponent<Currency>().decreaseCurrency();
+        GetComponent<Currency>().decreaseCurrency(7);
     }
 
     private void DeclineChest()
@@ -225,6 +230,8 @@ public class BoardPlayerController : MonoBehaviour
 
         int var = 0;
 
+        onStartMovingWithRocket.Invoke();
+
         while (steps > 0)
         {
             routePosition++;
@@ -254,11 +261,11 @@ public class BoardPlayerController : MonoBehaviour
             totalPos = var;
         }
         totalPos = PlayerPrefs.GetInt("totalPos");
-
-
-        print("VAR : " + var + " ROUTE POS: " + routePosition + " TOTAL POS: " + totalPos);
         
         isMoving = false;
+
+        onStopMovingWithRocket.Invoke();
+
         dicePV.RPC("SwitchTheDice", RpcTarget.AllBuffered);
 
         PV.RPC("IncrementTurn", RpcTarget.AllBuffered, PlayerPrefs.GetInt("Score"), false);
@@ -286,7 +293,6 @@ public class BoardPlayerController : MonoBehaviour
         isMoving = true;
 
         int var = 0;
-        print("VAR : " + var + " ROUTE POS: " + routePosition + " TOTAL POS: " + totalPos);
         while (steps > 0)
         {
             routePosition++;

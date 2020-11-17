@@ -78,4 +78,9 @@ public class GameController : MonoBehaviour
             players[i].GetComponent<BoardPlayerController>().SetTurn((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"] + 1);
         }
     }
+
+    public void onQuit()
+    {
+        currentTurn = 0;
+    }
 }

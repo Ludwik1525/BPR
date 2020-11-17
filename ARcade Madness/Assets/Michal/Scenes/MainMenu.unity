@@ -195,8 +195,8 @@ MonoBehaviour:
     m_LineSpacing: 1.06
   m_Text: "1. The game is turn-based and each turn a random mini-game launches. \n2.
     In the mini-games you must compete with others in order to get coins and power-ups.
-    \n3. Then the goal is to open chests with coins to get trophies on the board
-    scene. \n4. The player who gets 3 of them first one, wins."
+    \n3. Then the goal is to open chests with enough coins to get trophies on the
+    board scene. \n4. The player who gets 3 of them first one, wins."
 --- !u!222 &14084424
 CanvasRenderer:
   m_ObjectHideFlags: 0
