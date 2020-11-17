@@ -8,7 +8,7 @@ public class Rocket : MonoBehaviour
 {
     public bool isAvailable = true;
     private Button rocketB;
-    private BoardPlayerController BPC;
+    private GameManager BPC;
     private int numberOfTilesToMove = 5;
     private PhotonView PV;
 
@@ -16,7 +16,7 @@ public class Rocket : MonoBehaviour
     void Start()
     {
         PV = GetComponent<PhotonView>();
-        BPC = GetComponent<BoardPlayerController>();
+        BPC = GetComponent<GameManager>();
         rocketB = GameObject.Find("ButtonRocket").GetComponent<Button>();
         rocketB.onClick.AddListener(UseRocket);
         TurnOffRocket();

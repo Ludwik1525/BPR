@@ -39,7 +39,7 @@ public class GameController : MonoBehaviour
             {
                 if (players[i].position == startPositions[j].position)
                 {
-                    players[i].GetComponent<BoardPlayerController>().SetTurn(j + 1);
+                    players[i].GetComponent<GameManager>().SetTurn(j + 1);
                 }
             }
         }
@@ -75,7 +75,7 @@ public class GameController : MonoBehaviour
         }
         for (int i = 0; i < players.Length; i++)
         {
-            players[i].GetComponent<BoardPlayerController>().SetTurn((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"] + 1);
+            players[i].GetComponent<GameManager>().SetTurn((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"] + 1);
         }
     }
 

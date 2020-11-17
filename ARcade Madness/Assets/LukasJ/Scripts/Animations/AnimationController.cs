@@ -5,7 +5,7 @@ using Photon.Pun;
 
 public class AnimationController : MonoBehaviour
 {
-    private BoardPlayerController playerController;
+    private GameManager playerController;
     private Animator anim;
     private PhotonView PV;
 
@@ -14,7 +14,7 @@ public class AnimationController : MonoBehaviour
         PV = transform.parent.GetComponent<PhotonView>();
         anim = GetComponentInChildren<Animator>();
 
-        playerController = transform.parent.GetComponent<BoardPlayerController>();
+        playerController = transform.parent.GetComponent<GameManager>();
         playerController.onStartMoving.AddListener(delegate { StartBoolAnimationByName("isRunning"); });
         playerController.onStopMoving.AddListener(delegate { StopBoolAnimationByName("isRunning"); });
         playerController.onStartMovingWithRocket.AddListener(delegate { StartBoolAnimationByName("isRidingRocket"); });

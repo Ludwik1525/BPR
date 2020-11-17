@@ -6,7 +6,7 @@ using UnityEngine.Events;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
 
-public class BoardPlayerController : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     public int totalPos = 0;
 

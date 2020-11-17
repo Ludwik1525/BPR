@@ -8,14 +8,14 @@ public class RespawnChestNextToPlayer : MonoBehaviour
 {
     public bool isAvailable = true;
     private Button respawnChestB;
-    private BoardPlayerController BPC;
+    private GameManager BPC;
     private SpawnChest spawnChest;
 
     // Start is called before the first frame update
     void Start()
     {
         spawnChest = FindObjectOfType<SpawnChest>();
-        BPC = GetComponent<BoardPlayerController>();
+        BPC = GetComponent<GameManager>();
         respawnChestB = GameObject.Find("ButtonChestRespawn").GetComponent<Button>();
         respawnChestB.onClick.AddListener(UseChestRespawn);
         TurnOffChestRespawn();
