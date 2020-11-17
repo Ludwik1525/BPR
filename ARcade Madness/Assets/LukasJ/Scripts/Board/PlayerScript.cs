@@ -46,7 +46,7 @@ public class PlayerScript : MonoBehaviour
     [PunRPC]
     void EnableEndScreen()
     {
-        FindObjectOfType<GameManager>().TurnOnWinScreen();
+        FindObjectOfType<BoardMenus>().TurnOnWinScreen();
     }
 
     [PunRPC]

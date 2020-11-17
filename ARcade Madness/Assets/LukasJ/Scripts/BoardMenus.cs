@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+public class BoardMenus : MonoBehaviour
 {
     public GameObject pauseScreen, optWindow, escWindow, mainScreen, winScreen;
 

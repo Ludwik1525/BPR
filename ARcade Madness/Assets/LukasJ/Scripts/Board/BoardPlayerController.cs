@@ -366,7 +366,7 @@ public class BoardPlayerController : MonoBehaviour
 
         if (callersScore >= 3)
         {
-            FindObjectOfType<GameManager>().TurnOnWinScreen();
+            FindObjectOfType<BoardMenus>().TurnOnWinScreen();
             isGameFinished = true;
         }
     }
