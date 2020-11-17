@@ -41,7 +41,7 @@ public class PlayerSetup : MonoBehaviourPun
             }
             else
             {
-                playerNameText.text = photonView.Owner.NickName;
+                //playerNameText.text = photonView.Owner.NickName;
             }
         }
     }
