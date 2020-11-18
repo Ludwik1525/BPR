@@ -5,16 +5,18 @@ using UnityEngine.UI;
 
 public class FireBallAnimator : MonoBehaviour
 {
+    public Transform myParent;
     public Transform fireballSpawnPoint;
     public GameObject fireballPrefab;
     public Button attackB, blockB;
     private Animator animator;
     public GameObject joystick;
     public GameObject shield;
-    private bool isBlocking;
+    private bool isBlocking, isCastingSpell;
 
     void Start()
     {
+        isCastingSpell = false;
         isBlocking = false;
         animator = GetComponent<Animator>();
         attackB.onClick.AddListener(CastFireballAnimStart);
@@ -35,11 +37,15 @@ public class FireBallAnimator : MonoBehaviour
     private void CastFireballAnimStart()
     {
         animator.SetBool("isThrowingSpell", true);
+        myParent.GetComponent<JoystickScript>().isPerformingAnAction = true;
+        isCastingSpell = true;
     }
 
     private void CastFireballAnimStop()
     {
         animator.SetBool("isThrowingSpell", false);
+        myParent.GetComponent<JoystickScript>().isPerformingAnAction = false;
+        isCastingSpell = false;
     }
 
     private void CastShieldAnimStart()
@@ -71,17 +77,22 @@ public class FireBallAnimator : MonoBehaviour
 
     private void Block()
     {
-        if(!isBlocking)
+        if (!isCastingSpell)
         {
-            isBlocking = true;
-            CastShieldAnimStart();
-            shield.SetActive(true);
-        }
-        else
-        {
-            isBlocking = false;
-            CastShieldAnimStop();
-            shield.SetActive(false);
+            if (!isBlocking)
+            {
+                isBlocking = true;
+                CastShieldAnimStart();
+                shield.SetActive(true);
+                myParent.GetComponent<JoystickScript>().isPerformingAnAction = true;
+            }
+            else
+            {
+                isBlocking = false;
+                CastShieldAnimStop();
+                shield.SetActive(false);
+                myParent.GetComponent<JoystickScript>().isPerformingAnAction = false;
+            }
         }
     }
 }

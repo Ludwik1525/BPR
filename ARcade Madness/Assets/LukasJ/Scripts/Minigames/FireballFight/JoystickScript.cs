@@ -8,6 +8,7 @@ public class JoystickScript : MonoBehaviour
     public float speed = 2f;
     public float maxVelocityChange = 4f;
     public float tiltAmount = 10f;
+    public bool isPerformingAnAction;
 
     private Vector3 velocityVector = Vector3.zero;
     private Rigidbody rb;
@@ -15,6 +16,7 @@ public class JoystickScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        isPerformingAnAction = false;
         rb = GetComponent<Rigidbody>();
     }
 
@@ -38,7 +40,8 @@ public class JoystickScript : MonoBehaviour
         if(-newPosition + transform.position != transform.position)
             transform.GetChild(1).LookAt(-newPosition + transform.position);
 
-        transform.Translate(newPosition * speed * Time.deltaTime, Space.World);
+        if(!isPerformingAnAction)
+            transform.Translate(newPosition * speed * Time.deltaTime, Space.World);
 
         Move(_movementVelocityVector);
 
