@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementController : MonoBehaviour
+public class JoystickScript : MonoBehaviour
 {
     public Joystick joystick;
     public float speed = 2f;
@@ -32,9 +32,16 @@ public class MovementController : MonoBehaviour
         //Final movement velocity vector
         Vector3 _movementVelocityVector = (_movementHorizontal + _movementVertical).normalized * speed;
 
+        Vector3 newPosition = new Vector3(_xMovementInput, 0.0f, _zMovementInput);
+        transform.GetChild(0).LookAt(-newPosition + transform.position);
+
+        if(-newPosition + transform.position != transform.position)
+            transform.GetChild(1).LookAt(-newPosition + transform.position);
+
+        transform.Translate(newPosition * speed * Time.deltaTime, Space.World);
+
         Move(_movementVelocityVector);
 
-        transform.rotation = Quaternion.Euler(joystick.Vertical * speed * tiltAmount, 0, -1 * joystick.Horizontal * speed * tiltAmount);
     }
 
     void Move(Vector3 movementVelocityVector)
@@ -42,19 +49,4 @@ public class MovementController : MonoBehaviour
         velocityVector = movementVelocityVector;
     }
 
-    private void FixedUpdate()
-    {
-        if (velocityVector != Vector3.zero)
-        {
-            Vector3 velocity = rb.velocity;
-            Vector3 velocityChange = (velocityVector - velocity);
-
-            velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
-            velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
-            velocityChange.y = 0f;
-
-            rb.AddForce(velocityChange, ForceMode.Acceleration);
-        }
-
-    }
 }

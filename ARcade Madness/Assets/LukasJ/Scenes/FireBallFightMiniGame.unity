@@ -559,7 +559,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -106, y: 117}
-  m_SizeDelta: {x: 84.07521, y: 77.04225}
+  m_SizeDelta: {x: 84.07521, y: 95.27}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1077097013
 MonoBehaviour:
@@ -624,7 +624,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ca673148f67d8364798b873dd92c73df, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 64059ff0352f96e439be48a19c025b16, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1300,7 +1300,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -106, y: 308}
+  m_AnchoredPosition: {x: -106, y: 335.8}
   m_SizeDelta: {x: 84.07521, y: 77.04225}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2063526699
@@ -1672,22 +1672,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2328038353982409406
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5269389219472566511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 757be5689b9ee4f4b908be71d8717a45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  joystick: {fileID: 1362874975038561544}
-  speed: 2
-  maxVelocityChange: 4
-  tiltAmount: 10
 --- !u!222 &2419237077417638647
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2073,9 +2057,9 @@ GameObject:
   - component: {fileID: 5269389219472566498}
   - component: {fileID: 5269389219472566509}
   - component: {fileID: 5269389219472566499}
-  - component: {fileID: 2328038353982409406}
   - component: {fileID: 6995718887053405833}
   - component: {fileID: 5181779001582584477}
+  - component: {fileID: 5269389219472566512}
   m_Layer: 0
   m_Name: Player_Fireball
   m_TagString: Player
@@ -2083,6 +2067,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &5269389219472566512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5269389219472566511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4458181ce324fa649b5907f80656498c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  joystick: {fileID: 1362874975038561544}
+  speed: 2
+  maxVelocityChange: 4
+  tiltAmount: 10
 --- !u!224 &5269389219842367336
 RectTransform:
   m_ObjectHideFlags: 0

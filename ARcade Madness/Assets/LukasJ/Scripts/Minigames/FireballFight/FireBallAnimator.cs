@@ -25,6 +25,8 @@ public class FireBallAnimator : MonoBehaviour
         }
         else
             RunAnimStart();
+
+        //transform.LookAt();
             
     }
 
