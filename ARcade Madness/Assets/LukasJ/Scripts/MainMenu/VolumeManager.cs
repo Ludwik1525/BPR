@@ -9,8 +9,10 @@ public class VolumeManager : MonoBehaviour
 
     public Slider musicSlider, soundsSlider;
 
+
     void Start()
     {
+        // checking if the player has any settings saved
         if(!PlayerPrefs.HasKey("MusicVol"))
         {
             PlayerPrefs.SetFloat("MusicVol", 0.5f);
@@ -21,6 +23,7 @@ public class VolumeManager : MonoBehaviour
             PlayerPrefs.SetFloat("SoundsVol", 0.5f);
         }
 
+        // getting all the values
         musicSource.volume = PlayerPrefs.GetFloat("MusicVol");
         musicSlider.value = PlayerPrefs.GetFloat("MusicVol");
 
@@ -28,10 +31,12 @@ public class VolumeManager : MonoBehaviour
         neonSoundsSource.volume = PlayerPrefs.GetFloat("SoundsVol");
         soundsSlider.value = PlayerPrefs.GetFloat("SoundsVol");
 
+        // assigning listeners for volume sliders
         musicSlider.onValueChanged.AddListener(ChangeMusicVolume);
         soundsSlider.onValueChanged.AddListener(ChangeSoundsVolume);
     }
     
+    // for changing music volume
     void ChangeMusicVolume(float value)
     {
         musicSource.volume = value;
@@ -39,6 +44,7 @@ public class VolumeManager : MonoBehaviour
         PlayerPrefs.SetFloat("MusicVol", musicValue);
     }
 
+    // for changing sounds volume
     void ChangeSoundsVolume(float value)
     {
         countdownSoundsSource.volume = value;

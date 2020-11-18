@@ -6,20 +6,26 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+    // all pages / menus
     public GameObject mainMenu, mainMenuObjs, nameBox, optionsMenu, soundsBox, lobby, 
         lobbyObjs, roomCreation, privateRoomBox, instructionsMenu, instructionsGeneral, instructionsMinigames, instructionsPowerups;
 
+    // all text elements
     public GameObject welcomeText, playerNameErrorShort, playerNameErrorLong, playerNameErrorNumbers, roomNameErrorShort, roomNameErrorLong, privateRoomError;
 
+    // all input fields
     public InputField playerNameField, roomNameField, privateRoomField;
 
+    // all buttons
     public Button acceptNameB, playB, optionsB, quitB, changeNameB, changeVolumeB, acceptVolumeB, optionsBackB, lobbyBackB, roomCreationBackB, roomCreationB, roomAcceptB, players2B, 
         players3B, players4B, privateB, publicB, joinPrivateB, confirmPrivateB, cancelPrivateB, openInstrB, instrBack1B, instrBack2B, instrBack3B, instrBack4B, instrGeneralB, instrMinigamesB, instrPowerupsB;
 
     private bool isChangingName;
 
+
     void Start()
     {
+        // buttons assignments
         quitB.onClick.AddListener(QuitApp);
         acceptNameB.onClick.AddListener(SavePlayerName);
         optionsB.onClick.AddListener(OpenOptions);
@@ -48,10 +54,12 @@ public class MainMenu : MonoBehaviour
         instrMinigamesB.onClick.AddListener(OpenMinigamesInstrMenu);
         instrPowerupsB.onClick.AddListener(OpenPowerupsInstrMenu);
 
+        // turn off all the error message by default
         playerNameErrorLong.SetActive(false);
         playerNameErrorShort.SetActive(false);
         playerNameErrorNumbers.SetActive(false);
 
+        // turn off all the menus except for the main one by default
         optionsMenu.SetActive(false);
         soundsBox.SetActive(false);
         lobby.SetActive(false);
@@ -59,19 +67,23 @@ public class MainMenu : MonoBehaviour
 
         isChangingName = false;
 
+        // check if the player opens the game for the first time
         if (PlayerPrefs.GetInt("IsAvatarCreated") == 0)
         {
+            // if so, open the name box first and let the player choose their name
             nameBox.SetActive(true);
             mainMenuObjs.SetActive(false);
         }
         else
         {
+            // if the player has launched the app before, open it normally
             nameBox.SetActive(false);
             mainMenuObjs.SetActive(true);
             welcomeText.GetComponent<Text>().text = "Welcome, " + PlayerPrefs.GetString("NickName");
         }
     }
     
+    // opening the lobby's canvas
     private void GoToLobby()
     {
         mainMenu.SetActive(false);
@@ -80,6 +92,7 @@ public class MainMenu : MonoBehaviour
         Choose2Players();
     }
 
+    // opening the main menu
     private void GoToMenu()
     {
         mainMenu.SetActive(true);
@@ -87,6 +100,7 @@ public class MainMenu : MonoBehaviour
         lobby.SetActive(false);
     }
 
+    // opening the menu for creating a new room
     private void OpenRoomCreation()
     {
         roomCreation.SetActive(true);
@@ -101,6 +115,7 @@ public class MainMenu : MonoBehaviour
         SetPublic();
     }
 
+    // opening the prompt for joining a private room
     private void OpenPrivateRoomBox()
     {
         privateRoomField.text = "";
@@ -109,28 +124,33 @@ public class MainMenu : MonoBehaviour
         privateRoomBox.SetActive(true);
     }
 
+    // turning on an error while connecting to a private room
     public void TurnOnPrivateRoomError()
     {
         privateRoomError.SetActive(true);
     }
 
+    // turning off an error while connecting to a private room
     public void TurnOffPrivateRoomError()
     {
         privateRoomError.SetActive(false);
     }
 
+    // closing the prompt for joining a private room
     public void ClosePrivateRoomBox()
     {
         lobbyObjs.SetActive(true);
         privateRoomBox.SetActive(false);
     }
 
+    // going back to the lobby from the room's creation menu
     private void GoBackToLobby()
     {
         roomCreation.SetActive(false);
         lobbyObjs.SetActive(true);
     }
 
+    // opening the options
     private void OpenOptions()
     {
         optionsMenu.SetActive(true);
@@ -138,6 +158,7 @@ public class MainMenu : MonoBehaviour
         instructionsMenu.SetActive(false);
     }
 
+    // going back to the main menu canvas
     private void GoBackToMenu()
     {
         optionsMenu.SetActive(false);
@@ -146,6 +167,7 @@ public class MainMenu : MonoBehaviour
         FindObjectOfType<LogoBlinker>().enabled = true;
     }
 
+    // opening the name change prompt
     private void OpenNameBox()
     {
         optionsMenu.SetActive(false);
@@ -153,21 +175,24 @@ public class MainMenu : MonoBehaviour
         isChangingName = true;
     }
 
+    // opening the volume prompt
     private void OpenSoundsBox()
     {
         optionsMenu.SetActive(false);
         soundsBox.SetActive(true);
     }
 
+    // closing the volume prompt
     private void CloseSoundsBox()
     {
         optionsMenu.SetActive(true);
         soundsBox.SetActive(false);
     }
 
+    // creating a room
     private void CreateRoom()
     {
-        if(IsNameOK(1))
+        if(IsNameOK(1)) // if the name matches the criteria
         {
                 PlayerPrefs.SetString("RoomName", roomNameField.text);
                 FindObjectOfType<LobbyController>().CreateRoom();
@@ -176,30 +201,35 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    // opening instructions menu
     private void OpenInstructionsMenu()
     {
         instructionsMenu.SetActive(true);
         optionsMenu.SetActive(false);
     }
 
+    // opening general instructions menu
     private void OpenGeneralInstrMenu()
     {
         instructionsMenu.SetActive(false);
         instructionsGeneral.SetActive(true);
     }
 
+    // opening mini-games instructions menu
     private void OpenMinigamesInstrMenu()
     {
         instructionsMenu.SetActive(false);
         instructionsMinigames.SetActive(true);
     }
-    
+
+    // opening power-ups instructions menu
     private void OpenPowerupsInstrMenu()
     {
         instructionsMenu.SetActive(false);
         instructionsPowerups.SetActive(true);
     }
 
+    // going back to instructions menu
     private void BackToInstructionsMenu()
     {
         instructionsMenu.SetActive(true);
@@ -208,6 +238,7 @@ public class MainMenu : MonoBehaviour
         instructionsPowerups.SetActive(false);
     }
 
+    // setting the room to private while creating a room
     private void SetPrivate()
     {
         privateB.GetComponent<Image>().color = new Color32(180, 240, 70, 255);
@@ -215,6 +246,7 @@ public class MainMenu : MonoBehaviour
         PlayerPrefs.SetInt("IsPrivate", 1);
     }
 
+    // setting the room to public while creating a room
     private void SetPublic()
     {
         privateB.GetComponent<Image>().color = new Color32(250, 50, 25, 255);
@@ -222,6 +254,7 @@ public class MainMenu : MonoBehaviour
         PlayerPrefs.SetInt("IsPrivate", 0);
     }
 
+    // setting the room's size to 2 while creating a room
     private void Choose2Players()
     {
         players2B.GetComponent<Image>().color = new Color32(180, 240, 70, 255);
@@ -230,6 +263,7 @@ public class MainMenu : MonoBehaviour
         PlayerPrefs.SetInt("RoomSize", 2);
     }
 
+    // setting the room's size to 3 while creating a room
     private void Choose3Players()
     {
         players2B.GetComponent<Image>().color = new Color32(250, 50, 25, 255);
@@ -238,6 +272,7 @@ public class MainMenu : MonoBehaviour
         PlayerPrefs.SetInt("RoomSize", 3);
     }
 
+    // setting the room's size to 4 while creating a room
     private void Choose4Players()
     {
         players2B.GetComponent<Image>().color = new Color32(250, 50, 25, 255);
@@ -246,6 +281,7 @@ public class MainMenu : MonoBehaviour
         PlayerPrefs.SetInt("RoomSize", 4);
     }
 
+    // save the player's new name
     private void SavePlayerName()
     {
         if (IsNameOK(0))
@@ -267,9 +303,10 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    // method for checking if a name matches the criteria
     private bool IsNameOK(int option)
     {
-        if (option == 0)
+        if (option == 0) // for the player's name
         {
             playerNameErrorLong.SetActive(false);
             playerNameErrorShort.SetActive(false);
@@ -295,7 +332,7 @@ public class MainMenu : MonoBehaviour
                 return true;
             }
         }
-        else if (option == 1)
+        else if (option == 1) // for the room's name
         {
             roomNameErrorLong.SetActive(false);
             roomNameErrorShort.SetActive(false);
@@ -318,6 +355,7 @@ public class MainMenu : MonoBehaviour
         else return false;
     }
 
+    // closing the application
     private void QuitApp()
     {
         Application.Quit();
