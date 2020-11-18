@@ -14,6 +14,7 @@ public class FireballSetupManager : MonoBehaviour
     {
         PV = GetComponent<PhotonView>();
         spawnPositions = GameObject.Find("SpawnPos");
+        SpawnPlayer();
     }
     
     void Update()
@@ -31,6 +32,10 @@ public class FireballSetupManager : MonoBehaviour
         if (PV2.IsMine)
         {
             PV2.RPC("RPC_AssignColour", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["ColourID"]);
+        }
+        if(PV.IsMine)
+        {
+            PV.RPC("SetName", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer.NickName);
         }
     }
 }

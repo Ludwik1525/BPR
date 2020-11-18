@@ -340,13 +340,26 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 516920695}
+  - component: {fileID: 516920694}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: GameScripts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &516920694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516920693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d09445e83b138e4d939295b5068defe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &516920695
 Transform:
   m_ObjectHideFlags: 0
