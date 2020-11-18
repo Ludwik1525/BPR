@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using TMPro;
 
 public class FireballPlayerScript : MonoBehaviour
 {
@@ -15,6 +16,6 @@ public class FireballPlayerScript : MonoBehaviour
     [PunRPC]
     private void SetName(string name)
     {
-        transform.GetChild(1).GetChild(0).GetComponent<TextMesh>().text = name;
+        transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text = name;
     }
 }

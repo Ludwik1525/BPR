@@ -12,7 +12,6 @@ public class FireballSetupManager : MonoBehaviour
 
     void Start()
     {
-        PV = GetComponent<PhotonView>();
         spawnPositions = GameObject.Find("SpawnPositions");
         SpawnPlayer();
     }
@@ -27,7 +26,7 @@ public class FireballSetupManager : MonoBehaviour
         player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player_Fireball"),
         spawnPositions.transform.GetChild((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]).position, Quaternion.identity);
 
-
+        PV = player.GetComponent<PhotonView>();
         PV2 = player.transform.GetChild(0).GetChild(1).GetChild(0).GetChild(0).GetComponent<PhotonView>();
         if (PV2.IsMine)
         {
