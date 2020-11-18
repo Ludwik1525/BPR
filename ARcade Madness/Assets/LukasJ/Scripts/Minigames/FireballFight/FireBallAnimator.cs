@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class FireBallAnimator : MonoBehaviour
 {
+    private PhotonView PV;
     public Transform myParent;
     public Transform fireballSpawnPoint;
     public GameObject fireballPrefab, fireballGuiderPrefab;
@@ -16,9 +18,13 @@ public class FireBallAnimator : MonoBehaviour
 
     void Start()
     {
+        PV = GetComponent<PhotonView>();
         isCastingSpell = false;
         isBlocking = false;
         animator = GetComponent<Animator>();
+        attackB = GameObject.Find("ButtonAttack").GetComponent<Button>();
+        blockB = GameObject.Find("ButtonBlock").GetComponent<Button>();
+
         attackB.onClick.AddListener(CastFireballAnimStart);
         blockB.onClick.AddListener(Block);
         joystick = FindObjectOfType<FixedJoystick>();
@@ -79,10 +85,13 @@ public class FireBallAnimator : MonoBehaviour
             animator.SetBool("isRunning", false);
         }  
     }
-
+    
     public void SpawnFireBall()
     {
-        GameObject fireball = Instantiate(fireballPrefab, fireballSpawnPoint.position, transform.rotation);
+        if (PV.IsMine)
+        {
+            GameObject fireball = Instantiate(fireballPrefab, fireballSpawnPoint.position, transform.rotation);
+        }
     }
 
     private void Block()
@@ -94,15 +103,34 @@ public class FireBallAnimator : MonoBehaviour
                 isBlocking = true;
                 CastShieldAnimStart();
                 myParent.GetComponent<JoystickScript>().isPerformingAnAction = true;
+                if(PV.IsMine)
+                {
+                    PV.RPC("ShowShield", RpcTarget.AllBuffered);
+                }
             }
             else
             {
                 isBlocking = false;
                 CastShieldAnimStop();
-                shield.SetActive(false);
                 myParent.GetComponent<JoystickScript>().isPerformingAnAction = false;
+                if (PV.IsMine)
+                {
+                    PV.RPC("HideShield", RpcTarget.AllBuffered);
+                }
             }
         }
+    }
+
+    [PunRPC]
+    void HideShield()
+    {
+        shield.SetActive(false);
+    }
+
+    [PunRPC]
+    void ShowShield()
+    {
+        shield.SetActive(true);
     }
 
     public void Die()
