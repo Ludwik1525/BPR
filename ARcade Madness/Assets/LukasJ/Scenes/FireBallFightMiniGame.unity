@@ -3315,6 +3315,7 @@ MonoBehaviour:
   myParent: {fileID: 5269389219472566508}
   fireballSpawnPoint: {fileID: 1612783291}
   fireballPrefab: {fileID: 8550139918564627117, guid: 0e1f153ab96f3f14d89ce0e6e2839b4a, type: 3}
+  fireballGuiderPrefab: {fileID: 3910483539192918364, guid: e51590cc8302ebd46b3ccaf293e8626a, type: 3}
   attackB: {fileID: 2063526699}
   blockB: {fileID: 1077097013}
   joystick: {fileID: 1502857611}

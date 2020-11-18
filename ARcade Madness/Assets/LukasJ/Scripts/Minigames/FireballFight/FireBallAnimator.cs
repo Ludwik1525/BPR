@@ -7,7 +7,7 @@ public class FireBallAnimator : MonoBehaviour
 {
     public Transform myParent;
     public Transform fireballSpawnPoint;
-    public GameObject fireballPrefab;
+    public GameObject fireballPrefab, fireballGuiderPrefab;
     public Button attackB, blockB;
     private Animator animator;
     public GameObject joystick;
@@ -72,7 +72,7 @@ public class FireBallAnimator : MonoBehaviour
 
     public void SpawnFireBall()
     {
-        Instantiate(fireballPrefab, fireballSpawnPoint.position, Quaternion.identity);
+        GameObject fireball = Instantiate(fireballPrefab, fireballSpawnPoint.position, transform.rotation);
     }
 
     private void Block()
