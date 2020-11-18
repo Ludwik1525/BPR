@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class JoystickScript : MonoBehaviour
 {
-    public Joystick joystick;
+    private Joystick joystick;
     public float speed = 2f;
     public float maxVelocityChange = 4f;
     public float tiltAmount = 10f;
@@ -16,6 +16,7 @@ public class JoystickScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        joystick = FindObjectOfType<FixedJoystick>();
         isPerformingAnAction = false;
         rb = GetComponent<Rigidbody>();
     }

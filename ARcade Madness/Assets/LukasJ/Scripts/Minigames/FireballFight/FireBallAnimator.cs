@@ -10,7 +10,7 @@ public class FireBallAnimator : MonoBehaviour
     public GameObject fireballPrefab, fireballGuiderPrefab;
     public Button attackB, blockB;
     private Animator animator;
-    public GameObject joystick;
+    private FixedJoystick joystick;
     public GameObject shield;
     private bool isBlocking, isCastingSpell;
 
@@ -21,6 +21,7 @@ public class FireBallAnimator : MonoBehaviour
         animator = GetComponent<Animator>();
         attackB.onClick.AddListener(CastFireballAnimStart);
         blockB.onClick.AddListener(Block);
+        joystick = FindObjectOfType<FixedJoystick>();
     }
 
     private void Update()

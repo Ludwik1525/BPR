@@ -8,11 +8,6 @@ public class FireballPlayerScript : MonoBehaviour
 {
     private PhotonView PV;
 
-    void Start()
-    {
-        
-    }
-
     [PunRPC]
     private void SetName(string name)
     {

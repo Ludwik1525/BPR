@@ -23,7 +23,7 @@ public class FireballSetupManager : MonoBehaviour
 
     private void SpawnPlayer()
     {
-        player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player_Fireball"),
+        player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player_FireBall"),
         spawnPositions.transform.GetChild((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]).position, Quaternion.identity);
 
         PV = player.GetComponent<PhotonView>();
