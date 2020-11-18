@@ -61,13 +61,22 @@ public class FireBallAnimator : MonoBehaviour
     private void RunAnimStart()
     {
         if(!animator.GetBool("isRunning"))
+        {
+            attackB.interactable = false;
+            blockB.interactable = false;
             animator.SetBool("isRunning", true);
+        } 
     }
 
     private void RunAnimStop()
     {
         if (animator.GetBool("isRunning"))
+        {
+
+            attackB.interactable = true;
+            blockB.interactable = true;
             animator.SetBool("isRunning", false);
+        }  
     }
 
     public void SpawnFireBall()
@@ -93,6 +102,11 @@ public class FireBallAnimator : MonoBehaviour
                 myParent.GetComponent<JoystickScript>().isPerformingAnAction = false;
             }
         }
+    }
+
+    public void Die()
+    {
+        animator.SetBool("isDead", true);
     }
 
     public void EnableShield()

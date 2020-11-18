@@ -21,7 +21,7 @@ public class FireballRoutine : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-
+            other.GetComponentInChildren<Animator>().gameObject.GetComponent<FireBallAnimator>().Die();
         }
 
         Destroy(gameObject);
