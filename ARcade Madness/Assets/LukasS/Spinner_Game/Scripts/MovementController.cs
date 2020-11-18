@@ -34,7 +34,7 @@ public class MovementController : MonoBehaviour
 
         Move(_movementVelocityVector);
 
-        transform.rotation = Quaternion.Euler(joystick.Vertical * speed * tiltAmount, 0, -1 * joystick.Horizontal * speed * tiltAmount);
+        //transform.rotation = Quaternion.Euler(joystick.Vertical * speed * tiltAmount, 0, -1 * joystick.Horizontal * speed * tiltAmount);
     }
 
     void Move(Vector3 movementVelocityVector)

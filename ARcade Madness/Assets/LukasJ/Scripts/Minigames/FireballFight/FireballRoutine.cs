@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class FireballRoutine : MonoBehaviour
 {
-    public float speed = 0.01f;
+    public float speed = 10f;
+    private Rigidbody rb;
 
-    void Start()
+
+    private void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
     }
-    
     void Update()
     {
-        this.gameObject.transform.Translate(-Vector3.forward * Time.deltaTime * speed);
+        //rb.velocity = -transform.forward * speed;// * Time.deltaTime;
+        rb.AddForce(-transform.forward * speed * Time.deltaTime, ForceMode.Impulse);
+        //this.gameObject.transform.Translate(-Vector3.forward * speed * Time.deltaTime);
+        //stransform.Translate()
     }
 }
