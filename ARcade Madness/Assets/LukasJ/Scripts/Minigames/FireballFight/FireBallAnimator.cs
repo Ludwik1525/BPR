@@ -83,7 +83,6 @@ public class FireBallAnimator : MonoBehaviour
             {
                 isBlocking = true;
                 CastShieldAnimStart();
-                shield.SetActive(true);
                 myParent.GetComponent<JoystickScript>().isPerformingAnAction = true;
             }
             else
@@ -94,5 +93,10 @@ public class FireBallAnimator : MonoBehaviour
                 myParent.GetComponent<JoystickScript>().isPerformingAnAction = false;
             }
         }
+    }
+
+    public void EnableShield()
+    {
+        shield.SetActive(true);
     }
 }

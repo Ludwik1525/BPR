@@ -21,8 +21,11 @@ EditorBuildSettings:
     path: Assets/LukasJ/Scenes/BoardSceneWithAr.unity
     guid: cf623cec438f9fe4093d3c672dcd4877
   - enabled: 0
-    path: Assets/LukasS/Spinner_Game/Scenes/Spinner_Gameplay 1.unity
-    guid: 552cc7c900d03524092d44a54632b555
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: Assets/LukasJ/Scenes/FireBallFightMiniGame.unity
+    guid: a4cd0588fbc1d654080b9c760fb240e3
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 07b6381d889f04f44aab930a18e2a7e7, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: ecea760742381cd4288de8867b2e84f9, type: 2}
