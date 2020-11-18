@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: -3825459625850955643}
   - component: {fileID: -2782691013397961861}
   - component: {fileID: 7959464030216673383}
-  - component: {fileID: 9188957542380697100}
+  - component: {fileID: 4453680360511165330}
   m_Layer: 0
   m_Name: Player_Fireball
   m_TagString: Player
@@ -456,7 +456,7 @@ MonoBehaviour:
   synchronizeAngularVelocity: 1
   isTeleportEnabled: 1
   teleportIfDistanceGreaterThan: 1
---- !u!114 &9188957542380697100
+--- !u!114 &4453680360511165330
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -465,10 +465,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3259567589277361756}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cdef2bb16f07a542bce2a159419e200, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f7f6308569c2d04184c4b0a8ad61f4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  readyForGame: 0
 --- !u!1 &3259567589776471890
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ public class FireballSetupManager : MonoBehaviour
     void Start()
     {
         PV = GetComponent<PhotonView>();
-        spawnPositions = GameObject.Find("SpawnPos");
+        spawnPositions = GameObject.Find("SpawnPositions");
         SpawnPlayer();
     }
     

@@ -61,9 +61,4 @@ public class PlayerScript : MonoBehaviour
         rocket.SetActive(false);
     }
 
-    [PunRPC]
-    private void SetName(string name)
-    {
-        transform.GetChild(1).GetChild(0).GetComponent<TextMesh>().text = name;
-    }
 }
