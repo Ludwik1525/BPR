@@ -7,14 +7,18 @@ public class FireBallAnimator : MonoBehaviour
 {
     public Transform fireballSpawnPoint;
     public GameObject fireballPrefab;
-    public Button attackB;
+    public Button attackB, blockB;
     private Animator animator;
     public GameObject joystick;
+    public GameObject shield;
+    private bool isBlocking;
 
     void Start()
     {
+        isBlocking = false;
         animator = GetComponent<Animator>();
         attackB.onClick.AddListener(CastFireballAnimStart);
+        blockB.onClick.AddListener(Block);
     }
 
     private void Update()
@@ -25,47 +29,59 @@ public class FireBallAnimator : MonoBehaviour
         }
         else
             RunAnimStart();
-
-        //transform.LookAt();
-            
+          
     }
 
     private void CastFireballAnimStart()
     {
         animator.SetBool("isThrowingSpell", true);
-        //PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "FireBall"), this.gameObject.transform.position, Quaternion.identity);
     }
 
     private void CastFireballAnimStop()
     {
         animator.SetBool("isThrowingSpell", false);
-        //PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "FireBall"), this.gameObject.transform.position, Quaternion.identity);
     }
 
     private void CastShieldAnimStart()
     {
+        animator.SetBool("isBlocking", true);
+    }
 
+    private void CastShieldAnimStop()
+    {
+        animator.SetBool("isBlocking", false);
     }
 
     private void RunAnimStart()
     {
         if(!animator.GetBool("isRunning"))
             animator.SetBool("isRunning", true);
-        //PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "FireBall"), this.gameObject.transform.position, Quaternion.identity);
     }
 
     private void RunAnimStop()
     {
         if (animator.GetBool("isRunning"))
             animator.SetBool("isRunning", false);
-        //PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "FireBall"), this.gameObject.transform.position, Quaternion.identity);
     }
-
-
 
     public void SpawnFireBall()
     {
-        //animator
         Instantiate(fireballPrefab, fireballSpawnPoint.position, Quaternion.identity);
+    }
+
+    private void Block()
+    {
+        if(!isBlocking)
+        {
+            isBlocking = true;
+            CastShieldAnimStart();
+            shield.SetActive(true);
+        }
+        else
+        {
+            isBlocking = false;
+            CastShieldAnimStop();
+            shield.SetActive(false);
+        }
     }
 }
