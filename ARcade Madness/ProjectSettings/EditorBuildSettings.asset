@@ -11,21 +11,27 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/LukasJ/Scenes/BoardScene.unity
     guid: ee83d437d80995e4c8b51fa818a40bdd
-  - enabled: 1
+  - enabled: 0
     path: Assets/LukasJ/Scenes/AssetScene.unity
     guid: ccfbf8f03be0d524b8321881eefa6d59
   - enabled: 0
-    path: Assets/LukasS/Spinner_Game/Scenes/Spinner_Gameplay.unity
-    guid: e5f2cbe788e7da84c831cf3d0f14f2f1
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
     path: Assets/LukasJ/Scenes/BoardSceneWithAr.unity
     guid: cf623cec438f9fe4093d3c672dcd4877
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/LukasJ/Scenes/FireBallFightMiniGame.unity
     guid: a4cd0588fbc1d654080b9c760fb240e3
+  - enabled: 0
+    path: Assets/LukasS/Spinner_Game/Scenes/Spinner_Gameplay.unity
+    guid: 552cc7c900d03524092d44a54632b555
+  - enabled: 1
+    path: Assets/LukasS/Pacman_Game/Scenes/Pacman_Gameplay.unity
+    guid: a20c681e0678633449006f169a3a8f14
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 07b6381d889f04f44aab930a18e2a7e7, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: ecea760742381cd4288de8867b2e84f9, type: 2}

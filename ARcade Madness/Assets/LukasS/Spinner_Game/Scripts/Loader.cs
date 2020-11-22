@@ -23,7 +23,7 @@ public class Loader : MonoBehaviour
     }
 
     [PunRPC]
-    void RPC_SetPlayerLoader()
+    void RPC_SetPlayerLoaderForSpinner()
     {
         //Set parent
         playersParent = GameObject.Find("Content").transform;
@@ -36,18 +36,26 @@ public class Loader : MonoBehaviour
         SpinningGameManager.playerLoaders.Add(this.gameObject);
     }
 
-    //[PunRPC]
-    //void RPC_SetParent()
-    //{
-    //    playersParent = GameObject.Find("Content").transform;
+    [PunRPC]
+    void RPC_SetPlayerLoaderForPacman()
+    {
+        //Set parent
+        playersParent = GameObject.Find("Content").transform;
+        this.gameObject.transform.SetParent(playersParent);
 
-    //    this.gameObject.transform.SetParent(playersParent);
-    //}
+        //Set name
+        //playerName.text = PhotonNetwork.NickName;
+
+        //Add player to the list
+        GameManager_PC.playerLoaders.Add(this.gameObject);
+    }
+
+
 
     [PunRPC]
-    void RPC_SetName()
+    void RPC_SetName(string name)
     {
-        playerName.text = PhotonNetwork.NickName;
+        playerName.text = name;
     }
 
     [PunRPC]
@@ -57,11 +65,4 @@ public class Loader : MonoBehaviour
         transform.GetChild(2).gameObject.SetActive(true);
         ready = true;
     }
-
-    //[PunRPC]
-    //void RPC_AddPlayerLoaderToList()
-    //{
-    //    SpinningGameManager.playerLoaders.Add(this.gameObject);
-    //}
-
 }

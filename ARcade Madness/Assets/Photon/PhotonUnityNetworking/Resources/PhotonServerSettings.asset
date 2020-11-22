@@ -25,66 +25,62 @@ MonoBehaviour:
     AuthMode: 0
     EnableLobbyStatistics: 0
     NetworkLogging: 1
-  DevRegion: eu
+  DevRegion: 
   PunLogging: 0
   EnableSupportLogger: 0
   RunInBackground: 1
   StartInOfflineMode: 0
   RpcList:
+  - ActivateChildren
+  - ChangePosition
+  - ChangeRotation
   - ChooseRandomNumber
   - ClickRpc
+  - DestroyChest
   - DestroyRpc
   - DestroySpaceship
+  - DisableRocket
   - DoDamage
+  - EnableEndScreen
+  - EnableRocket
   - Fire
+  - GenerateColourIndex
+  - HideShield
   - IncrementTurn
+  - KillMe
+  - PlayChestSpawnSound
+  - PlayCoinStealSound
+  - PlayTrophySound
+  - ReadyIndication
   - ResetTurnVar
   - RespawnSpaceship
   - RPC_AbortStarting
   - RPC_AddToList
+  - RPC_AddToNewList
   - RPC_ApplyColour
   - RPC_AssignColour
   - RPC_ChangeType
   - RPC_ResetTimer
+  - RPC_SetName
   - RPC_SetParent
+  - RPC_SetPlayerLoader
   - RPC_UpdateTimer
   - SaveMyPos
   - SetChestsParent
-  - TurnOnTheDice
-  - TurnOnTheDiceDelayed
-  - SetParent
-  - SetScoresParent
-  - ActivateChildren
-  - SetScore
-  - RPC_AddToNewList
   - SetChestVariable
-  - StartTheTime
-  - StopTheTime
+  - SetCurrency
+  - SetFinalScores
+  - SetName
+  - SetScore
+  - ShowShield
   - StartTheTimeAccept
   - StartTheTimeDecline
-  - SetCurrency
-  - SwitchTheDice
-  - GenerateColourIndex
-  - EnableEndScreen
-  - SetFinalScores
-  - ReadyIndication
-  - DestroyChest
-  - SpawningChestSequence
-  - UnifyTheRandomNumber
-  - DisableRocket
-  - EnableRocket
-  - RPC_SetName
-  - RPC_SetPlayerLoader
-  - PlayChestSpawnSound
-  - PlayCoinStealSound
-  - PlayTrophySound
+  - StopTheTime
   - SwitchRocketSounds
-  - KillMe
-  - SetName
-  - ChangePosition
-  - ChangeRotation
-  - HideShield
-  - ShowShield
+  - SwitchTheDice
+  - UnifyTheRandomNumber
+  - RPC_SetPlayerLoaderForPacman
+  - RPC_SetPlayerLoaderForSpinner
   DisableAutoOpenWizard: 1
   ShowSettings: 1
-  DevRegionSetOnce: 1
+  DevRegionSetOnce: 0

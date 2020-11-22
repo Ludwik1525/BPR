@@ -21,7 +21,6 @@ public class PlayerSetup : MonoBehaviourPun
         }
         else
         {
-            Debug.Log("not mine");
             //The player is remote player
             transform.GetComponent<MovementController>().enabled = false;
             transform.GetComponent<MovementController>().joystick.gameObject.SetActive(false);

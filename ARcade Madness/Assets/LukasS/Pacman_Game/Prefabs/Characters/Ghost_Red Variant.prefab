@@ -43,7 +43,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   points: []
   random: 0
-  speed: 0.2
+  RotationSpeed: 10
+  speed: 0.4
 --- !u!1001 &1484215935965077304
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54,6 +55,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: cd46c4c845d21ed4690627267f2edc5d, type: 3}
       propertyPath: m_Name
       value: Ghost_Red Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: cd46c4c845d21ed4690627267f2edc5d, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: cd46c4c845d21ed4690627267f2edc5d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -101,15 +106,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: cd46c4c845d21ed4690627267f2edc5d, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: cd46c4c845d21ed4690627267f2edc5d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: cd46c4c845d21ed4690627267f2edc5d, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 13700000, guid: cd46c4c845d21ed4690627267f2edc5d, type: 3}
       propertyPath: m_AABB.m_Center.x

@@ -10,6 +10,8 @@ public class GhostMovement_PC : MonoBehaviour
     bool toMove = true;
     public int random;
 
+    public float RotationSpeed = 10f;
+
     public float speed = 0.02f;
     void Start()
     {
@@ -27,10 +29,11 @@ public class GhostMovement_PC : MonoBehaviour
 
     void Move()
     {
+        Vector3 _direction = (points[random].transform.position - transform.position).normalized;
+        Quaternion _lookRotation = Quaternion.LookRotation(_direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, RotationSpeed * Time.deltaTime);
 
-
-
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, points[random].transform.rotation , 360 * Time.deltaTime);
+        //transform.rotation = Quaternion.RotateTowards(transform.rotation, points[random].transform.rotation , 360 * Time.deltaTime);
 
   
         transform.position = Vector3.MoveTowards(transform.position, points[random].transform.position, speed * Time.deltaTime);

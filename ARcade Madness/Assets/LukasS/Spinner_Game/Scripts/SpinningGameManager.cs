@@ -19,27 +19,37 @@ public class SpinningGameManager : MonoBehaviour
     private GameObject battleArenaGameobject;
     [SerializeField]
     private GameObject instruction;
+    [SerializeField]
+    private Text count_Ui;
 
-    public static List<GameObject> playerLoaders = new List<GameObject>();
+    public static List<GameObject> playerLoaders;
 
     private PhotonView pv;
     private int count = 0;
 
+    private void Awake()
+    {
+        playerLoaders = new List<GameObject>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        instruction.SetActive(true);
+
         GameObject playerLoader = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerLoadingImg"), menu.transform.position, Quaternion.identity);
         pv = playerLoader.GetComponent<PhotonView>();
-        pv.RPC("RPC_SetPlayerLoader", RpcTarget.AllBuffered);
+        pv.RPC("RPC_SetPlayerLoaderForSpinner", RpcTarget.AllBuffered);
 
         if(pv.IsMine)
         {
-            pv.RPC("RPC_SetName", RpcTarget.AllBuffered);
+            pv.RPC("RPC_SetName", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer.NickName);
         }
     }
 
     void Update()
     {
+        print(playerLoaders.Count);
         while(count < playerLoaders.Count)
         {
             foreach (var a in playerLoaders)
@@ -58,13 +68,10 @@ public class SpinningGameManager : MonoBehaviour
 
             if (count == playerLoaders.Count)
             {
-                print("ready");
                 instruction.SetActive(false);
                 SpawnPlayer();
             }
         }
-        
-
     }
 
     public void Ready()
@@ -76,11 +83,8 @@ public class SpinningGameManager : MonoBehaviour
 
     public void SpawnPlayer()
     {
-        int randomSpawnPoint = Random.Range(0, spawnPositions.Length - 1);
-
-        Vector3 instantiatePosition = spawnPositions[randomSpawnPoint].position;
+        Vector3 instantiatePosition = spawnPositions[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]].position;
 
         PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player_Spinner"), instantiatePosition, Quaternion.identity);
     }
-
 }

@@ -16,7 +16,7 @@ public class PlayerScript_PC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        score_txt.text = $"Score: {score}";
+        //score_txt.text = $"Score: {score}";
     }
 
     private void OnTriggerEnter(Collider other)
