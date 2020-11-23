@@ -29,9 +29,6 @@ public class Loader : MonoBehaviour
         playersParent = GameObject.Find("Content").transform;
         this.gameObject.transform.SetParent(playersParent);
 
-        //Set name
-        //playerName.text = PhotonNetwork.NickName;
-
         //Add player to the list
         SpinningGameManager.playerLoaders.Add(this.gameObject);
     }
@@ -42,9 +39,6 @@ public class Loader : MonoBehaviour
         //Set parent
         playersParent = GameObject.Find("Content").transform;
         this.gameObject.transform.SetParent(playersParent);
-
-        //Set name
-        //playerName.text = PhotonNetwork.NickName;
 
         //Add player to the list
         GameManager_PC.playerLoaders.Add(this.gameObject);

@@ -11,6 +11,7 @@ TagManager:
   - PacmanPatrolPoints
   - Chest
   - ArenaWall
+  - PacmanGhost
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - 
   - 
   - Pacman_Ghost
-  - 
+  - Pacman_Player
   - 
   - 
   - 

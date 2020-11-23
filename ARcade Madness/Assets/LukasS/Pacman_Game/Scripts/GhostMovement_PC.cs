@@ -6,9 +6,10 @@ using UnityEngine;
 public class GhostMovement_PC : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject[] points;
+    [SerializeField]
+    private GameObject[] points;
     bool toMove = true;
-    public int random;
+    private int random;
 
     public float RotationSpeed = 10f;
 
@@ -44,7 +45,7 @@ public class GhostMovement_PC : MonoBehaviour
         if(other.gameObject.CompareTag("PacmanPatrolPoints"))
         {
             points = other.gameObject.GetComponent<PossiblePatrolPoints_PC>().points;
-            random = Random.Range(0, points.Length);
+            random = Random.Range(0, points.Length-1);
         }    
     }
 }

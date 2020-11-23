@@ -5,21 +5,12 @@ using UnityEngine;
 public class MovementController_PC : MonoBehaviour
 {
     public Joystick joystick;
-    public float speed = 2f;
-    public float maxVelocityChange = 4f;
+    public float speed = 0.8f;
 
     float dr = 0f;
 
-    private Vector3 velocityVector = Vector3.zero;
-    private Rigidbody rb;
-    // Start is called before the first frame update
-    void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
-
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //Joystick inputs
         float _xMovementInput = joystick.Horizontal;
@@ -33,6 +24,4 @@ public class MovementController_PC : MonoBehaviour
 
         transform.position += new Vector3(_xMovementInput, 0, _zMovementInput).normalized * Time.deltaTime * speed;
     }
-
-
 }

@@ -13,8 +13,8 @@ public class GameManager_PC : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI startUi;
 
-    [SerializeField]
-    private GameObject[] ghosts;
+    //[SerializeField]
+    //private GameObject[] ghosts;
     [SerializeField]
     private GameObject[] patrolPoints;
 
@@ -79,14 +79,14 @@ public class GameManager_PC : MonoBehaviour
             {
                 instruction.SetActive(false);
                 SpawnPlayer();
-                StartGame();
+                start = true;
             }
         }
 
-        //if (start)
-        //{
-        //    StartCoroutine(CountDown());
-        //}
+        if (start)
+        {
+            StartCoroutine(CountDown());
+        }
     }
 
     IEnumerator CountDown()
@@ -109,18 +109,15 @@ public class GameManager_PC : MonoBehaviour
          
     }
 
-    public void StartGame()
-    {
-        start = true;
-    }
 
     private void SpawnGhosts()
     {
-        foreach(var ghost in ghosts)
+        if (PhotonNetwork.IsMasterClient)
         {
-            int random = Random.Range(0, patrolPoints.Length -1);
-
-            Instantiate(ghost, patrolPoints[random].transform.position, Quaternion.identity);
+            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Ghost_LitBlue"), patrolPoints[Random.Range(0, patrolPoints.Length - 1)].transform.position, Quaternion.identity);
+            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Ghost_Orange"), patrolPoints[Random.Range(0, patrolPoints.Length - 1)].transform.position, Quaternion.identity);
+            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Ghost_Pink"), patrolPoints[Random.Range(0, patrolPoints.Length - 1)].transform.position, Quaternion.identity);
+            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Ghost_Red"), patrolPoints[Random.Range(0, patrolPoints.Length - 1)].transform.position, Quaternion.identity);
         }
     }
 
@@ -128,8 +125,8 @@ public class GameManager_PC : MonoBehaviour
     {
         Vector3 instantiatePosition = spawnPositions[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]].position;
 
-        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player_Pacman"), instantiatePosition, Quaternion.identity);
-    }
+        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Capsule"), instantiatePosition, Quaternion.identity);
+    }  //"Player_Pacman"
 
     public void Ready()
     {

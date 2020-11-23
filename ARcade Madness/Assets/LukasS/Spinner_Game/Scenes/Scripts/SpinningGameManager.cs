@@ -49,7 +49,6 @@ public class SpinningGameManager : MonoBehaviour
 
     void Update()
     {
-        print(playerLoaders.Count);
         while(count < playerLoaders.Count)
         {
             foreach (var a in playerLoaders)
