@@ -520,6 +520,8 @@ MonoBehaviour:
   attackB: {fileID: 0}
   blockB: {fileID: 0}
   shield: {fileID: 4254223388946779317}
+  isBlocking: 0
+  isCastingSpell: 0
 --- !u!114 &3377739920676543694
 MonoBehaviour:
   m_ObjectHideFlags: 0

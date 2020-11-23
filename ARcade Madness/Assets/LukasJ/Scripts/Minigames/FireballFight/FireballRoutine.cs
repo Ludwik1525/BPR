@@ -26,11 +26,14 @@ public class FireballRoutine : MonoBehaviour
         if(other.tag == "Player")
         {
             other.GetComponentInChildren<Animator>().gameObject.GetComponent<FireBallAnimator>().Die();
-            PhotonNetwork.Instantiate(Path.Combine("SmallExplosion", "Player"), this.transform.position, Quaternion.identity);
+            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "SmallExplosion"), this.transform.position, Quaternion.identity);
         }
-
-        PhotonNetwork.Instantiate(Path.Combine("PlasmaExplosion", "Player"), this.transform.position, Quaternion.identity);
+        else
+        {
+            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlasmaExplosion"), this.transform.position, Quaternion.identity);
+        }
         PV.RPC("KillMe", RpcTarget.AllBuffered);
+
     }
 
     [PunRPC]

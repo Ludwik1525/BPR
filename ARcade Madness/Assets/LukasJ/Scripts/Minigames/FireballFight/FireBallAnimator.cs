@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using System.IO;
 
 public class FireBallAnimator : MonoBehaviour
 {
@@ -93,7 +94,7 @@ public class FireBallAnimator : MonoBehaviour
     {
         if (PV.IsMine)
         {
-            GameObject fireball = Instantiate(fireballPrefab, fireballSpawnPoint.position, transform.rotation);
+            GameObject fireball = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "FireBall"), fireballSpawnPoint.position, transform.rotation);
         }
     }
 
