@@ -86,17 +86,18 @@ public class JoystickScript : MonoBehaviour
 
     public void Die()
     {
-        isAlive = false;
-        playerScript.attackB.interactable = false;
-        playerScript.blockB.interactable = false;
         PV.RPC("DisableMyCollider", RpcTarget.AllBuffered);
     }
 
     [PunRPC]
     void DisableMyCollider()
     {
+        GetComponentInChildren<Animator>().gameObject.GetComponent<FireBallAnimator>().Die();
         GetComponent<Collider>().enabled = false;
         transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        isAlive = false;
+        playerScript.attackB.interactable = false;
+        playerScript.blockB.interactable = false;
     }
 
 }
