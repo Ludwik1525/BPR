@@ -11,7 +11,7 @@ public class JoystickScript : MonoBehaviour
     public float maxVelocityChange = 4f;
     public float tiltAmount = 10f;
     public bool isPerformingAnAction;
-    public bool isAlive = true;
+    public bool isAlive;
 
     private Vector3 velocityVector = Vector3.zero;
     private Rigidbody rb;
@@ -23,6 +23,7 @@ public class JoystickScript : MonoBehaviour
         joystick = FindObjectOfType<FixedJoystick>();
         isPerformingAnAction = false;
         rb = GetComponent<Rigidbody>();
+        isAlive = true;
     }
 
     // Update is called once per frame
@@ -84,6 +85,7 @@ public class JoystickScript : MonoBehaviour
     public void Die()
     {
         isAlive = false;
+        transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
     }
 
 }
