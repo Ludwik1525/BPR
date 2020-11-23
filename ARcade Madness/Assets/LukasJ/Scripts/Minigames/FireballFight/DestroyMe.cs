@@ -10,7 +10,7 @@ public class DestroyMe : MonoBehaviour
     void Start()
     {
         PV = GetComponent<PhotonView>();
-        StartCoroutine(DestroyMeAfterTime(3));
+        StartCoroutine(DestroyMeAfterTime(1.5f));
     }
     
     IEnumerator DestroyMeAfterTime(float time)
