@@ -9,10 +9,10 @@ public class FireBallAnimator : MonoBehaviour
     private PhotonView PV;
     public Transform myParent;
     public Transform fireballSpawnPoint;
-    public GameObject fireballPrefab, fireballGuiderPrefab;
+    public GameObject fireballPrefab;
     public Button attackB, blockB;
     private Animator animator;
-    private FixedJoystick joystick;
+    private GameObject joystick;
     public GameObject shield;
     private bool isBlocking, isCastingSpell;
 
@@ -27,7 +27,7 @@ public class FireBallAnimator : MonoBehaviour
 
         attackB.onClick.AddListener(CastFireballAnimStart);
         blockB.onClick.AddListener(Block);
-        joystick = FindObjectOfType<FixedJoystick>();
+        joystick = FindObjectOfType<FixedJoystick>().transform.GetChild(0).gameObject;
     }
 
     private void Update()
