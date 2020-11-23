@@ -41,7 +41,7 @@ public class JoystickScript : MonoBehaviour
             Vector3 _movementVelocityVector = (_movementHorizontal + _movementVertical).normalized * speed;
             Vector3 newPosition = new Vector3(_xMovementInput, 0.0f, _zMovementInput);
 
-            if (!transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<FireBallAnimator>().isBlocking || !transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<FireBallAnimator>().isCastingSpell)
+            if (!transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<FireBallAnimator>().isBlocking && !transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<FireBallAnimator>().isCastingSpell)
             {
                 Move(_movementVelocityVector);
             }
@@ -58,8 +58,6 @@ public class JoystickScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<FireBallAnimator>().isBlocking || !transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<FireBallAnimator>().isCastingSpell)
-        {
             if (velocityVector != Vector3.zero)
             {
                 Vector3 velocity = rb.velocity;
@@ -71,7 +69,6 @@ public class JoystickScript : MonoBehaviour
 
                 rb.AddForce(velocityChange, ForceMode.VelocityChange);
             }
-        }
     }
 
     public void StopMe()

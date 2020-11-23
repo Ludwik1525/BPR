@@ -105,6 +105,7 @@ public class FireBallAnimator : MonoBehaviour
             {
                 isBlocking = true;
                 CastShieldAnimStart();
+                attackB.interactable = false;
                 myParent.GetComponent<JoystickScript>().isPerformingAnAction = true;
                 if(PV.IsMine)
                 {
@@ -115,6 +116,7 @@ public class FireBallAnimator : MonoBehaviour
             {
                 isBlocking = false;
                 CastShieldAnimStop();
+                attackB.interactable = true;
                 myParent.GetComponent<JoystickScript>().isPerformingAnAction = false;
                 if (PV.IsMine)
                 {
