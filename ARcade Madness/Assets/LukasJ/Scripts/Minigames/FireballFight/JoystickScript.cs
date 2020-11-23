@@ -11,7 +11,6 @@ public class JoystickScript : MonoBehaviour
     public float maxVelocityChange = 4f;
     public float tiltAmount = 10f;
     public bool isPerformingAnAction;
-    public bool isAlive;
 
     private Vector3 velocityVector = Vector3.zero;
     private Rigidbody rb;
@@ -24,7 +23,6 @@ public class JoystickScript : MonoBehaviour
         joystick = FindObjectOfType<FixedJoystick>();
         isPerformingAnAction = false;
         rb = GetComponent<Rigidbody>();
-        isAlive = true;
         playerScript = transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<FireBallAnimator>();
     }
 
@@ -33,8 +31,6 @@ public class JoystickScript : MonoBehaviour
     {
         if (PV.IsMine)
         {
-            if(isAlive)
-            {
                 //Joystick inputs
                 float _xMovementInput = joystick.Horizontal;
                 float _zMovementInput = joystick.Vertical;
@@ -52,7 +48,6 @@ public class JoystickScript : MonoBehaviour
                     Move(_movementVelocityVector);
                 }
                 transform.GetChild(0).LookAt(-newPosition + transform.position);
-            }
             
         }
 
@@ -95,9 +90,10 @@ public class JoystickScript : MonoBehaviour
         GetComponentInChildren<Animator>().gameObject.GetComponent<FireBallAnimator>().Die();
         GetComponent<Collider>().enabled = false;
         transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
-        isAlive = false;
-        playerScript.attackB.interactable = false;
-        playerScript.blockB.interactable = false;
+        playerScript.attackB.gameObject.SetActive(false);
+        playerScript.blockB.gameObject.SetActive(false);
+        transform.GetChild(1).gameObject.SetActive(false);
+        GameObject.Find("FixedJoystick").SetActive(false);
     }
 
 }
