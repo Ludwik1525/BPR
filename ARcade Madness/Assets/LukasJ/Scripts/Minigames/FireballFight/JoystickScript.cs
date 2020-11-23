@@ -90,10 +90,13 @@ public class JoystickScript : MonoBehaviour
         GetComponentInChildren<Animator>().gameObject.GetComponent<FireBallAnimator>().Die();
         GetComponent<Collider>().enabled = false;
         transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
-        playerScript.attackB.gameObject.SetActive(false);
-        playerScript.blockB.gameObject.SetActive(false);
-        transform.GetChild(1).gameObject.SetActive(false);
-        GameObject.Find("FixedJoystick").SetActive(false);
+        if(PV.IsMine)
+        {
+            playerScript.attackB.gameObject.SetActive(false);
+            playerScript.blockB.gameObject.SetActive(false);
+            transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
+            GameObject.Find("FixedJoystick").SetActive(false);
+        }
     }
 
 }
