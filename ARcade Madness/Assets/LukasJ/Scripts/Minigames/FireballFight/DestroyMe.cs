@@ -16,12 +16,11 @@ public class DestroyMe : MonoBehaviour
     IEnumerator DestroyMeAfterTime(float time)
     {
         yield return new WaitForSeconds(time);
-        PV.RPC("KillMe", RpcTarget.AllBuffered);
+        KillMe();
     }
-
-    [PunRPC]
+    
     void KillMe()
     {
-        Destroy(this.gameObject);
+        PhotonNetwork.Destroy(this.gameObject);
     }
 }

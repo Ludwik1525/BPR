@@ -33,13 +33,12 @@ public class FireballRoutine : MonoBehaviour
         {
             PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlasmaExplosion"), this.transform.position, Quaternion.identity);
         }
-        PV.RPC("KillMe", RpcTarget.AllBuffered);
+        KillMe();
 
     }
-
-    [PunRPC]
+    
     void KillMe()
     {
-        Destroy(gameObject);
+        PhotonNetwork.Destroy(gameObject);
     }
 }
