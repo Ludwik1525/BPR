@@ -95,7 +95,7 @@ public class JoystickScript : MonoBehaviour
     [PunRPC]
     void DisableMyCollider()
     {
-        GetComponent<Collider>().gameObject.SetActive(false);
+        GetComponent<Collider>().enabled = false;
         transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
     }
 
