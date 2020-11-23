@@ -30,24 +30,27 @@ public class JoystickScript : MonoBehaviour
     {
         if (PV.IsMine)
         {
-            //Joystick inputs
-            float _xMovementInput = joystick.Horizontal;
-            float _zMovementInput = joystick.Vertical;
-
-            //Velocity vectores
-            Vector3 _movementHorizontal = transform.right * _xMovementInput;
-            Vector3 _movementVertical = transform.forward * _zMovementInput;
-
-            //Final movement velocity vector
-            Vector3 _movementVelocityVector = (_movementHorizontal + _movementVertical).normalized * speed;
-            Vector3 newPosition = new Vector3(_xMovementInput, 0.0f, _zMovementInput);
-
-            if (!transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<FireBallAnimator>().isBlocking && !transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<FireBallAnimator>().isCastingSpell)
-            {
-                Move(_movementVelocityVector);
-            }
             if(isAlive)
+            {
+                //Joystick inputs
+                float _xMovementInput = joystick.Horizontal;
+                float _zMovementInput = joystick.Vertical;
+
+                //Velocity vectores
+                Vector3 _movementHorizontal = transform.right * _xMovementInput;
+                Vector3 _movementVertical = transform.forward * _zMovementInput;
+
+                //Final movement velocity vector
+                Vector3 _movementVelocityVector = (_movementHorizontal + _movementVertical).normalized * speed;
+                Vector3 newPosition = new Vector3(_xMovementInput, 0.0f, _zMovementInput);
+
+                if (!transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<FireBallAnimator>().isBlocking && !transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<FireBallAnimator>().isCastingSpell)
+                {
+                    Move(_movementVelocityVector);
+                }
                 transform.GetChild(0).LookAt(-newPosition + transform.position);
+            }
+            
         }
 
     }
