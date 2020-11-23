@@ -16,6 +16,10 @@ public class FireBallAnimator : MonoBehaviour
     public GameObject shield;
     private bool isBlocking, isCastingSpell;
 
+    private Button buttonn;
+    private bool isMoving = false;
+    Vector3 target;
+
     void Start()
     {
         PV = GetComponent<PhotonView>();
@@ -28,6 +32,9 @@ public class FireBallAnimator : MonoBehaviour
         attackB.onClick.AddListener(CastFireballAnimStart);
         blockB.onClick.AddListener(Block);
         joystick = FindObjectOfType<FixedJoystick>().transform.GetChild(0).gameObject;
+
+        buttonn = GameObject.Find("Buttonn").GetComponent<Button>();
+        buttonn.onClick.AddListener(Move);
     }
 
     private void Update()
@@ -38,7 +45,27 @@ public class FireBallAnimator : MonoBehaviour
         }
         else
             RunAnimStart();
+
+        if(isMoving)
+        {
+            Vector3.MoveTowards(transform.position, target, 5 * Time.deltaTime);
+        }
           
+    }
+
+    private void Move()
+    {
+        if(isMoving)
+        {
+            isMoving = false;
+            RunAnimStop();
+        }
+        else
+        {
+            RunAnimStart();
+            isMoving = true;
+            target = new Vector3(Random.Range(-0.5f, 0.5f), -0.7537111f, Random.Range(-1, 1));
+        }
     }
 
     private void CastFireballAnimStart()
