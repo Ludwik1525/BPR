@@ -94,9 +94,9 @@ public class JoystickScript : MonoBehaviour
         {
             playerScript.attackB.gameObject.SetActive(false);
             playerScript.blockB.gameObject.SetActive(false);
-            transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
             GameObject.Find("FixedJoystick").SetActive(false);
         }
+        transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
     }
 
 }

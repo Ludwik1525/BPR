@@ -561,6 +561,19 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!65 &6375204478501816202
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4254223388946779317}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.4667883, y: 3.3668647, z: 0.22758539}
+  m_Center: {x: 0.049474064, y: 0, z: 0.11117719}
 --- !u!114 &194773383570548632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1399,14 +1412,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3667946887678727147, guid: 0b346dbdae897ac43950a8ad5db48a24, type: 3}
   m_PrefabInstance: {fileID: 1497196311219009510}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1390949698902593549 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0b346dbdae897ac43950a8ad5db48a24, type: 3}
-  m_PrefabInstance: {fileID: 1497196311219009510}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1731200630992063159 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0b346dbdae897ac43950a8ad5db48a24, type: 3}
+  m_PrefabInstance: {fileID: 1497196311219009510}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1390949698902593549 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0b346dbdae897ac43950a8ad5db48a24, type: 3}
   m_PrefabInstance: {fileID: 1497196311219009510}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5459582770634735855
@@ -1426,7 +1439,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8128535787883072602, guid: b5be9a3f0078d884290d6fba200ded15, type: 3}
       propertyPath: m_Name
-      value: Shield (1)
+      value: Shield
       objectReference: {fileID: 0}
     - target: {fileID: 8128535787883072602, guid: b5be9a3f0078d884290d6fba200ded15, type: 3}
       propertyPath: m_IsActive
@@ -1488,7 +1501,8 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 6
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2579353164312251269, guid: b5be9a3f0078d884290d6fba200ded15, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b5be9a3f0078d884290d6fba200ded15, type: 3}
 --- !u!1 &4254223388946779317 stripped
 GameObject:

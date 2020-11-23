@@ -82,6 +82,7 @@ MonoBehaviour:
   - RPC_SetPlayerLoaderForPacman
   - RPC_SetPlayerLoaderForSpinner
   - Move
+  - DisableMyCollider
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
