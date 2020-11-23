@@ -68,4 +68,9 @@ public class JoystickScript : MonoBehaviour
         }
     }
 
+    public void StopMe()
+    {
+        velocityVector = Vector3.zero;
+    }
+
 }
