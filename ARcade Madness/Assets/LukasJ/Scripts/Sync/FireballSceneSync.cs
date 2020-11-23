@@ -5,7 +5,7 @@ using Photon.Pun;
 
 public class FireballSceneSync : MonoBehaviour, IPunObservable
 {
-    Rigidbody rb;
+    Transform trn;
     PhotonView photonView;
 
     Vector3 networkedPosition;
@@ -21,7 +21,7 @@ public class FireballSceneSync : MonoBehaviour, IPunObservable
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        trn = GetComponent<Transform>();
         photonView = GetComponent<PhotonView>();
 
         networkedPosition = new Vector3();
@@ -33,7 +33,7 @@ public class FireballSceneSync : MonoBehaviour, IPunObservable
         if (!photonView.IsMine)
         {
             // update "RemoteME"
-            rb.position = Vector3.MoveTowards(rb.position, networkedPosition, distance * (1.0f / PhotonNetwork.SerializationRate));
+            trn.position = Vector3.MoveTowards(trn.position, networkedPosition, distance * (1.0f / PhotonNetwork.SerializationRate));
             //rb.rotation = Quaternion.RotateTowards(rb.rotation, networkedRotation, angle * (1.0f / PhotonNetwork.SerializationRate));
         }
     }
@@ -44,12 +44,12 @@ public class FireballSceneSync : MonoBehaviour, IPunObservable
         {
             //Then, photonView is mine and I am the one who controls the player
             //should send postion, velocity etc. data to the other players 
-            stream.SendNext(rb.position);
+            stream.SendNext(trn.position);
             //stream.SendNext(rb.rotation);
 
             if (synchronizeVelocity)
             {
-                stream.SendNext(rb.velocity);
+                //stream.SendNext(trn.velocity);
             }
 
             //if (synchronizeAngularVelocity)
@@ -65,9 +65,9 @@ public class FireballSceneSync : MonoBehaviour, IPunObservable
 
             if (isTeleportEnabled)
             {
-                if (Vector3.Distance(rb.position, networkedPosition) > teleportIfDistanceGreaterThan)
+                if (Vector3.Distance(trn.position, networkedPosition) > teleportIfDistanceGreaterThan)
                 {
-                    rb.position = networkedPosition;
+                    trn.position = networkedPosition;
                 }
             }
 
@@ -77,11 +77,11 @@ public class FireballSceneSync : MonoBehaviour, IPunObservable
 
                 if (synchronizeVelocity)
                 {
-                    rb.velocity = (Vector3)stream.ReceiveNext();
+                    //trn.velocity = (Vector3)stream.ReceiveNext();
 
-                    networkedPosition += rb.velocity * lag;
+                    //networkedPosition += trn.velocity * lag;
 
-                    distance = Vector3.Distance(rb.position, networkedPosition);
+                    distance = Vector3.Distance(trn.position, networkedPosition);
                 }
 
                 //if (synchronizeAngularVelocity)
