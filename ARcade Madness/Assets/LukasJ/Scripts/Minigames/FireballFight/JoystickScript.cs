@@ -71,6 +71,13 @@ public class JoystickScript : MonoBehaviour
     public void StopMe()
     {
         velocityVector = Vector3.zero;
+        rb.velocity = Vector3.zero;
+        rb.isKinematic = false;
+    }
+
+    public void StartMe()
+    {
+        rb.isKinematic = true;
     }
 
 }
