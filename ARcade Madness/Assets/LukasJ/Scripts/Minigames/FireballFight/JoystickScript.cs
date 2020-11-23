@@ -89,13 +89,13 @@ public class JoystickScript : MonoBehaviour
         isAlive = false;
         playerScript.attackB.interactable = false;
         playerScript.blockB.interactable = false;
-        PV.RPC("DisableMyCollider", RpcTarget.AllBuffered, transform.GetChild(0).GetChild(0).gameObject);
+        PV.RPC("DisableMyCollider", RpcTarget.AllBuffered);
     }
 
     [PunRPC]
-    void DisableMyCollider(GameObject collider)
+    void DisableMyCollider()
     {
-        collider.SetActive(false);
+        transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
     }
 
 }
