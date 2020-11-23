@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 208559802487891693}
   - component: {fileID: 102021320323502062}
   - component: {fileID: 4197142949469543785}
+  - component: {fileID: 7318711463060701269}
   m_Layer: 0
   m_Name: PlayerGraphics
   m_TagString: Untagged
@@ -72,6 +73,22 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
+--- !u!114 &7318711463060701269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208559802487891694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eabeed050ac70242a4bcb9bd2cce99d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  synchronizeVelocity: 1
+  synchronizeAngularVelocity: 1
+  isTeleportEnabled: 1
+  teleportIfDistanceGreaterThan: 1
 --- !u!1 &208559803351174310
 GameObject:
   m_ObjectHideFlags: 0
@@ -87,8 +104,8 @@ GameObject:
   - component: {fileID: 208559803351174329}
   - component: {fileID: 7291758562938909311}
   - component: {fileID: 8554972591235975553}
+  - component: {fileID: 4732448850084410013}
   - component: {fileID: 1303261897437100392}
-  - component: {fileID: 8407936420854933467}
   m_Layer: 0
   m_Name: Player_Fireball
   m_TagString: Player
@@ -207,6 +224,22 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
+--- !u!114 &4732448850084410013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208559803351174310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eabeed050ac70242a4bcb9bd2cce99d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  synchronizeVelocity: 1
+  synchronizeAngularVelocity: 1
+  isTeleportEnabled: 1
+  teleportIfDistanceGreaterThan: 1
 --- !u!114 &1303261897437100392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,22 +252,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f7f6308569c2d04184c4b0a8ad61f4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8407936420854933467
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 208559803351174310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72456712df28f1d41bb31e6b3c166c3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  synchronizeVelocity: 1
-  synchronizeAngularVelocity: 1
-  isTeleportEnabled: 1
-  teleportIfDistanceGreaterThan: 1
 --- !u!1 &208559803788533406
 GameObject:
   m_ObjectHideFlags: 0
@@ -1467,11 +1484,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b346dbdae897ac43950a8ad5db48a24, type: 3}
---- !u!1 &8067457095161305276 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -346142337343115430, guid: 0b346dbdae897ac43950a8ad5db48a24, type: 3}
-  m_PrefabInstance: {fileID: 1497196311219009510}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2747255551899264013 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3667946887678727147, guid: 0b346dbdae897ac43950a8ad5db48a24, type: 3}
@@ -1485,6 +1497,11 @@ Transform:
 --- !u!1 &1731200630992063159 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0b346dbdae897ac43950a8ad5db48a24, type: 3}
+  m_PrefabInstance: {fileID: 1497196311219009510}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8067457095161305276 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -346142337343115430, guid: 0b346dbdae897ac43950a8ad5db48a24, type: 3}
   m_PrefabInstance: {fileID: 1497196311219009510}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5459582770634735855
