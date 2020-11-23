@@ -82,8 +82,8 @@ public class FireBallAnimator : MonoBehaviour
     {
         if (animator.GetBool("isRunning"))
         {
-
-            attackB.interactable = true;
+            if (!isBlocking)
+                attackB.interactable = true;
             blockB.interactable = true;
             animator.SetBool("isRunning", false);
         }  
