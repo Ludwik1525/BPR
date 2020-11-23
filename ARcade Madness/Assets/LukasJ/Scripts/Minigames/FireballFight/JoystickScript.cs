@@ -15,6 +15,7 @@ public class JoystickScript : MonoBehaviour
 
     private Vector3 velocityVector = Vector3.zero;
     private Rigidbody rb;
+    private FireBallAnimator playerScript;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,7 @@ public class JoystickScript : MonoBehaviour
         isPerformingAnAction = false;
         rb = GetComponent<Rigidbody>();
         isAlive = true;
+        playerScript = transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<FireBallAnimator>();
     }
 
     // Update is called once per frame
@@ -45,7 +47,7 @@ public class JoystickScript : MonoBehaviour
                 Vector3 _movementVelocityVector = (_movementHorizontal + _movementVertical).normalized * speed;
                 Vector3 newPosition = new Vector3(_xMovementInput, 0.0f, _zMovementInput);
 
-                if (!transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<FireBallAnimator>().isBlocking && !transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<FireBallAnimator>().isCastingSpell)
+                if (!playerScript.isBlocking && !playerScript.isCastingSpell)
                 {
                     Move(_movementVelocityVector);
                 }
@@ -85,7 +87,15 @@ public class JoystickScript : MonoBehaviour
     public void Die()
     {
         isAlive = false;
-        transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        playerScript.attackB.interactable = false;
+        playerScript.blockB.interactable = false;
+        PV.RPC("DisableMyCollider", RpcTarget.AllBuffered, transform.GetChild(0).GetChild(0).gameObject);
+    }
+
+    [PunRPC]
+    void DisableMyCollider(GameObject collider)
+    {
+        collider.SetActive(false);
     }
 
 }
