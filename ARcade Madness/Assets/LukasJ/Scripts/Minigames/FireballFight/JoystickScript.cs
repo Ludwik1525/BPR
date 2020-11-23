@@ -11,6 +11,7 @@ public class JoystickScript : MonoBehaviour
     public float maxVelocityChange = 4f;
     public float tiltAmount = 10f;
     public bool isPerformingAnAction;
+    public bool isAlive = true;
 
     private Vector3 velocityVector = Vector3.zero;
     private Rigidbody rb;
@@ -45,8 +46,8 @@ public class JoystickScript : MonoBehaviour
             {
                 Move(_movementVelocityVector);
             }
-
-            transform.GetChild(0).LookAt(-newPosition + transform.position);
+            if(isAlive)
+                transform.GetChild(0).LookAt(-newPosition + transform.position);
         }
 
     }
@@ -75,6 +76,11 @@ public class JoystickScript : MonoBehaviour
     {
         velocityVector = Vector3.zero;
         rb.velocity = Vector3.zero;
+    }
+
+    public void Die()
+    {
+        isAlive = false;
     }
 
 }

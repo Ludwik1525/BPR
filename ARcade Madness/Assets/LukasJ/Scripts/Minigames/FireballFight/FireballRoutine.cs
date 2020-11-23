@@ -26,6 +26,7 @@ public class FireballRoutine : MonoBehaviour
         if(other.tag == "Player")
         {
             other.GetComponentInChildren<Animator>().gameObject.GetComponent<FireBallAnimator>().Die();
+            other.gameObject.GetComponent<JoystickScript>().Die();
             PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "SmallExplosion"), this.transform.position, Quaternion.identity);
         }
         else
