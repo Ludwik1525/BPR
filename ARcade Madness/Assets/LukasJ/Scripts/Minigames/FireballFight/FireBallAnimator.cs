@@ -48,7 +48,8 @@ public class FireBallAnimator : MonoBehaviour
 
         if(isMoving)
         {
-            Vector3.MoveTowards(transform.position, target, 5 * Time.deltaTime);
+            if(PV.IsMine)
+                myParent.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime);
         }
           
     }
@@ -64,7 +65,7 @@ public class FireBallAnimator : MonoBehaviour
         {
             RunAnimStart();
             isMoving = true;
-            target = new Vector3(Random.Range(-0.5f, 0.5f), -0.7537111f, Random.Range(-1, 1));
+            target = new Vector3(Random.Range(-0.5f, 0.5f), 0, Random.Range(-1, 1));
         }
     }
 

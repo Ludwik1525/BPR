@@ -43,10 +43,10 @@ public class JoystickScript : MonoBehaviour
             Vector3 newPosition = new Vector3(_xMovementInput, 0.0f, _zMovementInput);
             transform.GetChild(0).LookAt(-newPosition + transform.position);
 
-            PV.RPC("ChangeRotation", RpcTarget.AllBuffered, newPosition);
+            //PV.RPC("ChangeRotation", RpcTarget.AllBuffered, newPosition);
 
-            if (!isPerformingAnAction)
-                PV.RPC("ChangePosition", RpcTarget.AllBuffered, newPosition);
+            //if (!isPerformingAnAction)
+            //    PV.RPC("ChangePosition", RpcTarget.AllBuffered, newPosition);
 
             Move(_movementVelocityVector);
         }
@@ -69,6 +69,21 @@ public class JoystickScript : MonoBehaviour
     {
         if (-newPos + transform.position != transform.position)
             transform.GetChild(1).LookAt(-newPos + transform.position);
+    }
+
+    private void FixedUpdate()
+    {
+        if (velocityVector != Vector3.zero)
+        {
+            Vector3 velocity = rb.velocity;
+            Vector3 velocityChange = (velocityVector - velocity);
+
+            velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
+            velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
+            velocityChange.y = 0f;
+
+            rb.AddForce(velocityChange, ForceMode.Acceleration);
+        }
     }
 
 }
