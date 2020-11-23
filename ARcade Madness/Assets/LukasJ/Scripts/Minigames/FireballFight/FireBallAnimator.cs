@@ -14,7 +14,7 @@ public class FireBallAnimator : MonoBehaviour
     private Animator animator;
     private GameObject joystick;
     public GameObject shield;
-    private bool isBlocking, isCastingSpell;
+    public bool isBlocking, isCastingSpell;
 
     void Start()
     {

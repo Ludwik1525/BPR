@@ -7,7 +7,7 @@ public class JoystickScript : MonoBehaviour
 {
     private PhotonView PV;
     private Joystick joystick;
-    public float speed = 1f;
+    public float speed = 2f;
     public float maxVelocityChange = 4f;
     public float tiltAmount = 10f;
     public bool isPerformingAnAction;
@@ -39,11 +39,14 @@ public class JoystickScript : MonoBehaviour
 
             //Final movement velocity vector
             Vector3 _movementVelocityVector = (_movementHorizontal + _movementVertical).normalized * speed;
-
             Vector3 newPosition = new Vector3(_xMovementInput, 0.0f, _zMovementInput);
-            transform.GetChild(0).LookAt(-newPosition + transform.position);
 
-            Move(_movementVelocityVector);
+            if (!transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<FireBallAnimator>().isBlocking || !transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<FireBallAnimator>().isCastingSpell)
+            {
+                Move(_movementVelocityVector);
+            }
+
+            transform.GetChild(0).LookAt(-newPosition + transform.position);
         }
 
     }
@@ -71,6 +74,7 @@ public class JoystickScript : MonoBehaviour
     public void StopMe()
     {
         velocityVector = Vector3.zero;
+        rb.velocity = Vector3.zero;
     }
 
 }
