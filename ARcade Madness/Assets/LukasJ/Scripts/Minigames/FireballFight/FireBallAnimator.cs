@@ -35,12 +35,10 @@ public class FireBallAnimator : MonoBehaviour
         if (joystick.transform.localPosition == Vector3.zero)
         {
             RunAnimStop();
-            myParent.GetComponent<JoystickScript>().StopMe();
         }
         else
         {
             RunAnimStart();
-            myParent.GetComponent<JoystickScript>().StartMe();
         }
 
     }

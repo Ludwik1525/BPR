@@ -7,7 +7,7 @@ public class JoystickScript : MonoBehaviour
 {
     private PhotonView PV;
     private Joystick joystick;
-    public float speed = 2f;
+    public float speed = 1f;
     public float maxVelocityChange = 4f;
     public float tiltAmount = 10f;
     public bool isPerformingAnAction;
@@ -60,24 +60,12 @@ public class JoystickScript : MonoBehaviour
             Vector3 velocity = rb.velocity;
             Vector3 velocityChange = (velocityVector - velocity);
 
-            velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
-            velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
+            //velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
+            //velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
             velocityChange.y = 0f;
 
-            rb.AddForce(velocityChange, ForceMode.Acceleration);
+            rb.AddForce(velocityChange, ForceMode.VelocityChange);
         }
-    }
-
-    public void StopMe()
-    {
-        velocityVector = Vector3.zero;
-        rb.velocity = Vector3.zero;
-        rb.isKinematic = false;
-    }
-
-    public void StartMe()
-    {
-        rb.isKinematic = true;
     }
 
 }
