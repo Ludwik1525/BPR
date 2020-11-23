@@ -58,16 +58,19 @@ public class JoystickScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (velocityVector != Vector3.zero)
+        if (!transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<FireBallAnimator>().isBlocking || !transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<FireBallAnimator>().isCastingSpell)
         {
-            Vector3 velocity = rb.velocity;
-            Vector3 velocityChange = (velocityVector - velocity);
+            if (velocityVector != Vector3.zero)
+            {
+                Vector3 velocity = rb.velocity;
+                Vector3 velocityChange = (velocityVector - velocity);
 
-            //velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
-            //velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
-            velocityChange.y = 0f;
+                //velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
+                //velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
+                velocityChange.y = 0f;
 
-            rb.AddForce(velocityChange, ForceMode.VelocityChange);
+                rb.AddForce(velocityChange, ForceMode.VelocityChange);
+            }
         }
     }
 
