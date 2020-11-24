@@ -34,10 +34,10 @@ public class Loader : MonoBehaviour
     } 
     
     [PunRPC]
-    void RPC_SetPlayerLoaderForFireBall()
+    void RPC_SetPlayerLoaderForFireBall(int index)
     {
         //Set parent
-        playersParent = GameObject.Find("Content").transform;
+        playersParent = GameObject.Find("Content").transform.GetChild(index);
         this.gameObject.transform.SetParent(playersParent);
 
         //Add player to the list
@@ -45,10 +45,10 @@ public class Loader : MonoBehaviour
     }
 
     [PunRPC]
-    void RPC_SetPlayerLoaderForPacman()
+    void RPC_SetPlayerLoaderForPacman(int index)
     {
         //Set parent
-        playersParent = GameObject.Find("Content").transform;
+        playersParent = GameObject.Find("Content").transform.GetChild(index);
         this.gameObject.transform.SetParent(playersParent);
 
         //Add player to the list
