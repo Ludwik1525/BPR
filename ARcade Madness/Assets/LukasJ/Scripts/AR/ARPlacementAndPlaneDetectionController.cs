@@ -80,14 +80,7 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
 
     public void Ready()
     {
-
-        foreach(GameObject player in GameSetupController.players)
-        {   
-            if(player.GetComponent<PhotonView>().IsMine)
-            {
-                ARCanvas.SetActive(false);
-                instructionsCanvas.SetActive(true);
-            }
-        }
+        ARCanvas.SetActive(false);
+        instructionsCanvas.SetActive(true);
     }
 }

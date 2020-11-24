@@ -15,6 +15,8 @@ public class UIGameManager : MonoBehaviour
     private GameObject menu;
     [SerializeField]
     private GameObject instruction;
+    [SerializeField]
+    private GameObject mainUI;
     private GameSetupController gsc;
 
     [SerializeField]
@@ -34,12 +36,11 @@ public class UIGameManager : MonoBehaviour
     void Start()
     {
         gsc = FindObjectOfType<GameSetupController>();
-        instruction.SetActive(true);
 
         GameObject playerLoader = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerLoadingImg"), loadersSpawns[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]].transform.position, Quaternion.identity);
 
         pv = playerLoader.GetComponent<PhotonView>();
-        pv.RPC("RPC_SetPlayerLoaderForSpinner", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]);
+        pv.RPC("RPC_SetPlayerLoaderForBoard", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]);
         print((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]);
 
         if (pv.IsMine)
@@ -69,7 +70,9 @@ public class UIGameManager : MonoBehaviour
             if (count == playerLoaders.Count)
             {
                 instruction.SetActive(false);
+                mainUI.SetActive(true);
                 gsc.CreatePlayer();
+
             }
         }
     }
