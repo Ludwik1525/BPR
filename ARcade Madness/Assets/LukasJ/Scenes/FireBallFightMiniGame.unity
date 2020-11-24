@@ -2912,8 +2912,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SpinningGameManager, Assembly-CSharp
+      - m_Target: {fileID: 516920694}
+        m_TargetAssemblyTypeName: FireballSetupManager, Assembly-CSharp
         m_MethodName: Ready
         m_Mode: 1
         m_Arguments:

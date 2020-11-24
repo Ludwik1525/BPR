@@ -1986,9 +1986,9 @@ MonoBehaviour:
   - {fileID: 1558152738}
   - {fileID: 1726347007}
   - {fileID: 1497018218}
-  ready_btn: {fileID: 0}
-  instruction: {fileID: 0}
-  menu: {fileID: 0}
+  ready_btn: {fileID: 6565997737207058813}
+  instruction: {fileID: 6565997736442576082}
+  menu: {fileID: 6565997736839008922}
 --- !u!1 &366262267 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1399099369030212, guid: e953438b1e8b2b248b619f24ce7e1bd6, type: 3}
