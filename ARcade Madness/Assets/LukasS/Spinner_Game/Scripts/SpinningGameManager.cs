@@ -22,6 +22,9 @@ public class SpinningGameManager : MonoBehaviour
     [SerializeField]
     private Text count_Ui;
 
+    [SerializeField]
+    private List<GameObject> loadersSpawns = new List<GameObject>();
+
     public static List<GameObject> playerLoaders;
 
     private PhotonView pv;
@@ -37,9 +40,11 @@ public class SpinningGameManager : MonoBehaviour
     {
         instruction.SetActive(true);
 
-        GameObject playerLoader = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerLoadingImg"), menu.transform.position, Quaternion.identity);
+        GameObject playerLoader = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerLoadingImg"), loadersSpawns[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]].transform.position, Quaternion.identity);
+
         pv = playerLoader.GetComponent<PhotonView>();
-        pv.RPC("RPC_SetPlayerLoaderForSpinner", RpcTarget.AllBuffered);
+        pv.RPC("RPC_SetPlayerLoaderForSpinner", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]);
+        print((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]);
 
         if(pv.IsMine)
         {
