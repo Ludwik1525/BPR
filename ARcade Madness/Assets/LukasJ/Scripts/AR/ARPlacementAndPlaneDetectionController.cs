@@ -14,8 +14,12 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
     public GameObject adjustButton;
     public GameObject searchForGameButton;
     public GameObject scaleSlider;
-    public GameObject instructionsCanvas;
     public GameObject ARCanvas;
+
+    private int readyPlayersCount = 0;
+    private bool started = false;
+    private GameSetupController gsc;
+    private PhotonView pv;
 
     public TextMeshProUGUI informUIPanel_Text;
 
@@ -24,6 +28,8 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
     {
         m_ARPlaneManager = GetComponent<ARPlaneManager>();
         m_ARPlacementManager = GetComponent<ARPlacementManager>();
+        gsc = FindObjectOfType<GameSetupController>();
+        pv = GetComponent<PhotonView>();
 
     }
     // Start is called before the first frame update
@@ -37,6 +43,15 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
         searchForGameButton.SetActive(true);
 
         informUIPanel_Text.text = "Move phone to detect planes and place the Board!";
+    }
+
+    private void Update()
+    {
+        if(readyPlayersCount == PhotonNetwork.CountOfPlayers && !started)
+        {
+            gsc.CreatePlayer();
+            started = true;
+        }
     }
 
     public void DisableARPlacementAndPlaneDetection()
@@ -78,9 +93,14 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
         }
     }
 
-    public void Ready()
+    [PunRPC]
+    private void Ready()
     {
-        ARCanvas.SetActive(false);
-        instructionsCanvas.SetActive(true);
+        readyPlayersCount++;
+    }
+
+    public void ReadyButtonPress()
+    {
+        pv.RPC("Ready", RpcTarget.AllBuffered);
     }
 }

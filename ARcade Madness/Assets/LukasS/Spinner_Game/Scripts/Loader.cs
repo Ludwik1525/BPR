@@ -56,19 +56,6 @@ public class Loader : MonoBehaviour
     }
 
     [PunRPC]
-    void RPC_SetPlayerLoaderForBoard(int index)
-    {
-        //Set parent
-        playersParent = GameObject.Find("Content").transform.GetChild(index);
-        this.gameObject.transform.SetParent(playersParent);
-
-        //Add player to the list
-        UIGameManager.playerLoaders.Add(this.gameObject);
-    }
-
-
-
-    [PunRPC]
     void RPC_SetName(string name)
     {
         playerName.text = name;
