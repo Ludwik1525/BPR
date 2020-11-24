@@ -12,14 +12,13 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
 
     public GameObject placeButton;
     public GameObject adjustButton;
-    public GameObject searchForGameButton;
+    public GameObject readyButton;
     public GameObject scaleSlider;
     public GameObject ARCanvas;
     public GameObject mainCanvas;
 
     private int readyPlayersCount = 0;
     private bool started = false;
-    private GameSetupController gsc;
     private PhotonView pv;
 
     public TextMeshProUGUI informUIPanel_Text;
@@ -29,7 +28,6 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
     {
         m_ARPlaneManager = GetComponent<ARPlaneManager>();
         m_ARPlacementManager = GetComponent<ARPlacementManager>();
-        gsc = FindObjectOfType<GameSetupController>();
         pv = GetComponent<PhotonView>();
 
     }
@@ -41,19 +39,18 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
         
 
         adjustButton.SetActive(false);
-        searchForGameButton.SetActive(true);
+        readyButton.SetActive(true);
 
         informUIPanel_Text.text = "Move phone to detect planes and place the Board!";
     }
 
     private void Update()
     {
-        print(PhotonNetwork.CountOfPlayers);
-        if(readyPlayersCount == PhotonNetwork.CountOfPlayers && !started)
+        print(GameSetupController.players.Count);
+        if(readyPlayersCount == GameSetupController.players.Count && !started)
         {
             started = true;
             ARCanvas.SetActive(false);
-            mainCanvas.SetActive(true);
         }
     }
 
@@ -68,7 +65,7 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
 
         placeButton.SetActive(false);
         adjustButton.SetActive(true);
-        searchForGameButton.SetActive(true);
+        readyButton.SetActive(true);
 
         informUIPanel_Text.text = "Great! Now get ready!";
     }
@@ -83,7 +80,7 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
 
         placeButton.SetActive(true);
         adjustButton.SetActive(false);
-        searchForGameButton.SetActive(false);
+        readyButton.SetActive(false);
 
         informUIPanel_Text.text = "Move phone to detect planes and place the Board!";
     }
@@ -105,5 +102,9 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
     public void ReadyButtonPress()
     {
         pv.RPC("Ready", RpcTarget.AllBuffered);
+        placeButton.SetActive(false);
+        scaleSlider.SetActive(false);
+        adjustButton.SetActive(false);
+        readyButton.SetActive(false);
     }
 }
