@@ -56,8 +56,7 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
     }
 
     private void Update()
-    {
-        print(GameSetupController.players.Count);
+    { 
         if(readyPlayersCount == GameSetupController.players.Count && !started)
         {
             started = true;
@@ -68,11 +67,15 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
             {
                 foreach(GameObject p in GameSetupController.players)
                 {
-                    if(GameController.gc.currentTurn == p.GetComponent<GameManager>().turn)
+                    if(p.GetComponent<PhotonView>().IsMine)
                     {
-                        go.GetComponent<Button>().interactable = true;
+                        print("GC CURRENT TURN : " + GameController.gc.currentTurn + " PLAYERS TURN : " + p.GetComponent<GameManager>().turn);
+
+                        if (GameController.gc.currentTurn == p.GetComponent<GameManager>().turn)
+                        {
+                            go.GetComponent<Button>().interactable = true;
+                        }
                     }
-                    
                 }
                 go.GetComponent<Image>().enabled = true;
             }
