@@ -187,7 +187,11 @@ MonoBehaviour:
   battleArenaGameobject: {fileID: 1413374867}
   instruction: {fileID: 2057312354}
   count_Ui: {fileID: 0}
-  loadersSpawns: []
+  loadersSpawns:
+  - {fileID: 3463900519768043832}
+  - {fileID: 3463900519768043831}
+  - {fileID: 3463900519768043830}
+  - {fileID: 3463900519768043829}
 --- !u!114 &353995398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -666,3 +670,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7deab4415e686c498e8b138bc8e7317, type: 3}
+--- !u!1 &3463900519768043829 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2226859178928029056, guid: f7deab4415e686c498e8b138bc8e7317, type: 3}
+  m_PrefabInstance: {fileID: 3463900519768043828}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3463900519768043830 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2226859178478525666, guid: f7deab4415e686c498e8b138bc8e7317, type: 3}
+  m_PrefabInstance: {fileID: 3463900519768043828}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3463900519768043831 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2226859177615584143, guid: f7deab4415e686c498e8b138bc8e7317, type: 3}
+  m_PrefabInstance: {fileID: 3463900519768043828}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3463900519768043832 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2226859177841306717, guid: f7deab4415e686c498e8b138bc8e7317, type: 3}
+  m_PrefabInstance: {fileID: 3463900519768043828}
+  m_PrefabAsset: {fileID: 0}
