@@ -25,20 +25,19 @@ MonoBehaviour:
     AuthMode: 0
     EnableLobbyStatistics: 0
     NetworkLogging: 1
-  DevRegion: eu
+  DevRegion: 
   PunLogging: 0
   EnableSupportLogger: 0
   RunInBackground: 1
   StartInOfflineMode: 0
   RpcList:
   - ActivateChildren
-  - ChangePosition
-  - ChangeRotation
   - ChooseRandomNumber
   - ClickRpc
   - DestroyChest
   - DestroyRpc
   - DestroySpaceship
+  - DisableMyCollider
   - DisableRocket
   - DoDamage
   - EnableEndScreen
@@ -63,7 +62,8 @@ MonoBehaviour:
   - RPC_ResetTimer
   - RPC_SetName
   - RPC_SetParent
-  - RPC_SetPlayerLoader
+  - RPC_SetPlayerLoaderForPacman
+  - RPC_SetPlayerLoaderForSpinner
   - RPC_UpdateTimer
   - SaveMyPos
   - SetChestsParent
@@ -79,10 +79,6 @@ MonoBehaviour:
   - SwitchRocketSounds
   - SwitchTheDice
   - UnifyTheRandomNumber
-  - RPC_SetPlayerLoaderForPacman
-  - RPC_SetPlayerLoaderForSpinner
-  - Move
-  - DisableMyCollider
   DisableAutoOpenWizard: 1
   ShowSettings: 1
-  DevRegionSetOnce: 1
+  DevRegionSetOnce: 0
