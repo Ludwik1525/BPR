@@ -77,6 +77,11 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
                         }
                     }
                 }
+
+                if(go.gameObject.name.Contains("Options"))
+                {
+                    go.GetComponent<Button>().interactable = true;
+                }
                 go.GetComponent<Image>().enabled = true;
             }
         }
