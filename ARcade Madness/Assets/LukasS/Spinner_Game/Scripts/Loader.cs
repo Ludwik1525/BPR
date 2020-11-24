@@ -26,7 +26,7 @@ public class Loader : MonoBehaviour
     void RPC_SetPlayerLoaderForSpinner(int index)
     {
         //Set parent
-        playersParent = GameObject.Find("Content").transform.GetChild(index - 1);
+        playersParent = GameObject.Find("Content").transform.GetChild(index);
         this.gameObject.transform.SetParent(playersParent);
 
         //Add player to the list
