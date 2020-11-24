@@ -31,6 +31,17 @@ public class Loader : MonoBehaviour
 
         //Add player to the list
         SpinningGameManager.playerLoaders.Add(this.gameObject);
+    } 
+    
+    [PunRPC]
+    void RPC_SetPlayerLoaderForFireBall()
+    {
+        //Set parent
+        playersParent = GameObject.Find("Content").transform;
+        this.gameObject.transform.SetParent(playersParent);
+
+        //Add player to the list
+        FireballSetupManager.playerLoaders.Add(this.gameObject);
     }
 
     [PunRPC]

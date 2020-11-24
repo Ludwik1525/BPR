@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using System.IO;
+using UnityEngine.UI;
 
 public class FireballSetupManager : MonoBehaviour
 {
@@ -10,15 +11,63 @@ public class FireballSetupManager : MonoBehaviour
     private GameObject player;
     private GameObject spawnPositions;
 
+    [SerializeField]
+    private GameObject instruction;
+    [SerializeField]
+    private GameObject content;
+    [SerializeField]
+    private Button ready_btn;
+    private PhotonView imagePV;
+    private int count = 0;
+
+    public static List<GameObject> playerLoaders;
+
+    private void Awake()
+    {
+        playerLoaders = new List<GameObject>();
+    }
+
     void Start()
     {
+        instruction.SetActive(true);
+
+        GameObject playerLoader = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerLoadingImg"), content.transform.position, Quaternion.identity);
+        imagePV = playerLoader.GetComponent<PhotonView>();
+        imagePV.RPC("RPC_SetPlayerLoaderForFireBall", RpcTarget.AllBuffered);
+
+        if (imagePV.IsMine)
+        {
+            imagePV.RPC("RPC_SetName", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer.NickName);
+        }
+
         spawnPositions = GameObject.Find("SpawnPositions");
-        SpawnPlayer();
+        //SpawnPlayer();
     }
-    
+
     void Update()
     {
-        
+        while (count < playerLoaders.Count)
+        {
+            foreach (var a in playerLoaders)
+            {
+                if (a.GetComponent<Loader>().ready == true)
+                {
+                    count++;
+                }
+                else
+                {
+                    count = 0;
+                    return;
+                }
+                print(count);
+            }
+
+            if (count == playerLoaders.Count)
+            {
+                instruction.SetActive(false);
+                SpawnPlayer();
+            }
+        }
     }
 
     private void SpawnPlayer()
@@ -36,5 +85,12 @@ public class FireballSetupManager : MonoBehaviour
         {
             PV.RPC("SetName", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer.NickName);
         }
+    }
+
+    public void Ready()
+    {
+        print("c  " + PhotonNetwork.CountOfPlayers);
+        imagePV.RPC("ReadyIndication", RpcTarget.AllBuffered);
+        ready_btn.interactable = false;
     }
 }
