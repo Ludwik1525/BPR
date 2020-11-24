@@ -38,7 +38,7 @@ public class GameSetupController : MonoBehaviour
         currentRoute = FindObjectOfType<Route>();
         spawn = FindObjectOfType<Spawn>();
         colours = FindObjectOfType<ColourPalette>();
-        //CreatePlayer();
+        CreatePlayer();
     }
 
     private void Update()

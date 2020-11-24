@@ -15,6 +15,7 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
     public GameObject searchForGameButton;
     public GameObject scaleSlider;
     public GameObject ARCanvas;
+    public GameObject mainCanvas;
 
     private int readyPlayersCount = 0;
     private bool started = false;
@@ -47,10 +48,12 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
 
     private void Update()
     {
+        print(PhotonNetwork.CountOfPlayers);
         if(readyPlayersCount == PhotonNetwork.CountOfPlayers && !started)
         {
-            gsc.CreatePlayer();
             started = true;
+            ARCanvas.SetActive(false);
+            mainCanvas.SetActive(true);
         }
     }
 
