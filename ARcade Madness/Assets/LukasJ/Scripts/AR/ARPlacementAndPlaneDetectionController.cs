@@ -62,9 +62,18 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
         {
             started = true;
             ARCanvas.SetActive(false);
+
+
             foreach (GameObject go in boardUI)
             {
-                go.GetComponent<Button>().interactable = true;
+                foreach(GameObject p in GameSetupController.players)
+                {
+                    if(GameController.gc.currentTurn == p.GetComponent<GameManager>().turn)
+                    {
+                        go.GetComponent<Button>().interactable = true;
+                    }
+                    
+                }
                 go.GetComponent<Image>().enabled = true;
             }
         }
