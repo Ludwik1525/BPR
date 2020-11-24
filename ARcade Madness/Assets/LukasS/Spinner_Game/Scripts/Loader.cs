@@ -55,6 +55,17 @@ public class Loader : MonoBehaviour
         GameManager_PC.playerLoaders.Add(this.gameObject);
     }
 
+    [PunRPC]
+    void RPC_SetPlayerLoaderForBoard(int index)
+    {
+        //Set parent
+        playersParent = GameObject.Find("Content").transform.GetChild(index);
+        this.gameObject.transform.SetParent(playersParent);
+
+        //Add player to the list
+        GameManager_PC.playerLoaders.Add(this.gameObject);
+    }
+
 
 
     [PunRPC]
