@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 
 public class ARPlacementAndPlaneDetectionController : MonoBehaviour
@@ -17,6 +18,11 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
     public GameObject ARCanvas;
     public GameObject mainCanvas;
 
+    //Board buttons
+
+    public List<GameObject> boardUI;
+
+
     private int readyPlayersCount = 0;
     private bool started = false;
     private PhotonView pv;
@@ -26,6 +32,11 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
 
     private void Awake()
     {
+        foreach(GameObject go in boardUI)
+        {
+            go.GetComponent<Button>().interactable = false;
+            go.GetComponent<Image>().enabled = false;
+        }
         m_ARPlaneManager = GetComponent<ARPlaneManager>();
         m_ARPlacementManager = GetComponent<ARPlacementManager>();
         pv = GetComponent<PhotonView>();
@@ -51,6 +62,11 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
         {
             started = true;
             ARCanvas.SetActive(false);
+            foreach (GameObject go in boardUI)
+            {
+                go.GetComponent<Button>().interactable = true;
+                go.GetComponent<Image>().enabled = true;
+            }
         }
     }
 

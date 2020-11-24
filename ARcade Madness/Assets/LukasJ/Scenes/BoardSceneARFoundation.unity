@@ -1601,10 +1601,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   placeButton: {fileID: 915340144}
   adjustButton: {fileID: 915340143}
-  searchForGameButton: {fileID: 915340142}
+  readyButton: {fileID: 915340142}
   scaleSlider: {fileID: 915340141}
   ARCanvas: {fileID: 915340146}
-  mainCanvas: {fileID: 0}
+  mainCanvas: {fileID: 918359958}
+  boardUI:
+  - {fileID: 378197612}
+  - {fileID: 1165654633}
+  - {fileID: 764253966}
+  - {fileID: 4916099}
+  - {fileID: 887040119}
   informUIPanel_Text: {fileID: 915340140}
 --- !u!114 &560193090
 MonoBehaviour:
