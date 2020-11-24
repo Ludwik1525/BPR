@@ -1604,6 +1604,7 @@ MonoBehaviour:
   searchForGameButton: {fileID: 915340142}
   scaleSlider: {fileID: 915340141}
   ARCanvas: {fileID: 915340146}
+  mainCanvas: {fileID: 0}
   informUIPanel_Text: {fileID: 915340140}
 --- !u!114 &560193090
 MonoBehaviour:
