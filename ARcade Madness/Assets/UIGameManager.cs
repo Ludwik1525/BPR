@@ -37,7 +37,8 @@ public class UIGameManager : MonoBehaviour
     {
         gsc = FindObjectOfType<GameSetupController>();
 
-        GameObject playerLoader = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerLoadingImg"), loadersSpawns[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]].transform.position, Quaternion.identity);
+        //GameObject playerLoader = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerLoadingImg"), loadersSpawns[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]].transform.position, Quaternion.identity);
+        GameObject playerLoader = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerLoadingImg"), menu.transform.position, Quaternion.identity);
 
         pv = playerLoader.GetComponent<PhotonView>();
         pv.RPC("RPC_SetPlayerLoaderForBoard", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]);

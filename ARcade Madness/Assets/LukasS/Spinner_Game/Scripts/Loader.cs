@@ -63,7 +63,7 @@ public class Loader : MonoBehaviour
         this.gameObject.transform.SetParent(playersParent);
 
         //Add player to the list
-        GameManager_PC.playerLoaders.Add(this.gameObject);
+        UIGameManager.playerLoaders.Add(this.gameObject);
     }
 
 
