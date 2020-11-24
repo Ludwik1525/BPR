@@ -348,7 +348,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -571,10 +571,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1626478864}
     m_Modifications:
-    - target: {fileID: 3463900519738885912, guid: f7deab4415e686c498e8b138bc8e7317, type: 3}
-      propertyPath: m_ReverseArrangement
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3463900520507491577, guid: f7deab4415e686c498e8b138bc8e7317, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -585,7 +581,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3463900521221368150, guid: f7deab4415e686c498e8b138bc8e7317, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3463900521221368151, guid: f7deab4415e686c498e8b138bc8e7317, type: 3}
       propertyPath: m_LocalPosition.x
