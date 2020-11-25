@@ -2176,6 +2176,8 @@ MonoBehaviour:
   - {fileID: 3313797965330712673}
   - {fileID: 3313797965330712672}
   infoPanel: {fileID: 0}
+  boardPlayerPrefab: {fileID: 3396989747327439425, guid: 72825a5d4e4d326479f0e94545fe883f, type: 3}
+  board: {fileID: 1203952170}
 --- !u!1 &887040119
 GameObject:
   m_ObjectHideFlags: 0
