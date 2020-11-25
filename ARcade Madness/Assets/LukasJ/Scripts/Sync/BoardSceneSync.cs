@@ -49,7 +49,8 @@ public class BoardSceneSync: MonoBehaviour, IPunObservable
             //Then, photonView is mine and I am the one who controls the player
             //should send postion, velocity etc. data to the other players 
             stream.SendNext(rb.position - boardGameObject.transform.position);
-            stream.SendNext(rb.rotation * Quaternion.Inverse(boardGameObject.transform.rotation));
+            //stream.SendNext(rb.rotation * Quaternion.Inverse(boardGameObject.transform.rotation));
+            stream.SendNext(rb.rotation);
 
             if (synchronizeVelocity)
             {
@@ -65,7 +66,8 @@ public class BoardSceneSync: MonoBehaviour, IPunObservable
         {
             //Called on my player gameobject that exists in remote player's game
             networkedPosition = (Vector3)stream.ReceiveNext() + boardGameObject.transform.position;
-            networkedRotation = (Quaternion)stream.ReceiveNext() * boardGameObject.transform.rotation;
+            //networkedRotation = (Quaternion)stream.ReceiveNext() * boardGameObject.transform.rotation;
+            networkedRotation = (Quaternion)stream.ReceiveNext();
 
             if (isTeleportEnabled)
             {
