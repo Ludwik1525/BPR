@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 
     public int routePosition;
     public int turn;
-    public Route currentRoute;
+    private Route currentRoute;
     public int steps;
     public float speed = 2f;
     public GameObject dice;
@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        currentRoute = FindObjectOfType<Route>();
         audioManager = FindObjectOfType<AudioManager>();
         if (PlayerPrefs.HasKey("totalPos"))
             totalPos = PlayerPrefs.GetInt("totalPos");
