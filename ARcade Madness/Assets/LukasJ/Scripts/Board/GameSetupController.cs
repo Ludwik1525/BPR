@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 using Photon.Realtime;
 using ExitGames.Client.Photon;
 
-public class GameSetupController : MonoBehaviour
+public class GameSetupController : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     private int menuSceneIndex;
@@ -44,10 +44,10 @@ public class GameSetupController : MonoBehaviour
 
     private void Start()
     {
-        //currentRoute = FindObjectOfType<Route>();
-        //spawn = FindObjectOfType<Spawn>();
-        //colours = FindObjectOfType<ColourPalette>();
-        //CreatePlayer();
+        currentRoute = FindObjectOfType<Route>();
+        spawn = FindObjectOfType<Spawn>();
+        colours = FindObjectOfType<ColourPalette>();
+        CreatePlayer();
 
         PhotonNetwork.NetworkingClient.EventReceived += OnEvent;
     }
