@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
   AppSettings:
-    AppIdRealtime: b01c217f-42b5-4df8-837d-3ea6f4348813
+    AppIdRealtime: 
     AppIdChat: 
     AppIdVoice: 
     AppVersion: 
@@ -25,7 +25,7 @@ MonoBehaviour:
     AuthMode: 0
     EnableLobbyStatistics: 0
     NetworkLogging: 1
-  DevRegion: eu
+  DevRegion: 
   PunLogging: 0
   EnableSupportLogger: 0
   RunInBackground: 1
@@ -50,6 +50,7 @@ MonoBehaviour:
   - PlayChestSpawnSound
   - PlayCoinStealSound
   - PlayTrophySound
+  - Ready
   - ReadyIndication
   - ResetTurnVar
   - RespawnSpaceship
@@ -62,6 +63,7 @@ MonoBehaviour:
   - RPC_ResetTimer
   - RPC_SetName
   - RPC_SetParent
+  - RPC_SetPlayerLoaderForFireBall
   - RPC_SetPlayerLoaderForPacman
   - RPC_SetPlayerLoaderForSpinner
   - RPC_UpdateTimer
@@ -79,9 +81,6 @@ MonoBehaviour:
   - SwitchRocketSounds
   - SwitchTheDice
   - UnifyTheRandomNumber
-  - RPC_SetPlayerLoaderForFireBall
-  - RPC_SetPlayerLoaderForBoard
-  - Ready
   DisableAutoOpenWizard: 1
-  ShowSettings: 1
-  DevRegionSetOnce: 1
+  ShowSettings: 0
+  DevRegionSetOnce: 0

@@ -71,5 +71,11 @@ public class PlayerScript_PC : MonoBehaviourPun
     {
         Destroy(this.gameObject);
     }
+
+    [PunRPC]
+    void EnableEndScreen()
+    {
+        FindObjectOfType<BoardMenus>().TurnOnWinScreen();
+    }
 }
 

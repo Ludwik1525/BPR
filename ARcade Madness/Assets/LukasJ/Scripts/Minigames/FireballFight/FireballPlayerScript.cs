@@ -13,4 +13,11 @@ public class FireballPlayerScript : MonoBehaviour
     {
         transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text = name;
     }
+
+    [PunRPC]
+    void EnableEndScreen()
+    {
+        FindObjectOfType<BoardMenus>().TurnOnWinScreen();
+    }
+
 }

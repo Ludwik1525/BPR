@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Spinner : MonoBehaviour
 {
@@ -20,5 +21,11 @@ public class Spinner : MonoBehaviour
         {
             playerGraphics.transform.Rotate(new Vector3(0, spinSpeed * Time.deltaTime, 0));
         }
+    }
+
+    [PunRPC]
+    void EnableEndScreen()
+    {
+        FindObjectOfType<BoardMenus>().TurnOnWinScreen();
     }
 }

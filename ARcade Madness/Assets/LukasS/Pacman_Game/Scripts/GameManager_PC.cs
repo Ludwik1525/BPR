@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager_PC : MonoBehaviour
@@ -26,6 +27,9 @@ public class GameManager_PC : MonoBehaviour
     private GameObject instruction;
     [SerializeField]
     private GameObject menu;
+
+    private GameObject player;
+    private PhotonView playerPV;
 
     private PhotonView pv;
     private int count = 0;
@@ -125,7 +129,8 @@ public class GameManager_PC : MonoBehaviour
     {
         Vector3 instantiatePosition = spawnPositions[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]].position;
 
-        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Capsule"), instantiatePosition, Quaternion.identity);
+        player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Capsule"), instantiatePosition, Quaternion.identity);
+        playerPV = player.GetComponent<PhotonView>();
     }  //"Player_Pacman"
 
     public void Ready()
@@ -133,5 +138,27 @@ public class GameManager_PC : MonoBehaviour
         print("c  " + PhotonNetwork.CountOfPlayers);
         pv.RPC("ReadyIndication", RpcTarget.AllBuffered);
         ready_btn.interactable = false;
+    }
+
+    public void DisconnectPlayer()
+    {
+        if (PhotonNetwork.PlayerList.Length - 1 < 2)
+        {
+            playerPV.RPC("EnableEndScreen", RpcTarget.AllBuffered);
+        }
+
+        StartCoroutine("DisconnectAndLoad");
+        PlayerPrefs.SetInt("Score", 0);
+    }
+
+    IEnumerator DisconnectAndLoad()
+    {
+        PlayerPrefs.SetInt("totalPos", 0);
+        GameController.gc.doesHavePosition = false;
+        yield return new WaitForSeconds(1f);
+        PhotonNetwork.Disconnect();
+        while (PhotonNetwork.IsConnected)
+            yield return null;
+        SceneManager.LoadScene("MainMenu");
     }
 }

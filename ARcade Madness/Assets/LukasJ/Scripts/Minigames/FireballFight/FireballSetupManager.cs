@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using System.IO;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class FireballSetupManager : MonoBehaviour
 {
@@ -92,5 +93,27 @@ public class FireballSetupManager : MonoBehaviour
         print("c  " + PhotonNetwork.CountOfPlayers);
         imagePV.RPC("ReadyIndication", RpcTarget.AllBuffered);
         ready_btn.interactable = false;
+    }
+
+    public void DisconnectPlayer()
+    {
+        if (PhotonNetwork.PlayerList.Length - 1 < 2)
+        {
+            PV.RPC("EnableEndScreen", RpcTarget.AllBuffered);
+        }
+
+        StartCoroutine("DisconnectAndLoad");
+        PlayerPrefs.SetInt("Score", 0);
+    }
+
+    IEnumerator DisconnectAndLoad()
+    {
+        PlayerPrefs.SetInt("totalPos", 0);
+        GameController.gc.doesHavePosition = false;
+        yield return new WaitForSeconds(1f);
+        PhotonNetwork.Disconnect();
+        while (PhotonNetwork.IsConnected)
+            yield return null;
+        SceneManager.LoadScene("MainMenu");
     }
 }

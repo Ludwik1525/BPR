@@ -5,6 +5,7 @@ using TMPro;
 using Photon.Pun;
 using UnityEngine.UI;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class SpinningGameManager : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class SpinningGameManager : MonoBehaviour
     private GameObject instruction;
     [SerializeField]
     private Text count_Ui;
+
+    private GameObject player;
+    private PhotonView playerPV;
 
     [SerializeField]
     private List<GameObject> loadersSpawns = new List<GameObject>();
@@ -89,6 +93,29 @@ public class SpinningGameManager : MonoBehaviour
     {
         Vector3 instantiatePosition = spawnPositions[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]].position;
 
-        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player_Spinner"), instantiatePosition, Quaternion.identity);
+        player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player_Spinner"), instantiatePosition, Quaternion.identity);
+        playerPV = player.GetComponent<PhotonView>();
+    }
+
+    public void DisconnectPlayer()
+    {
+        if (PhotonNetwork.PlayerList.Length - 1 < 2)
+        {
+            playerPV.RPC("EnableEndScreen", RpcTarget.AllBuffered);
+        }
+
+        StartCoroutine("DisconnectAndLoad");
+        PlayerPrefs.SetInt("Score", 0);
+    }
+
+    IEnumerator DisconnectAndLoad()
+    {
+        PlayerPrefs.SetInt("totalPos", 0);
+        GameController.gc.doesHavePosition = false;
+        yield return new WaitForSeconds(1f);
+        PhotonNetwork.Disconnect();
+        while (PhotonNetwork.IsConnected)
+            yield return null;
+        SceneManager.LoadScene("MainMenu");
     }
 }
