@@ -27,7 +27,9 @@ public class GameSetupController : MonoBehaviour
     private Route currentRoute;
     private int readyCount;
     private bool startGame = false;
+    
     public GameObject infoPanel;
+    public GameObject board;
 
     public static List<GameObject> players = new List<GameObject>();
     public static List<GameObject> newPlayers = new List<GameObject>();
