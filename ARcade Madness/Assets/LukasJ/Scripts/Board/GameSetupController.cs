@@ -65,6 +65,14 @@ public class GameSetupController : MonoBehaviourPunCallbacks
             GameObject remotePlayer = Instantiate(boardPlayerPrefab, receivedPosition + board.transform.position, receivedRotation);
             PhotonView pv = player.GetComponent<PhotonView>();
             pv.ViewID = (int)data[2];
+            pv.RPC("RPC_AddToList", RpcTarget.AllBuffered);
+            pv.RPC("RPC_SetParent", RpcTarget.AllBuffered);
+
+            PhotonView rpv = player.transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<PhotonView>();
+            if (rpv.IsMine)
+            {
+                rpv.RPC("RPC_AssignColour", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["ColourID"]);
+            }
 
         }
     }
@@ -154,7 +162,14 @@ public class GameSetupController : MonoBehaviourPunCallbacks
                 (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], 0);
 
 
+            PV1.RPC("RPC_AddToList", RpcTarget.AllBuffered);
+            PV1.RPC("RPC_SetParent", RpcTarget.AllBuffered);
 
+            PV2 = player.transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<PhotonView>();
+            if (PV2.IsMine)
+            {
+                PV2.RPC("RPC_AssignColour", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["ColourID"]);
+            }
         }
         else
         {
@@ -168,14 +183,7 @@ public class GameSetupController : MonoBehaviourPunCallbacks
             //.position);
         }
 
-        PV1.RPC("RPC_AddToList", RpcTarget.AllBuffered);
-        PV1.RPC("RPC_SetParent", RpcTarget.AllBuffered);
-
-        PV2 = player.transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<PhotonView>();
-        if (PV2.IsMine)
-        {
-            PV2.RPC("RPC_AssignColour", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["ColourID"]);
-        }
+       
     }
 
     public void DisconnectPlayer()

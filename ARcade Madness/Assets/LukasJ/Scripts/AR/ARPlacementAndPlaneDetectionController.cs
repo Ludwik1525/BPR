@@ -56,7 +56,8 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
     }
 
     private void Update()
-    { 
+    {
+        print(GameSetupController.players.Count);
         if(readyPlayersCount == GameSetupController.players.Count && !started)
         {
             started = true;
