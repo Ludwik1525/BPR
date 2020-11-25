@@ -19,6 +19,8 @@ public class BoardSceneSync: MonoBehaviour, IPunObservable
     private float distance;
     private float angle;
 
+    private GameObject boardGameObject;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -26,6 +28,8 @@ public class BoardSceneSync: MonoBehaviour, IPunObservable
 
         networkedPosition = new Vector3();
         networkedRotation = new Quaternion();
+
+        boardGameObject = GameObject.Find("Board");
     }
 
     private void FixedUpdate()
@@ -44,7 +48,7 @@ public class BoardSceneSync: MonoBehaviour, IPunObservable
         {
             //Then, photonView is mine and I am the one who controls the player
             //should send postion, velocity etc. data to the other players 
-            stream.SendNext(rb.position);
+            stream.SendNext(rb.position - boardGameObject.transform.position);
             stream.SendNext(rb.rotation);
 
             if (synchronizeVelocity)
@@ -60,7 +64,7 @@ public class BoardSceneSync: MonoBehaviour, IPunObservable
         else
         {
             //Called on my player gameobject that exists in remote player's game
-            networkedPosition = (Vector3)stream.ReceiveNext();
+            networkedPosition = (Vector3)stream.ReceiveNext() + boardGameObject.transform.position;
             networkedRotation = (Quaternion)stream.ReceiveNext();
 
             if (isTeleportEnabled)
