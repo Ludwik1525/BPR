@@ -8,20 +8,22 @@ using UnityEngine.SceneManagement;
 
 public class FireballSetupManager : MonoBehaviour
 {
-    private PhotonView PV, PV2;
-    private GameObject player;
-    private GameObject spawnPositions;
+    private int count = 0;
+
+    private GameObject player,  spawnPositions;
 
     [SerializeField]
     private GameObject instruction;
     [SerializeField]
     private GameObject content;
-    [SerializeField]
-    private Button ready_btn;
-    private PhotonView imagePV;
-    private int count = 0;
 
     public static List<GameObject> playerLoaders;
+
+    [SerializeField]
+    private Button ready_btn;
+
+    private PhotonView PV, PV2, imagePV;
+
 
     private void Awake()
     {
@@ -32,6 +34,7 @@ public class FireballSetupManager : MonoBehaviour
     {
         instruction.SetActive(true);
 
+        // instantiating the player's displayer on the instructions page
         GameObject playerLoader = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerLoadingImg"), content.transform.position, Quaternion.identity);
         imagePV = playerLoader.GetComponent<PhotonView>();
         imagePV.RPC("RPC_SetPlayerLoaderForFireBall", RpcTarget.AllBuffered);
@@ -42,7 +45,6 @@ public class FireballSetupManager : MonoBehaviour
         }
 
         spawnPositions = GameObject.Find("SpawnPositions");
-        //SpawnPlayer();
     }
 
     void Update()
@@ -71,6 +73,7 @@ public class FireballSetupManager : MonoBehaviour
         }
     }
 
+    // spawning players
     private void SpawnPlayer()
     {
         player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player_FireBall"),
@@ -88,6 +91,7 @@ public class FireballSetupManager : MonoBehaviour
         }
     }
 
+    // function defining the behavious when the player clicks on the "ready" button
     public void Ready()
     {
         print("c  " + PhotonNetwork.CountOfPlayers);
@@ -95,6 +99,7 @@ public class FireballSetupManager : MonoBehaviour
         ready_btn.interactable = false;
     }
 
+    // function called when the player chooses to disconnect from the game
     public void DisconnectPlayer()
     {
         if (PhotonNetwork.PlayerList.Length - 1 < 2)
@@ -106,6 +111,7 @@ public class FireballSetupManager : MonoBehaviour
         PlayerPrefs.SetInt("Score", 0);
     }
 
+    // function to disconnect from the game
     IEnumerator DisconnectAndLoad()
     {
         PlayerPrefs.SetInt("totalPos", 0);

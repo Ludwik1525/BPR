@@ -1,49 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using Photon.Pun;
 
 public class Currency : MonoBehaviour
 {
-    private ScoreInfo si;
-    private PhotonView myPV;
     private int currency;
 
-    //Button[] buttons;
-    //Button buttonQuit;
-    //Button buttonQuit2;
+    private PhotonView myPV;
+
+    private ScoreInfo si;
 
 
     private void Start()
     {
-        //Very bad code that might work
-        //buttons = GameObject.Find("Canvas").GetComponentsInChildren<Button>(true);
-        //foreach(Button b in buttons)
-        //{
-        //    if(b.gameObject.name.Contains("Quit"))
-        //    {
-        //        buttonQuit = b;
-        //    }
-        //    if (b.gameObject.name.Contains("Confirm"))
-        //    {
-        //        buttonQuit2 = b;
-        //    }
-        //}
-        //buttonQuit.onClick.AddListener(onQuit);
-        //buttonQuit2.onClick.AddListener(onQuit);
-
         si = FindObjectOfType<ScoreInfo>();
         myPV = GetComponent<PhotonView>();
-
-        //if (PlayerPrefs.HasKey("Currency"))
-        //{
-        //    currency = PlayerPrefs.GetInt("Currency");
-        //}
-        //else
-        //{
-        //    currency = 0;
-        //}
 
         if (PhotonNetwork.LocalPlayer.CustomProperties["Currency"] != null)
         {
@@ -64,7 +34,7 @@ public class Currency : MonoBehaviour
         }
     }
 
-
+    // increase my currency by one
     public void setCurrency()
     {
         if (myPV.IsMine)
@@ -80,6 +50,7 @@ public class Currency : MonoBehaviour
         }
     }
 
+    // increase my currecny with a specific value
     public void setCurrencyWithVar(int currencyVar)
     {
         if (myPV.IsMine)
@@ -95,6 +66,7 @@ public class Currency : MonoBehaviour
         }
     }
 
+    // decrease my currency with a specific value
     public void decreaseCurrency(int chestCost)
     {
         if (myPV.IsMine)
@@ -110,6 +82,7 @@ public class Currency : MonoBehaviour
         }
     }
 
+    // check how many other players have coins
     public int CheckHowManyHaveMoney(string myName)
     {
         int amount = 0;
@@ -132,6 +105,7 @@ public class Currency : MonoBehaviour
         return amount;
     }
 
+    // decrese the amount of coins for other players who have it (while using the magnet power-up)
     public void decreaseCurrencyCoinMagnet(string myName)
     {
         for(int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
@@ -161,11 +135,13 @@ public class Currency : MonoBehaviour
         }
     }
 
+    // defice behaviour when closing the application
     private void OnApplicationQuit()
     {
         onQuit();
     }
 
+    // zero out the amount of coins
     void onQuit()
     {
         currency = 0;
@@ -175,6 +151,4 @@ public class Currency : MonoBehaviour
 
         si.GetComponent<PhotonView>().RPC("SetCurrency", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"], currency);
     }
-
-
 }

@@ -1,14 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Photon.Pun;
 using System.IO;
 
 public class FireballRoutine : MonoBehaviour
 {
     public float speed = 10f;
+
     private Rigidbody rb;
+
     private PhotonView PV;
+
 
     private void Start()
     {
@@ -21,8 +22,10 @@ public class FireballRoutine : MonoBehaviour
         rb.AddForce(transform.forward * speed * Time.deltaTime, ForceMode.Impulse);
     }
 
+    // what happens when the fireball enters another collider that is a trigger
     private void OnTriggerEnter(Collider other)
     {
+        // if it's a plyer, then kill him
         if(other.tag == "Player")
         {
             other.gameObject.GetComponent<JoystickScript>().Die();
@@ -32,10 +35,12 @@ public class FireballRoutine : MonoBehaviour
         {
             PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlasmaExplosion"), this.transform.position, Quaternion.identity);
         }
+        // destroy the fireball
         PV.RPC("KillMe", RpcTarget.AllBuffered);
 
     }
 
+    // destroying the fireball
     [PunRPC]
     void KillMe()
     {

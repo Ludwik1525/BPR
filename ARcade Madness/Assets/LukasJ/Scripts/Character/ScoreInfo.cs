@@ -1,16 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
 public class ScoreInfo : MonoBehaviour
 {
-    private PhotonView PV;
+    private string[] namesToDisplay;
+
     private GameObject winScores;
+
     private List<string> finalNames;
     private List<int> finalScores;
-    private string[] namesToDisplay;
+
+    private PhotonView PV;
+
 
     private void Start()
     {
@@ -27,6 +30,7 @@ public class ScoreInfo : MonoBehaviour
         }
     }
 
+    // enable scores UI according to the number of players in the game
     [PunRPC]
     void ActivateChildren()
     {
@@ -37,6 +41,7 @@ public class ScoreInfo : MonoBehaviour
         }
     }
 
+    // sort the players by the final scores
     public void SortPlayersOrder()
     {
         for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
@@ -64,6 +69,7 @@ public class ScoreInfo : MonoBehaviour
         PV.RPC("SetFinalScores", RpcTarget.AllBuffered);
     }
 
+    // enable the final scores that have been alraedy sorted
     [PunRPC]
     void SetFinalScores()
     {
@@ -78,12 +84,14 @@ public class ScoreInfo : MonoBehaviour
         }
     }
 
+    // set my score
     [PunRPC]
     void SetScore(int index, int score)
     {
         this.gameObject.transform.GetChild(index).GetChild(0).GetChild(2).GetComponent<Text>().text = "" + score;
     }
 
+    // set my coins
     [PunRPC]
     void SetCurrency(int index, int currency)
     {

@@ -1,27 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
 public class CoinMagnet : MonoBehaviour
 {
-    
     public bool isAvailable = true;
+
     private Button coinB;
+
     private Currency currency;
     private GameManager GM;
+    
 
-    // Start is called before the first frame update
     void Start()
     {
         GM = GetComponent<GameManager>();
         currency = GetComponent<Currency>();
         coinB = GameObject.Find("ButtonCoinMagnet").GetComponent<Button>();
+
         coinB.onClick.AddListener(StealTheCoins);
+
         TurnOffCoinMagnet();
     }
 
+    // function to use steal coins from other players and give them for the player who used this power-up
     public void StealTheCoins()
     {
         if (GM.PV.IsMine)
@@ -35,6 +37,7 @@ public class CoinMagnet : MonoBehaviour
         GM.PV.RPC("PlayCoinStealSound", RpcTarget.AllBuffered);
     }
 
+    // function to disable the power-up
     public void TurnOffCoinMagnet()
     {
         if (isAvailable)
@@ -44,6 +47,7 @@ public class CoinMagnet : MonoBehaviour
         } 
     }
 
+    // function to enable the power-up
     public void TurnOnCoinMagnet()
     {
         if (!isAvailable)

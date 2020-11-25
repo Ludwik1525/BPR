@@ -1,13 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Photon.Pun;
 
 public class PlayerScript : MonoBehaviour
 {
-    private PhotonView PV;
-    private GameObject rocket;
     private Transform playersParent;
+
+    private GameObject rocket;
+
+    private PhotonView PV;
+
 
     private void Start()
     {
@@ -17,7 +18,7 @@ public class PlayerScript : MonoBehaviour
     //ready for game after placing ar board
     public bool readyForGame;
 
-
+    // add the player to the list of players
     [PunRPC]
     void RPC_AddToList()
     {
@@ -26,7 +27,7 @@ public class PlayerScript : MonoBehaviour
         GameSetupController.players.Add(this.gameObject);
     }
 
-
+    // add the player to a new list of players
     [PunRPC]
     void RPC_AddToNewList()
     {
@@ -35,6 +36,7 @@ public class PlayerScript : MonoBehaviour
         GameSetupController.newPlayers.Add(this.gameObject);
     }
 
+    // set the player's parent
     [PunRPC]
     void RPC_SetParent()
     {
@@ -43,18 +45,21 @@ public class PlayerScript : MonoBehaviour
         this.gameObject.transform.SetParent(playersParent);
     }
 
+    // enable the end screen
     [PunRPC]
     void EnableEndScreen()
     {
         FindObjectOfType<BoardMenus>().TurnOnWinScreen();
     }
 
+    // enable the rocket power-up
     [PunRPC]
     private void EnableRocket()
     {
         rocket.SetActive(true);
     }
 
+    // disable the rocket power-up
     [PunRPC]
     private void DisableRocket()
     {

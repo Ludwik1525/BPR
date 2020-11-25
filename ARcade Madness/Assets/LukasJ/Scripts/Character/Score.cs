@@ -1,15 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using Photon.Pun;
-using System.IO;
 
 public class Score : MonoBehaviour
 {
-    private ScoreInfo si;
-    private PhotonView myPV;
     private int score;
+
+    private PhotonView myPV;
+
+    private ScoreInfo si;
+
 
     private void Start()
     {
@@ -32,6 +31,7 @@ public class Score : MonoBehaviour
         }
     }
 
+    // set my score
     public void setScore()
     {
         if (myPV.IsMine)
@@ -44,6 +44,7 @@ public class Score : MonoBehaviour
         }
     }
 
+    // set my score to 0 while closing the application
     private void OnApplicationQuit()
     {
         PlayerPrefs.SetInt("Score", 0);

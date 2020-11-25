@@ -1,26 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
 public class RespawnChestNextToPlayer : MonoBehaviour
 {
     public bool isAvailable = true;
+
     private Button respawnChestB;
+
     private GameManager BPC;
     private SpawnChest spawnChest;
+    
 
-    // Start is called before the first frame update
     void Start()
     {
         spawnChest = FindObjectOfType<SpawnChest>();
         BPC = GetComponent<GameManager>();
         respawnChestB = GameObject.Find("ButtonChestRespawn").GetComponent<Button>();
+
         respawnChestB.onClick.AddListener(UseChestRespawn);
+
         TurnOffChestRespawn();
     }
 
+    // function to re-spawn the chest in front of the player
     public void UseChestRespawn()
     {
         if (BPC.PV.IsMine)
@@ -36,6 +39,7 @@ public class RespawnChestNextToPlayer : MonoBehaviour
         }
     }
 
+    // function to disable the power-up
     public void TurnOffChestRespawn()
     {
         if (isAvailable)
@@ -45,6 +49,7 @@ public class RespawnChestNextToPlayer : MonoBehaviour
         }
     }
 
+    // function to enable the power-up
     public void TurnOnChestRespawn()
     {
         if (!isAvailable)

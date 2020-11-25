@@ -1,27 +1,32 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
 public class Rocket : MonoBehaviour
 {
     public bool isAvailable = true;
-    private Button rocketB;
-    private GameManager BPC;
+
     private int numberOfTilesToMove = 5;
+
+    private Button rocketB;
+
     private PhotonView PV;
 
-    // Start is called before the first frame update
+    private GameManager BPC;
+    
+
     void Start()
     {
         PV = GetComponent<PhotonView>();
         BPC = GetComponent<GameManager>();
         rocketB = GameObject.Find("ButtonRocket").GetComponent<Button>();
+
         rocketB.onClick.AddListener(UseRocket);
+
         TurnOffRocket();
     }
 
+    // function to move forward with the rocket
     public void UseRocket()
     {
         if (BPC.PV.IsMine)
@@ -33,6 +38,7 @@ public class Rocket : MonoBehaviour
         }
     }
 
+    // function to disable the power-up
     public void TurnOffRocket()
     {
         if (isAvailable)
@@ -42,6 +48,7 @@ public class Rocket : MonoBehaviour
         }
     }
 
+    // function to enable the power-up
     public void TurnOnRocket()
     {
         if (!isAvailable)
@@ -51,6 +58,7 @@ public class Rocket : MonoBehaviour
         }
     }
 
+    // function to make the random number the same for all the players
     [PunRPC]
     void UnifyTheRandomNumber(int number)
     {

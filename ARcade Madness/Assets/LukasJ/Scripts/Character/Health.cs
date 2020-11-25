@@ -1,11 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Health : MonoBehaviour
 {
     private int health = 100;
 
+
+    // for taking damage
     public void TakeDamage(int amount)
     {
         if (health > amount)
@@ -16,6 +16,7 @@ public class Health : MonoBehaviour
             health = 0;
     }
 
+    // fore healing
     public void Heal(int amount)
     {
         if (100 - health > amount)

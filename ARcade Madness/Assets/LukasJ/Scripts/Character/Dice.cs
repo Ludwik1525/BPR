@@ -1,17 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Photon.Pun;
 
 public class Dice : MonoBehaviour
 {
     PhotonView PV;
-    // Start is called before the first frame update
+
+
     void Start()
     {
         PV = GetComponent<PhotonView>();
     }
 
+    // turn the dice on/off
     [PunRPC]
     public void SwitchTheDice()
     {
