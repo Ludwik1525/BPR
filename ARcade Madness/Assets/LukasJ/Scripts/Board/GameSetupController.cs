@@ -58,7 +58,7 @@ public class GameSetupController : MonoBehaviour
             GameController.gc.roundCount = 0;
             PlayerPrefs.SetInt("totalPos", 0);
             player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player"),
-            spawnPositions[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]].position, Quaternion.identity);
+            spawnPositions[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]].position - board.transform.position, Quaternion.identity);
 
             ExitGames.Client.Photon.Hashtable thisCurrency = new ExitGames.Client.Photon.Hashtable();
             thisCurrency.Add("Currency", 0);
