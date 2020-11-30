@@ -20,7 +20,11 @@ public class MovementController_PC : MonoBehaviour
         if (_zMovementInput < 0) dr = 180;
         else if (_zMovementInput > 0) dr = 0;
 
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, dr, 0), 360 * Time.deltaTime);
+        Vector3 newPosition = new Vector3(_xMovementInput, 0.0f, _zMovementInput);
+        transform.LookAt(-newPosition + transform.position); 
+
+
+        //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(_xMovementInput, 0, _zMovementInput), 360 * Time.deltaTime);
 
         transform.position += new Vector3(_xMovementInput, 0, _zMovementInput).normalized * Time.deltaTime * speed;
     }

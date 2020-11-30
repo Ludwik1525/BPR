@@ -2461,52 +2461,10 @@ MonoBehaviour:
   door: {fileID: 1743866879}
   startUi: {fileID: 1774118015}
   patrolPoints:
-  - {fileID: 1141403109}
-  - {fileID: 1660626852}
-  - {fileID: 670910977}
-  - {fileID: 305675404}
-  - {fileID: 524762162}
-  - {fileID: 659399879}
-  - {fileID: 1935628331}
-  - {fileID: 692294184}
-  - {fileID: 431348329}
-  - {fileID: 1239562611}
-  - {fileID: 624962937}
-  - {fileID: 774882425}
-  - {fileID: 805842348}
-  - {fileID: 1921473908}
-  - {fileID: 140675467}
-  - {fileID: 134839334}
   - {fileID: 1999296228}
-  - {fileID: 1700557984}
-  - {fileID: 205153236}
-  - {fileID: 918145595}
-  - {fileID: 1809232428}
-  - {fileID: 1960453320}
-  - {fileID: 1496474829}
-  - {fileID: 359759602}
-  - {fileID: 381467726}
-  - {fileID: 542867266}
-  - {fileID: 127165881}
-  - {fileID: 1005648743}
-  - {fileID: 2147396727}
-  - {fileID: 1900920525}
-  - {fileID: 1636131366}
-  - {fileID: 1622020245}
-  - {fileID: 1831683437}
-  - {fileID: 2111972909}
+  - {fileID: 1921473908}
   - {fileID: 639616411}
   - {fileID: 1277866034}
-  - {fileID: 309653162}
-  - {fileID: 309653162}
-  - {fileID: 1889450500}
-  - {fileID: 1363611595}
-  - {fileID: 570867470}
-  - {fileID: 1433800318}
-  - {fileID: 468785294}
-  - {fileID: 961268682}
-  - {fileID: 1898280265}
-  - {fileID: 90172033}
   spawnPositions:
   - {fileID: 516424593}
   - {fileID: 1558152738}
@@ -2515,6 +2473,11 @@ MonoBehaviour:
   ready_btn: {fileID: 5294107464167084876}
   instruction: {fileID: 5294107462800981731}
   menu: {fileID: 5294107463725633707}
+  loadersSpawns:
+  - {fileID: 7461665256897723368}
+  - {fileID: 7461665256605482042}
+  - {fileID: 7461665255052561239}
+  - {fileID: 7461665255829875253}
 --- !u!114 &361460060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6028,7 +5991,7 @@ Transform:
   m_Children:
   - {fileID: 812820832}
   m_Father: {fileID: 7070516641780438038}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1005648743 stripped
 GameObject:
@@ -11247,7 +11210,7 @@ Transform:
   - {fileID: 1726347007}
   - {fileID: 1497018218}
   m_Father: {fileID: 7070516641780438038}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1829474145 stripped
 GameObject:
@@ -16298,7 +16261,7 @@ Transform:
   m_Children:
   - {fileID: 1322029340769510048}
   m_Father: {fileID: 7070516641780438038}
-  m_RootOrder: 3
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1322029340095673264
 GameObject:
@@ -16315,7 +16278,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1001 &1322029340134486512
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24928,10 +24891,10 @@ Transform:
   - {fileID: 7070516642929953500}
   - {fileID: 7070516642174341768}
   - {fileID: 6301664193014532906}
-  - {fileID: 1322029340095673167}
-  - {fileID: 1743866878}
   - {fileID: 1000846558}
+  - {fileID: 1743866878}
   - {fileID: 1828194608}
+  - {fileID: 1322029340095673167}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}

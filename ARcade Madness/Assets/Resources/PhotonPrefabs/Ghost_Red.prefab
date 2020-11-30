@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points: []
-  RotationSpeed: 10
+  RotationSpeed: 20
   speed: 0.4
 --- !u!1001 &1484215935965077304
 PrefabInstance:

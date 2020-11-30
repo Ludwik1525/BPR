@@ -64,7 +64,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points: []
-  RotationSpeed: 10
+  RotationSpeed: 20
   speed: 0.4
 --- !u!114 &3273800238477481822
 MonoBehaviour:

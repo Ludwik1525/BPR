@@ -48,7 +48,6 @@ public class SpinningGameManager : MonoBehaviour
 
         pv = playerLoader.GetComponent<PhotonView>();
         pv.RPC("RPC_SetPlayerLoaderForSpinner", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]);
-        print((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"] );
 
         if(pv.IsMine)
         {

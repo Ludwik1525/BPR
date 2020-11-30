@@ -31,6 +31,9 @@ public class GameManager_PC : MonoBehaviour
     private GameObject player;
     private PhotonView playerPV;
 
+    [SerializeField]
+    private List<GameObject> loadersSpawns = new List<GameObject>();
+
     private PhotonView pv;
     private int count = 0;
 
@@ -48,9 +51,9 @@ public class GameManager_PC : MonoBehaviour
     {
         instruction.SetActive(true);
 
-        GameObject playerLoader = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerLoadingImg"), menu.transform.position, Quaternion.identity);
+        GameObject playerLoader = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerLoadingImg"), loadersSpawns[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]].transform.position, Quaternion.identity);
         pv = playerLoader.GetComponent<PhotonView>();
-        pv.RPC("RPC_SetPlayerLoaderForPacman", RpcTarget.AllBuffered);
+        pv.RPC("RPC_SetPlayerLoaderForPacman", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]);
 
         if (pv.IsMine)
         {
@@ -76,7 +79,6 @@ public class GameManager_PC : MonoBehaviour
                     count = 0;
                     return;
                 }
-                print(count);
             }
 
             if (count == playerLoaders.Count)
@@ -118,10 +120,10 @@ public class GameManager_PC : MonoBehaviour
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Ghost_LitBlue"), patrolPoints[Random.Range(0, patrolPoints.Length - 1)].transform.position, Quaternion.identity);
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Ghost_Orange"), patrolPoints[Random.Range(0, patrolPoints.Length - 1)].transform.position, Quaternion.identity);
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Ghost_Pink"), patrolPoints[Random.Range(0, patrolPoints.Length - 1)].transform.position, Quaternion.identity);
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Ghost_Red"), patrolPoints[Random.Range(0, patrolPoints.Length - 1)].transform.position, Quaternion.identity);
+            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Ghost_LitBlue"), patrolPoints[0].transform.position, Quaternion.identity);
+            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Ghost_Orange"), patrolPoints[1].transform.position, Quaternion.identity);
+            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Ghost_Pink"), patrolPoints[2].transform.position, Quaternion.identity);
+            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Ghost_Red"), patrolPoints[3].transform.position, Quaternion.identity);
         }
     }
 
@@ -129,13 +131,12 @@ public class GameManager_PC : MonoBehaviour
     {
         Vector3 instantiatePosition = spawnPositions[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]].position;
 
-        player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Capsule"), instantiatePosition, Quaternion.identity);
+        player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player_Pacman"), instantiatePosition, Quaternion.identity);
         playerPV = player.GetComponent<PhotonView>();
     }  //"Player_Pacman"
 
     public void Ready()
     {
-        print("c  " + PhotonNetwork.CountOfPlayers);
         pv.RPC("ReadyIndication", RpcTarget.AllBuffered);
         ready_btn.interactable = false;
     }
