@@ -399,7 +399,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aec4e5d6369e69418a8cbf7ec4417e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNameText: {fileID: 2523371896480695254}
 --- !u!114 &806629828439463818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,7 +439,6 @@ MonoBehaviour:
   spinSpeedBar_Image: {fileID: 2523371896873197419}
   spinSpeedRatio_Text: {fileID: 4278660854099477796}
   isDead: 0
-  common_Demage_Coefficient: 0.04
   doDamage_Coefficient: 10
   getDamaged_Coefficient: 1.2
 --- !u!114 &3300311974834469790

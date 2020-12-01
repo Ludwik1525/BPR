@@ -136,7 +136,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score_txt: {fileID: 6954280485830650853}
-  playerNameText: {fileID: 208559803788533404}
 --- !u!114 &7407221023496799247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1104,6 +1103,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 83ed2439d6d35e447b97ff1c37c05461, type: 2}
+    - target: {fileID: -5047368470670671337, guid: 0b346dbdae897ac43950a8ad5db48a24, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -3746190272939815206, guid: 0b346dbdae897ac43950a8ad5db48a24, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -52.541447

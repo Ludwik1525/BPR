@@ -13,8 +13,6 @@ public class SpinningGameManager : MonoBehaviour
     [SerializeField]
     private Button ready_btn;
     [SerializeField]
-    private GameObject menu;
-    [SerializeField]
     private Transform[] spawnPositions;
     [SerializeField]
     private GameObject battleArenaGameobject;
@@ -70,7 +68,6 @@ public class SpinningGameManager : MonoBehaviour
                     count = 0;
                     return;
                 }
-                print(count);
             }
 
             if (count == playerLoaders.Count)
@@ -94,6 +91,11 @@ public class SpinningGameManager : MonoBehaviour
 
         player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player_Spinner"), instantiatePosition, Quaternion.identity);
         playerPV = player.GetComponent<PhotonView>();
+
+        if (playerPV.IsMine)
+        {
+            playerPV.RPC("SetName", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer.NickName);
+        }
     }
 
     public void DisconnectPlayer()

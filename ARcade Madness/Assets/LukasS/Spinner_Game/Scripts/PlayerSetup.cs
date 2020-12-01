@@ -7,8 +7,6 @@ using System;
 
 public class PlayerSetup : MonoBehaviourPun
 {
-    public TextMeshProUGUI playerNameText;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +15,7 @@ public class PlayerSetup : MonoBehaviourPun
             //The player is local player
             transform.GetComponent<MovementController>().enabled = true;
             transform.GetComponent<MovementController>().joystick.gameObject.SetActive(true);
-
+            transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.red;
         }
         else
         {
@@ -25,23 +23,11 @@ public class PlayerSetup : MonoBehaviourPun
             transform.GetComponent<MovementController>().enabled = false;
             transform.GetComponent<MovementController>().joystick.gameObject.SetActive(false);
         }
-
-        SetPlayerName();
     }
 
-    void SetPlayerName()
+    [PunRPC]
+    private void SetName(string name)
     {
-        if (playerNameText != null)
-        {
-            if (photonView.IsMine)
-            {
-                playerNameText.text = "YOU";
-                playerNameText.color = Color.red;
-            }
-            else
-            {
-                //playerNameText.text = photonView.Owner.NickName;
-            }
-        }
+        transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text = name;
     }
 }

@@ -135,12 +135,16 @@ public class GameManager_PC : MonoBehaviour
         playerPV = player.GetComponent<PhotonView>();
         PV2 = player.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetComponent<PhotonView>();
 
-
         if (PV2.IsMine)
         {
             PV2.RPC("RPC_AssignColour", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["ColourID"]);
         }
-    }  //"Player_Pacman"
+
+        if (playerPV.IsMine)
+        {
+            playerPV.RPC("SetName", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer.NickName);
+        }
+    } 
 
     public void Ready()
     {

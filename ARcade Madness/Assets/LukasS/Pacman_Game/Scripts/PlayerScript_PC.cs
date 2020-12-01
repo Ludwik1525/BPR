@@ -7,7 +7,6 @@ using UnityEngine;
 public class PlayerScript_PC : MonoBehaviourPun
 {
     public TextMeshProUGUI score_txt;
-    public TextMeshProUGUI playerNameText;
     private int score;
     private PhotonView pv;
     // Start is called before the first frame update
@@ -20,7 +19,7 @@ public class PlayerScript_PC : MonoBehaviourPun
             //The player is local player
             transform.GetComponent<MovementController_PC>().enabled = true;
             transform.GetComponent<MovementController_PC>().joystick.gameObject.SetActive(true);
-
+            transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.red;
         }
         else
         {
@@ -28,8 +27,6 @@ public class PlayerScript_PC : MonoBehaviourPun
             transform.GetComponent<MovementController_PC>().enabled = false;
             transform.GetComponent<MovementController_PC>().joystick.gameObject.SetActive(false);
         }
-
-        SetPlayerName();
     }
 
     void Update()
@@ -38,21 +35,13 @@ public class PlayerScript_PC : MonoBehaviourPun
             score_txt.text = "Score: " + score;
     }
 
-    void SetPlayerName()
+
+    [PunRPC]
+    private void SetName(string name)
     {
-        if (playerNameText != null)
-        {
-            if (photonView.IsMine)
-            {
-                playerNameText.text = "YOU";
-                playerNameText.color = Color.red;
-            }
-            else
-            {
-                //playerNameText.text = photonView.Owner.NickName;
-            }
-        }
+        transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text = name;
     }
+
 
     private void OnTriggerEnter(Collider other)
     {

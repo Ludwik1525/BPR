@@ -22,12 +22,9 @@ public class BattleScript : MonoBehaviourPun
 
     public bool isDead = false;
 
+    [SerializeField]
+    private float damage = 300.0f;
 
-    public float common_Demage_Coefficient = 0.04f;
-
-    [Header("Player Type Damage Coefficients")]
-    public float doDamage_Coefficient = 10f;
-    public float getDamaged_Coefficient = 1.2f;
 
     private void Awake()
     {
@@ -53,12 +50,12 @@ public class BattleScript : MonoBehaviourPun
             if (mySpeed > otherPlayerSpeed)
             {
 
-                float default_Damage_Amount = gameObject.GetComponent<Rigidbody>().velocity.magnitude * 3600 * common_Demage_Coefficient * doDamage_Coefficient;
+                //float default_Damage_Amount = gameObject.GetComponent<Rigidbody>().velocity.magnitude * 3600 * doDamage_Coefficient;
 
                 if (collision.collider.gameObject.GetComponent<PhotonView>().IsMine)
                 {
                     //Apply dmg to slower player
-                    collision.collider.gameObject.GetComponent<PhotonView>().RPC("DoDamage", RpcTarget.AllBuffered, default_Damage_Amount);
+                    collision.collider.gameObject.GetComponent<PhotonView>().RPC("DoDamage", RpcTarget.AllBuffered, damage);
                 }
             }
         }
@@ -69,13 +66,6 @@ public class BattleScript : MonoBehaviourPun
     {
         if (!isDead)
         {
-            _damageAmount *= getDamaged_Coefficient;
-
-            if (_damageAmount > 1000)
-            {
-                _damageAmount = 400f;
-            }
-
             spinnerScript.spinSpeed -= _damageAmount;
             currentSpinSpeed = spinnerScript.spinSpeed;
 
@@ -100,11 +90,6 @@ public class BattleScript : MonoBehaviourPun
             spinnerScript.spinSpeed = 0f;
 
             uI_3D_Gameobject.SetActive(false);
-
-            //if (photonView.IsMine)
-            //{
-            //    StartCoroutine(ReSpawn());
-            //}
         }
 
     }
