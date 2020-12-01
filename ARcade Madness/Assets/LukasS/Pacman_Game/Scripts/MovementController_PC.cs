@@ -21,7 +21,8 @@ public class MovementController_PC : MonoBehaviour
         else if (_zMovementInput > 0) dr = 0;
 
         Vector3 newPosition = new Vector3(_xMovementInput, 0.0f, _zMovementInput);
-        transform.LookAt(-newPosition + transform.position); 
+        //transform.LookAt(-newPosition + transform.position);
+        transform.GetChild(0).LookAt(-newPosition + transform.position); // rotate just the model itself which is a child
 
 
         //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(_xMovementInput, 0, _zMovementInput), 360 * Time.deltaTime);

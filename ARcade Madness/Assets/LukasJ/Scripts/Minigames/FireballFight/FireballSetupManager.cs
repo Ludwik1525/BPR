@@ -15,7 +15,7 @@ public class FireballSetupManager : MonoBehaviour
     [SerializeField]
     private GameObject instruction;
     [SerializeField]
-    private GameObject content;
+    private List<GameObject> loadersSpawns = new List<GameObject>();
 
     public static List<GameObject> playerLoaders;
 
@@ -35,9 +35,9 @@ public class FireballSetupManager : MonoBehaviour
         instruction.SetActive(true);
 
         // instantiating the player's displayer on the instructions page
-        GameObject playerLoader = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerLoadingImg"), content.transform.position, Quaternion.identity);
+        GameObject playerLoader = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerLoadingImg"), loadersSpawns[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]].transform.position, Quaternion.identity);
         imagePV = playerLoader.GetComponent<PhotonView>();
-        imagePV.RPC("RPC_SetPlayerLoaderForFireBall", RpcTarget.AllBuffered);
+        imagePV.RPC("RPC_SetPlayerLoaderForFireBall", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]);
 
         if (imagePV.IsMine)
         {

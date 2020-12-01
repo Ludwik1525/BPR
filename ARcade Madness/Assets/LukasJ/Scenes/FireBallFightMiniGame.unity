@@ -1293,7 +1293,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instruction: {fileID: 7885688498422598994}
-  content: {fileID: 7885688498546516762}
+  loadersSpawns:
+  - {fileID: 4871430646244886617}
+  - {fileID: 4871430646556528523}
+  - {fileID: 4871430644869871846}
+  - {fileID: 4871430645177309572}
   ready_btn: {fileID: 7885688499185099005}
 --- !u!4 &516920695
 Transform:
@@ -4699,7 +4703,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.25878906, y: -108.09082}
+  m_AnchoredPosition: {x: 0.25878906, y: -108.09094}
   m_SizeDelta: {x: -2460, y: -1340}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7885688498073870976

@@ -122,10 +122,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4458181ce324fa649b5907f80656498c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPerformingAnAction: 0
   speed: 2
   maxVelocityChange: 4
   tiltAmount: 10
-  isPerformingAnAction: 0
 --- !u!114 &7291758562938909311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -501,14 +501,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f998a6f7a456fb741b7b10b0347fd331, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBlocking: 0
+  isCastingSpell: 0
   myParent: {fileID: 208559803351174309}
   fireballSpawnPoint: {fileID: 2747255551899264013}
   fireballPrefab: {fileID: 8550139918564627117, guid: 0e1f153ab96f3f14d89ce0e6e2839b4a, type: 3}
+  shield: {fileID: 4254223388946779317}
   attackB: {fileID: 0}
   blockB: {fileID: 0}
-  shield: {fileID: 4254223388946779317}
-  isBlocking: 0
-  isCastingSpell: 0
 --- !u!114 &3377739920676543694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -917,6 +917,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 83ed2439d6d35e447b97ff1c37c05461, type: 2}
+    - target: {fileID: -5047368470670671337, guid: 0b346dbdae897ac43950a8ad5db48a24, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -3746190272939815206, guid: 0b346dbdae897ac43950a8ad5db48a24, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -52.541447

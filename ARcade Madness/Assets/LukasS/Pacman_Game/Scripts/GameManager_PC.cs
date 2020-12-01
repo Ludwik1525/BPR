@@ -29,7 +29,7 @@ public class GameManager_PC : MonoBehaviour
     private GameObject menu;
 
     private GameObject player;
-    private PhotonView playerPV;
+    private PhotonView playerPV, PV2;
 
     [SerializeField]
     private List<GameObject> loadersSpawns = new List<GameObject>();
@@ -133,6 +133,13 @@ public class GameManager_PC : MonoBehaviour
 
         player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player_Pacman"), instantiatePosition, Quaternion.identity);
         playerPV = player.GetComponent<PhotonView>();
+        PV2 = player.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetComponent<PhotonView>();
+
+
+        if (PV2.IsMine)
+        {
+            PV2.RPC("RPC_AssignColour", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["ColourID"]);
+        }
     }  //"Player_Pacman"
 
     public void Ready()
