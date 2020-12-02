@@ -20,6 +20,8 @@ public class BattleScript : MonoBehaviourPun
     public Image spinSpeedBar_Image;
     public TextMeshProUGUI spinSpeedRatio_Text;
 
+    private GameObject winScreen;
+
     private PhotonView pv;
 
     public bool isDead = false;
@@ -39,6 +41,7 @@ public class BattleScript : MonoBehaviourPun
 
     void Start()
     {
+        winScreen = GameObject.Find("Canvas").transform.GetChild(2).gameObject;
         placement = 1;
         rb = GetComponent<Rigidbody>();
         pv = GetComponent<PhotonView>();
@@ -110,5 +113,21 @@ public class BattleScript : MonoBehaviourPun
     void SubstructPlayersLeft()
     {
         FindObjectOfType<SpinningGameManager>().SubstuctPlayersLeft();
+        print("pl left " + FindObjectOfType<SpinningGameManager>().GetPlayersLeft());
+    }
+
+    [PunRPC]
+    private void DisplayScore()
+    {
+        winScreen.SetActive(true);
+        winScreen.transform.GetChild(2).GetChild(placement - 1).gameObject.SetActive(true);
+        winScreen.transform.GetChild(2).GetChild(placement - 1).GetComponent<Text>().text = placement + ". " + PhotonNetwork.LocalPlayer.NickName;
+
+        //for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+        //{
+        //    winScreen.transform.GetChild(2).GetChild(player.GetComponent<BattleScript>().placement - 1).gameObject.SetActive(true);
+        //    winScreen.transform.GetChild(2).GetChild(player.GetComponent<BattleScript>().placement - 1).GetComponent<Text>().text = $"{i + 1}. " + playerPV.Owner.NickName;
+        //}
+
     }
 }

@@ -87,7 +87,8 @@ public class SpinningGameManager : MonoBehaviour
         {
           if(!winScreen.activeInHierarchy)
             {
-                DisplayScore();
+                playerPV.RPC("DisplayScore", RpcTarget.AllBuffered);
+                //DisplayScore();
             }
         }
     }
@@ -144,16 +145,7 @@ public class SpinningGameManager : MonoBehaviour
         playersLeft--;
     }
 
-    private void DisplayScore()
-    {
-        winScreen.SetActive(true);
 
 
-        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
-        {
-            winScreen.transform.GetChild(2).GetChild(player.GetComponent<BattleScript>().placement - 1).gameObject.SetActive(true);
-            winScreen.transform.GetChild(2).GetChild(player.GetComponent<BattleScript>().placement - 1).GetComponent<Text>().text = $"{i + 1}. " + playerPV.Owner.NickName;
-        }
 
-    }
 }
