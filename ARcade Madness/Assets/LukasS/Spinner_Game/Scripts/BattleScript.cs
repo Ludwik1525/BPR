@@ -20,6 +20,8 @@ public class BattleScript : MonoBehaviourPun
     public Image spinSpeedBar_Image;
     public TextMeshProUGUI spinSpeedRatio_Text;
 
+    private PhotonView pv;
+
     public bool isDead = false;
 
     [SerializeField]
@@ -37,7 +39,9 @@ public class BattleScript : MonoBehaviourPun
 
     void Start()
     {
+        placement = 1;
         rb = GetComponent<Rigidbody>();
+        pv = GetComponent<PhotonView>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -92,9 +96,14 @@ public class BattleScript : MonoBehaviourPun
 
             uI_3D_Gameobject.SetActive(false);
 
-            placement = FindObjectOfType<SpinningGameManager>().GetPlayersLeft();
-            FindObjectOfType<SpinningGameManager>().SubstuctPlayersLeft();
+            if(pv.IsMine)
+            {
+                placement = FindObjectOfType<SpinningGameManager>().GetPlayersLeft();
+                print(PhotonNetwork.LocalPlayer.NickName + " " + placement);
+                FindObjectOfType<SpinningGameManager>().SubstuctPlayersLeft();
+            }
         }
-
     }
+
+
 }

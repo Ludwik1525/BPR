@@ -440,6 +440,7 @@ MonoBehaviour:
   spinSpeedRatio_Text: {fileID: 4278660854099477796}
   isDead: 0
   damage: 300
+  placement: 0
 --- !u!114 &3300311974834469790
 MonoBehaviour:
   m_ObjectHideFlags: 0

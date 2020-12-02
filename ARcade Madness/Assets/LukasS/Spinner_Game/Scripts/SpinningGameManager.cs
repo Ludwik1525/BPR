@@ -80,6 +80,9 @@ public class SpinningGameManager : MonoBehaviour
             }
         }
 
+
+        //print(player.GetComponent<BattleScript>().placement);
+
         if (playersLeft == 1)
         {
           if(!winScreen.activeInHierarchy)
@@ -144,11 +147,13 @@ public class SpinningGameManager : MonoBehaviour
     private void DisplayScore()
     {
         winScreen.SetActive(true);
+
+
         for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
         {
-            winScreen.transform.GetChild(2).GetChild(player.GetComponent<BattleScript>().placement -1).gameObject.SetActive(true);
-            winScreen.transform.GetChild(2).GetChild(player.GetComponent<BattleScript>().placement -1).GetComponent<Text>().text = $"{i+1}. " + playerPV.Owner.NickName;
-
+            winScreen.transform.GetChild(2).GetChild(player.GetComponent<BattleScript>().placement - 1).gameObject.SetActive(true);
+            winScreen.transform.GetChild(2).GetChild(player.GetComponent<BattleScript>().placement - 1).GetComponent<Text>().text = $"{i + 1}. " + playerPV.Owner.NickName;
         }
+
     }
 }
