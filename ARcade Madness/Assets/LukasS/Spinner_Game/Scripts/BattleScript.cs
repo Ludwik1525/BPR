@@ -122,7 +122,7 @@ public class BattleScript : MonoBehaviourPun
     {
         winScreen.SetActive(true);
 
-        for (int i = FindObjectOfType<SpinningGameManager>().players.Count; i > 0 ; i--)
+        for (int i = PhotonNetwork.PlayerList.Length; i > 0 ; i--)
         {
             if (i < 4)
             {
@@ -142,10 +142,11 @@ public class BattleScript : MonoBehaviourPun
         //    pv.RPC("SetScores", RpcTarget.AllBuffered, placement - 1, PhotonNetwork.LocalPlayer.NickName);
         //}
     }
-    
+
     [PunRPC]
-    private void AddMeToListLast(string myName)
+    private void SetScores(int pos, string name)
     {
-        FindObjectOfType<SpinningGameManager>().players.Add(myName);
+        winScreen.transform.GetChild(2).GetChild(pos).gameObject.SetActive(true);
+        winScreen.transform.GetChild(2).GetChild(pos).GetComponent<Text>().text = (pos + 1) + ". " + name;
     }
 }

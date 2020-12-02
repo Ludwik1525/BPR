@@ -91,11 +91,6 @@ public class SpinningGameManager : MonoBehaviour
         {
           if(!winScreen.activeInHierarchy)
             {
-                if(!players.Contains(PhotonNetwork.LocalPlayer.NickName))
-                {
-                    playerPV.RPC("AddMeToListLast", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer.NickName);
-                }
-
                 if(PhotonNetwork.IsMasterClient)
                 {
                     playerPV.RPC("DisplayScore", RpcTarget.AllBuffered);
