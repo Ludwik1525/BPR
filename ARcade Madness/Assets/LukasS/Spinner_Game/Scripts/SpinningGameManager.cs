@@ -31,10 +31,6 @@ public class SpinningGameManager : MonoBehaviour
     public static List<GameObject> playerLoaders;
 
     private PhotonView pv;
-
-    public List<string> players = new List<string>();
-
-
     private int count = 0;
 
     private int playersLeft = PhotonNetwork.PlayerList.Length;
@@ -91,11 +87,7 @@ public class SpinningGameManager : MonoBehaviour
         {
           if(!winScreen.activeInHierarchy)
             {
-                if(PhotonNetwork.IsMasterClient)
-                {
-                    playerPV.RPC("DisplayScore", RpcTarget.AllBuffered);
-                }
-
+                playerPV.RPC("DisplayScore", RpcTarget.AllBuffered);
                 //DisplayScore();
             }
         }
