@@ -119,15 +119,17 @@ public class BattleScript : MonoBehaviourPun
     [PunRPC]
     private void DisplayScore()
     {
+       if(pv.IsMine)
+        {
+            pv.RPC("SetScores", RpcTarget.AllBuffered, placement - 1, PhotonNetwork.LocalPlayer.NickName);
+        }
+    }
+
+    [PunRPC]
+    private void SetScores(int pos, string name)
+    {
         winScreen.SetActive(true);
-        winScreen.transform.GetChild(2).GetChild(placement - 1).gameObject.SetActive(true);
-        winScreen.transform.GetChild(2).GetChild(placement - 1).GetComponent<Text>().text = placement + ". " + PhotonNetwork.LocalPlayer.NickName;
-
-        //for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
-        //{
-        //    winScreen.transform.GetChild(2).GetChild(player.GetComponent<BattleScript>().placement - 1).gameObject.SetActive(true);
-        //    winScreen.transform.GetChild(2).GetChild(player.GetComponent<BattleScript>().placement - 1).GetComponent<Text>().text = $"{i + 1}. " + playerPV.Owner.NickName;
-        //}
-
+        winScreen.transform.GetChild(2).GetChild(pos).gameObject.SetActive(true);
+        winScreen.transform.GetChild(2).GetChild(pos).GetComponent<Text>().text = pos + 1 + ". " + name;
     }
 }
