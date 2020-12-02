@@ -439,8 +439,7 @@ MonoBehaviour:
   spinSpeedBar_Image: {fileID: 2523371896873197419}
   spinSpeedRatio_Text: {fileID: 4278660854099477796}
   isDead: 0
-  doDamage_Coefficient: 10
-  getDamaged_Coefficient: 1.2
+  damage: 300
 --- !u!114 &3300311974834469790
 MonoBehaviour:
   m_ObjectHideFlags: 0

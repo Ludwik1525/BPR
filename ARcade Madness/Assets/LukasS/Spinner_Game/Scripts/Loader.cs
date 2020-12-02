@@ -28,7 +28,8 @@ public class Loader : MonoBehaviour
         //Set parent
         playersParent = GameObject.Find("Content").transform.GetChild(index);
         this.gameObject.transform.SetParent(playersParent);
-
+        transform.localPosition = new Vector3(0, 0, 0);
+         
         //Add player to the list
         SpinningGameManager.playerLoaders.Add(this.gameObject);
     } 
@@ -39,6 +40,7 @@ public class Loader : MonoBehaviour
         //Set parent
         playersParent = GameObject.Find("Content").transform.GetChild(index);
         this.gameObject.transform.SetParent(playersParent);
+        transform.localPosition = new Vector3(0, 0, 0);
 
         //Add player to the list
         FireballSetupManager.playerLoaders.Add(this.gameObject);
@@ -50,6 +52,7 @@ public class Loader : MonoBehaviour
         //Set parent
         playersParent = GameObject.Find("Content").transform.GetChild(index);
         this.gameObject.transform.SetParent(playersParent);
+        transform.localPosition = new Vector3(0, 0, 0);
 
         //Add player to the list
         GameManager_PC.playerLoaders.Add(this.gameObject);

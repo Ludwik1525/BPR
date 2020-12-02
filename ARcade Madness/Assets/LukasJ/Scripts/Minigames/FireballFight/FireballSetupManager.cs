@@ -35,7 +35,7 @@ public class FireballSetupManager : MonoBehaviour
         instruction.SetActive(true);
 
         // instantiating the player's displayer on the instructions page
-        GameObject playerLoader = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerLoadingImg"), loadersSpawns[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]].transform.position, Quaternion.identity);
+        GameObject playerLoader = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerLoadingImg"), loadersSpawns[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]].transform.localPosition, Quaternion.identity);
         imagePV = playerLoader.GetComponent<PhotonView>();
         imagePV.RPC("RPC_SetPlayerLoaderForFireBall", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]);
 
