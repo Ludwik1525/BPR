@@ -82,28 +82,33 @@ public class BattleScript : MonoBehaviourPun
                 Die();
             }
         }
-
-        void Die()
-        {
-            isDead = true;
-
-            GetComponent<MovementController>().enabled = false;
-            rb.freezeRotation = false;
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-
-            spinnerScript.spinSpeed = 0f;
-
-            uI_3D_Gameobject.SetActive(false);
-
-            if(pv.IsMine)
-            {
-                placement = FindObjectOfType<SpinningGameManager>().GetPlayersLeft();
-                print(PhotonNetwork.LocalPlayer.NickName + " " + placement);
-                FindObjectOfType<SpinningGameManager>().SubstuctPlayersLeft();
-            }
-        }
     }
 
+    void Die()
+    {
+        isDead = true;
 
+        GetComponent<MovementController>().enabled = false;
+        rb.freezeRotation = false;
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
+        spinnerScript.spinSpeed = 0f;
+
+        uI_3D_Gameobject.SetActive(false);
+
+        if (pv.IsMine)
+        {
+            placement = FindObjectOfType<SpinningGameManager>().GetPlayersLeft();
+            print(PhotonNetwork.LocalPlayer.NickName + " " + placement);
+            pv.RPC("SubstructPlayersLeft", RpcTarget.AllBuffered);
+        }
+
+    }
+
+    [PunRPC]
+    void SubstructPlayersLeft()
+    {
+        FindObjectOfType<SpinningGameManager>().SubstuctPlayersLeft();
+    }
 }
