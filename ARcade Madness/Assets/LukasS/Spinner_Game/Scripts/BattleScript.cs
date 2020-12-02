@@ -105,6 +105,7 @@ public class BattleScript : MonoBehaviourPun
             placement = FindObjectOfType<SpinningGameManager>().GetPlayersLeft();
             print(PhotonNetwork.LocalPlayer.NickName + " " + placement);
             pv.RPC("SubstructPlayersLeft", RpcTarget.AllBuffered);
+            FindObjectOfType<SpinningGameManager>().players.Add(PhotonNetwork.LocalPlayer.NickName);
         }
 
     }
@@ -119,17 +120,33 @@ public class BattleScript : MonoBehaviourPun
     [PunRPC]
     private void DisplayScore()
     {
-       if(pv.IsMine)
+        winScreen.SetActive(true);
+
+        for (int i = PhotonNetwork.PlayerList.Length; i > 0 ; i--)
         {
-            pv.RPC("SetScores", RpcTarget.AllBuffered, placement - 1, PhotonNetwork.LocalPlayer.NickName);
+            if (i < 4)
+            {
+                winScreen.transform.GetChild(2).GetChild(i - 1).gameObject.SetActive(true);
+                winScreen.transform.GetChild(2).GetChild(i - 1).GetComponent<Text>().text = i + ". " + FindObjectOfType<SpinningGameManager>().players[i - 1];
+            }
         }
+
+        //for(int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+        //{
+        //    winScreen.transform.GetChild(2).GetChild(pos).gameObject.SetActive(true);
+        //    winScreen.transform.GetChild(2).GetChild(pos).GetComponent<Text>().text = (pos + 1) + ". " + name;
+        //}
+
+        //if (pv.IsMine)
+        //{
+        //    pv.RPC("SetScores", RpcTarget.AllBuffered, placement - 1, PhotonNetwork.LocalPlayer.NickName);
+        //}
     }
 
     [PunRPC]
     private void SetScores(int pos, string name)
     {
-        winScreen.SetActive(true);
         winScreen.transform.GetChild(2).GetChild(pos).gameObject.SetActive(true);
-        winScreen.transform.GetChild(2).GetChild(pos).GetComponent<Text>().text = pos + 1 + ". " + name;
+        winScreen.transform.GetChild(2).GetChild(pos).GetComponent<Text>().text = (pos + 1) + ". " + name;
     }
 }
