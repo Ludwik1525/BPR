@@ -19,7 +19,8 @@ public class SpinningGameManager : MonoBehaviour
     [SerializeField]
     private GameObject instruction;
     [SerializeField]
-    private Text count_Ui;
+    private GameObject winScreen;
+
 
     private GameObject player;
     private PhotonView playerPV;
@@ -31,6 +32,8 @@ public class SpinningGameManager : MonoBehaviour
 
     private PhotonView pv;
     private int count = 0;
+
+    private int playersLeft = PhotonNetwork.PlayerList.Length;
 
     private void Awake()
     {
@@ -76,6 +79,14 @@ public class SpinningGameManager : MonoBehaviour
                 SpawnPlayer();
             }
         }
+
+        if (playersLeft == 1)
+        {
+          if(!winScreen.activeInHierarchy)
+            {
+                DisplayScore();
+            }
+        }
     }
 
     public void Ready()
@@ -118,5 +129,26 @@ public class SpinningGameManager : MonoBehaviour
         while (PhotonNetwork.IsConnected)
             yield return null;
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public int GetPlayersLeft()
+    {
+        return playersLeft;
+    }
+
+    public void SubstuctPlayersLeft()
+    {
+        playersLeft--;
+    }
+
+    private void DisplayScore()
+    {
+        winScreen.SetActive(true);
+        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+        {
+            winScreen.transform.GetChild(2).GetChild(player.GetComponent<BattleScript>().placement -1).gameObject.SetActive(true);
+            winScreen.transform.GetChild(2).GetChild(player.GetComponent<BattleScript>().placement -1).GetComponent<Text>().text = $"{i+1}. " + playerPV.Owner.NickName;
+
+        }
     }
 }

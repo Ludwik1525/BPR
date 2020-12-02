@@ -25,6 +25,7 @@ public class BattleScript : MonoBehaviourPun
     [SerializeField]
     private float damage = 300.0f;
 
+    public int placement;
 
     private void Awake()
     {
@@ -90,6 +91,9 @@ public class BattleScript : MonoBehaviourPun
             spinnerScript.spinSpeed = 0f;
 
             uI_3D_Gameobject.SetActive(false);
+
+            placement = FindObjectOfType<SpinningGameManager>().GetPlayersLeft();
+            FindObjectOfType<SpinningGameManager>().SubstuctPlayersLeft();
         }
 
     }

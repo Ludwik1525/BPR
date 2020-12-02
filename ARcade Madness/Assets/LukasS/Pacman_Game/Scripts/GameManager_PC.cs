@@ -93,6 +93,8 @@ public class GameManager_PC : MonoBehaviour
         {
             StartCoroutine(CountDown());
         }
+
+      
     }
 
     IEnumerator CountDown()

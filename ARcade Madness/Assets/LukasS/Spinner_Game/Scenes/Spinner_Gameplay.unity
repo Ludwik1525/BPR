@@ -531,7 +531,7 @@ MonoBehaviour:
   - {fileID: 929775559}
   battleArenaGameobject: {fileID: 1413374867}
   instruction: {fileID: 2057312354}
-  count_Ui: {fileID: 0}
+  winScreen: {fileID: 1534033085}
   loadersSpawns:
   - {fileID: 3463900519768043832}
   - {fileID: 3463900519768043831}
@@ -2248,7 +2248,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1702026210
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2822,7 +2822,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3463900520735855925, guid: f7deab4415e686c498e8b138bc8e7317, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -108.09082
+      value: -108.09094
       objectReference: {fileID: 0}
     - target: {fileID: 3463900521221368150, guid: f7deab4415e686c498e8b138bc8e7317, type: 3}
       propertyPath: m_Name
@@ -2830,7 +2830,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3463900521221368150, guid: f7deab4415e686c498e8b138bc8e7317, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3463900521221368151, guid: f7deab4415e686c498e8b138bc8e7317, type: 3}
       propertyPath: m_LocalPosition.x
