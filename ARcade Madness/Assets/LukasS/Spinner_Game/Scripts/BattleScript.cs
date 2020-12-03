@@ -239,7 +239,7 @@ public class BattleScript : MonoBehaviourPun
                     case 3:
                         PlayerPrefs.SetInt("MyPowerups", 6);
                         break;
-                    case 6:
+                    case 5:
                         PlayerPrefs.SetInt("MyPowerups", 7);
                         break;
                 }
@@ -256,7 +256,7 @@ public class BattleScript : MonoBehaviourPun
                     case 2:
                         PlayerPrefs.SetInt("MyPowerups", 6);
                         break;
-                    case 6:
+                    case 4:
                         PlayerPrefs.SetInt("MyPowerups", 7);
                         break;
                 }
