@@ -32,6 +32,10 @@ public class GameManager_PC : MonoBehaviour
     private PhotonView playerPV, PV2;
 
     [SerializeField]
+    private GameObject winScreen;
+    private int playersLeft = PhotonNetwork.PlayerList.Length;
+
+    [SerializeField]
     private List<GameObject> loadersSpawns = new List<GameObject>();
 
     private PhotonView pv;
@@ -94,7 +98,17 @@ public class GameManager_PC : MonoBehaviour
             StartCoroutine(CountDown());
         }
 
-      
+        if (playersLeft <= 1)
+        {
+            if (!winScreen.activeInHierarchy)
+            {
+                winScreen.SetActive(true);
+                playerPV.RPC("DisplayScore", RpcTarget.AllBuffered);
+                //DisplayScore();
+            }
+        }
+
+
     }
 
     IEnumerator CountDown()
@@ -175,4 +189,15 @@ public class GameManager_PC : MonoBehaviour
             yield return null;
         SceneManager.LoadScene("MainMenu");
     }
+
+    public int GetPlayersLeft()
+    {
+        return playersLeft;
+    }
+
+    public void SubstractPlayersLeft()
+    {
+        playersLeft--;
+    }
+
 }

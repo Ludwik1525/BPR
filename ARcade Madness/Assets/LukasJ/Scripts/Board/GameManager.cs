@@ -396,13 +396,13 @@ public class GameManager : MonoBehaviour
         {
             yield return new WaitForSeconds(3f);
             if(!isGameFinished)
-                SceneManager.LoadScene("Spinner_Gameplay");
+                SceneManager.LoadScene("FireBallFightMiniGame");
         }
         else
         {
             yield return new WaitForSeconds(1f);
             if (!isGameFinished)
-                SceneManager.LoadScene("Spinner_Gameplay");
+                SceneManager.LoadScene("FireBallFightMiniGame");
         }
     }
 

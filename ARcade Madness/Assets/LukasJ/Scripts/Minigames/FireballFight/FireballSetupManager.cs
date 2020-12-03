@@ -24,6 +24,10 @@ public class FireballSetupManager : MonoBehaviour
 
     private PhotonView PV, PV2, imagePV;
 
+    [SerializeField]
+    private GameObject winScreen;
+    private int playersLeft = PhotonNetwork.PlayerList.Length;
+
 
     private void Awake()
     {
@@ -69,6 +73,15 @@ public class FireballSetupManager : MonoBehaviour
             {
                 instruction.SetActive(false);
                 SpawnPlayer();
+            }
+        }
+
+        if (playersLeft <= 1)
+        {
+            if (!winScreen.activeInHierarchy)
+            {
+                winScreen.SetActive(true);
+                PV.RPC("DisplayScore", RpcTarget.AllBuffered);
             }
         }
     }
@@ -122,4 +135,15 @@ public class FireballSetupManager : MonoBehaviour
             yield return null;
         SceneManager.LoadScene("MainMenu");
     }
+
+    public int GetPlayersLeft()
+    {
+        return playersLeft;
+    }
+
+    public void SubstractPlayersLeft()
+    {
+        playersLeft--;
+    }
+
 }
