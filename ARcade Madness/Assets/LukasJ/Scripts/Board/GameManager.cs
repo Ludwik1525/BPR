@@ -451,6 +451,7 @@ public class GameManager : MonoBehaviour
     private void UnifyMinigameIndex(int no)
     {
         minigameIndex = no;
+        print("Minigame : " + minigameIndex);
     }
 
     [PunRPC]
