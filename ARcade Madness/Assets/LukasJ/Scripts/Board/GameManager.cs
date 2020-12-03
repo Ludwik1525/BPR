@@ -163,34 +163,37 @@ public class GameManager : MonoBehaviour
         rollB.interactable = true;
         if (!hasUsedPowerUp)
         {
-            switch(PlayerPrefs.GetInt("MyPowerups"))
+            if (PV.IsMine)
             {
-                case 1:
-                    coinMagnet.TurnOnCoinMagnet();
-                    break;
-                case 2:
-                    rocket.TurnOnRocket();
-                    break;
-                case 3:
-                    respawnChest.TurnOnChestRespawn();
-                    break;
-                case 4:
-                    coinMagnet.TurnOnCoinMagnet();
-                    rocket.TurnOnRocket();
-                    break;
-                case 5:
-                    coinMagnet.TurnOnCoinMagnet();
-                    respawnChest.TurnOnChestRespawn();
-                    break;
-                case 6:
-                    rocket.TurnOnRocket();
-                    respawnChest.TurnOnChestRespawn();
-                    break;
-                case 7:
-                    coinMagnet.TurnOnCoinMagnet();
-                    rocket.TurnOnRocket();
-                    respawnChest.TurnOnChestRespawn();
-                    break;
+                switch (PlayerPrefs.GetInt("MyPowerups"))
+                {
+                    case 1:
+                        respawnChest.TurnOnChestRespawn();
+                        break;
+                    case 2:
+                        rocket.TurnOnRocket();
+                        break;
+                    case 3:
+                        coinMagnet.TurnOnCoinMagnet();
+                        break;
+                    case 4:
+                        respawnChest.TurnOnChestRespawn();
+                        rocket.TurnOnRocket();
+                        break;
+                    case 5:
+                        coinMagnet.TurnOnCoinMagnet();
+                        respawnChest.TurnOnChestRespawn();
+                        break;
+                    case 6:
+                        rocket.TurnOnRocket();
+                        coinMagnet.TurnOnCoinMagnet();
+                        break;
+                    case 7:
+                        coinMagnet.TurnOnCoinMagnet();
+                        rocket.TurnOnRocket();
+                        respawnChest.TurnOnChestRespawn();
+                        break;
+                }
             }
         }
         else
