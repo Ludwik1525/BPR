@@ -33,17 +33,17 @@ public class CoinMagnet : MonoBehaviour
 
             switch (PlayerPrefs.GetInt("MyPowerups"))
             {
-                case 1:
+                case 3:
                     PlayerPrefs.SetInt("MyPowerups", 0);
                     break;
-                case 4:
+                case 5:
+                    PlayerPrefs.SetInt("MyPowerups", 1);
+                    break;
+                case 6:
                     PlayerPrefs.SetInt("MyPowerups", 2);
                     break;
-                case 5:
-                    PlayerPrefs.SetInt("MyPowerups", 3);
-                    break;
                 case 7:
-                    PlayerPrefs.SetInt("MyPowerups", 6);
+                    PlayerPrefs.SetInt("MyPowerups", 4);
                     break;
             }
         }

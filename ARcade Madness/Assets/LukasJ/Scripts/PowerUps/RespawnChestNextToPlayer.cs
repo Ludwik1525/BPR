@@ -32,17 +32,17 @@ public class RespawnChestNextToPlayer : MonoBehaviour
 
             switch (PlayerPrefs.GetInt("MyPowerups"))
             {
-                case 3:
+                case 1:
                     PlayerPrefs.SetInt("MyPowerups", 0);
                     break;
-                case 5:
-                    PlayerPrefs.SetInt("MyPowerups", 1);
-                    break;
-                case 6:
+                case 4:
                     PlayerPrefs.SetInt("MyPowerups", 2);
                     break;
+                case 5:
+                    PlayerPrefs.SetInt("MyPowerups", 3);
+                    break;
                 case 7:
-                    PlayerPrefs.SetInt("MyPowerups", 4);
+                    PlayerPrefs.SetInt("MyPowerups", 6);
                     break;
             }
         }

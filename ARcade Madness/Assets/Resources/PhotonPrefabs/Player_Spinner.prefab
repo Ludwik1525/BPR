@@ -440,9 +440,9 @@ MonoBehaviour:
   spinSpeedRatio_Text: {fileID: 4278660854099477796}
   isDead: 0
   powerupsIMGs:
-  - {fileID: 21300000, guid: b6367f5e4deb2c34096d9d55cc1c44cf, type: 3}
-  - {fileID: 21300000, guid: 230d9201f72f56b4aa16af3278d9f4bf, type: 3}
   - {fileID: 21300000, guid: 7b8f36835045e8d408f239eb4564c5c0, type: 3}
+  - {fileID: 21300000, guid: 230d9201f72f56b4aa16af3278d9f4bf, type: 3}
+  - {fileID: 21300000, guid: b6367f5e4deb2c34096d9d55cc1c44cf, type: 3}
   damage: 300
   placement: 0
 --- !u!114 &3300311974834469790
