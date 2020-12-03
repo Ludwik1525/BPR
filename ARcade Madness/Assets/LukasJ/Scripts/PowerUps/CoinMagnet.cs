@@ -30,6 +30,22 @@ public class CoinMagnet : MonoBehaviour
         {
             TurnOffCoinMagnet();
             GM.hasUsedPowerUp = true;
+
+            switch (PlayerPrefs.GetInt("MyPowerups"))
+            {
+                case 1:
+                    PlayerPrefs.SetInt("MyPowerups", 0);
+                    break;
+                case 4:
+                    PlayerPrefs.SetInt("MyPowerups", 2);
+                    break;
+                case 5:
+                    PlayerPrefs.SetInt("MyPowerups", 3);
+                    break;
+                case 7:
+                    PlayerPrefs.SetInt("MyPowerups", 6);
+                    break;
+            }
         }
 
         currency.setCurrencyWithVar(currency.CheckHowManyHaveMoney(PhotonNetwork.LocalPlayer.NickName));

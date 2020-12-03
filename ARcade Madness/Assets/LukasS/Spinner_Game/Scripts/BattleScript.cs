@@ -140,15 +140,26 @@ public class BattleScript : MonoBehaviourPun
 
         if(pv.IsMine)
         {
+            int random = 0;
+
             if (pos == 0)
             {
-                int random = Random.Range(0, 3);
+                random = SetRandomPowerup();
 
                 pv.RPC("SetPrizeWon", RpcTarget.AllBuffered, random);
             }
 
             PlayerPrefs.SetInt("PlaceFromLastMinigame", PhotonNetwork.PlayerList.Length - pos);
-            print("WHAT AM I GETTING :" + PlayerPrefs.GetInt("PlaceFromLastMinigame"));
+
+            if(random == 3)
+            {
+                PlayerPrefs.SetInt("PlaceFromLastMinigame", PlayerPrefs.GetInt("PlaceFromLastMinigame") + 1);
+            }
+
+            SaveMyPowerups(random);
+
+            print("COINS I AM GETTING :" + PlayerPrefs.GetInt("PlaceFromLastMinigame"));
+            print("MY POWERUPS: " + PlayerPrefs.GetInt("MyPowerups"));
         }
     }
 
@@ -156,6 +167,89 @@ public class BattleScript : MonoBehaviourPun
     void SetPrizeWon(int no)
     {
         wonPrize = no;
-        winScreen.transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().sprite = powerupsIMGs[wonPrize];
+        if (no != 3)
+            winScreen.transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().sprite = powerupsIMGs[wonPrize];
+        else
+            winScreen.transform.GetChild(2).GetChild(0).GetChild(0).gameObject.SetActive(false);
+    }
+
+    int SetRandomPowerup()
+    {
+        switch (PlayerPrefs.GetInt("MyPowerups"))
+        {
+            case 0:
+                return Random.Range(0, 3);
+            case 1:
+                return Random.Range(1, 3);
+            case 2:
+                int newRand = Random.Range(0, 2);
+                if(newRand == 0)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return 2;
+                }
+            case 3:
+                return Random.Range(0, 2);
+            case 4:
+                return 2;
+            case 5:
+                return 1;
+            case 6:
+                return 0;
+            default:
+                return 3;
+        }
+    }
+
+    void SaveMyPowerups(int newPowerup)
+    {
+        switch(newPowerup)
+        {
+            case 0: 
+                switch(PlayerPrefs.GetInt("MyPowerups"))
+                {
+                    case 2:
+                        PlayerPrefs.SetInt("MyPowerups", 4);
+                        break;
+                    case 3:
+                        PlayerPrefs.SetInt("MyPowerups", 5);
+                        break;
+                    case 6:
+                        PlayerPrefs.SetInt("MyPowerups", 7);
+                        break;
+                }
+                break;
+            case 1:
+                switch (PlayerPrefs.GetInt("MyPowerups"))
+                {
+                    case 1:
+                        PlayerPrefs.SetInt("MyPowerups", 4);
+                        break;
+                    case 3:
+                        PlayerPrefs.SetInt("MyPowerups", 6);
+                        break;
+                    case 6:
+                        PlayerPrefs.SetInt("MyPowerups", 7);
+                        break;
+                }
+                break;
+            case 2:
+                switch (PlayerPrefs.GetInt("MyPowerups"))
+                {
+                    case 1:
+                        PlayerPrefs.SetInt("MyPowerups", 5);
+                        break;
+                    case 2:
+                        PlayerPrefs.SetInt("MyPowerups", 6);
+                        break;
+                    case 6:
+                        PlayerPrefs.SetInt("MyPowerups", 7);
+                        break;
+                }
+                break;
+        }
     }
 }

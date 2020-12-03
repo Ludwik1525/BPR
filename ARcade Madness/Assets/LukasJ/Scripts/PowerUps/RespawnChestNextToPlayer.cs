@@ -29,6 +29,22 @@ public class RespawnChestNextToPlayer : MonoBehaviour
         if (BPC.PV.IsMine)
         {
             BPC.hasUsedPowerUp = true;
+
+            switch (PlayerPrefs.GetInt("MyPowerups"))
+            {
+                case 3:
+                    PlayerPrefs.SetInt("MyPowerups", 0);
+                    break;
+                case 5:
+                    PlayerPrefs.SetInt("MyPowerups", 1);
+                    break;
+                case 6:
+                    PlayerPrefs.SetInt("MyPowerups", 2);
+                    break;
+                case 7:
+                    PlayerPrefs.SetInt("MyPowerups", 4);
+                    break;
+            }
         }
 
         FindObjectOfType<SpawnChest>().PV.RPC("DestroyChest", RpcTarget.AllBuffered, true);

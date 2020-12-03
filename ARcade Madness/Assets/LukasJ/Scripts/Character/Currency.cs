@@ -117,8 +117,6 @@ public class Currency : MonoBehaviour
                 if (tempCurrency > 1)
                 {
                     tempCurrency -= 2;
-
-                   
                 }
                 else if(tempCurrency > 0)
                 {

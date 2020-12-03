@@ -163,9 +163,35 @@ public class GameManager : MonoBehaviour
         rollB.interactable = true;
         if (!hasUsedPowerUp)
         {
-            coinMagnet.TurnOnCoinMagnet();
-            rocket.TurnOnRocket();
-            respawnChest.TurnOnChestRespawn();
+            switch(PlayerPrefs.GetInt("MyPowerups"))
+            {
+                case 1:
+                    coinMagnet.TurnOnCoinMagnet();
+                    break;
+                case 2:
+                    rocket.TurnOnRocket();
+                    break;
+                case 3:
+                    respawnChest.TurnOnChestRespawn();
+                    break;
+                case 4:
+                    coinMagnet.TurnOnCoinMagnet();
+                    rocket.TurnOnRocket();
+                    break;
+                case 5:
+                    coinMagnet.TurnOnCoinMagnet();
+                    respawnChest.TurnOnChestRespawn();
+                    break;
+                case 6:
+                    rocket.TurnOnRocket();
+                    respawnChest.TurnOnChestRespawn();
+                    break;
+                case 7:
+                    coinMagnet.TurnOnCoinMagnet();
+                    rocket.TurnOnRocket();
+                    respawnChest.TurnOnChestRespawn();
+                    break;
+            }
         }
         else
         {
@@ -233,6 +259,22 @@ public class GameManager : MonoBehaviour
         rocket.TurnOffRocket();
         coinMagnet.TurnOffCoinMagnet();
         respawnChest.TurnOffChestRespawn();
+
+         switch(PlayerPrefs.GetInt("MyPowerups"))
+            {
+                case 2:
+                PlayerPrefs.SetInt("MyPowerups", 0);
+                break;
+                case 4:
+                PlayerPrefs.SetInt("MyPowerups", 1);
+                break;
+                case 6:
+                PlayerPrefs.SetInt("MyPowerups", 3);
+                break;
+                case 7:
+                PlayerPrefs.SetInt("MyPowerups", 5);
+                break;
+            }
 
         int var = 0;
 
