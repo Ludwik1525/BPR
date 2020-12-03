@@ -134,7 +134,7 @@ public class BattleScript : MonoBehaviourPun
     {
         
         winScreen.transform.GetChild(2).GetChild(pos).gameObject.SetActive(true);
-        winScreen.transform.GetChild(2).GetChild(pos).GetComponent<Text>().text = pos + 1 + ". " + name + ", " + (PhotonNetwork.PlayerList.Length - pos);
+        //winScreen.transform.GetChild(2).GetChild(pos).GetComponent<Text>().text = pos + 1 + ". " + name + ", " + (PhotonNetwork.PlayerList.Length - pos);
         winScreen.transform.GetChild(1).gameObject.SetActive(false);
 
 
@@ -163,6 +163,9 @@ public class BattleScript : MonoBehaviourPun
             print("COINS I AM GETTING :" + PlayerPrefs.GetInt("PlaceFromLastMinigame"));
             print("MY POWERUPS: " + PlayerPrefs.GetInt("MyPowerups"));
         }
+
+        if(pos == 0 && wonPrize == 3)
+            winScreen.transform.GetChild(2).GetChild(pos).GetComponent<Text>().text = pos + 1 + ". " + name + ", " + (PhotonNetwork.PlayerList.Length - pos + 1);
     }
 
     [PunRPC]
