@@ -83,7 +83,7 @@ public class SpinningGameManager : MonoBehaviour
 
         //print(player.GetComponent<BattleScript>().placement);
 
-        if (playersLeft == 1)
+        if (playersLeft <= 1)
         {
           if(!winScreen.activeInHierarchy)
             {

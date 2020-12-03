@@ -147,6 +147,8 @@ public class BattleScript : MonoBehaviourPun
                 random = SetRandomPowerup();
 
                 pv.RPC("SetPrizeWon", RpcTarget.AllBuffered, random);
+
+                SaveMyPowerups();
             }
 
             if(random != 3)
@@ -157,8 +159,6 @@ public class BattleScript : MonoBehaviourPun
             {
                 PlayerPrefs.SetInt("PlaceFromLastMinigame", PhotonNetwork.PlayerList.Length - pos + 1);
             }
-
-            SaveMyPowerups();
 
             print("COINS I AM GETTING :" + PlayerPrefs.GetInt("PlaceFromLastMinigame"));
             print("MY POWERUPS: " + PlayerPrefs.GetInt("MyPowerups"));
