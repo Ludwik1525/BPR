@@ -23,6 +23,7 @@ public class GameController : MonoBehaviour
         {
             gc = this;
         }
+        
     }
 
     private void Start()

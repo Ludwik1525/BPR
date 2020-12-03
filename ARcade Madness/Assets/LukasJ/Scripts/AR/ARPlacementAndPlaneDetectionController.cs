@@ -29,10 +29,11 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
 
     public TextMeshProUGUI informUIPanel_Text;
 
-
-    private void Awake()
+    // Start is called before the first frame update
+    void Start()
     {
-        if(GameController.gc.roundCount < 1)
+        print("DOES HAVE POS : " + GameController.gc.doesHavePosition);
+        if (!GameController.gc.doesHavePosition)
         {
             foreach (GameObject go in boardUI)
             {
@@ -42,20 +43,6 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
             m_ARPlaneManager = GetComponent<ARPlaneManager>();
             m_ARPlacementManager = GetComponent<ARPlacementManager>();
             pv = GetComponent<PhotonView>();
-        }
-        else
-        {
-            placeButton.transform.parent.gameObject.SetActive(false);
-        }
-
-
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-
-        if (GameController.gc.roundCount < 1)
-        {
 
             placeButton.SetActive(true);
             scaleSlider.SetActive(true);

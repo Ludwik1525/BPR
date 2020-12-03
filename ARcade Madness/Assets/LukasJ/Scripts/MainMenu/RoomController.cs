@@ -213,6 +213,7 @@ public class RoomController : MonoBehaviourPunCallbacks
 
         //PhotonNetwork.LoadLevel("FireBallFightMiniGame");
         PhotonNetwork.LoadLevel("BoardSceneARFoundation");
+        //PhotonNetwork.LoadLevel("BoardScene");
     }
 
     // for joining the lobby backs

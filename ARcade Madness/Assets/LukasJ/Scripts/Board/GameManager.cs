@@ -383,6 +383,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         if (GameController.gc.roundCount > 0)
         {
+            print(PlayerPrefs.GetInt("PlaceFromLastMinigame"));
             GetComponent<Currency>().setCurrency(PlayerPrefs.GetInt("PlaceFromLastMinigame"));
         }
         GameController.gc.roundCount++;
