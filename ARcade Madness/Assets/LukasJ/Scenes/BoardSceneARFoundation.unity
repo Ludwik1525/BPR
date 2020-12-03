@@ -1611,7 +1611,7 @@ MonoBehaviour:
   - {fileID: 764253966}
   - {fileID: 4916099}
   - {fileID: 887040119}
-  informUIPanel_Text: {fileID: 0}
+  informUIPanel_Text: {fileID: 915340150}
 --- !u!114 &560193090
 MonoBehaviour:
   m_ObjectHideFlags: 0

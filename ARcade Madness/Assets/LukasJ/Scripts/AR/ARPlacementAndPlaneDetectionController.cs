@@ -27,12 +27,11 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
     private bool started = false;
     private PhotonView pv;
 
-    public TextMeshProUGUI informUIPanel_Text;
+    public Text informUIPanel_Text;
 
     // Start is called before the first frame update
     void Start()
     {
-        print("DOES HAVE POS : " + GameController.gc.doesHavePosition);
         if (!GameController.gc.doesHavePosition)
         {
             foreach (GameObject go in boardUI)
@@ -49,7 +48,7 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
 
 
             adjustButton.SetActive(false);
-            readyButton.SetActive(true);
+            readyButton.SetActive(false);
 
             informUIPanel_Text.text = "Move phone to detect planes and place the Board!";
         }
@@ -62,7 +61,6 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
 
     private void Update()
     {
-        //print(GameSetupController.players.Count);
         if(readyPlayersCount == GameSetupController.players.Count && !started)
         {
             started = true;
