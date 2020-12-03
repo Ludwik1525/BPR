@@ -133,6 +133,10 @@ public class BattleScript : MonoBehaviourPun
         winScreen.transform.GetChild(2).GetChild(pos).GetComponent<Text>().text = pos + 1 + ". " + name + ", " + (PhotonNetwork.PlayerList.Length - pos);
         winScreen.transform.GetChild(1).gameObject.SetActive(false);
 
-        PlayerPrefs.SetInt("PlaceFromLastMinigame", PhotonNetwork.PlayerList.Length - pos);
+        if(pv.IsMine)
+        {
+            PlayerPrefs.SetInt("PlaceFromLastMinigame", PhotonNetwork.PlayerList.Length - pos);
+            print("WHAT AM I GETTING :" + PlayerPrefs.GetInt("PlaceFromLastMinigame"));
+        }
     }
 }

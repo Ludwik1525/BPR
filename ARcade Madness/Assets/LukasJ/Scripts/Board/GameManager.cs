@@ -381,10 +381,14 @@ public class GameManager : MonoBehaviour
     IEnumerator DelayOnStart()
     {
         yield return new WaitForSeconds(1f);
-        if (GameController.gc.roundCount > 0)
+        if (GameController.gc.doesHavePosition)
         {
-            print(PlayerPrefs.GetInt("PlaceFromLastMinigame"));
-            GetComponent<Currency>().setCurrency(PlayerPrefs.GetInt("PlaceFromLastMinigame"));
+            if(PV.IsMine)
+            {
+                print(PlayerPrefs.GetInt("PlaceFromLastMinigame"));
+                GetComponent<Currency>().setCurrency(PlayerPrefs.GetInt("PlaceFromLastMinigame"));
+            }
+
         }
         GameController.gc.roundCount++;
     }

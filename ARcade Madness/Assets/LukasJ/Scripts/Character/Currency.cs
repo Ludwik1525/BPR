@@ -40,7 +40,7 @@ public class Currency : MonoBehaviour
         if (myPV.IsMine)
         {
             this.currency = (int)PhotonNetwork.LocalPlayer.CustomProperties["Currency"];
-            this.currency = currencyToAdd;
+            this.currency += currencyToAdd;
 
             ExitGames.Client.Photon.Hashtable thisCurrency = new ExitGames.Client.Photon.Hashtable();
             thisCurrency.Add("Currency", currency);
