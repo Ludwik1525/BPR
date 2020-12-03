@@ -32,27 +32,45 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
 
     private void Awake()
     {
-        foreach(GameObject go in boardUI)
+        if(GameController.gc.roundCount < 1)
         {
-            go.GetComponent<Button>().interactable = false;
-            go.GetComponent<Image>().enabled = false;
+            foreach (GameObject go in boardUI)
+            {
+                go.GetComponent<Button>().interactable = false;
+                go.GetComponent<Image>().enabled = false;
+            }
+            m_ARPlaneManager = GetComponent<ARPlaneManager>();
+            m_ARPlacementManager = GetComponent<ARPlacementManager>();
+            pv = GetComponent<PhotonView>();
         }
-        m_ARPlaneManager = GetComponent<ARPlaneManager>();
-        m_ARPlacementManager = GetComponent<ARPlacementManager>();
-        pv = GetComponent<PhotonView>();
+        else
+        {
+            placeButton.transform.parent.gameObject.SetActive(false);
+        }
+
 
     }
     // Start is called before the first frame update
     void Start()
     {
-        placeButton.SetActive(true);
-        scaleSlider.SetActive(true);
-        
 
-        adjustButton.SetActive(false);
-        readyButton.SetActive(true);
+        if (GameController.gc.roundCount < 1)
+        {
 
-        informUIPanel_Text.text = "Move phone to detect planes and place the Board!";
+            placeButton.SetActive(true);
+            scaleSlider.SetActive(true);
+
+
+            adjustButton.SetActive(false);
+            readyButton.SetActive(true);
+
+            informUIPanel_Text.text = "Move phone to detect planes and place the Board!";
+        }
+        else
+        {
+            placeButton.transform.parent.gameObject.SetActive(false);
+        }
+
     }
 
     private void Update()
