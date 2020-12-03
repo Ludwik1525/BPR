@@ -128,8 +128,9 @@ public class BattleScript : MonoBehaviourPun
     [PunRPC]
     private void SetScores(int pos, string name)
     {
-        winScreen.SetActive(true);
+        
         winScreen.transform.GetChild(2).GetChild(pos).gameObject.SetActive(true);
         winScreen.transform.GetChild(2).GetChild(pos).GetComponent<Text>().text = pos + 1 + ". " + name;
+        winScreen.transform.GetChild(1).gameObject.SetActive(false);
     }
 }

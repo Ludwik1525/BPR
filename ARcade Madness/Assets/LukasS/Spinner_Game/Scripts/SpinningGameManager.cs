@@ -87,6 +87,7 @@ public class SpinningGameManager : MonoBehaviour
         {
           if(!winScreen.activeInHierarchy)
             {
+                winScreen.SetActive(true);
                 playerPV.RPC("DisplayScore", RpcTarget.AllBuffered);
                 //DisplayScore();
             }
