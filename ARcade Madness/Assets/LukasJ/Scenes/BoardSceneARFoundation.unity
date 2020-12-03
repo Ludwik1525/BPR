@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 4916102}
   - component: {fileID: 4916101}
   m_Layer: 5
-  m_Name: ButtonRocket
+  m_Name: ButtonPowerupRocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1877,7 +1877,7 @@ GameObject:
   - component: {fileID: 764253969}
   - component: {fileID: 764253968}
   m_Layer: 5
-  m_Name: ButtonCoinMagnet
+  m_Name: ButtonPowerupCoinMagnet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2190,7 +2190,7 @@ GameObject:
   - component: {fileID: 887040122}
   - component: {fileID: 887040121}
   m_Layer: 5
-  m_Name: ButtonChestRespawn
+  m_Name: ButtonPowerupChestRespawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

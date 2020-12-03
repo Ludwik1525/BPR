@@ -73,14 +73,12 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
             {
                 foreach(GameObject p in GameSetupController.players)
                 {
-                    print("GC CURRENT TURN : " + GameController.gc.currentTurn + " PLAYERS TURN : " + p.GetComponent<GameManager>().turn);
                     if (p.GetComponent<PhotonView>().IsMine)
                     {
-                        print("IS ME");
                         if (GameController.gc.currentTurn == p.GetComponent<GameManager>().turn)
                         {
-                            print("IS ME2");
-                            go.GetComponent<Button>().interactable = true;
+                            if(!go.gameObject.name.Contains("Powerup"))
+                                go.GetComponent<Button>().interactable = true;
                         }
                     }
                 }
