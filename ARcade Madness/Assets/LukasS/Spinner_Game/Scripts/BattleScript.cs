@@ -26,6 +26,8 @@ public class BattleScript : MonoBehaviourPun
 
     public bool isDead = false;
 
+    public Sprite[] powerupsIMGs;
+
     [SerializeField]
     private float damage = 300.0f;
 
@@ -132,6 +134,13 @@ public class BattleScript : MonoBehaviourPun
         winScreen.transform.GetChild(2).GetChild(pos).gameObject.SetActive(true);
         winScreen.transform.GetChild(2).GetChild(pos).GetComponent<Text>().text = pos + 1 + ". " + name + ", " + (PhotonNetwork.PlayerList.Length - pos);
         winScreen.transform.GetChild(1).gameObject.SetActive(false);
+
+        if(pos == 0)
+        {
+            int random = Random.Range(0, 3);
+
+            winScreen.transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().sprite = powerupsIMGs[random];
+        }
 
         if(pv.IsMine)
         {
