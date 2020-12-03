@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
 
     private GameObject decisionBox;
     private Button yesB, noB, rollB;
+    private string[] minigames;
 
     public int routePosition;
     public int turn;
@@ -51,6 +52,9 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        minigames = new string[3];
+        minigames[0] = "FireBallFightMiniGame";
+        minigames[1] = "Spinner_Gameplay";
         currentRoute = FindObjectOfType<Route>();
         audioManager = FindObjectOfType<AudioManager>();
         if (PlayerPrefs.HasKey("totalPos"))
@@ -392,17 +396,18 @@ public class GameManager : MonoBehaviour
 
     IEnumerator LoadSceneDelay()
     {
+        var minigame = Random.Range(0, minigames.Length);
         if (FindObjectOfType<ChestAnimationController>().taken)
         {
             yield return new WaitForSeconds(3f);
             if(!isGameFinished)
-                SceneManager.LoadScene("FireBallFightMiniGame");
+                SceneManager.LoadScene(minigame);
         }
         else
         {
             yield return new WaitForSeconds(1f);
             if (!isGameFinished)
-                SceneManager.LoadScene("FireBallFightMiniGame");
+                SceneManager.LoadScene(minigame);
         }
     }
 
