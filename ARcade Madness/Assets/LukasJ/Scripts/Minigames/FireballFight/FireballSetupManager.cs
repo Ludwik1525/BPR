@@ -22,7 +22,7 @@ public class FireballSetupManager : MonoBehaviour
     [SerializeField]
     private Button ready_btn;
 
-    private PhotonView PV, PV2, imagePV;
+    private PhotonView PV, PV2, imagePV, PV4;
 
     [SerializeField]
     private GameObject winScreen;
@@ -81,7 +81,7 @@ public class FireballSetupManager : MonoBehaviour
             if (!winScreen.activeInHierarchy)
             {
                 winScreen.SetActive(true);
-                PV.RPC("DisplayScore", RpcTarget.AllBuffered);
+                PV4.RPC("DisplayScore", RpcTarget.AllBuffered);
             }
         }
     }
@@ -94,6 +94,8 @@ public class FireballSetupManager : MonoBehaviour
 
         PV = player.GetComponent<PhotonView>();
         PV2 = player.transform.GetChild(0).GetChild(1).GetChild(0).GetChild(0).GetComponent<PhotonView>();
+        PV4 = player.transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<PhotonView>();
+
         if (PV2.IsMine)
         {
             PV2.RPC("RPC_AssignColour", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["ColourID"]);

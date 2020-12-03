@@ -20,12 +20,13 @@ public class FireBallAnimator : MonoBehaviour
     private PhotonView PV;
 
     //For giving out the rewards
-    int wonPrize, placement;
+    int wonPrize, placement = 1;
 
     public Sprite[] powerupImgs;
 
     void Start()
     {
+        placement = 1;
         PV = GetComponent<PhotonView>();
         winScreen = GameObject.Find("Canvas").transform.GetChild(2).gameObject;
         isCastingSpell = false;
@@ -193,14 +194,11 @@ public class FireBallAnimator : MonoBehaviour
     [PunRPC]
     private void SetScores(int pos, string name)
     {
-
         winScreen.transform.GetChild(2).GetChild(pos).gameObject.SetActive(true);
-        //winScreen.transform.GetChild(2).GetChild(pos).GetComponent<Text>().text = pos + 1 + ". " + name + ", " + (PhotonNetwork.PlayerList.Length - pos);
+        winScreen.transform.GetChild(2).GetChild(pos).GetComponent<Text>().text = pos + 1 + ". " + name + ", " + (PhotonNetwork.PlayerList.Length - pos);
         winScreen.transform.GetChild(1).gameObject.SetActive(false);
-
-
         if (PV.IsMine)
-        {
+        {  
             int random = 0;
 
             if (pos == 0)

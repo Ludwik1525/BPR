@@ -99,7 +99,7 @@ public class JoystickScript : MonoBehaviour
             // disabling the canvas buttons
             playerScript.attackB.gameObject.SetActive(false);
             playerScript.blockB.gameObject.SetActive(false);
-            GameObject.Find("FixedJoystick").SetActive(false);
+            joystick.gameObject.SetActive(false);
         }
 
         transform.GetChild(0).GetChild(2).gameObject.SetActive(false);

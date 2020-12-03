@@ -14223,7 +14223,7 @@ GameObject:
   - component: {fileID: 6588698860178352660}
   - component: {fileID: 3059306099281930305}
   - component: {fileID: 52011551927154877}
-  - component: {fileID: 892819885843005958}
+  - component: {fileID: 6247801109128775930}
   m_Layer: 0
   m_Name: FireBall
   m_TagString: Untagged
@@ -14326,7 +14326,7 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 892819885843005958}
+  - {fileID: 6247801109128775930}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -14359,7 +14359,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &892819885843005958
+--- !u!114 &6247801109128775930
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14368,7 +14368,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8550139918564627117}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5eabeed050ac70242a4bcb9bd2cce99d, type: 3}
+  m_Script: {fileID: 11500000, guid: f6848081c181cc348a073cfeddc5648a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   synchronizeVelocity: 1
