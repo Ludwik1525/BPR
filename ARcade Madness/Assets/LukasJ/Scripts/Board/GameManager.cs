@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     public GameObject dice;
     private GameObject diceRollInfo;
     public int roll;
+    private int minigameIndex;
 
     private AudioManager audioManager;
 
@@ -55,6 +56,7 @@ public class GameManager : MonoBehaviour
         minigames = new string[3];
         minigames[0] = "FireBallFightMiniGame";
         minigames[1] = "Spinner_Gameplay";
+        minigames[2] = "Spinner_Gameplay";
         currentRoute = FindObjectOfType<Route>();
         audioManager = FindObjectOfType<AudioManager>();
         if (PlayerPrefs.HasKey("totalPos"))
@@ -387,6 +389,9 @@ public class GameManager : MonoBehaviour
         wasKeyPressed = false;
         print("VAR : " + var + " ROUTE POS: " + routePosition + " TOTAL POS: " + totalPos);
         PV.RPC("IncrementTurn", RpcTarget.AllBuffered , PlayerPrefs.GetInt("Score"), true);
+
+        int minigame = Random.Range(0, minigames.Length);
+        PV.RPC("UnifyMinigameIndex", RpcTarget.AllBuffered, minigame);
     }
 
     IEnumerator Delay(float seconds)
@@ -396,18 +401,17 @@ public class GameManager : MonoBehaviour
 
     IEnumerator LoadSceneDelay()
     {
-        var minigame = Random.Range(0, minigames.Length);
         if (FindObjectOfType<ChestAnimationController>().taken)
         {
             yield return new WaitForSeconds(3f);
             if(!isGameFinished)
-                SceneManager.LoadScene(minigame);
+                SceneManager.LoadScene(minigames[minigameIndex]);
         }
         else
         {
             yield return new WaitForSeconds(1f);
             if (!isGameFinished)
-                SceneManager.LoadScene(minigame);
+                SceneManager.LoadScene(minigames[minigameIndex]);
         }
     }
 
@@ -441,6 +445,12 @@ public class GameManager : MonoBehaviour
 
         }
         GameController.gc.roundCount++;
+    }
+
+    [PunRPC]
+    private void UnifyMinigameIndex(int no)
+    {
+        minigameIndex = no;
     }
 
     [PunRPC]
