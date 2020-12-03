@@ -85,8 +85,8 @@ GameObject:
   - component: {fileID: 7291758562938909311}
   - component: {fileID: 1303261897437100392}
   - component: {fileID: 1401135784001390936}
-  - component: {fileID: 3405711867747471448}
   - component: {fileID: 6279635841843747658}
+  - component: {fileID: 3090564561372695330}
   m_Layer: 0
   m_Name: Player_Fireball
   m_TagString: Player
@@ -144,7 +144,7 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 3405711867747471448}
+  - {fileID: 3090564561372695330}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -176,22 +176,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!114 &3405711867747471448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 208559803351174310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5eabeed050ac70242a4bcb9bd2cce99d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  synchronizeVelocity: 1
-  synchronizeAngularVelocity: 1
-  isTeleportEnabled: 1
-  teleportIfDistanceGreaterThan: 1
 --- !u!136 &6279635841843747658
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -206,6 +190,22 @@ CapsuleCollider:
   m_Height: 1.33
   m_Direction: 1
   m_Center: {x: 0, y: 0.55, z: 0}
+--- !u!114 &3090564561372695330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208559803351174310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6848081c181cc348a073cfeddc5648a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  synchronizeVelocity: 1
+  synchronizeAngularVelocity: 1
+  isTeleportEnabled: 1
+  teleportIfDistanceGreaterThan: 1
 --- !u!1 &208559803788533406
 GameObject:
   m_ObjectHideFlags: 0
