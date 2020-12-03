@@ -19,7 +19,7 @@ public class Rocket : MonoBehaviour
     {
         PV = GetComponent<PhotonView>();
         BPC = GetComponent<GameManager>();
-        rocketB = GameObject.Find("ButtonRocket").GetComponent<Button>();
+        rocketB = GameObject.Find("ButtonPowerupRocket").GetComponent<Button>();
 
         rocketB.onClick.AddListener(UseRocket);
 

@@ -16,7 +16,7 @@ public class RespawnChestNextToPlayer : MonoBehaviour
     {
         spawnChest = FindObjectOfType<SpawnChest>();
         BPC = GetComponent<GameManager>();
-        respawnChestB = GameObject.Find("ButtonChestRespawn").GetComponent<Button>();
+        respawnChestB = GameObject.Find("ButtonPowerupChestRespawn").GetComponent<Button>();
 
         respawnChestB.onClick.AddListener(UseChestRespawn);
 
