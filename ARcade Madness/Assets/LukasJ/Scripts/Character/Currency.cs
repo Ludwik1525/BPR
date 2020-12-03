@@ -35,12 +35,12 @@ public class Currency : MonoBehaviour
     }
 
     // increase my currency by one
-    public void setCurrency()
+    public void setCurrency(int currencyToAdd)
     {
         if (myPV.IsMine)
         {
             this.currency = (int)PhotonNetwork.LocalPlayer.CustomProperties["Currency"];
-            this.currency++;
+            this.currency = currencyToAdd;
 
             ExitGames.Client.Photon.Hashtable thisCurrency = new ExitGames.Client.Photon.Hashtable();
             thisCurrency.Add("Currency", currency);

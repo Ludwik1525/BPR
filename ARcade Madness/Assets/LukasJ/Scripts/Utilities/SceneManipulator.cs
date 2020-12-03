@@ -13,6 +13,6 @@ public class SceneManipulator : MonoBehaviour
     IEnumerator CD()
     {
         yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene("BoardScene");
+        SceneManager.LoadScene("BoardSceneARFoundation");
     }
 }
