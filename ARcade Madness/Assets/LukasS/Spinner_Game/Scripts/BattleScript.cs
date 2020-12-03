@@ -28,6 +28,8 @@ public class BattleScript : MonoBehaviourPun
 
     public Sprite[] powerupsIMGs;
 
+    private int wonPrize;
+
     [SerializeField]
     private float damage = 300.0f;
 
@@ -135,17 +137,25 @@ public class BattleScript : MonoBehaviourPun
         winScreen.transform.GetChild(2).GetChild(pos).GetComponent<Text>().text = pos + 1 + ". " + name + ", " + (PhotonNetwork.PlayerList.Length - pos);
         winScreen.transform.GetChild(1).gameObject.SetActive(false);
 
-        if(pos == 0)
-        {
-            int random = Random.Range(0, 3);
-
-            winScreen.transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().sprite = powerupsIMGs[random];
-        }
 
         if(pv.IsMine)
         {
+            if (pos == 0)
+            {
+                int random = Random.Range(0, 3);
+
+                pv.RPC("SetPrizeWon", RpcTarget.AllBuffered, random);
+            }
+
             PlayerPrefs.SetInt("PlaceFromLastMinigame", PhotonNetwork.PlayerList.Length - pos);
             print("WHAT AM I GETTING :" + PlayerPrefs.GetInt("PlaceFromLastMinigame"));
         }
+    }
+
+    [PunRPC]
+    void SetPrizeWon(int no)
+    {
+        wonPrize = no;
+        winScreen.transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().sprite = powerupsIMGs[wonPrize];
     }
 }
