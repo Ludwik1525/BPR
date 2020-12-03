@@ -149,14 +149,16 @@ public class BattleScript : MonoBehaviourPun
                 pv.RPC("SetPrizeWon", RpcTarget.AllBuffered, random);
             }
 
-            PlayerPrefs.SetInt("PlaceFromLastMinigame", PhotonNetwork.PlayerList.Length - pos);
-
-            if(random == 3)
+            if(random != 3)
             {
-                PlayerPrefs.SetInt("PlaceFromLastMinigame", PlayerPrefs.GetInt("PlaceFromLastMinigame") + 1);
+                PlayerPrefs.SetInt("PlaceFromLastMinigame", PhotonNetwork.PlayerList.Length - pos);
+            }
+            else
+            {
+                PlayerPrefs.SetInt("PlaceFromLastMinigame", PhotonNetwork.PlayerList.Length - pos + 1);
             }
 
-            SaveMyPowerups(random);
+            SaveMyPowerups();
 
             print("COINS I AM GETTING :" + PlayerPrefs.GetInt("PlaceFromLastMinigame"));
             print("MY POWERUPS: " + PlayerPrefs.GetInt("MyPowerups"));
@@ -204,13 +206,16 @@ public class BattleScript : MonoBehaviourPun
         }
     }
 
-    void SaveMyPowerups(int newPowerup)
+    void SaveMyPowerups()
     {
-        switch(newPowerup)
+        switch(wonPrize)
         {
             case 0: 
                 switch(PlayerPrefs.GetInt("MyPowerups"))
                 {
+                    case 0:
+                        PlayerPrefs.SetInt("MyPowerups", 1);
+                        break;
                     case 2:
                         PlayerPrefs.SetInt("MyPowerups", 4);
                         break;
@@ -225,6 +230,9 @@ public class BattleScript : MonoBehaviourPun
             case 1:
                 switch (PlayerPrefs.GetInt("MyPowerups"))
                 {
+                    case 0:
+                        PlayerPrefs.SetInt("MyPowerups", 2);
+                        break;
                     case 1:
                         PlayerPrefs.SetInt("MyPowerups", 4);
                         break;
@@ -239,6 +247,9 @@ public class BattleScript : MonoBehaviourPun
             case 2:
                 switch (PlayerPrefs.GetInt("MyPowerups"))
                 {
+                    case 0:
+                        PlayerPrefs.SetInt("MyPowerups", 3);
+                        break;
                     case 1:
                         PlayerPrefs.SetInt("MyPowerups", 5);
                         break;

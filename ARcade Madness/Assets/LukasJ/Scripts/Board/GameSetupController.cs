@@ -55,6 +55,7 @@ public class GameSetupController : MonoBehaviour
     {
         if (!GameController.gc.doesHavePosition)
         {
+            PlayerPrefs.SetInt("MyPowerups", 0);
             GameController.gc.roundCount = 0;
             PlayerPrefs.SetInt("totalPos", 0);
             player = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Player"),
