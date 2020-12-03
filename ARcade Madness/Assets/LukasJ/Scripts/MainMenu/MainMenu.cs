@@ -6,7 +6,7 @@ public class MainMenu : MonoBehaviour
 {
     // all pages / menus
     public GameObject mainMenu, mainMenuObjs, nameBox, optionsMenu, soundsBox, lobby, 
-        lobbyObjs, roomCreation, privateRoomBox, instructionsMenu, instructionsGeneral, instructionsMinigames, instructionsPowerups;
+        lobbyObjs, roomCreation, privateRoomBox, instructionsMenu, instructionsGeneral, instructionsPowerups;
 
     // all text elements
     public GameObject welcomeText, playerNameErrorShort, playerNameErrorLong, playerNameErrorNumbers, roomNameErrorShort, roomNameErrorLong, privateRoomError;
@@ -16,7 +16,7 @@ public class MainMenu : MonoBehaviour
 
     // all buttons
     public Button acceptNameB, playB, optionsB, quitB, changeNameB, changeVolumeB, acceptVolumeB, optionsBackB, lobbyBackB, roomCreationBackB, roomCreationB, roomAcceptB, players2B, 
-        players3B, players4B, privateB, publicB, joinPrivateB, confirmPrivateB, cancelPrivateB, openInstrB, instrBack1B, instrBack2B, instrBack3B, instrBack4B, instrGeneralB, instrMinigamesB, instrPowerupsB;
+        players3B, players4B, privateB, publicB, joinPrivateB, confirmPrivateB, cancelPrivateB, openInstrB, instrBack1B, instrBack2B, instrBack4B, instrGeneralB, instrPowerupsB;
 
     private bool isChangingName;
 
@@ -46,10 +46,8 @@ public class MainMenu : MonoBehaviour
         openInstrB.onClick.AddListener(OpenInstructionsMenu);
         instrBack1B.onClick.AddListener(OpenOptions);
         instrBack2B.onClick.AddListener(BackToInstructionsMenu);
-        instrBack3B.onClick.AddListener(BackToInstructionsMenu);
         instrBack4B.onClick.AddListener(BackToInstructionsMenu);
         instrGeneralB.onClick.AddListener(OpenGeneralInstrMenu);
-        instrMinigamesB.onClick.AddListener(OpenMinigamesInstrMenu);
         instrPowerupsB.onClick.AddListener(OpenPowerupsInstrMenu);
 
         // turn off all the error message by default
@@ -213,13 +211,6 @@ public class MainMenu : MonoBehaviour
         instructionsGeneral.SetActive(true);
     }
 
-    // opening mini-games instructions menu
-    private void OpenMinigamesInstrMenu()
-    {
-        instructionsMenu.SetActive(false);
-        instructionsMinigames.SetActive(true);
-    }
-
     // opening power-ups instructions menu
     private void OpenPowerupsInstrMenu()
     {
@@ -232,7 +223,6 @@ public class MainMenu : MonoBehaviour
     {
         instructionsMenu.SetActive(true);
         instructionsGeneral.SetActive(false);
-        instructionsMinigames.SetActive(false);
         instructionsPowerups.SetActive(false);
     }
 
