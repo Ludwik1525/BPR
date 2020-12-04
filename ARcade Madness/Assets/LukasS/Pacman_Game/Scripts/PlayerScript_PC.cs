@@ -91,8 +91,8 @@ public class PlayerScript_PC : MonoBehaviourPun
         FindObjectOfType<BoardMenus>().TurnOnWinScreen();
     }
 
-    [PunRPC]
-    private void DisplayScore()
+
+    public void DisplayScore()
     {
         if (PV.IsMine)
         {

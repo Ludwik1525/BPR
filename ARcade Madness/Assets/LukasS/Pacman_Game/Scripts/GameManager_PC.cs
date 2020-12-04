@@ -260,7 +260,9 @@ public class GameManager_PC : MonoBehaviour
                 if (namesToDisplay[i].Contains(playersParent.transform.GetChild(j).GetComponent<PhotonView>().Owner.NickName))
                 {
                     playersParent.transform.GetChild(j).GetComponent<PlayerScript_PC>().placement = i + 1;
-                    playersParent.transform.GetChild(j).GetComponent<PhotonView>().RPC("DisplayScore", RpcTarget.AllBuffered);
+                    if (i == 0)
+                        playersParent.transform.GetChild(j).GetComponent<PlayerScript_PC>().DisplayScore();
+                        //playersParent.transform.GetChild(j).GetComponent<PhotonView>().RPC("DisplayScore", RpcTarget.AllBuffered);
                 }
             }
         }
