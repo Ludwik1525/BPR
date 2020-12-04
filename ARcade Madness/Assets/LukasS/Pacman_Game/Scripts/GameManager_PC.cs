@@ -20,6 +20,9 @@ public class GameManager_PC : MonoBehaviour
     private GameObject[] patrolPoints;
 
     [SerializeField]
+    private GameObject pointParent;
+
+    [SerializeField]
     private Transform[] spawnPositions;
     [SerializeField]
     private Button ready_btn;
@@ -38,6 +41,10 @@ public class GameManager_PC : MonoBehaviour
     [SerializeField]
     private List<GameObject> loadersSpawns = new List<GameObject>();
 
+    private string[] namesToDisplay;
+    private List<string> finalNames;
+    private List<int> finalScores;
+
     private PhotonView pv;
     private int count = 0;
 
@@ -54,7 +61,9 @@ public class GameManager_PC : MonoBehaviour
     void Start()
     {
         instruction.SetActive(true);
-
+        finalNames = new List<string>();
+        finalScores = new List<int>();
+        namesToDisplay = new string[PhotonNetwork.PlayerList.Length];
         GameObject playerLoader = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerLoadingImg"), loadersSpawns[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]].transform.localPosition, Quaternion.identity);
         pv = playerLoader.GetComponent<PhotonView>();
         pv.RPC("RPC_SetPlayerLoaderForPacman", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]);
@@ -98,13 +107,12 @@ public class GameManager_PC : MonoBehaviour
             StartCoroutine(CountDown());
         }
 
-        if (playersLeft <= 1)
+        if (playersLeft <= 0 || pointParent.transform.childCount < 1)
         {
             if (!winScreen.activeInHierarchy)
             {
                 winScreen.SetActive(true);
                 playerPV.RPC("DisplayScore", RpcTarget.AllBuffered);
-                //DisplayScore();
             }
         }
 
@@ -198,6 +206,33 @@ public class GameManager_PC : MonoBehaviour
     public void SubstractPlayersLeft()
     {
         playersLeft--;
+    }
+
+    public void SortPlayersOrder()
+    {
+        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+        {
+            finalNames.Add(this.gameObject.transform.GetChild(i).GetChild(0).GetChild(0).GetComponent<Text>().text + "  " +
+                this.gameObject.transform.GetChild(i).GetChild(0).GetChild(2).GetComponent<Text>().text);
+            finalScores.Add(int.Parse(this.gameObject.transform.GetChild(i).GetChild(0).GetChild(2).GetComponent<Text>().text));
+        }
+
+        finalScores.Sort();
+        finalScores.Reverse();
+
+        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+        {
+            string checker = finalScores[i].ToString();
+            for (int j = 0; j < finalNames.Count; j++)
+            {
+                if (finalNames[j].Contains(checker))
+                {
+                    namesToDisplay[i] = finalNames[j];
+                }
+            }
+        }
+
+        //PV.RPC("SetFinalScores", RpcTarget.AllBuffered);
     }
 
 }

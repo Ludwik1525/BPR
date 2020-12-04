@@ -210,10 +210,10 @@ public class RoomController : MonoBehaviourPunCallbacks
         if (!PhotonNetwork.IsMasterClient)
             return;
         //PhotonNetwork.LoadLevel("Spinner_Gameplay");
-        //PhotonNetwork.LoadLevel("Pacman_Gameplay");
+        PhotonNetwork.LoadLevel("Pacman_Gameplay");
 
         //PhotonNetwork.LoadLevel("FireBallFightMiniGame");
-        PhotonNetwork.LoadLevel("BoardSceneARFoundation");
+        //PhotonNetwork.LoadLevel("BoardSceneARFoundation");
         //PhotonNetwork.LoadLevel("BoardScene");
     }
 

@@ -2465,6 +2465,7 @@ MonoBehaviour:
   - {fileID: 1921473908}
   - {fileID: 639616411}
   - {fileID: 1277866034}
+  pointParent: {fileID: 1322029340769510049}
   spawnPositions:
   - {fileID: 516424593}
   - {fileID: 1558152738}
@@ -2473,6 +2474,7 @@ MonoBehaviour:
   ready_btn: {fileID: 5294107464167084876}
   instruction: {fileID: 5294107462800981731}
   menu: {fileID: 5294107463725633707}
+  winScreen: {fileID: 1335420652}
   loadersSpawns:
   - {fileID: 7461665256897723368}
   - {fileID: 7461665256605482042}
