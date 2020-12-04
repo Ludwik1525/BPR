@@ -259,14 +259,8 @@ public class GameManager_PC : MonoBehaviour
             {
                 if (namesToDisplay[i].Contains(playersParent.transform.GetChild(j).GetComponent<PhotonView>().Owner.NickName))
                 {
-                    print("lgth " + namesToDisplay.Length + "j " + playersParent.transform.GetChild(j).GetComponent<PhotonView>().Owner.NickName);
-                    if (myPV.IsMine)
-                    {
-                        print("myPv");
-                        playersParent.transform.GetChild(j).GetComponent<PlayerScript_PC>().placement = i + 1;
-                        playersParent.transform.GetChild(j).GetComponent<PhotonView>().RPC("DisplayScore", RpcTarget.AllBuffered);
-                    }
-
+                    playersParent.transform.GetChild(j).GetComponent<PlayerScript_PC>().placement = i + 1;
+                    playersParent.transform.GetChild(j).GetComponent<PhotonView>().RPC("DisplayScore", RpcTarget.AllBuffered);
                 }
             }
         }
