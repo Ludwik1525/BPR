@@ -2901,6 +2901,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1626478864}
     m_Modifications:
+    - target: {fileID: 3463900519500003027, guid: f7deab4415e686c498e8b138bc8e7317, type: 3}
+      propertyPath: m_Text
+      value: Move around the battle arena using joystick and hit other players. Player
+        with hegher speed deals damage. Last man standing wins!
+      objectReference: {fileID: 0}
+    - target: {fileID: 3463900519603016163, guid: f7deab4415e686c498e8b138bc8e7317, type: 3}
+      propertyPath: m_Text
+      value: Spin   for   life
+      objectReference: {fileID: 0}
     - target: {fileID: 3463900520507491577, guid: f7deab4415e686c498e8b138bc8e7317, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2919,7 +2928,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3463900521221368150, guid: f7deab4415e686c498e8b138bc8e7317, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3463900521221368151, guid: f7deab4415e686c498e8b138bc8e7317, type: 3}
       propertyPath: m_LocalPosition.x

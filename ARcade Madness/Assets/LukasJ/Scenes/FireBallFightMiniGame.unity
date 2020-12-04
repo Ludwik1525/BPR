@@ -4793,7 +4793,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.25878906, y: -108.09094}
+  m_AnchoredPosition: {x: 0.25878906, y: -108.09082}
   m_SizeDelta: {x: -2460, y: -1340}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7885688498073870976
@@ -5356,8 +5356,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Move around battle arena using joystick and hit other players. The player
-    with heigher speed deals damage. Last man standing!
+  m_Text: Move around the battle arena using joystick, throw spells at others and
+    use a shield to protect from them. Last man standing wins!
 --- !u!222 &7885688498852385496
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5539,7 +5539,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Spin  for  life
+  m_Text: Fireball    Arena
 --- !u!114 &7885688498950698472
 MonoBehaviour:
   m_ObjectHideFlags: 0

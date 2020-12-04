@@ -242,7 +242,7 @@ public class GameManager_PC : MonoBehaviour
             {
                 winScreen.transform.GetChild(2).GetChild(i).gameObject.SetActive(true);
 
-                winScreen.transform.GetChild(2).GetComponent<Text>().text = (i + 1) + ".  " + namesToDisplay[i];
+                winScreen.transform.GetChild(2).GetComponent<Text>().text = (i + 1) + ".  " + namesToDisplay[i] + ", " + (PhotonNetwork.PlayerList.Length - i);
             }
         }
     }
