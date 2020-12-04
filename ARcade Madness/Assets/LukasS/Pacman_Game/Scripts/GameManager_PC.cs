@@ -262,7 +262,8 @@ public class GameManager_PC : MonoBehaviour
                     playersParent.transform.GetChild(j).GetComponent<PlayerScript_PC>().placement = i + 1;
                     if (i == 0)
                         playersParent.transform.GetChild(j).GetComponent<PlayerScript_PC>().DisplayScore();
-                        //playersParent.transform.GetChild(j).GetComponent<PhotonView>().RPC("DisplayScore", RpcTarget.AllBuffered);
+                                            
+                    playersParent.transform.GetChild(j).GetComponent<PhotonView>().RPC("DisplayCoins", RpcTarget.AllBuffered);
                 }
             }
         }

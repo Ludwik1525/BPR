@@ -96,12 +96,22 @@ public class PlayerScript_PC : MonoBehaviourPun
     {
         if (PV.IsMine)
         {
-            PV.RPC("SetScores", RpcTarget.AllBuffered, placement - 1, PhotonNetwork.LocalPlayer.NickName);
+            PV.RPC("SetScores", RpcTarget.AllBuffered, placement - 1);
+        }
+    }
+
+
+    [PunRPC]
+    public void DisplayCoins()
+    {
+        if (PV.IsMine)
+        {
+            PV.RPC("SetCoins", RpcTarget.AllBuffered, placement - 1, PhotonNetwork.LocalPlayer.NickName);
         }
     }
 
     [PunRPC]
-    private void SetScores(int pos, string name)
+    private void SetScores(int pos)
     {
         if (PV.IsMine)
         {
@@ -116,7 +126,16 @@ public class PlayerScript_PC : MonoBehaviourPun
                 SaveMyPowerups();
             }
 
-            if (random != 3)
+        }
+    }
+
+
+    [PunRPC]
+    private void SetCoins(int pos, string name)
+    {
+        if (PV.IsMine)
+        {
+            if (wonPrize != 3)
             {
                 PlayerPrefs.SetInt("PlaceFromLastMinigame", PhotonNetwork.PlayerList.Length - pos);
             }
@@ -132,6 +151,7 @@ public class PlayerScript_PC : MonoBehaviourPun
         if (pos == 0 && wonPrize == 3)
             winScreen.transform.GetChild(2).GetChild(pos).GetComponent<Text>().text = pos + 1 + ". " + name + ", " + (PhotonNetwork.PlayerList.Length - pos + 1);
     }
+
 
     [PunRPC]
     private void SetMyParent()
