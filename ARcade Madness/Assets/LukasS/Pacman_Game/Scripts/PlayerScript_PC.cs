@@ -71,11 +71,8 @@ public class PlayerScript_PC : MonoBehaviourPun
     void KillMe()
     {
         Destroy(this.gameObject);
-
-        if(PV.IsMine)
-        {
-            SendMyInfo();
-        }
+        
+        SendMyInfo();
     }
 
     private void SendMyInfo()

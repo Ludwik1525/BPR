@@ -119,6 +119,8 @@ public class GameManager_PC : MonoBehaviour
             }
         }
 
+        print("NO PLAYERS: " + playersLeft);
+
 
     }
 
