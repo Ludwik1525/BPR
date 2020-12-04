@@ -60,6 +60,7 @@ public class GameManager_PC : MonoBehaviour
     }
     void Start()
     {
+        playersLeft = PhotonNetwork.PlayerList.Length;
         myPV = GetComponent<PhotonView>();
         instruction.SetActive(true);
         finalNames = new List<string>();

@@ -80,6 +80,7 @@ public class PlayerScript_PC : MonoBehaviourPun
 
     private void SendMyInfo()
     {
+        FindObjectOfType<GameManager_PC>().SubstractPlayersLeft();
         FindObjectOfType<GameManager_PC>().AddMeToLists(PhotonNetwork.LocalPlayer.NickName, score);
     }
 
