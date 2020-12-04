@@ -171,6 +171,7 @@ public class GameManager_PC : MonoBehaviour
         if (playerPV.IsMine)
         {
             playerPV.RPC("SetName", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer.NickName);
+            playerPV.RPC("SetMyParent", RpcTarget.AllBuffered);
         }
     } 
 

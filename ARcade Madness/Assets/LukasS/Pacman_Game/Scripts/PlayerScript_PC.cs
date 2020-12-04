@@ -139,6 +139,12 @@ public class PlayerScript_PC : MonoBehaviourPun
     }
 
     [PunRPC]
+    private void SetMyParent()
+    {
+        transform.SetParent(GameObject.Find("PlayersParent").transform);
+    }
+
+    [PunRPC]
     void SetPrizeWon(int no)
     {
         wonPrize = no;
