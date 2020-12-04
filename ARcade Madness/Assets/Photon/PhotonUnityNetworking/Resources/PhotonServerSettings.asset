@@ -89,6 +89,8 @@ MonoBehaviour:
   - AddMeToLists
   - SetMyParent
   - SubstractPlayersLeft
+  - DisplayCoins
+  - SetCoins
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
