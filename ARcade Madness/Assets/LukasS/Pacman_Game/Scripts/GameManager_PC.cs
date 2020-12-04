@@ -35,6 +35,9 @@ public class GameManager_PC : MonoBehaviour
     private PhotonView playerPV, PV2, myPV;
 
     [SerializeField]
+    private GameObject playersParent;
+
+    [SerializeField]
     private GameObject winScreen;
     private int playersLeft = PhotonNetwork.PlayerList.Length;
 
@@ -114,8 +117,8 @@ public class GameManager_PC : MonoBehaviour
             if (!winScreen.activeInHierarchy)
             {
                 winScreen.SetActive(true);
+                winScreen.transform.GetChild(1).gameObject.SetActive(false);
                 SortPlayersOrder();
-                //playerPV.RPC("DisplayScore", RpcTarget.AllBuffered);
             }
         }
     }
@@ -239,6 +242,18 @@ public class GameManager_PC : MonoBehaviour
                 winScreen.transform.GetChild(2).GetChild(i).gameObject.SetActive(true);
 
                 winScreen.transform.GetChild(2).GetChild(i).GetComponent<Text>().text = (i + 1) + ".  " + namesToDisplay[i] + ", " + (PhotonNetwork.PlayerList.Length - i);
+            }
+        }
+
+        for(int i = 0; i < playersParent.transform.childCount; i++)
+        {
+            for(int j = 0; i < playersParent.transform.childCount; i++)
+            {
+                if (playersParent.transform.GetChild(j).GetComponent<PhotonView>().Owner.NickName.Contains(namesToDisplay[i]))
+                {
+                    playersParent.transform.GetChild(j).GetComponent<PlayerScript_PC>().placement = i + 1;
+                    playersParent.transform.GetChild(j).GetComponent<PhotonView>().RPC("DisplayScore", RpcTarget.AllBuffered);
+                }
             }
         }
     }
