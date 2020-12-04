@@ -232,6 +232,7 @@ public class GameManager_PC : MonoBehaviour
         }
 
         myPV.RPC("SetFinalScores", RpcTarget.AllBuffered);
+        DisplayPowerups();
     }
 
     [PunRPC]
@@ -247,22 +248,30 @@ public class GameManager_PC : MonoBehaviour
             }
         }
 
-        for(int i = 0; i < namesToDisplay.Length; i++)
+        
+    }
+
+    private void DisplayPowerups()
+    {
+        for (int i = 0; i < namesToDisplay.Length; i++)
         {
-            for(int j = 0; j < namesToDisplay.Length; j++)
+            for (int j = 0; j < namesToDisplay.Length; j++)
             {
                 if (namesToDisplay[i].Contains(playersParent.transform.GetChild(j).GetComponent<PhotonView>().Owner.NickName))
                 {
+                    print("lgth " + namesToDisplay.Length + "j " + playersParent.transform.GetChild(j).GetComponent<PhotonView>().Owner.NickName);
                     if (myPV.IsMine)
                     {
+                        print("myPv");
                         playersParent.transform.GetChild(j).GetComponent<PlayerScript_PC>().placement = i + 1;
                         playersParent.transform.GetChild(j).GetComponent<PhotonView>().RPC("DisplayScore", RpcTarget.AllBuffered);
                     }
-                       
+
                 }
             }
         }
     }
+
 
     [PunRPC]
     public void AddMeToLists(string myName, int myScore)
