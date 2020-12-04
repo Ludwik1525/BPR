@@ -11869,19 +11869,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: dfa846214fe98954ca47d9a694a75cf4, type: 3}
   m_PrefabInstance: {fileID: 1322029341126983117}
   m_PrefabAsset: {fileID: 0}
---- !u!135 &1901703200
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1901703198}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.31
-  m_Center: {x: -0.000000059604645, y: 0.3, z: 0}
 --- !u!135 &1901703201
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -11893,7 +11880,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.13398124
+  m_Radius: 0.31
   m_Center: {x: -0.000000059604645, y: 0.3, z: 0}
 --- !u!1001 &1901944474
 PrefabInstance:

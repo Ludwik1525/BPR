@@ -78,7 +78,8 @@ public class PlayerScript_PC : MonoBehaviourPun
     private void SendMyInfo()
     {
         FindObjectOfType<GameManager_PC>().SubstractPlayersLeft();
-        FindObjectOfType<GameManager_PC>().AddMeToLists(PhotonNetwork.LocalPlayer.NickName, score);
+
+        FindObjectOfType<GameManager_PC>().GetComponent<PhotonView>().RPC("AddMeToLists", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer.NickName, score);
     }
 
     [PunRPC]
@@ -91,7 +92,6 @@ public class PlayerScript_PC : MonoBehaviourPun
     void SubstructPlayersLeft()
     {
         FindObjectOfType<GameManager_PC>().SubstractPlayersLeft();
-        print("pl left " + FindObjectOfType<GameManager_PC>().GetPlayersLeft());
     }
 
     //[PunRPC]

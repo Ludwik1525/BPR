@@ -118,10 +118,6 @@ public class GameManager_PC : MonoBehaviour
                 //playerPV.RPC("DisplayScore", RpcTarget.AllBuffered);
             }
         }
-
-        print("NO PLAYERS: " + playersLeft);
-
-
     }
 
     IEnumerator CountDown()
@@ -242,14 +238,15 @@ public class GameManager_PC : MonoBehaviour
             {
                 winScreen.transform.GetChild(2).GetChild(i).gameObject.SetActive(true);
 
-                winScreen.transform.GetChild(2).GetComponent<Text>().text = (i + 1) + ".  " + namesToDisplay[i] + ", " + (PhotonNetwork.PlayerList.Length - i);
+                winScreen.transform.GetChild(2).GetChild(i).GetComponent<Text>().text = (i + 1) + ".  " + namesToDisplay[i] + ", " + (PhotonNetwork.PlayerList.Length - i);
             }
         }
     }
 
+    [PunRPC]
     public void AddMeToLists(string myName, int myScore)
     {
-        finalNames.Add(myName + myScore);
+        finalNames.Add(myName + " " + myScore);
         finalScores.Add(myScore);
     }
 
