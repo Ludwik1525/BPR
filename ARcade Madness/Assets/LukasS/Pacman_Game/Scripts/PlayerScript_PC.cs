@@ -12,15 +12,16 @@ public class PlayerScript_PC : MonoBehaviourPun
     private PhotonView PV;
 
     private GameObject winScreen;
-    int wonPrize, placement = 1;
+    int wonPrize;
     public Sprite[] powerupImgs;
+    private GameObject pointParent;
 
     // Start is called before the first frame update
     void Start()
     {
         PV = GetComponent<PhotonView>();
-        placement = 1;
         winScreen = GameObject.Find("Canvas").transform.GetChild(1).gameObject;
+        pointParent = GameObject.Find("Dots");
         if (PV.IsMine)
         {
             //The player is local player
@@ -40,6 +41,11 @@ public class PlayerScript_PC : MonoBehaviourPun
     {
         if(PV.IsMine)
             score_txt.text = "Score: " + score;
+
+        if(pointParent.transform.childCount < 1)
+        {
+            SendMyInfo();
+        }
     }
 
     [PunRPC]
@@ -65,6 +71,16 @@ public class PlayerScript_PC : MonoBehaviourPun
     void KillMe()
     {
         Destroy(this.gameObject);
+
+        if(PV.IsMine)
+        {
+            SendMyInfo();
+        }
+    }
+
+    private void SendMyInfo()
+    {
+        FindObjectOfType<GameManager_PC>().AddMeToLists(PhotonNetwork.LocalPlayer.NickName, score);
     }
 
     [PunRPC]
@@ -80,60 +96,60 @@ public class PlayerScript_PC : MonoBehaviourPun
         print("pl left " + FindObjectOfType<GameManager_PC>().GetPlayersLeft());
     }
 
-    [PunRPC]
-    private void DisplayScore()
-    {
-        if (PV.IsMine)
-        {
-            PV.RPC("SetScores", RpcTarget.AllBuffered, placement - 1, PhotonNetwork.LocalPlayer.NickName);
-        }
-    }
+    //[PunRPC]
+    //private void DisplayScore()
+    //{
+    //    if (PV.IsMine)
+    //    {
+    //        PV.RPC("SetScores", RpcTarget.AllBuffered, placement - 1, PhotonNetwork.LocalPlayer.NickName);
+    //    }
+    //}
 
-    [PunRPC]
-    private void SetScores(int pos, string name)
-    {
-        winScreen.transform.GetChild(2).GetChild(pos).gameObject.SetActive(true);
-        winScreen.transform.GetChild(2).GetChild(pos).GetComponent<Text>().text = pos + 1 + ". " + name + ", " + (PhotonNetwork.PlayerList.Length - pos);
-        winScreen.transform.GetChild(1).gameObject.SetActive(false);
-        if (PV.IsMine)
-        {
-            int random = 0;
+    //[PunRPC]
+    //private void SetScores(int pos, string name)
+    //{
+    //    winScreen.transform.GetChild(2).GetChild(pos).gameObject.SetActive(true);
+    //    winScreen.transform.GetChild(2).GetChild(pos).GetComponent<Text>().text = pos + 1 + ". " + name + ", " + (PhotonNetwork.PlayerList.Length - pos);
+    //    winScreen.transform.GetChild(1).gameObject.SetActive(false);
+    //    if (PV.IsMine)
+    //    {
+    //        int random = 0;
 
-            if (pos == 0)
-            {
-                random = SetRandomPowerup();
+    //        if (pos == 0)
+    //        {
+    //            random = SetRandomPowerup();
 
-                PV.RPC("SetPrizeWon", RpcTarget.AllBuffered, random);
+    //            PV.RPC("SetPrizeWon", RpcTarget.AllBuffered, random);
 
-                SaveMyPowerups();
-            }
+    //            SaveMyPowerups();
+    //        }
 
-            if (random != 3)
-            {
-                PlayerPrefs.SetInt("PlaceFromLastMinigame", PhotonNetwork.PlayerList.Length - pos);
-            }
-            else
-            {
-                PlayerPrefs.SetInt("PlaceFromLastMinigame", PhotonNetwork.PlayerList.Length - pos + 1);
-            }
+    //        if (random != 3)
+    //        {
+    //            PlayerPrefs.SetInt("PlaceFromLastMinigame", PhotonNetwork.PlayerList.Length - pos);
+    //        }
+    //        else
+    //        {
+    //            PlayerPrefs.SetInt("PlaceFromLastMinigame", PhotonNetwork.PlayerList.Length - pos + 1);
+    //        }
 
-            print("COINS I AM GETTING :" + PlayerPrefs.GetInt("PlaceFromLastMinigame"));
-            print("MY POWERUPS: " + PlayerPrefs.GetInt("MyPowerups"));
-        }
+    //        print("COINS I AM GETTING :" + PlayerPrefs.GetInt("PlaceFromLastMinigame"));
+    //        print("MY POWERUPS: " + PlayerPrefs.GetInt("MyPowerups"));
+    //    }
 
-        if (pos == 0 && wonPrize == 3)
-            winScreen.transform.GetChild(2).GetChild(pos).GetComponent<Text>().text = pos + 1 + ". " + name + ", " + (PhotonNetwork.PlayerList.Length - pos + 1);
-    }
+    //    if (pos == 0 && wonPrize == 3)
+    //        winScreen.transform.GetChild(2).GetChild(pos).GetComponent<Text>().text = pos + 1 + ". " + name + ", " + (PhotonNetwork.PlayerList.Length - pos + 1);
+    //}
 
-    [PunRPC]
-    void SetPrizeWon(int no)
-    {
-        wonPrize = no;
-        if (no != 3)
-            winScreen.transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().sprite = powerupImgs[wonPrize];
-        else
-            winScreen.transform.GetChild(2).GetChild(0).GetChild(0).gameObject.SetActive(false);
-    }
+    //[PunRPC]
+    //void SetPrizeWon(int no)
+    //{
+    //    wonPrize = no;
+    //    if (no != 3)
+    //        winScreen.transform.GetChild(2).GetChild(0).GetChild(0).GetComponent<Image>().sprite = powerupImgs[wonPrize];
+    //    else
+    //        winScreen.transform.GetChild(2).GetChild(0).GetChild(0).gameObject.SetActive(false);
+    //}
 
     int SetRandomPowerup()
     {

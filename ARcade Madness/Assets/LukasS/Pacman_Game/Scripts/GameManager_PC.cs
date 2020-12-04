@@ -32,7 +32,7 @@ public class GameManager_PC : MonoBehaviour
     private GameObject menu;
 
     private GameObject player;
-    private PhotonView playerPV, PV2;
+    private PhotonView playerPV, PV2, myPV;
 
     [SerializeField]
     private GameObject winScreen;
@@ -60,6 +60,7 @@ public class GameManager_PC : MonoBehaviour
     }
     void Start()
     {
+        myPV = GetComponent<PhotonView>();
         instruction.SetActive(true);
         finalNames = new List<string>();
         finalScores = new List<int>();
@@ -112,7 +113,8 @@ public class GameManager_PC : MonoBehaviour
             if (!winScreen.activeInHierarchy)
             {
                 winScreen.SetActive(true);
-                playerPV.RPC("DisplayScore", RpcTarget.AllBuffered);
+                SortPlayersOrder();
+                //playerPV.RPC("DisplayScore", RpcTarget.AllBuffered);
             }
         }
 
@@ -210,13 +212,6 @@ public class GameManager_PC : MonoBehaviour
 
     public void SortPlayersOrder()
     {
-        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
-        {
-            finalNames.Add(this.gameObject.transform.GetChild(i).GetChild(0).GetChild(0).GetComponent<Text>().text + "  " +
-                this.gameObject.transform.GetChild(i).GetChild(0).GetChild(2).GetComponent<Text>().text);
-            finalScores.Add(int.Parse(this.gameObject.transform.GetChild(i).GetChild(0).GetChild(2).GetComponent<Text>().text));
-        }
-
         finalScores.Sort();
         finalScores.Reverse();
 
@@ -232,7 +227,27 @@ public class GameManager_PC : MonoBehaviour
             }
         }
 
-        //PV.RPC("SetFinalScores", RpcTarget.AllBuffered);
+        myPV.RPC("SetFinalScores", RpcTarget.AllBuffered);
+    }
+
+    [PunRPC]
+    void SetFinalScores()
+    {
+        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+        {
+            if (i < 3)
+            {
+                winScreen.transform.GetChild(2).GetChild(i).gameObject.SetActive(true);
+
+                winScreen.transform.GetChild(2).GetComponent<Text>().text = (i + 1) + ".  " + namesToDisplay[i];
+            }
+        }
+    }
+
+    public void AddMeToLists(string myName, int myScore)
+    {
+        finalNames.Add(myName + myScore);
+        finalScores.Add(myScore);
     }
 
 }
