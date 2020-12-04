@@ -71,29 +71,24 @@ public class PlayerScript_PC : MonoBehaviourPun
     [PunRPC]
     void KillMe()
     {
-        Destroy(this.gameObject);
-        
+        //Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
         SendMyInfo();
     }
 
     private void SendMyInfo()
     {
-        FindObjectOfType<GameManager_PC>().SubstractPlayersLeft();
-
-        if(PV.IsMine)
+        if (PV.IsMine)
+        {
+            FindObjectOfType<GameManager_PC>().GetComponent<PhotonView>().RPC("SubstractPlayersLeft", RpcTarget.AllBuffered);
             FindObjectOfType<GameManager_PC>().GetComponent<PhotonView>().RPC("AddMeToLists", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer.NickName, score);
+        }
     }
 
     [PunRPC]
     void EnableEndScreen()
     {
         FindObjectOfType<BoardMenus>().TurnOnWinScreen();
-    }
-
-    [PunRPC]
-    void SubstructPlayersLeft()
-    {
-        FindObjectOfType<GameManager_PC>().SubstractPlayersLeft();
     }
 
     [PunRPC]

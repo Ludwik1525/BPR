@@ -208,6 +208,7 @@ public class GameManager_PC : MonoBehaviour
         return playersLeft;
     }
 
+    [PunRPC]
     public void SubstractPlayersLeft()
     {
         playersLeft--;
@@ -246,14 +247,18 @@ public class GameManager_PC : MonoBehaviour
             }
         }
 
-        for(int i = 0; i < playersParent.transform.childCount; i++)
+        for(int i = 0; i < namesToDisplay.Length; i++)
         {
-            for(int j = 0; i < playersParent.transform.childCount; i++)
+            for(int j = 0; j < namesToDisplay.Length; j++)
             {
-                if (playersParent.transform.GetChild(j).GetComponent<PhotonView>().Owner.NickName.Contains(namesToDisplay[i]))
+                if (namesToDisplay[i].Contains(playersParent.transform.GetChild(j).GetComponent<PhotonView>().Owner.NickName))
                 {
-                    playersParent.transform.GetChild(j).GetComponent<PlayerScript_PC>().placement = i + 1;
-                    playersParent.transform.GetChild(j).GetComponent<PhotonView>().RPC("DisplayScore", RpcTarget.AllBuffered);
+                    if (myPV.IsMine)
+                    {
+                        playersParent.transform.GetChild(j).GetComponent<PlayerScript_PC>().placement = i + 1;
+                        playersParent.transform.GetChild(j).GetComponent<PhotonView>().RPC("DisplayScore", RpcTarget.AllBuffered);
+                    }
+                       
                 }
             }
         }
