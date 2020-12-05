@@ -8,8 +8,10 @@ public class GhostMovement_PC : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField]
     private GameObject[] points;
+    [SerializeField]
+    private GameObject playersParent;
     bool toMove = true;
-    private int random = 0;
+    private int random;
 
     public float RotationSpeed = 10f;
 
@@ -19,7 +21,8 @@ public class GhostMovement_PC : MonoBehaviour
     Quaternion _lookRotation;
     void Start()
     {
-        
+        playersParent = GameObject.Find("PlayersParent");
+        random = Random.Range(0, playersParent.transform.childCount);
     }
 
     // Update is called once per frame
@@ -36,17 +39,20 @@ public class GhostMovement_PC : MonoBehaviour
         //transform.rotation = Quaternion.RotateTowards(transform.rotation, points[random].transform.rotation , 360 * Time.deltaTime);
 
 
-        transform.position = Vector3.MoveTowards(transform.position, points[random].transform.position, speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, playersParent.transform.GetChild(random).position, speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("PacmanPatrolPoints"))
+        //if(other.gameObject.CompareTag("PacmanPatrolPoints"))
+        if (other.gameObject.CompareTag("PacmanPlayer"))
         {
             points = other.gameObject.GetComponent<PossiblePatrolPoints_PC>().points;
-            random = Random.Range(0, points.Length);
+            //random = Random.Range(0, points.Length);
+            random = Random.Range(0, playersParent.transform.childCount);
 
-            _direction = (points[random].transform.position - transform.position);
+            _direction = (playersParent.transform.GetChild(random).transform.position - transform.position);
+            //_direction = (points[random].transform.position - transform.position);
             _lookRotation = Quaternion.LookRotation(_direction);
         }    
     }

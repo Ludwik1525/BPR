@@ -12,6 +12,7 @@ TagManager:
   - Chest
   - ArenaWall
   - PacmanGhost
+  - PacmanPlayer
   layers:
   - Default
   - TransparentFX
