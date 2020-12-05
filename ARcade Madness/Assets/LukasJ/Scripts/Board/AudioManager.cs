@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
     public AudioSource backgroundTheme, rocket, generalSource;
 
-    public AudioClip diceRoll, coinSteal, trophy, chestSpawn;
+    public AudioClip diceRoll, coinSteal, trophy, chestSpawn, scoreboard;
 
     void Start()
     {
@@ -45,11 +43,16 @@ public class AudioManager : MonoBehaviour
 
     public void PlayTrophySound()
     {
-        generalSource.PlayOneShot(chestSpawn);
+        generalSource.PlayOneShot(trophy);
     }
     
     public void PlayChestSpawnSound()
     {
         generalSource.PlayOneShot(chestSpawn);
+    }
+
+    public void PlayScoreboardSound()
+    {
+        generalSource.PlayOneShot(scoreboard);
     }
 }

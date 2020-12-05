@@ -92,8 +92,6 @@ public class GameManager : MonoBehaviour
         onStopMoving.AddListener(coinMagnet.TurnOffCoinMagnet);
         onStopMoving.AddListener(rocket.TurnOffRocket);
         onStopMoving.AddListener(respawnChest.TurnOffChestRespawn);
-
-
     }
 
     private void Start()
@@ -428,6 +426,7 @@ public class GameManager : MonoBehaviour
         if (callersScore >= 3)
         {
             FindObjectOfType<BoardMenus>().TurnOnWinScreen();
+            PV.RPC("PlayScoreboardSound", RpcTarget.AllBuffered);
             isGameFinished = true;
         }
     }
@@ -535,6 +534,12 @@ public class GameManager : MonoBehaviour
     public void PlayChestSpawnSound()
     {
         audioManager.PlayChestSpawnSound();
+    }
+
+    [PunRPC]
+    public void PlayScoreboardSound()
+    {
+        audioManager.PlayScoreboardSound();
     }
 
     [PunRPC]

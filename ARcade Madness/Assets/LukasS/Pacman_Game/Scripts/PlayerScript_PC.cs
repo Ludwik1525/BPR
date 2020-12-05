@@ -61,11 +61,15 @@ public class PlayerScript_PC : MonoBehaviourPun
         if(other.gameObject.CompareTag("PacmanPoint"))
         {
             score++;
+            FindObjectOfType<GameManager_PC>().GetComponent<PhotonView>().RPC("PlayCoinCollectSound", RpcTarget.AllBuffered);
             Destroy(other.gameObject);
         }
 
         if (other.gameObject.CompareTag("PacmanGhost"))
+        {
+            FindObjectOfType<GameManager_PC>().GetComponent<PhotonView>().RPC("PlayDeathSound", RpcTarget.AllBuffered);
             PV.RPC("KillMe", RpcTarget.AllBuffered);
+        }
     }
 
     [PunRPC]

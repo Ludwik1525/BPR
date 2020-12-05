@@ -59,6 +59,7 @@ public class FireBallAnimator : MonoBehaviour
         animator.SetBool("isThrowingSpell", true);
         myParent.GetComponent<JoystickScript>().isPerformingAnAction = true;
         isCastingSpell = true;
+        FindObjectOfType<FireballSetupManager>().GetComponent<PhotonView>().RPC("PlayFireballThrowSound", RpcTarget.AllBuffered);
     }
 
     // finishing casting the fireball
@@ -73,12 +74,14 @@ public class FireBallAnimator : MonoBehaviour
     private void CastShieldAnimStart()
     {
         animator.SetBool("isBlocking", true);
+        FindObjectOfType<FireballSetupManager>().SwitchShieldSounds(true);
     }
 
     // finishing casting the shield
     private void CastShieldAnimStop()
     {
         animator.SetBool("isBlocking", false);
+        FindObjectOfType<FireballSetupManager>().SwitchShieldSounds(false);
     }
 
     // starting running
@@ -165,7 +168,7 @@ public class FireBallAnimator : MonoBehaviour
         if (PV.IsMine)
         {
             placement = FindObjectOfType<FireballSetupManager>().GetPlayersLeft();
-            PV.RPC("SubstructPlayersLeft", RpcTarget.AllBuffered);
+            PV.RPC("SubstructPlayersLeft", RpcTarget.AllBuffered); FindObjectOfType<FireballSetupManager>().GetComponent<PhotonView>().RPC("PlayDeathSound", RpcTarget.AllBuffered);
         }
     }
 

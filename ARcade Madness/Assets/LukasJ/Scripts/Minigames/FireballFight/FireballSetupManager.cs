@@ -28,10 +28,13 @@ public class FireballSetupManager : MonoBehaviour
     private GameObject winScreen;
     private int playersLeft = PhotonNetwork.PlayerList.Length;
 
+    private AudioManagerFireball audioManager;
+
 
     private void Awake()
     {
         playerLoaders = new List<GameObject>();
+        audioManager = FindObjectOfType<AudioManagerFireball>();
     }
 
     void Start()
@@ -82,6 +85,7 @@ public class FireballSetupManager : MonoBehaviour
             {
                 winScreen.SetActive(true);
                 PV4.RPC("DisplayScore", RpcTarget.AllBuffered);
+                GetComponent<PhotonView>().RPC("PlayScoreboardSound", RpcTarget.AllBuffered);
             }
         }
     }
@@ -146,6 +150,42 @@ public class FireballSetupManager : MonoBehaviour
     public void SubstractPlayersLeft()
     {
         playersLeft--;
+    }
+
+    [PunRPC]
+    public void PlayFireballThrowSound()
+    {
+        audioManager.PlayFireballThrowSound();
+    }
+
+    [PunRPC]
+    private void PlayFireballExplodeSound()
+    {
+        audioManager.PlayFireballExplodeSound();
+    }
+
+    [PunRPC]
+    public void PlayDeathSound()
+    {
+        audioManager.PlayDeathSound();
+    }
+
+    [PunRPC]
+    public void PlayScoreboardSound()
+    {
+        audioManager.PlayScoreboardSound();
+    }
+    
+    public void SwitchShieldSounds(bool condition)
+    {
+        if (condition)
+        {
+            audioManager.TurnOnShieldSounds();
+        }
+        else
+        {
+            audioManager.TurnOffShieldSounds();
+        }
     }
 
 }

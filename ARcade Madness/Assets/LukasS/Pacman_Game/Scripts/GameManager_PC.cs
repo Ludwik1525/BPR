@@ -57,9 +57,13 @@ public class GameManager_PC : MonoBehaviour
 
     private float time = 4f;
 
+    private AudioManagerPacman audioManager;
+
+
     private void Awake()
     {
         playerLoaders = new List<GameObject>();
+        audioManager = FindObjectOfType<AudioManagerPacman>();
     }
     void Start()
     {
@@ -119,6 +123,7 @@ public class GameManager_PC : MonoBehaviour
                 winScreen.SetActive(true);
                 winScreen.transform.GetChild(1).gameObject.SetActive(false);
                 SortPlayersOrder();
+                myPV.RPC("PlayScoreboardSound", RpcTarget.AllBuffered);
             }
         }
     }
@@ -269,7 +274,6 @@ public class GameManager_PC : MonoBehaviour
         }
     }
 
-
     [PunRPC]
     public void AddMeToLists(string myName, int myScore)
     {
@@ -277,4 +281,21 @@ public class GameManager_PC : MonoBehaviour
         finalScores.Add(myScore);
     }
 
+    [PunRPC]
+    private void PlayCoinCollectSound()
+    {
+        audioManager.PlayCoinCollectSound();
+    }
+
+    [PunRPC]
+    public void PlayDeathSound()
+    {
+        audioManager.PlayDeathSound();
+    }
+
+    [PunRPC]
+    public void PlayScoreboardSound()
+    {
+        audioManager.PlayScoreboardSound();
+    }
 }

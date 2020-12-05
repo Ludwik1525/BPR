@@ -36,6 +36,7 @@ public class FireballRoutine : MonoBehaviour
             PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlasmaExplosion"), this.transform.position, Quaternion.identity);
         }
         // destroy the fireball
+        FindObjectOfType<FireballSetupManager>().GetComponent<PhotonView>().RPC("PlayFireballExplodeSound", RpcTarget.AllBuffered);
         PV.RPC("KillMe", RpcTarget.AllBuffered);
 
     }

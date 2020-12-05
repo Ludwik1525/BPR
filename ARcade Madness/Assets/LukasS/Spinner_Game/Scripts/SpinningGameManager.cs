@@ -35,9 +35,13 @@ public class SpinningGameManager : MonoBehaviour
 
     private int playersLeft = PhotonNetwork.PlayerList.Length;
 
+    private AudioManagerSpinner audioManager;
+
+
     private void Awake()
     {
         playerLoaders = new List<GameObject>();
+        audioManager = FindObjectOfType<AudioManagerSpinner>();
     }
 
     // Start is called before the first frame update
@@ -89,6 +93,7 @@ public class SpinningGameManager : MonoBehaviour
             {
                 winScreen.SetActive(true);
                 playerPV.RPC("DisplayScore", RpcTarget.AllBuffered);
+                GetComponent<PhotonView>().RPC("PlayScoreboardSound", RpcTarget.AllBuffered);
                 //DisplayScore();
             }
         }
@@ -146,7 +151,17 @@ public class SpinningGameManager : MonoBehaviour
         playersLeft--;
     }
 
+    [PunRPC]
+    public void PlayDeathSound()
+    {
+        audioManager.PlayDeathSound();
+    }
 
+    [PunRPC]
+    public void PlayScoreboardSound()
+    {
+        audioManager.PlayScoreboardSound();
+    }
 
 
 }

@@ -109,6 +109,7 @@ public class BattleScript : MonoBehaviourPun
             placement = FindObjectOfType<SpinningGameManager>().GetPlayersLeft();
             print(PhotonNetwork.LocalPlayer.NickName + " " + placement);
             pv.RPC("SubstructPlayersLeft", RpcTarget.AllBuffered);
+            FindObjectOfType<SpinningGameManager>().GetComponent<PhotonView>().RPC("PlayScoreboardSound", RpcTarget.AllBuffered);
         }
 
     }

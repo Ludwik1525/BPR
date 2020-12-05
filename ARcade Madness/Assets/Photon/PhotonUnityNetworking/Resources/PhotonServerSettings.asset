@@ -91,6 +91,12 @@ MonoBehaviour:
   - SubstractPlayersLeft
   - DisplayCoins
   - SetCoins
+  - PlayDeathSound
+  - PlayFireballExplodeSound
+  - PlayFireballThrowSound
+  - PlayScoreboardSound
+  - SwitchShieldSounds
+  - PlayCoinCollectSound
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
