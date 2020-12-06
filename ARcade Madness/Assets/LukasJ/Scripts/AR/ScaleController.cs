@@ -12,7 +12,7 @@ public class ScaleController : MonoBehaviour
 
     private void Awake()
     {
-        m_ARSessionOrigin = GetComponent<ARSessionOrigin>();
+        m_ARSessionOrigin = FindObjectOfType<ARSessionOrigin>();
     }
     // Start is called before the first frame update
     void Start()

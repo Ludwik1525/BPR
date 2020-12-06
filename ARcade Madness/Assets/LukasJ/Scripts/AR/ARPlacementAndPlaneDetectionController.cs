@@ -39,7 +39,9 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
                 go.GetComponent<Button>().interactable = false;
                 go.GetComponent<Image>().enabled = false;
             }
-            m_ARPlaneManager = GetComponent<ARPlaneManager>();
+
+
+            m_ARPlaneManager = FindObjectOfType<ARPlaneManager>();
             m_ARPlacementManager = GetComponent<ARPlacementManager>();
             pv = GetComponent<PhotonView>();
 

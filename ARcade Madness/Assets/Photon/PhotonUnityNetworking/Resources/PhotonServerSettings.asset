@@ -25,13 +25,14 @@ MonoBehaviour:
     AuthMode: 0
     EnableLobbyStatistics: 0
     NetworkLogging: 1
-  DevRegion: eu
+  DevRegion: 
   PunLogging: 0
   EnableSupportLogger: 0
   RunInBackground: 1
   StartInOfflineMode: 0
   RpcList:
   - ActivateChildren
+  - AddMeToLists
   - ChooseRandomNumber
   - ClickRpc
   - DestroyChest
@@ -39,6 +40,8 @@ MonoBehaviour:
   - DestroySpaceship
   - DisableMyCollider
   - DisableRocket
+  - DisplayCoins
+  - DisplayScore
   - DoDamage
   - EnableEndScreen
   - EnableRocket
@@ -48,7 +51,12 @@ MonoBehaviour:
   - IncrementTurn
   - KillMe
   - PlayChestSpawnSound
+  - PlayCoinCollectSound
   - PlayCoinStealSound
+  - PlayDeathSound
+  - PlayFireballExplodeSound
+  - PlayFireballThrowSound
+  - PlayScoreboardSound
   - PlayTrophySound
   - Ready
   - ReadyIndication
@@ -70,33 +78,24 @@ MonoBehaviour:
   - SaveMyPos
   - SetChestsParent
   - SetChestVariable
+  - SetCoins
   - SetCurrency
   - SetFinalScores
+  - SetMyParent
   - SetName
+  - SetPrizeWon
   - SetScore
+  - SetScores
   - ShowShield
   - StartTheTimeAccept
   - StartTheTimeDecline
   - StopTheTime
+  - SubstractPlayersLeft
+  - SubstructPlayersLeft
   - SwitchRocketSounds
   - SwitchTheDice
-  - UnifyTheRandomNumber
-  - SubstructPlayersLeft
-  - DisplayScore
-  - SetScores
-  - SetPrizeWon
   - UnifyMinigameIndex
-  - AddMeToLists
-  - SetMyParent
-  - SubstractPlayersLeft
-  - DisplayCoins
-  - SetCoins
-  - PlayDeathSound
-  - PlayFireballExplodeSound
-  - PlayFireballThrowSound
-  - PlayScoreboardSound
-  - SwitchShieldSounds
-  - PlayCoinCollectSound
+  - UnifyTheRandomNumber
   DisableAutoOpenWizard: 1
   ShowSettings: 1
-  DevRegionSetOnce: 1
+  DevRegionSetOnce: 0

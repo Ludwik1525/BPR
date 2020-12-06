@@ -1134,6 +1134,114 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 378197612}
   m_CullTransparentMesh: 0
+--- !u!1 &406219165
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 406219170}
+  - component: {fileID: 406219169}
+  - component: {fileID: 406219168}
+  - component: {fileID: 406219167}
+  - component: {fileID: 406219166}
+  m_Layer: 0
+  m_Name: ARPlacement
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &406219166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406219165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  viewIdField: 15
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &406219167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406219165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c67c51669af0571409677f0a5dc61ccd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleSlider: {fileID: 915340145}
+--- !u!114 &406219168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406219165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf6f270ea56248d46bd856dd8d3b1a0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aRCamera: {fileID: 172767298}
+  battleArenaGameobject: {fileID: 1203952170}
+--- !u!114 &406219169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406219165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 495860057cbb1ee4ca1194d85c296431, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placeButton: {fileID: 915340144}
+  adjustButton: {fileID: 915340143}
+  readyButton: {fileID: 915340142}
+  scaleSlider: {fileID: 915340141}
+  ARCanvas: {fileID: 915340146}
+  mainCanvas: {fileID: 918359958}
+  boardUI:
+  - {fileID: 378197612}
+  - {fileID: 1165654633}
+  - {fileID: 764253966}
+  - {fileID: 4916099}
+  - {fileID: 887040119}
+  informUIPanel_Text: {fileID: 915340150}
+--- !u!4 &406219170
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406219165}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &424959878
 GameObject:
   m_ObjectHideFlags: 0
@@ -1187,6 +1295,7 @@ MonoBehaviour:
   coinSteal: {fileID: 8300000, guid: 8af246470b88cd548b3bc23b25a9cd19, type: 3}
   trophy: {fileID: 8300000, guid: 3a15e04180a38084cb419022082ddbbb, type: 3}
   chestSpawn: {fileID: 8300000, guid: 8bf034b8047e0cb4da295acd2d7b7105, type: 3}
+  scoreboard: {fileID: 0}
 --- !u!1 &460702817
 GameObject:
   m_ObjectHideFlags: 0
@@ -1560,11 +1669,7 @@ GameObject:
   - component: {fileID: 560193088}
   - component: {fileID: 560193093}
   - component: {fileID: 560193092}
-  - component: {fileID: 560193091}
   - component: {fileID: 560193090}
-  - component: {fileID: 560193089}
-  - component: {fileID: 560193094}
-  - component: {fileID: 560193095}
   m_Layer: 0
   m_Name: AR Session Origin
   m_TagString: Untagged
@@ -1587,31 +1692,6 @@ Transform:
   m_Father: {fileID: 1234210336}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &560193089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 560193087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 495860057cbb1ee4ca1194d85c296431, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  placeButton: {fileID: 915340144}
-  adjustButton: {fileID: 915340143}
-  readyButton: {fileID: 915340142}
-  scaleSlider: {fileID: 915340141}
-  ARCanvas: {fileID: 915340146}
-  mainCanvas: {fileID: 918359958}
-  boardUI:
-  - {fileID: 378197612}
-  - {fileID: 1165654633}
-  - {fileID: 764253966}
-  - {fileID: 4916099}
-  - {fileID: 887040119}
-  informUIPanel_Text: {fileID: 915340150}
 --- !u!114 &560193090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1624,20 +1704,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa17d122634046b4a8e23048891fafc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &560193091
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 560193087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf6f270ea56248d46bd856dd8d3b1a0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aRCamera: {fileID: 172767298}
-  battleArenaGameobject: {fileID: 1203952170}
 --- !u!114 &560193092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1665,41 +1731,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Camera: {fileID: 172767298}
---- !u!114 &560193094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 560193087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c67c51669af0571409677f0a5dc61ccd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scaleSlider: {fileID: 915340145}
---- !u!114 &560193095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 560193087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 0
-  OwnershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
-  viewIdField: 15
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1 &560604247
 GameObject:
   m_ObjectHideFlags: 0
@@ -2592,7 +2623,7 @@ PrefabInstance:
     - target: {fileID: 6905972851773758878, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 560193089}
+      objectReference: {fileID: 406219169}
     - target: {fileID: 6905972851773758878, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ReadyButtonPress
@@ -2760,7 +2791,7 @@ PrefabInstance:
     - target: {fileID: 6905972852771941361, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 560193089}
+      objectReference: {fileID: 406219169}
     - target: {fileID: 6905972852771941361, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: DisableARPlacementAndPlaneDetection
@@ -2824,7 +2855,7 @@ PrefabInstance:
     - target: {fileID: 6905972852859733412, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 560193089}
+      objectReference: {fileID: 406219169}
     - target: {fileID: 6905972852859733412, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: EnableARPlacementAndPlaneDetection
