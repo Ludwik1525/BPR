@@ -15,6 +15,7 @@ public class ARPlacementManager : MonoBehaviour
 
     private ARAnchorManager anchorManager;
 
+
     private void Awake()
     {
         m_ARRaycastManager = FindObjectOfType<ARRaycastManager>();
@@ -40,7 +41,9 @@ public class ARPlacementManager : MonoBehaviour
 
             battleArenaGameobject.transform.position = positionToBePlaced;
 
-            anchorManager.AddAnchor(hitPose);
+            ARAnchor anchor = anchorManager.AddAnchor(hitPose);
+
+            ArPersistence.anchor = anchor;
         }
 
     }

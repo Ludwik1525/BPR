@@ -60,6 +60,10 @@ public class FireballSetupManager : MonoBehaviour
         spawnPositions = GameObject.Find("SpawnPositions");
 
         anchorManager.anchorPrefab = boardPrefab;
+        anchorManager.anchorPrefab.transform.position = ArPersistence.anchor.transform.position;
+
+
+
     }
 
     void Update()
