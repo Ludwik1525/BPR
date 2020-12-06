@@ -55,8 +55,10 @@ public class GameManager : MonoBehaviour
     {
         minigames = new string[3];
         minigames[0] = "FireBallFightMiniGame";
-        minigames[1] = "Spinner_Gameplay";
-        minigames[2] = "Pacman_Gameplay";
+        minigames[1] = "FireBallFightMiniGame";
+        minigames[2] = "FireBallFightMiniGame";
+        //minigames[1] = "Spinner_Gameplay";
+        //minigames[2] = "Pacman_Gameplay";
         currentRoute = FindObjectOfType<Route>();
         audioManager = FindObjectOfType<AudioManager>();
         if (PlayerPrefs.HasKey("totalPos"))

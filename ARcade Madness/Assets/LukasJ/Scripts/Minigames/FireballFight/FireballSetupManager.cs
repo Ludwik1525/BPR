@@ -5,6 +5,7 @@ using Photon.Pun;
 using System.IO;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.XR.ARFoundation;
 
 public class FireballSetupManager : MonoBehaviour
 {
@@ -30,11 +31,16 @@ public class FireballSetupManager : MonoBehaviour
 
     private AudioManagerFireball audioManager;
 
+    [SerializeField]
+    private GameObject boardPrefab;
+    private ARAnchorManager anchorManager;
 
     private void Awake()
     {
         playerLoaders = new List<GameObject>();
         audioManager = FindObjectOfType<AudioManagerFireball>();
+
+        anchorManager = FindObjectOfType<ARAnchorManager>();
     }
 
     void Start()
@@ -52,6 +58,8 @@ public class FireballSetupManager : MonoBehaviour
         }
 
         spawnPositions = GameObject.Find("SpawnPositions");
+
+        anchorManager.anchorPrefab = boardPrefab;
     }
 
     void Update()

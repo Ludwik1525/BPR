@@ -13,9 +13,12 @@ public class ARPlacementManager : MonoBehaviour
 
     public GameObject battleArenaGameobject;
 
+    private ARAnchorManager anchorManager;
+
     private void Awake()
     {
-        m_ARRaycastManager = GetComponent<ARRaycastManager>();
+        m_ARRaycastManager = FindObjectOfType<ARRaycastManager>();
+        anchorManager = FindObjectOfType<ARAnchorManager>();
     }
     // Start is called before the first frame update
     void Start()
@@ -36,6 +39,8 @@ public class ARPlacementManager : MonoBehaviour
             Vector3 positionToBePlaced = hitPose.position;
 
             battleArenaGameobject.transform.position = positionToBePlaced;
+
+            anchorManager.AddAnchor(hitPose);
         }
 
     }

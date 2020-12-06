@@ -1442,6 +1442,7 @@ MonoBehaviour:
   - {fileID: 4871430645177309572}
   ready_btn: {fileID: 7885688499185099005}
   winScreen: {fileID: 1799067372}
+  boardPrefab: {fileID: 661623546}
 --- !u!4 &516920695
 Transform:
   m_ObjectHideFlags: 0
