@@ -61,7 +61,7 @@ public class SpinningGameManager : MonoBehaviour
             pv.RPC("RPC_SetName", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer.NickName);
         }
 
-        anchorManager.anchorPrefab = boardPrefab;
+        anchorManager.anchorPrefab = battleArenaGameobject;
         anchorManager.anchorPrefab.transform.position = ArPersistence.anchor.transform.position;
     }
 
