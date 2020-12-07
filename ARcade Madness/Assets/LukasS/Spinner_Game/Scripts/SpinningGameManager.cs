@@ -37,17 +37,20 @@ public class SpinningGameManager : MonoBehaviour
     private int playersLeft = PhotonNetwork.PlayerList.Length;
 
     private AudioManagerSpinner audioManager;
-    private ARAnchorManager anchorManager;
 
     private void Awake()
     {
         playerLoaders = new List<GameObject>();
         audioManager = FindObjectOfType<AudioManagerSpinner>();
-        anchorManager = FindObjectOfType<ARAnchorManager>();
     }
 
     // Start is called before the first frame update
     void Start()
+    {
+       
+    }
+
+    public void LoadingPanel()
     {
         instruction.SetActive(true);
 
@@ -56,13 +59,10 @@ public class SpinningGameManager : MonoBehaviour
         pv = playerLoader.GetComponent<PhotonView>();
         pv.RPC("RPC_SetPlayerLoaderForSpinner", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]);
 
-        if(pv.IsMine)
+        if (pv.IsMine)
         {
             pv.RPC("RPC_SetName", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer.NickName);
         }
-
-        anchorManager.anchorPrefab = battleArenaGameobject;
-        anchorManager.anchorPrefab.transform.position = ArPersistence.anchor.transform.position;
     }
 
     void Update()
