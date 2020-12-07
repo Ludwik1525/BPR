@@ -21,12 +21,12 @@ public class ARPlacementManager : MonoBehaviour
     private void Awake()
     {
         m_ARRaycastManager = FindObjectOfType<ARRaycastManager>();
-        anchorManager = FindObjectOfType<ARAnchorManager>();
     }
     // Start is called before the first frame update
     void Start()
     {
-        if(ArPersistence.anchor != null)
+        anchorManager = FindObjectOfType<ARAnchorManager>();
+        if (ArPersistence.anchor != null)
         {
             anchorManager.anchorPrefab = battleArenaGameobject;
             anchorManager.anchorPrefab.transform.position = ArPersistence.anchor.transform.position;
