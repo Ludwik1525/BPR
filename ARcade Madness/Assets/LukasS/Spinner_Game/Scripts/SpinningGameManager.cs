@@ -6,6 +6,7 @@ using Photon.Pun;
 using UnityEngine.UI;
 using System.IO;
 using UnityEngine.SceneManagement;
+using UnityEngine.XR.ARFoundation;
 
 public class SpinningGameManager : MonoBehaviour
 {
@@ -36,12 +37,13 @@ public class SpinningGameManager : MonoBehaviour
     private int playersLeft = PhotonNetwork.PlayerList.Length;
 
     private AudioManagerSpinner audioManager;
-
+    private ARAnchorManager anchorManager;
 
     private void Awake()
     {
         playerLoaders = new List<GameObject>();
         audioManager = FindObjectOfType<AudioManagerSpinner>();
+        anchorManager = FindObjectOfType<ARAnchorManager>();
     }
 
     // Start is called before the first frame update
@@ -58,6 +60,9 @@ public class SpinningGameManager : MonoBehaviour
         {
             pv.RPC("RPC_SetName", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer.NickName);
         }
+
+        anchorManager.anchorPrefab = boardPrefab;
+        anchorManager.anchorPrefab.transform.position = ArPersistence.anchor.transform.position;
     }
 
     void Update()
