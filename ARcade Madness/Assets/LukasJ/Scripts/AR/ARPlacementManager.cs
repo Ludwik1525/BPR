@@ -25,6 +25,7 @@ public class ARPlacementManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        aRCamera = GameObject.Find("AR Camera").GetComponent<Camera>();
         anchorManager = FindObjectOfType<ARAnchorManager>();
         if (ArPersistence.anchor != null)
         {

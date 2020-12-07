@@ -8,10 +8,25 @@ public class ARInstantiation : MonoBehaviour
 
     private void Awake()
     {
-        GameObject go = FindObjectOfType<ArPersistence>().gameObject;
-        if(go == null)
+        print("awake");
+
+        GameObject go = GameObject.Find("ARFaundation(Clone)");
+        print("go " + go);
+        
+        if (go == null)
         {
+
+            print("helo");
             Instantiate(ARPrefab);
+            print("helo there");
+
         }
+
+        print("end");
+    }
+
+    private void Start()
+    {
+        print("start");
     }
 }
