@@ -33,36 +33,6 @@ public class ARPlacementController : MonoBehaviour
     void Start()
     {
         ARCanvas.SetActive(true);
-
-        if (!GameController.gc.doesHavePosition)
-        {
-            foreach (GameObject go in boardUI)
-            {
-                go.GetComponent<Button>().interactable = false;
-                go.GetComponent<Image>().enabled = false;
-            }
-
-
-            m_ARPlaneManager = FindObjectOfType<ARPlaneManager>();
-            m_ARPlacementManager = GetComponent<ARPlacementManager>();
-            spinningGameManager = FindObjectOfType<SpinningGameManager>();
-
-            pv = GetComponent<PhotonView>();
-
-            placeButton.SetActive(true);
-            scaleSlider.SetActive(true);
-
-
-            adjustButton.SetActive(false);
-            readyButton.SetActive(false);
-
-            informUIPanel_Text.text = "Move phone to detect planes and place the Board!";
-        }
-        else
-        {
-            placeButton.transform.parent.gameObject.SetActive(false);
-        }
-
     }
 
 
@@ -103,12 +73,6 @@ public class ARPlacementController : MonoBehaviour
         {
             plane.gameObject.SetActive(value);
         }
-    }
-
-    [PunRPC]
-    private void Ready()
-    {
-        readyPlayersCount++;
     }
 
     public void ReadyButtonPress()
