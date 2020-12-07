@@ -16,7 +16,7 @@ public class BoardMenus : MonoBehaviour
         optWindow.SetActive(false);
         escWindow.SetActive(false);
         winScreen.SetActive(false);
-        arScreen.SetActive(true);
+ 
 
         optButton.onClick.AddListener(OpenPauseScreen);
         escButton.onClick.AddListener(OpenEscWindow);

@@ -33,6 +33,12 @@ public class ARPlacementController : MonoBehaviour
     void Start()
     {
         ARCanvas.SetActive(true);
+
+        m_ARPlaneManager = FindObjectOfType<ARPlaneManager>();
+        m_ARPlacementManager = GetComponent<ARPlacementManager>();
+
+        adjustButton.SetActive(false);
+        readyButton.SetActive(false);
     }
 
 
