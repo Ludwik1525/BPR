@@ -10,7 +10,7 @@ public class ARInstantiation : MonoBehaviour
     {
         print("awake");
 
-        GameObject go = GameObject.Find("ARFaundation(Clone)");
+        GameObject go = GameObject.Find("ARFoundation(Clone)");
         print("go " + go);
         
         if (go == null)

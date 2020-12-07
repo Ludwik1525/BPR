@@ -20,13 +20,14 @@ public class ARPlacementManager : MonoBehaviour
 
     private void Awake()
     {
-        m_ARRaycastManager = FindObjectOfType<ARRaycastManager>();
+        
     }
     // Start is called before the first frame update
     void Start()
     {
         aRCamera = GameObject.Find("AR Camera").GetComponent<Camera>();
         anchorManager = FindObjectOfType<ARAnchorManager>();
+        m_ARRaycastManager = FindObjectOfType<ARRaycastManager>();
         if (ArPersistence.anchor != null)
         {
             anchorManager.anchorPrefab = battleArenaGameobject;
