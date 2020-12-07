@@ -24,26 +24,34 @@ public class ARPlacementManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        if(ArPersistence.anchor != null)
+        {
+            anchorManager.anchorPrefab = battleArenaGameobject;
+            anchorManager.anchorPrefab.transform.position = ArPersistence.anchor.transform.position;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 centerOfScreen = new Vector3(Screen.width / 2, Screen.height / 2);
-        Ray ray = aRCamera.ScreenPointToRay(centerOfScreen);
-
-        if (m_ARRaycastManager.Raycast(ray, raycast_Hits, TrackableType.PlaneWithinPolygon))
+        if(ArPersistence.anchor == null)
         {
-            Pose hitPose = raycast_Hits[0].pose;
+            Vector3 centerOfScreen = new Vector3(Screen.width / 2, Screen.height / 2);
+            Ray ray = aRCamera.ScreenPointToRay(centerOfScreen);
 
-            Vector3 positionToBePlaced = hitPose.position;
+            if (m_ARRaycastManager.Raycast(ray, raycast_Hits, TrackableType.PlaneWithinPolygon))
+            {
+                Pose hitPose = raycast_Hits[0].pose;
 
-            battleArenaGameobject.transform.position = positionToBePlaced;
+                Vector3 positionToBePlaced = hitPose.position;
 
-            ARAnchor anchor = anchorManager.AddAnchor(hitPose);
+                battleArenaGameobject.transform.position = positionToBePlaced;
 
-            ArPersistence.anchor = anchor;
+                ARAnchor anchor = anchorManager.AddAnchor(hitPose);
+
+                ArPersistence.anchor = anchor;
+            }
+       
         }
 
     }
