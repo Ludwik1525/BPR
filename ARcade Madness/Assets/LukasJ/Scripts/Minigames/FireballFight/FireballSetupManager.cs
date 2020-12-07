@@ -118,6 +118,7 @@ public class FireballSetupManager : MonoBehaviour
         }
         if(PV.IsMine)
         {
+            PV.RPC("SetParent", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]);
             PV.RPC("SetName", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer.NickName);
         }
     }

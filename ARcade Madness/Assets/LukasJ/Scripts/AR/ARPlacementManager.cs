@@ -15,8 +15,6 @@ public class ARPlacementManager : MonoBehaviour
 
     private ARAnchorManager anchorManager;
 
-    private bool isPlaced = false;
-
 
     private void Awake()
     {
@@ -35,7 +33,7 @@ public class ARPlacementManager : MonoBehaviour
         Vector3 centerOfScreen = new Vector3(Screen.width / 2, Screen.height / 2);
         Ray ray = aRCamera.ScreenPointToRay(centerOfScreen);
 
-        if (m_ARRaycastManager.Raycast(ray, raycast_Hits, TrackableType.PlaneWithinPolygon) && !isPlaced)
+        if (m_ARRaycastManager.Raycast(ray, raycast_Hits, TrackableType.PlaneWithinPolygon))
         {
             Pose hitPose = raycast_Hits[0].pose;
 
@@ -46,8 +44,6 @@ public class ARPlacementManager : MonoBehaviour
             ARAnchor anchor = anchorManager.AddAnchor(hitPose);
 
             ArPersistence.anchor = anchor;
-
-            isPlaced = true;
         }
 
     }

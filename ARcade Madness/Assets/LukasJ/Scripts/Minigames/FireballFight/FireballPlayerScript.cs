@@ -21,4 +21,11 @@ public class FireballPlayerScript : MonoBehaviour
         FindObjectOfType<BoardMenus>().TurnOnWinScreen();
     }
 
+    [PunRPC]
+    void SetParent(int index)
+    {
+        GameObject go = GameObject.Find("SpawnPositions").transform.GetChild(index).gameObject;
+        gameObject.transform.SetParent(go.transform);
+    }
+
 }
