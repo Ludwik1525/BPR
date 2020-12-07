@@ -15,6 +15,8 @@ public class ARPlacementManager : MonoBehaviour
 
     private ARAnchorManager anchorManager;
 
+    Pose hitPose;
+
 
     private void Awake()
     {
@@ -41,18 +43,21 @@ public class ARPlacementManager : MonoBehaviour
 
             if (m_ARRaycastManager.Raycast(ray, raycast_Hits, TrackableType.PlaneWithinPolygon))
             {
-                Pose hitPose = raycast_Hits[0].pose;
+                hitPose = raycast_Hits[0].pose;
 
                 Vector3 positionToBePlaced = hitPose.position;
 
                 battleArenaGameobject.transform.position = positionToBePlaced;
 
-                ARAnchor anchor = anchorManager.AddAnchor(hitPose);
-
-                ArPersistence.anchor = anchor;
+             
             }
-       
         }
 
+    }
+
+    private void OnDisable()
+    {
+        ARAnchor anchor = anchorManager.AddAnchor(hitPose);
+        ArPersistence.anchor = anchor;
     }
 }
