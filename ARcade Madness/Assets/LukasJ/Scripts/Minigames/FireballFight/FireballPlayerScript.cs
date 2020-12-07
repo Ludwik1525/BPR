@@ -26,6 +26,7 @@ public class FireballPlayerScript : MonoBehaviour
     {
         GameObject go = GameObject.Find("SpawnPositions").transform.GetChild(index).gameObject;
         gameObject.transform.SetParent(go.transform);
+        gameObject.transform.position = new Vector3(0, 0, 0);
     }
 
 }
