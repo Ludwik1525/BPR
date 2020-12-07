@@ -967,8 +967,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: ARFoundation
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 406219169, guid: d5ec90be378312f4c8c61125b6978a2e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d5ec90be378312f4c8c61125b6978a2e, type: 3}
+--- !u!1 &549736361 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 406219165, guid: d5ec90be378312f4c8c61125b6978a2e, type: 3}
+  m_PrefabInstance: {fileID: 549736360}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &549736362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 549736361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72634834fdea7ef498e3b9de9df0e9b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placeButton: {fileID: 879231728}
+  adjustButton: {fileID: 879231727}
+  readyButton: {fileID: 879231726}
+  scaleSlider: {fileID: 879231730}
+  ARCanvas: {fileID: 879231729}
+  mainCanvas: {fileID: 623884009}
+  boardUI: []
+  informUIPanel_Text: {fileID: 879231725}
 --- !u!4 &549985162 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2607134649954343952, guid: 98e3e617848dbf540a3f9ddabdd48141, type: 3}
@@ -1699,11 +1725,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6905972851276485313, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -14.771
       objectReference: {fileID: 0}
     - target: {fileID: 6905972851276485313, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 27.551
       objectReference: {fileID: 0}
     - target: {fileID: 6905972851276485313, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1737,9 +1763,33 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6905972851276485313, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.524544
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905972851276485313, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.524544
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905972851276485313, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.524544
+      objectReference: {fileID: 0}
     - target: {fileID: 6905972851276485314, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
       propertyPath: m_Name
       value: ARUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905972851773758878, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 549736362}
+    - target: {fileID: 6905972851773758878, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReadyButtonPress
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905972851773758878, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ARPlacementController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6905972851933458823, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
       propertyPath: m_AnchorMin.x
@@ -1760,6 +1810,30 @@ PrefabInstance:
     - target: {fileID: 6905972852110984882, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905972852771941361, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 549736362}
+    - target: {fileID: 6905972852771941361, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DisableARPlacementAndPlaneDetection
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905972852771941361, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ARPlacementController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905972852859733412, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 549736362}
+    - target: {fileID: 6905972852859733412, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: EnableARPlacementAndPlaneDetection
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905972852859733412, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ARPlacementController, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
