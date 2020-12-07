@@ -65,15 +65,6 @@ public class ARPlacementController : MonoBehaviour
 
     }
 
-    private void Update()
-    {
-        if (readyPlayersCount == GameSetupController.players.Count && !started)
-        {
-            started = true;
-            ARCanvas.SetActive(false);
-            spinningGameManager.LoadingPanel();
-        }
-    }
 
     public void DisableARPlacementAndPlaneDetection()
     {
@@ -122,10 +113,13 @@ public class ARPlacementController : MonoBehaviour
 
     public void ReadyButtonPress()
     {
-        pv.RPC("Ready", RpcTarget.AllBuffered);
+        //pv.RPC("Ready", RpcTarget.AllBuffered);
         placeButton.SetActive(false);
         scaleSlider.SetActive(false);
         adjustButton.SetActive(false);
         readyButton.SetActive(false);
+
+        ARCanvas.SetActive(false);
+        spinningGameManager.LoadingPanel();
     }
 }
