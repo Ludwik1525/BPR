@@ -5748,6 +5748,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 406219166, guid: d5ec90be378312f4c8c61125b6978a2e, type: 3}
+      propertyPath: viewIdField
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 406219167, guid: d5ec90be378312f4c8c61125b6978a2e, type: 3}
       propertyPath: scaleSlider
       value: 
