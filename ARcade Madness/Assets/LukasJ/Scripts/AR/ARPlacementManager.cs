@@ -13,7 +13,7 @@ public class ARPlacementManager : MonoBehaviour
 
     public GameObject battleArenaGameobject;
 
-    private ARAnchorManager anchorManager;
+
 
     Pose hitPose;
 
@@ -27,13 +27,7 @@ public class ARPlacementManager : MonoBehaviour
     void Start()
     {
         aRCamera = GameObject.Find("AR Camera").GetComponent<Camera>();
-        anchorManager = FindObjectOfType<ARAnchorManager>();
         m_ARRaycastManager = FindObjectOfType<ARRaycastManager>();
-        if (ArPersistence.anchor != null)
-        {
-            anchorManager.anchorPrefab = battleArenaGameobject;
-            anchorManager.anchorPrefab.transform.position = ArPersistence.anchor.transform.position;
-        }
     }
 
     // Update is called once per frame
@@ -56,11 +50,5 @@ public class ARPlacementManager : MonoBehaviour
             }
         }
 
-    }
-
-    private void OnDisable()
-    {
-        ARAnchor anchor = anchorManager.AddAnchor(hitPose);
-        ArPersistence.anchor = anchor;
     }
 }

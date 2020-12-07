@@ -32,6 +32,8 @@ public class ARPlacementController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ARCanvas.SetActive(true);
+
         if (!GameController.gc.doesHavePosition)
         {
             foreach (GameObject go in boardUI)
