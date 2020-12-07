@@ -607,6 +607,7 @@ MonoBehaviour:
   battleArenaGameobject: {fileID: 1413374867}
   instruction: {fileID: 2057312354}
   winScreen: {fileID: 1534033085}
+  arUi: {fileID: 879231729}
   loadersSpawns:
   - {fileID: 3463900519768043832}
   - {fileID: 3463900519768043831}
@@ -3865,6 +3866,7 @@ GameObject:
   - component: {fileID: 6951387553580483648}
   - component: {fileID: 6951387553580483649}
   - component: {fileID: 6951387553580483646}
+  - component: {fileID: 6951387553580483645}
   m_Layer: 0
   m_Name: AR Camera
   m_TagString: Untagged
@@ -3872,6 +3874,14 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!81 &6951387553580483645
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6951387553580483644}
+  m_Enabled: 1
 --- !u!114 &6951387553580483646
 MonoBehaviour:
   m_ObjectHideFlags: 0

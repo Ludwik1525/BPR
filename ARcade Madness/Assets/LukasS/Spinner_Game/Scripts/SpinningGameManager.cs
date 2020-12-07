@@ -22,6 +22,8 @@ public class SpinningGameManager : MonoBehaviour
     [SerializeField]
     private GameObject winScreen;
 
+    public GameObject arUi;
+
 
     private GameObject player;
     private PhotonView playerPV;
@@ -47,7 +49,7 @@ public class SpinningGameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+        arUi.SetActive(true);
     }
 
     public void LoadingPanel()
