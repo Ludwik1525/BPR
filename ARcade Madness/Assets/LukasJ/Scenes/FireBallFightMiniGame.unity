@@ -5413,7 +5413,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2320014297975095192}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -5474,7 +5474,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 2320014297975095197}
   m_OnClick:
     m_PersistentCalls:
@@ -5536,7 +5536,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 2320014298676209287}
   m_OnClick:
     m_PersistentCalls:
@@ -5594,7 +5594,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2320014298676209282}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -6024,6 +6024,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 141310474}
     m_Modifications:
+    - target: {fileID: 2929252283123773937, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -6112,11 +6116,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: FixedJoystick
       objectReference: {fileID: 0}
+    - target: {fileID: 2929252283123773951, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929252285020698103, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
 --- !u!224 &3664732898719928493 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
+  m_PrefabInstance: {fileID: 3664732898719928492}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3664732898719928494 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2929252285020697097, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
+  m_PrefabInstance: {fileID: 3664732898719928492}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3664732898719928495 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2929252283123773939, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
   m_PrefabInstance: {fileID: 3664732898719928492}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &4030499137157198264
@@ -6257,7 +6279,11 @@ MonoBehaviour:
   scaleSlider: {fileID: 1648919382704997454}
   ARCanvas: {fileID: 1648919383050127128}
   mainCanvas: {fileID: 141310473}
-  boardUI: []
+  boardUI:
+  - {fileID: 3664732898719928495}
+  - {fileID: 3664732898719928494}
+  - {fileID: 2320014298676209282}
+  - {fileID: 2320014297975095192}
   informUIPanel_Text: {fileID: 5275072826362621612}
 --- !u!114 &4919261931812401798
 MonoBehaviour:

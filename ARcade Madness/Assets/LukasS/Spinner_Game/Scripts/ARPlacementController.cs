@@ -60,7 +60,7 @@ public class ARPlacementController : MonoBehaviour
             ARCanvas.SetActive(false);
             switch (SceneManager.GetActiveScene().name)
             {
-                case "Spinner_Gameplay": 
+                case "Spinner_Gameplay":
                     spinningGameManager.LoadingPanel();
                     break;
 
@@ -72,11 +72,25 @@ public class ARPlacementController : MonoBehaviour
                     fireballSetupManager.LoadingPanel();
                     break;
             }
-            
+
+            foreach (GameObject go in boardUI)
+            {
+                foreach (GameObject p in GameSetupController.newPlayers)
+                {
+                    if (p.GetComponent<PhotonView>().IsMine)
+                    {
+                        go.GetComponent<Image>().enabled = true;
+                        go.GetComponent<Button>().interactable = true;
+                    }
+                }
+            }
+            FindObjectOfType<FixedJoystick>().enabled = true;
+
         }
+
+        
+
     }
-
-
     public void DisableARPlacementAndPlaneDetection()
     {
         m_ARPlaneManager.enabled = false;
