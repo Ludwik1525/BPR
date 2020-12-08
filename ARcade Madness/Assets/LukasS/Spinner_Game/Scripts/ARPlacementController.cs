@@ -75,7 +75,7 @@ public class ARPlacementController : MonoBehaviour
 
             foreach (GameObject go in boardUI)
             {
-                foreach (GameObject p in GameSetupController.newPlayers)
+                foreach (GameObject p in GameSetupController.players)
                 {
                     if (p.GetComponent<PhotonView>().IsMine)
                     {
