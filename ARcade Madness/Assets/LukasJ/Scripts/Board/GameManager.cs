@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     public int turn;
     private Route currentRoute;
     public int steps;
-    public float speed = 1f;
+    public float speed = 0.25f;
     public GameObject dice;
     private GameObject diceRollInfo;
     public int roll;

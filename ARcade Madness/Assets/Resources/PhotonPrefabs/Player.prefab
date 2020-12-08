@@ -374,7 +374,7 @@ MonoBehaviour:
   routePosition: 0
   turn: 0
   steps: 0
-  speed: 1
+  speed: 0.1
   dice: {fileID: 1896413874}
   roll: 0
   onStartMoving:
