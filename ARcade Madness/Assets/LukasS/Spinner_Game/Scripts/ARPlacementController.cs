@@ -36,6 +36,7 @@ public class ARPlacementController : MonoBehaviour
 
         m_ARPlaneManager = FindObjectOfType<ARPlaneManager>();
         m_ARPlacementManager = GetComponent<ARPlacementManager>();
+        spinningGameManager = FindObjectOfType<SpinningGameManager>();
 
         adjustButton.SetActive(false);
         readyButton.SetActive(false);
