@@ -98,7 +98,6 @@ public class GameManager_PC : MonoBehaviour
             pv.RPC("RPC_SetName", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer.NickName);
         }
 
-        SpawnGhosts();
     }
 
     // Update is called once per frame
@@ -124,6 +123,8 @@ public class GameManager_PC : MonoBehaviour
                 instruction.SetActive(false);
                 SpawnPlayer();
                 start = true;
+
+                SpawnGhosts();
             }
         }
 
