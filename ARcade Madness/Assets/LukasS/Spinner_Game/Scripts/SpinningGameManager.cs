@@ -61,7 +61,7 @@ public class SpinningGameManager : MonoBehaviour
 
     IEnumerator LoadingCorutine()
     {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.3f);
             GameObject playerLoader = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerLoadingImg"), loadersSpawns[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]].transform.localPosition, Quaternion.identity);
 
             pv = playerLoader.GetComponent<PhotonView>();
@@ -75,7 +75,7 @@ public class SpinningGameManager : MonoBehaviour
 
     void Update()
     {
-        while (count < PhotonNetwork.PlayerList.Length && playerLoaders.Count < 0)
+        while (count < PhotonNetwork.PlayerList.Length && playerLoaders.Count > 0)
         {
             foreach (var a in playerLoaders)
             {

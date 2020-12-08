@@ -32,38 +32,33 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (!GameController.gc.doesHavePosition)
+        readyPlayersCount = 0;
+        started = false;
+        foreach (GameObject go in boardUI)
         {
-            foreach (GameObject go in boardUI)
-            {
-                go.GetComponent<Button>().interactable = false;
-                go.GetComponent<Image>().enabled = false;
-            }
-
-
-            m_ARPlaneManager = FindObjectOfType<ARPlaneManager>();
-            m_ARPlacementManager = GetComponent<ARPlacementManager>();
-            pv = GetComponent<PhotonView>();
-
-            placeButton.SetActive(true);
-            scaleSlider.SetActive(true);
-
-
-            adjustButton.SetActive(false);
-            readyButton.SetActive(false);
-
-            informUIPanel_Text.text = "Move phone to detect planes and place the Board!";
+            go.GetComponent<Button>().interactable = false;
+            go.GetComponent<Image>().enabled = false;
         }
-        else
-        {
-            placeButton.transform.parent.gameObject.SetActive(false);
-        }
+
+
+        m_ARPlaneManager = FindObjectOfType<ARPlaneManager>();
+        m_ARPlacementManager = GetComponent<ARPlacementManager>();
+        pv = GetComponent<PhotonView>();
+
+        placeButton.SetActive(true);
+        scaleSlider.SetActive(true);
+
+
+        adjustButton.SetActive(false);
+        readyButton.SetActive(false);
+
+        informUIPanel_Text.text = "Move phone to detect planes and place the Board!";
 
     }
 
     private void Update()
     {
-        if(readyPlayersCount == GameSetupController.players.Count && !started)
+        if(readyPlayersCount == PhotonNetwork.PlayerList.Length && !started)
         {
             started = true;
             ARCanvas.SetActive(false);
@@ -71,7 +66,7 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
 
             foreach (GameObject go in boardUI)
             {
-                foreach(GameObject p in GameSetupController.players)
+                foreach(GameObject p in GameSetupController.newPlayers)
                 {
                     if (p.GetComponent<PhotonView>().IsMine)
                     {
