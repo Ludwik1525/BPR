@@ -73,16 +73,13 @@ public class ARPlacementController : MonoBehaviour
                     break;
             }
 
+            print("PLAYERS :" + GameSetupController.newPlayers.Count);
             foreach (GameObject go in boardUI)
             {
-                foreach (GameObject p in GameSetupController.players)
-                {
-                    if (p.GetComponent<PhotonView>().IsMine)
-                    {
+                if (go.GetComponent<Image>() != null)
                         go.GetComponent<Image>().enabled = true;
-                        go.GetComponent<Button>().interactable = true;
-                    }
-                }
+                if (go.GetComponent<Button>() != null)
+                    go.GetComponent<Button>().interactable = true;
             }
             FindObjectOfType<FixedJoystick>().enabled = true;
 
