@@ -69,7 +69,7 @@ public class SpinningGameManager : MonoBehaviour
 
     void Update()
     {
-        while(count < playerLoaders.Count)
+        while(count < PhotonNetwork.PlayerList.Length)
         {
             foreach (var a in playerLoaders)
             {
