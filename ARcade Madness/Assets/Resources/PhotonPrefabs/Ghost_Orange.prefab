@@ -42,9 +42,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points: []
-  playersParent: {fileID: 0}
   RotationSpeed: 20
-  speed: 0.4
+  speed: 0.13
 --- !u!114 &6687511618717260877
 MonoBehaviour:
   m_ObjectHideFlags: 0

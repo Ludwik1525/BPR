@@ -2525,7 +2525,7 @@ MonoBehaviour:
   ready_btn: {fileID: 5294107464167084876}
   instruction: {fileID: 5294107462800981731}
   menu: {fileID: 5294107463725633707}
-  playersParent: {fileID: 0}
+  playersParent: {fileID: 404443148}
   winScreen: {fileID: 1335420652}
   loadersSpawns:
   - {fileID: 7461665256897723368}
