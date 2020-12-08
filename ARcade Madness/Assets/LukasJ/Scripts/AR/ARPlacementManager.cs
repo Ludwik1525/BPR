@@ -33,8 +33,6 @@ public class ARPlacementManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(ArPersistence.anchor == null)
-        {
             Vector3 centerOfScreen = new Vector3(Screen.width / 2, Screen.height / 2);
             Ray ray = aRCamera.ScreenPointToRay(centerOfScreen);
 
@@ -45,10 +43,8 @@ public class ARPlacementManager : MonoBehaviour
                 Vector3 positionToBePlaced = hitPose.position;
 
                 battleArenaGameobject.transform.position = positionToBePlaced;
-
-             
             }
-        }
+        
 
     }
 }
