@@ -37,9 +37,22 @@ public class ARPlacementController : MonoBehaviour
         m_ARPlaneManager = FindObjectOfType<ARPlaneManager>();
         m_ARPlacementManager = GetComponent<ARPlacementManager>();
         spinningGameManager = FindObjectOfType<SpinningGameManager>();
+        pv.GetComponent<PhotonView>();
 
         adjustButton.SetActive(false);
         readyButton.SetActive(false);
+    }
+
+
+    private void Update()
+    {
+        if (readyPlayersCount == PhotonNetwork.PlayerList.Length && !started)
+        {
+            started = true;
+            ARCanvas.SetActive(false);
+            spinningGameManager.LoadingPanel();
+
+        }
     }
 
 
@@ -84,13 +97,10 @@ public class ARPlacementController : MonoBehaviour
 
     public void ReadyButtonPress()
     {
-        //pv.RPC("Ready", RpcTarget.AllBuffered);
+        pv.RPC("Ready", RpcTarget.AllBuffered);
         placeButton.SetActive(false);
         scaleSlider.SetActive(false);
         adjustButton.SetActive(false);
         readyButton.SetActive(false);
-
-        ARCanvas.SetActive(false);
-        spinningGameManager.LoadingPanel();
     }
 }

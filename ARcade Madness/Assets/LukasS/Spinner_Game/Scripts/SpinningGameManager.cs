@@ -69,7 +69,7 @@ public class SpinningGameManager : MonoBehaviour
 
     void Update()
     {
-        while(count < PhotonNetwork.PlayerList.Length)
+        while (count < PhotonNetwork.PlayerList.Length && playerLoaders.Count < 0)
         {
             foreach (var a in playerLoaders)
             {
@@ -84,8 +84,9 @@ public class SpinningGameManager : MonoBehaviour
                 }
             }
 
-            if (count == playerLoaders.Count)
+            if (count == PhotonNetwork.PlayerList.Length)
             {
+                print("spawn");
                 instruction.SetActive(false);
                 SpawnPlayer();
             }
