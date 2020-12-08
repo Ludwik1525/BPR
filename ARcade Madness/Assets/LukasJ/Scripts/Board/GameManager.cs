@@ -54,9 +54,9 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         minigames = new string[3];
-        minigames[0] = "Spinner_Gameplay";
-        minigames[1] = "Spinner_Gameplay";
-        minigames[2] = "Spinner_Gameplay";
+        minigames[0] = "Pacman_Gameplay";
+        minigames[1] = "Pacman_Gameplay";
+        minigames[2] = "Pacman_Gameplay";
         //minigames[1] = "Spinner_Gameplay";
         //minigames[2] = "Pacman_Gameplay";
         currentRoute = FindObjectOfType<Route>();

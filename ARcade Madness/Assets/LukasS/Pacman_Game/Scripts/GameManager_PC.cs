@@ -67,12 +67,28 @@ public class GameManager_PC : MonoBehaviour
     }
     void Start()
     {
+        
+    }
+
+    public void LoadingPanel()
+    {
+        instruction.SetActive(true);
+        StartCoroutine(LoadingCorutine());
+
+    }
+
+    IEnumerator LoadingCorutine()
+    {
+        yield return new WaitForSeconds(0.3f);
+
+
         playersLeft = PhotonNetwork.PlayerList.Length;
         myPV = GetComponent<PhotonView>();
         instruction.SetActive(true);
         finalNames = new List<string>();
         finalScores = new List<int>();
         namesToDisplay = new string[PhotonNetwork.PlayerList.Length];
+
         GameObject playerLoader = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerLoadingImg"), loadersSpawns[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]].transform.localPosition, Quaternion.identity);
         pv = playerLoader.GetComponent<PhotonView>();
         pv.RPC("RPC_SetPlayerLoaderForPacman", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]);
@@ -88,7 +104,7 @@ public class GameManager_PC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        while (count < playerLoaders.Count)
+        while (count < PhotonNetwork.PlayerList.Length && playerLoaders.Count > 0)
         {
             foreach (var a in playerLoaders)
             {
@@ -103,7 +119,7 @@ public class GameManager_PC : MonoBehaviour
                 }
             }
 
-            if (count == playerLoaders.Count)
+            if (count == PhotonNetwork.PlayerList.Length)
             {
                 instruction.SetActive(false);
                 SpawnPlayer();

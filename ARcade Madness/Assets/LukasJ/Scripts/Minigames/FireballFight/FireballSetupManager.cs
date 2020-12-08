@@ -45,7 +45,19 @@ public class FireballSetupManager : MonoBehaviour
 
     void Start()
     {
+
+    }
+
+    public void LoadingPanel()
+    {
         instruction.SetActive(true);
+        StartCoroutine(LoadingCorutine());
+
+    }
+
+    IEnumerator LoadingCorutine()
+    {
+        yield return new WaitForSeconds(0.3f);
 
         // instantiating the player's displayer on the instructions page
         GameObject playerLoader = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerLoadingImg"), loadersSpawns[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]].transform.localPosition, Quaternion.identity);
@@ -62,13 +74,11 @@ public class FireballSetupManager : MonoBehaviour
         anchorManager.anchorPrefab = boardPrefab;
         anchorManager.anchorPrefab.transform.position = ArPersistence.anchor.transform.position;
 
-
-
     }
 
     void Update()
     {
-        while (count < playerLoaders.Count)
+        while (count < PhotonNetwork.PlayerList.Length && playerLoaders.Count > 0)
         {
             foreach (var a in playerLoaders)
             {
@@ -84,7 +94,7 @@ public class FireballSetupManager : MonoBehaviour
                 print(count);
             }
 
-            if (count == playerLoaders.Count)
+            if (count == PhotonNetwork.PlayerList.Length)
             {
                 instruction.SetActive(false);
                 SpawnPlayer();

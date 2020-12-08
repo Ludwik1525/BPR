@@ -2549,7 +2549,7 @@ MonoBehaviour:
   escWindow: {fileID: 142625366}
   mainScreen: {fileID: 2026058878}
   winScreen: {fileID: 1335420652}
-  arScreen: {fileID: 0}
+  arScreen: {fileID: 714864989243157581}
   optButton: {fileID: 503377905}
   escButton: {fileID: 356002161}
   escCancelButton: {fileID: 1022957400}
@@ -13713,7 +13713,7 @@ RectTransform:
   m_GameObject: {fileID: 714864989243157581}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.83, y: 0.83, z: 0.83}
+  m_LocalScale: {x: 1.6826589, y: 1.6826589, z: 1.6826589}
   m_Children:
   - {fileID: 714864990197536125}
   - {fileID: 714864990914493226}
@@ -13725,7 +13725,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -24.178, y: 45.097}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &714864989482072124

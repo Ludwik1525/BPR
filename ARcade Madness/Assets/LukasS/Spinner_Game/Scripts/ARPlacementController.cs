@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 
@@ -10,6 +11,8 @@ public class ARPlacementController : MonoBehaviour
     ARPlaneManager m_ARPlaneManager;
     ARPlacementManager m_ARPlacementManager;
     SpinningGameManager spinningGameManager;
+    GameManager_PC gameManager_PC;
+    FireballSetupManager fireballSetupManager;
 
     public GameObject placeButton;
     public GameObject adjustButton;
@@ -32,6 +35,9 @@ public class ARPlacementController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        readyPlayersCount = 0;
+        started = false;
+
         ARCanvas.SetActive(true);
         adjustButton.SetActive(false);
         readyButton.SetActive(false);
@@ -39,10 +45,10 @@ public class ARPlacementController : MonoBehaviour
         pv= GetComponent<PhotonView>();
         m_ARPlaneManager = FindObjectOfType<ARPlaneManager>();
         m_ARPlacementManager = GetComponent<ARPlacementManager>();
+
         spinningGameManager = FindObjectOfType<SpinningGameManager>();
-        
-
-
+        fireballSetupManager = FindObjectOfType <FireballSetupManager> ();
+        gameManager_PC = FindObjectOfType<GameManager_PC>();
     }
 
 
@@ -52,7 +58,21 @@ public class ARPlacementController : MonoBehaviour
         {
             started = true;
             ARCanvas.SetActive(false);
-            spinningGameManager.LoadingPanel();
+            switch (SceneManager.GetActiveScene().name)
+            {
+                case "Spinner_Gameplay": 
+                    spinningGameManager.LoadingPanel();
+                    break;
+
+                case "Pacman_Gameplay":
+                    gameManager_PC.LoadingPanel();
+                    break;
+
+                case "FireBallFightMiniGame":
+                    fireballSetupManager.LoadingPanel();
+                    break;
+            }
+            
         }
     }
 

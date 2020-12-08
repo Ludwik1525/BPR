@@ -49,7 +49,6 @@ public class SpinningGameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        arUi.SetActive(true);
     }
 
     public void LoadingPanel()
@@ -92,7 +91,6 @@ public class SpinningGameManager : MonoBehaviour
 
             if (count == PhotonNetwork.PlayerList.Length)
             {
-                print("spawn");
                 instruction.SetActive(false);
                 SpawnPlayer();
             }
