@@ -1826,8 +1826,8 @@ GameObject:
   - component: {fileID: 955393546}
   - component: {fileID: 955393544}
   - component: {fileID: 955393591}
-  - component: {fileID: 955393590}
   - component: {fileID: 549736362}
+  - component: {fileID: 955393590}
   m_Layer: 0
   m_Name: ARPlacement
   m_TagString: Untagged

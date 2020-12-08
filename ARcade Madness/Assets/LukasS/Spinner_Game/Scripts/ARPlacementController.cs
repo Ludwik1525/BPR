@@ -33,14 +33,16 @@ public class ARPlacementController : MonoBehaviour
     void Start()
     {
         ARCanvas.SetActive(true);
+        adjustButton.SetActive(false);
+        readyButton.SetActive(false);
 
+        pv= GetComponent<PhotonView>();
         m_ARPlaneManager = FindObjectOfType<ARPlaneManager>();
         m_ARPlacementManager = GetComponent<ARPlacementManager>();
         spinningGameManager = FindObjectOfType<SpinningGameManager>();
-        pv.GetComponent<PhotonView>();
+        
 
-        adjustButton.SetActive(false);
-        readyButton.SetActive(false);
+
     }
 
 
@@ -51,7 +53,6 @@ public class ARPlacementController : MonoBehaviour
             started = true;
             ARCanvas.SetActive(false);
             spinningGameManager.LoadingPanel();
-
         }
     }
 
@@ -94,6 +95,13 @@ public class ARPlacementController : MonoBehaviour
             plane.gameObject.SetActive(value);
         }
     }
+
+    [PunRPC]
+    private void Ready()
+    {
+        readyPlayersCount++;
+    }
+
 
     public void ReadyButtonPress()
     {

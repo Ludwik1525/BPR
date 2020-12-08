@@ -134,7 +134,7 @@ public class ARPlacementAndPlaneDetectionController : MonoBehaviour
     [PunRPC]
     private void Ready()
     {
-        readyPlayersCount++;
+        readyPlayersCount++;    
     }
 
     public void ReadyButtonPress()

@@ -55,16 +55,22 @@ public class SpinningGameManager : MonoBehaviour
     public void LoadingPanel()
     {
         instruction.SetActive(true);
+        StartCoroutine(LoadingCorutine());
 
-        GameObject playerLoader = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerLoadingImg"), loadersSpawns[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]].transform.localPosition, Quaternion.identity);
+    }
 
-        pv = playerLoader.GetComponent<PhotonView>();
-        pv.RPC("RPC_SetPlayerLoaderForSpinner", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]);
+    IEnumerator LoadingCorutine()
+    {
+            yield return new WaitForSeconds(1f);
+            GameObject playerLoader = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerLoadingImg"), loadersSpawns[(int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]].transform.localPosition, Quaternion.identity);
 
-        if (pv.IsMine)
-        {
-            pv.RPC("RPC_SetName", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer.NickName);
-        }
+            pv = playerLoader.GetComponent<PhotonView>();
+            pv.RPC("RPC_SetPlayerLoaderForSpinner", RpcTarget.AllBuffered, (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]);
+
+            if (pv.IsMine)
+            {
+                pv.RPC("RPC_SetName", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer.NickName);
+            }
     }
 
     void Update()
