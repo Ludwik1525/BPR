@@ -42,7 +42,8 @@ public class FireballSetupManager : MonoBehaviour
 
     void Start()
     {
-
+        spawnPositions = GameObject.Find("SpawnPositions");
+        SpawnPlayer();
     }
 
     public void LoadingPanel()
@@ -66,7 +67,7 @@ public class FireballSetupManager : MonoBehaviour
             imagePV.RPC("RPC_SetName", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer.NickName);
         }
 
-        spawnPositions = GameObject.Find("SpawnPositions");
+        
     }
 
     void Update()
@@ -90,7 +91,7 @@ public class FireballSetupManager : MonoBehaviour
             if (count == PhotonNetwork.PlayerList.Length)
             {
                 instruction.SetActive(false);
-                SpawnPlayer();
+                
             }
         }
 
