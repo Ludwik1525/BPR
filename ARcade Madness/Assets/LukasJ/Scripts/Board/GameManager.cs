@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     public int turn;
     private Route currentRoute;
     public int steps;
-    public float speed = 2f;
+    public float speed = 1f;
     public GameObject dice;
     private GameObject diceRollInfo;
     public int roll;
@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
     {
         minigames = new string[3];
         minigames[0] = "FireBallFightMiniGame";
-        minigames[1] = "FireBallFightMiniGame";
+        minigames[1] = "Spinner_Gameplay";
         minigames[2] = "FireBallFightMiniGame";
         //minigames[1] = "Spinner_Gameplay";
         //minigames[2] = "Pacman_Gameplay";
