@@ -33,14 +33,11 @@ public class FireballSetupManager : MonoBehaviour
 
     [SerializeField]
     private GameObject boardPrefab;
-    private ARAnchorManager anchorManager;
 
     private void Awake()
     {
         playerLoaders = new List<GameObject>();
         audioManager = FindObjectOfType<AudioManagerFireball>();
-
-        anchorManager = FindObjectOfType<ARAnchorManager>();
     }
 
     void Start()
@@ -70,10 +67,6 @@ public class FireballSetupManager : MonoBehaviour
         }
 
         spawnPositions = GameObject.Find("SpawnPositions");
-
-        anchorManager.anchorPrefab = boardPrefab;
-        anchorManager.anchorPrefab.transform.position = ArPersistence.anchor.transform.position;
-
     }
 
     void Update()
