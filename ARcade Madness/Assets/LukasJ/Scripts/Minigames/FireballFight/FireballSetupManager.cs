@@ -85,7 +85,6 @@ public class FireballSetupManager : MonoBehaviour
                     count = 0;
                     return;
                 }
-                print(count);
             }
 
             if (count == PhotonNetwork.PlayerList.Length)
