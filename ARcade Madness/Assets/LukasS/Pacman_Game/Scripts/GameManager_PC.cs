@@ -169,8 +169,8 @@ public class GameManager_PC : MonoBehaviour
 
     private void SpawnGhosts()
     {
-        //if (PhotonNetwork.IsMasterClient)
-        //{
+        if (PhotonNetwork.IsMasterClient)
+        {
             var g1 = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Ghost_LitBlue"), patrolPoints[0].transform.position, Quaternion.identity);
             g1.GetComponent<PhotonView>().RPC("SetParent", RpcTarget.AllBuffered);
             var g2 = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Ghost_Orange"), patrolPoints[1].transform.position, Quaternion.identity);
@@ -179,7 +179,7 @@ public class GameManager_PC : MonoBehaviour
             g3.GetComponent<PhotonView>().RPC("SetParent", RpcTarget.AllBuffered);
             var g4 = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Ghost_Red"), patrolPoints[3].transform.position, Quaternion.identity);
             g4.GetComponent<PhotonView>().RPC("SetParent", RpcTarget.AllBuffered);
-       // }
+        }
     }
 
     public void SpawnPlayer()

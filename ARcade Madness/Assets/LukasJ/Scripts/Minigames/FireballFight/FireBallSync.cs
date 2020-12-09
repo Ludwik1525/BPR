@@ -46,6 +46,7 @@ public class FireBallSync : MonoBehaviour, IPunObservable
         {
             //Then, photonView is mine and I am the one who controls the player
             //should send postion, velocity etc. data to the other players 
+            print(boardGameObject.name);
             stream.SendNext(rb.position - boardGameObject.transform.position);
             //stream.SendNext(rb.rotation * Quaternion.Inverse(boardGameObject.transform.rotation));
             stream.SendNext(rb.rotation);
