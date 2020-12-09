@@ -6295,7 +6295,7 @@ Transform:
   m_Children:
   - {fileID: 812820832}
   m_Father: {fileID: 1537234816}
-  m_RootOrder: 34
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1005648743 stripped
 GameObject:
@@ -9324,6 +9324,7 @@ Transform:
   - {fileID: 7070516641293248419}
   - {fileID: 7070516642010275179}
   - {fileID: 7070516642819172004}
+  - {fileID: 1000846558}
   - {fileID: 7070516641623572441}
   - {fileID: 7070516642481148091}
   - {fileID: 7070516643143250157}
@@ -9334,7 +9335,6 @@ Transform:
   - {fileID: 1393566370}
   - {fileID: 1697431554}
   - {fileID: 1743866878}
-  - {fileID: 1000846558}
   - {fileID: 6301664193014532906}
   - {fileID: 1828194608}
   - {fileID: 1322029340095673167}
@@ -28845,6 +28845,7 @@ GameObject:
   - component: {fileID: 7210282572412040382}
   - component: {fileID: 7210282572412040383}
   - component: {fileID: 7210282572412040384}
+  - component: {fileID: 7210282572412040387}
   m_Layer: 0
   m_Name: AR Camera
   m_TagString: Untagged
@@ -28852,6 +28853,14 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!81 &7210282572412040387
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7210282572412040386}
+  m_Enabled: 1
 --- !u!114 &7210282573067506362
 MonoBehaviour:
   m_ObjectHideFlags: 0
