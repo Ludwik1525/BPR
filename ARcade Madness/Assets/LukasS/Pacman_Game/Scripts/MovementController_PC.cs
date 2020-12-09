@@ -87,4 +87,10 @@ public class MovementController_PC : MonoBehaviour
             rb.AddForce(velocityChange, ForceMode.VelocityChange);
         }
     }
+
+    public void StopMe()
+    {
+        velocityVector = Vector3.zero;
+        rb.velocity = Vector3.zero;
+    }
 }

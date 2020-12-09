@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Animator_PC : MonoBehaviour
 {
-    [SerializeField]
+    public Transform myParent;
+
     private GameObject joystick;
     private Animator animator;
 
@@ -13,14 +14,17 @@ public class Animator_PC : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        joystick = FindObjectOfType<FixedJoystick>().transform.GetChild(0).gameObject;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (joystick.transform.GetChild(0).localPosition == Vector3.zero)
+        if (joystick.transform.localPosition == Vector3.zero)
         {
             RunAnimStop();
+            myParent.GetComponent<MovementController_PC>().StopMe();
         }
         else
         {

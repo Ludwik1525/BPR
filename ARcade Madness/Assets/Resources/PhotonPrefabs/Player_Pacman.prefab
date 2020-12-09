@@ -178,8 +178,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   joystick: {fileID: 0}
-  speed: 6.82
-  maxVelocityChange: 4
+  speed: 0.5
+  maxVelocityChange: 2
   tiltAmount: 10
 --- !u!136 &153087381834066935
 CapsuleCollider:
@@ -506,7 +506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d4757a3ada18e543b005b28eadef312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joystick: {fileID: 3118993218671276098}
+  myParent: {fileID: 208559803351174309}
 --- !u!114 &8024204424545757230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -934,11 +934,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
---- !u!1 &3118993218671276098 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2929252283123773939, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
-  m_PrefabInstance: {fileID: 283208494882537905}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &3118993218671276099 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
