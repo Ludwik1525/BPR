@@ -8,9 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/LukasJ/Scenes/MainMenu.unity
     guid: 03fb2553cb5bf5840aa1bb0aadcfc9dd
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/LukasJ/Scenes/BoardSceneARFoundation.unity
+    guid: 0a21b129cbcd31b42a46f8f992f53a70
   - enabled: 1
     path: Assets/LukasJ/Scenes/FireBallFightMiniGame.unity
     guid: a4cd0588fbc1d654080b9c760fb240e3
@@ -18,27 +18,6 @@ EditorBuildSettings:
     path: Assets/LukasS/Pacman_Game/Scenes/Pacman_Gameplay.unity
     guid: a20c681e0678633449006f169a3a8f14
   - enabled: 1
-    path: Assets/LukasJ/Scenes/BoardSceneARFoundation.unity
-    guid: 0a21b129cbcd31b42a46f8f992f53a70
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 1
     path: Assets/LukasS/Spinner_Game/Scenes/Spinner_Gameplay.unity
     guid: 552cc7c900d03524092d44a54632b555
-  - enabled: 1
-    path: Assets/LukasJ/Scenes/AssetScene.unity
-    guid: ccfbf8f03be0d524b8321881eefa6d59
-  - enabled: 1
-    path: Assets/LukasJ/Scenes/BoardScene.unity
-    guid: ee83d437d80995e4c8b51fa818a40bdd
   m_configObjects: {}
