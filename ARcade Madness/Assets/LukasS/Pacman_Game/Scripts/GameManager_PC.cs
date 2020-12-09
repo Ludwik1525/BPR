@@ -171,13 +171,13 @@ public class GameManager_PC : MonoBehaviour
         if (PhotonNetwork.IsMasterClient)
         {
             var g1 = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Ghost_LitBlue"), patrolPoints[0].transform.position, Quaternion.identity);
-            g1.transform.SetParent(GameObject.Find("GhostsParent").transform);
+            g1.GetComponent<PhotonView>().RPC("SetParent", RpcTarget.AllBuffered);
             var g2 = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Ghost_Orange"), patrolPoints[1].transform.position, Quaternion.identity);
-            g2.transform.SetParent(GameObject.Find("GhostsParent").transform);
+            g2.GetComponent<PhotonView>().RPC("SetParent", RpcTarget.AllBuffered);
             var g3 = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Ghost_Pink"), patrolPoints[2].transform.position, Quaternion.identity);
-            g3.transform.SetParent(GameObject.Find("GhostsParent").transform);
+            g3.GetComponent<PhotonView>().RPC("SetParent", RpcTarget.AllBuffered);
             var g4 = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Ghost_Red"), patrolPoints[3].transform.position, Quaternion.identity);
-            g4.transform.SetParent(GameObject.Find("GhostsParent").transform);
+            g4.GetComponent<PhotonView>().RPC("SetParent", RpcTarget.AllBuffered);
         }
     }
 

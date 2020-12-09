@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -54,5 +55,11 @@ public class GhostMovement_PC : MonoBehaviour
             _direction = (points[random].transform.position - transform.position);
             _lookRotation = Quaternion.LookRotation(_direction);
         }
+    }
+
+    [PunRPC]
+    public void SetParent()
+    {
+        transform.SetParent(GameObject.Find("GhostsParent").transform);
     }
 }
