@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 208559802487891693}
   - component: {fileID: 3179867784315106699}
-  - component: {fileID: 6348474674472111426}
+  - component: {fileID: 1498650767853616312}
   m_Layer: 0
   m_Name: PlayerGraphics
   m_TagString: Untagged
@@ -51,11 +51,11 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 6348474674472111426}
+  - {fileID: 1498650767853616312}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &6348474674472111426
+--- !u!114 &1498650767853616312
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
+  m_SynchronizePosition: 0
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
 --- !u!1 &208559803351174310
