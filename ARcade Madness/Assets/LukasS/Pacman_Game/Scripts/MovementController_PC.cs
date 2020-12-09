@@ -66,9 +66,7 @@ public class MovementController_PC : MonoBehaviour
             Move(_movementVelocityVector);
 
 
-            //transform.GetChild(0).LookAt(-newPosition + transform.position); // rotate just the model itself which is a child
-        
-            transform.LookAt(-newPosition + transform.position); // rotate just the model itself which is a child
+            transform.GetChild(0).LookAt(-newPosition + transform.position); // rotate just the model itself which is a child
         }
 
     }
