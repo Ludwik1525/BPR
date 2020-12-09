@@ -55,8 +55,8 @@ public class GameManager : MonoBehaviour
     {
         minigames = new string[3];
         minigames[0] = "Pacman_Gameplay";
-        minigames[1] = "Pacman_Gameplay";
-        minigames[2] = "Pacman_Gameplay";
+        minigames[1] = "FireBallFightMiniGame";
+        minigames[2] = "Spinner_Gameplay";
         //minigames[1] = "FireBallFightMiniGame";
         //minigames[2] = "Spinner_Gameplay";
         currentRoute = FindObjectOfType<Route>();
