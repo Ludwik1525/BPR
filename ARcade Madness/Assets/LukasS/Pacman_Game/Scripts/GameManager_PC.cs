@@ -67,7 +67,9 @@ public class GameManager_PC : MonoBehaviour
     }
     void Start()
     {
-        
+        SpawnGhosts();
+        SpawnPlayer();
+
     }
 
     public void LoadingPanel()
@@ -121,10 +123,9 @@ public class GameManager_PC : MonoBehaviour
             if (count == PhotonNetwork.PlayerList.Length)
             {
                 instruction.SetActive(false);
-                SpawnPlayer();
                 start = true;
 
-                SpawnGhosts();
+                
             }
         }
 
