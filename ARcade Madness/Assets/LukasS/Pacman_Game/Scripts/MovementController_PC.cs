@@ -12,6 +12,7 @@ public class MovementController_PC : MonoBehaviour
     private PhotonView PV;
     private Vector3 velocityVector = Vector3.zero;
     public float speed = 2f, maxVelocityChange = 4f, tiltAmount = 10f;
+    private Rigidbody rb;
 
 
     float dr = 0f;
@@ -42,8 +43,48 @@ public class MovementController_PC : MonoBehaviour
         PV = GetComponent<PhotonView>();
         joystick = FindObjectOfType<FixedJoystick>();
         rb = GetComponent<Rigidbody>();
-        playerScript = transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<FireBallAnimator>();
+        
+    }
 
-        isPerformingAnAction = false;
+    void Update()
+    {
+        if (PV.IsMine)
+        {
+            //Joystick inputs
+            float _xMovementInput = joystick.Horizontal;
+            float _zMovementInput = joystick.Vertical;
+
+            //Velocity vectores
+            Vector3 _movementHorizontal = transform.right * _xMovementInput;
+            Vector3 _movementVertical = transform.forward * _zMovementInput;
+
+            //Final movement velocity vector
+            Vector3 _movementVelocityVector = (_movementHorizontal + _movementVertical).normalized * speed;
+            Vector3 newPosition = new Vector3(_xMovementInput, 0.0f, _zMovementInput);
+
+
+            Move(_movementVelocityVector);
+
+
+            transform.GetChild(0).LookAt(-newPosition + transform.position); // rotate just the model itself which is a child
+        }
+    }
+
+    void Move(Vector3 movementVelocityVector)
+    {
+        velocityVector = movementVelocityVector;
+    }
+
+    private void FixedUpdate()
+    {
+        if (velocityVector != Vector3.zero)
+        {
+            Vector3 velocity = rb.velocity;
+            Vector3 velocityChange = (velocityVector - velocity);
+
+            velocityChange.y = 0f;
+
+            rb.AddForce(velocityChange, ForceMode.VelocityChange);
+        }
     }
 }
