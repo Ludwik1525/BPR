@@ -66,10 +66,12 @@ public class ARPlacementController : MonoBehaviour
 
                 case "Pacman_Gameplay":
                     gameManager_PC.LoadingPanel();
+                    FindObjectOfType<FixedJoystick>().enabled = true;
                     break;
 
                 case "FireBallFightMiniGame":
                     fireballSetupManager.LoadingPanel();
+                    FindObjectOfType<FixedJoystick>().enabled = true;
                     break;
             }
 
@@ -81,7 +83,6 @@ public class ARPlacementController : MonoBehaviour
                 if (go.GetComponent<Button>() != null)
                     go.GetComponent<Button>().interactable = true;
             }
-            FindObjectOfType<FixedJoystick>().enabled = true;
 
         }
 

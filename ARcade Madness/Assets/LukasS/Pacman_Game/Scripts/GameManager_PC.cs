@@ -170,10 +170,14 @@ public class GameManager_PC : MonoBehaviour
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Ghost_LitBlue"), patrolPoints[0].transform.position, Quaternion.identity);
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Ghost_Orange"), patrolPoints[1].transform.position, Quaternion.identity);
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Ghost_Pink"), patrolPoints[2].transform.position, Quaternion.identity);
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Ghost_Red"), patrolPoints[3].transform.position, Quaternion.identity);
+            var g1 = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Ghost_LitBlue"), patrolPoints[0].transform.position, Quaternion.identity);
+            g1.transform.SetParent(GameObject.Find("GhostsParent").transform);
+            var g2 = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Ghost_Orange"), patrolPoints[1].transform.position, Quaternion.identity);
+            g2.transform.SetParent(GameObject.Find("GhostsParent").transform);
+            var g3 = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Ghost_Pink"), patrolPoints[2].transform.position, Quaternion.identity);
+            g3.transform.SetParent(GameObject.Find("GhostsParent").transform);
+            var g4 = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Ghost_Red"), patrolPoints[3].transform.position, Quaternion.identity);
+            g4.transform.SetParent(GameObject.Find("GhostsParent").transform);
         }
     }
 
