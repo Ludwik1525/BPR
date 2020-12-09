@@ -85,7 +85,6 @@ GameObject:
   - component: {fileID: 7407221023496799247}
   - component: {fileID: 153087381834066935}
   - component: {fileID: 2919717922018314506}
-  - component: {fileID: 993121267168568879}
   m_Layer: 0
   m_Name: Player_Pacman
   m_TagString: PacmanPlayer
@@ -173,13 +172,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 208559803351174310}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d6f7f560f8e7aa49968e8609938dabf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joystick: {fileID: 3118993218671276110}
-  speed: 0.27
+  joystick: {fileID: 0}
+  speed: 6.82
   maxVelocityChange: 4
   tiltAmount: 10
 --- !u!136 &153087381834066935
@@ -212,22 +211,6 @@ MonoBehaviour:
   synchronizeAngularVelocity: 1
   isTeleportEnabled: 1
   teleportIfDistanceGreaterThan: 1
---- !u!114 &993121267168568879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 208559803351174310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4458181ce324fa649b5907f80656498c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isPerformingAnAction: 0
-  speed: 2
-  maxVelocityChange: 4
-  tiltAmount: 10
 --- !u!1 &208559803788533406
 GameObject:
   m_ObjectHideFlags: 0
@@ -945,6 +928,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fixed Joystick
       objectReference: {fileID: 0}
+    - target: {fileID: 2929252283123773939, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
 --- !u!1 &3118993218671276098 stripped
@@ -957,17 +944,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
   m_PrefabInstance: {fileID: 283208494882537905}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3118993218671276110 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2929252283123773951, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
-  m_PrefabInstance: {fileID: 283208494882537905}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3118993218671276098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45977bbae16431c46a013576a1aea384, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1497196311219009510
 PrefabInstance:
   m_ObjectHideFlags: 0
