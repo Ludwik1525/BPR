@@ -36,8 +36,8 @@ public class GhostMovement_PC : MonoBehaviour
 
         //transform.rotation = Quaternion.RotateTowards(transform.rotation, points[random].transform.rotation , 360 * Time.deltaTime);
 
-        print("ranodm " + random);
-        transform.position = Vector3.MoveTowards(transform.position, points[random].transform.position, speed * Time.deltaTime);
+        if(points[random] != null)
+            transform.position = Vector3.MoveTowards(transform.position, points[random].transform.position, speed * Time.deltaTime);
         //transform.position = Vector3.MoveTowards(transform.position, playersParent.transform.GetChild(random).position, speed * Time.deltaTime);
     }
 
