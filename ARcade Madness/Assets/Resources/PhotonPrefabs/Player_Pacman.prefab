@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   joystick: {fileID: 0}
-  speed: 0.5
+  speed: 0.7
   maxVelocityChange: 2
   tiltAmount: 10
 --- !u!136 &153087381834066935
@@ -191,10 +191,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.20907108
-  m_Height: 1.1076941
+  m_Radius: 0.10412943
+  m_Height: 1.1076943
   m_Direction: 1
-  m_Center: {x: 0, y: 0.58480996, z: -0.01698451}
+  m_Center: {x: -0.023107193, y: 0.58480996, z: -0.04056724}
 --- !u!114 &2919717922018314506
 MonoBehaviour:
   m_ObjectHideFlags: 0
