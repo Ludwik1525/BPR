@@ -6295,7 +6295,7 @@ Transform:
   m_Children:
   - {fileID: 812820832}
   m_Father: {fileID: 1537234816}
-  m_RootOrder: 24
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1005648743 stripped
 GameObject:
@@ -9282,6 +9282,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1537234816}
+  - component: {fileID: 1537234817}
   m_Layer: 0
   m_Name: Arena
   m_TagString: Untagged
@@ -9313,6 +9314,7 @@ Transform:
   - {fileID: 7070516642630880360}
   - {fileID: 7070516641340700335}
   - {fileID: 7070516642481436134}
+  - {fileID: 1000846558}
   - {fileID: 7070516641109017913}
   - {fileID: 7070516642168335308}
   - {fileID: 7070516642238674534}
@@ -9324,7 +9326,6 @@ Transform:
   - {fileID: 7070516641293248419}
   - {fileID: 7070516642010275179}
   - {fileID: 7070516642819172004}
-  - {fileID: 1000846558}
   - {fileID: 7070516641623572441}
   - {fileID: 7070516642481148091}
   - {fileID: 7070516643143250157}
@@ -9341,6 +9342,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1537234817
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537234815}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.2808046, y: 0.028617024, z: 2.2765813}
+  m_Center: {x: -0.021807194, y: -0.028890789, z: -0.06593257}
 --- !u!1001 &1540907663
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10359,7 +10373,7 @@ MeshCollider:
   m_GameObject: {fileID: 4408232897188156891}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
