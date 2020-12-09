@@ -26,15 +26,15 @@ public class PlayerScript_PC : MonoBehaviourPun
         if (PV.IsMine)
         {
             //The player is local player
-            transform.GetComponent<MovementController_PC>().enabled = true;
-            transform.GetComponent<MovementController_PC>().joystick.gameObject.SetActive(true);
+            //transform.GetComponent<MovementController_PC>().enabled = true;
+            //transform.GetComponent<MovementController_PC>().joystick.gameObject.SetActive(true);
             transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().color = Color.red;
         }
         else
         {
             //The player is remote player
-            transform.GetComponent<MovementController_PC>().enabled = false;
-            transform.GetComponent<MovementController_PC>().joystick.gameObject.SetActive(false);
+            //transform.GetComponent<MovementController_PC>().enabled = false;
+            //transform.GetComponent<MovementController_PC>().joystick.gameObject.SetActive(false);
         }
     }
 
