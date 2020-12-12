@@ -2372,6 +2372,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ARUI
       objectReference: {fileID: 0}
+    - target: {fileID: 6905972851619889162, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -19.885
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905972851619889162, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 173.86545
+      objectReference: {fileID: 0}
     - target: {fileID: 6905972851773758878, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2395,6 +2403,14 @@ PrefabInstance:
     - target: {fileID: 6905972852110984882, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905972852419756465, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 3.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905972852419756465, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 248.42503
       objectReference: {fileID: 0}
     - target: {fileID: 6905972852771941361, guid: 7cb2ea6d705acdc49822b16bd3f5d493, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
