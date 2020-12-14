@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     private GameObject decisionBox;
     private Button yesB, noB, rollB;
     private string[] minigames;
+    private int coinsRequiredToOpenTheChest = 7;
 
     public int routePosition;
     public int turn;
@@ -57,8 +58,8 @@ public class GameManager : MonoBehaviour
         minigames[0] = "Pacman_Gameplay";
         minigames[1] = "FireBallFightMiniGame";
         minigames[2] = "Spinner_Gameplay";
-        //minigames[1] = "FireBallFightMiniGame";
-        //minigames[2] = "Spinner_Gameplay";
+
+
         currentRoute = FindObjectOfType<Route>();
         audioManager = FindObjectOfType<AudioManager>();
         if (PlayerPrefs.HasKey("totalPos"))
@@ -109,9 +110,12 @@ public class GameManager : MonoBehaviour
             {
                 if (!wasKeyPressed && !isMoving)
                 {
+                    //Makes sure player can roll only once per turn
                     wasKeyPressed = true;
                     steps = Random.Range(1, 7);
+                    //Displays UI text of the roll
                     StartCoroutine(ShowTheRoll(steps));
+                    //Moves the player around the board
                     StartCoroutine(Move());
                     audioManager.PlayDiceRollSound();
                 }
@@ -144,22 +148,6 @@ public class GameManager : MonoBehaviour
                     diceGuard = true;
                 }
 
-                if ((Input.touchCount > 0) && (Input.GetTouch(0).phase == TouchPhase.Began))
-                {
-                    Ray raycast = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-                    RaycastHit raycastHit;
-                    if (Physics.Raycast(raycast, out raycastHit))
-                    {
-                        if (raycastHit.collider.name == "DiceModel")
-                        {
-                            steps = Random.Range(1, 7);
-                            StartCoroutine(ShowTheRoll(steps));
-                            Debug.Log("Dice Rolled: " + steps);
-                            StartCoroutine(Move());
-                            audioManager.PlayDiceRollSound();
-                        }
-                    }
-                }
             }
         }
     }
@@ -212,7 +200,7 @@ public class GameManager : MonoBehaviour
 
     private void StopTimeAndOpenBox()
     {
-        if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Currency"] >= 7)
+        if ((int)PhotonNetwork.LocalPlayer.CustomProperties["Currency"] >= coinsRequiredToOpenTheChest)
         {
             decisionBox.SetActive(true);
             PV.RPC("StopTheTime", RpcTarget.AllBuffered);
@@ -224,7 +212,7 @@ public class GameManager : MonoBehaviour
         PV.RPC("StartTheTimeAccept", RpcTarget.AllBuffered);
         decisionBox.SetActive(false);
         steps = 0;
-        GetComponent<Currency>().decreaseCurrency(7);
+        GetComponent<Currency>().decreaseCurrency(coinsRequiredToOpenTheChest);
     }
 
     private void DeclineChest()
@@ -363,12 +351,15 @@ public class GameManager : MonoBehaviour
             {
                 var = totalPos + routePosition - currentRoute.childNodeList.Count;
             }
+            // Checks if the next tile player will step on will contain chest
             if (var == FindObjectOfType<SpawnChest>().GetRealTileNo(true))
             {
                 StopTimeAndOpenBox();
             }
 
-            Vector3 nextPos = currentRoute.childNodeList[var].transform.GetChild(1).GetChild((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]).position;
+            Vector3 nextPos = currentRoute.childNodeList[var].transform.GetChild(1)
+                .GetChild((int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerNo"]).position;
+
             while (MoveToNextNode(nextPos))
             {
                 yield return null;
@@ -387,7 +378,6 @@ public class GameManager : MonoBehaviour
         isMoving = false;
         diceGuard = false;
         wasKeyPressed = false;
-        print("VAR : " + var + " ROUTE POS: " + routePosition + " TOTAL POS: " + totalPos);
         PV.RPC("IncrementTurn", RpcTarget.AllBuffered , PlayerPrefs.GetInt("Score"), true);
 
         int minigame = Random.Range(0, minigames.Length);
@@ -440,7 +430,6 @@ public class GameManager : MonoBehaviour
         {
             if(PV.IsMine)
             {
-                print(PlayerPrefs.GetInt("PlaceFromLastMinigame"));
                 GetComponent<Currency>().setCurrency(PlayerPrefs.GetInt("PlaceFromLastMinigame"));
             }
 
@@ -452,7 +441,6 @@ public class GameManager : MonoBehaviour
     private void UnifyMinigameIndex(int no)
     {
         minigameIndex = no;
-        print("Minigame : " + minigameIndex);
     }
 
     [PunRPC]
