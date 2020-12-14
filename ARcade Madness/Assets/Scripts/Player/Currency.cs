@@ -82,7 +82,7 @@ public class Currency : MonoBehaviour
         }
     }
 
-    // check how many other players have coins
+    // Check how many other players have coins
     public int CheckHowManyHaveMoney(string myName)
     {
         int amount = 0;
@@ -105,7 +105,8 @@ public class Currency : MonoBehaviour
         return amount;
     }
 
-    // decrese the amount of coins for other players who have it (while using the magnet power-up)
+
+    // Decrese the amount of coins for other players who have it (while using the magnet power-up)
     public void decreaseCurrencyCoinMagnet(string myName)
     {
         for(int i = 0; i < PhotonNetwork.PlayerList.Length; i++)

@@ -322,7 +322,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3396989747327439427}
   - component: {fileID: 3396989747327439426}
-  - component: {fileID: 1686611084}
   - component: {fileID: -8749391038762223553}
   - component: {fileID: 1878651732429116845}
   - component: {fileID: 1663680026571956798}
@@ -389,18 +388,6 @@ MonoBehaviour:
   onStopMovingWithRocket:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1686611084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3396989747327439425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb0d036fe72f9704c9a1e667812d38d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-8749391038762223553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -753,6 +740,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b346dbdae897ac43950a8ad5db48a24, type: 3}
+--- !u!4 &543450652549438987 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0b346dbdae897ac43950a8ad5db48a24, type: 3}
+  m_PrefabInstance: {fileID: 1150597600}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &919132148023788721 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0b346dbdae897ac43950a8ad5db48a24, type: 3}
@@ -761,11 +753,6 @@ GameObject:
 --- !u!1 &8877229698361595578 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -346142337343115430, guid: 0b346dbdae897ac43950a8ad5db48a24, type: 3}
-  m_PrefabInstance: {fileID: 1150597600}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &543450652549438987 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0b346dbdae897ac43950a8ad5db48a24, type: 3}
   m_PrefabInstance: {fileID: 1150597600}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &8700783697684056166 stripped
