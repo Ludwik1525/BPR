@@ -50,7 +50,7 @@ namespace Tests
 
             player.GetComponent<BattleTest>().DoDamage(3600);
 
-            Assert.AreEqual(true, player.GetComponent<BattleTest>().isDead);
+            Assert.AreEqual(true, player.GetComponent<BattleTest>().isDead );
         }
 
 
